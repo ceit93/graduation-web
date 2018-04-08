@@ -2,6 +2,7 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  plugins:['~plugins/vuetify.js'],
   head: {
     title: 'graduation-web',
     meta: [

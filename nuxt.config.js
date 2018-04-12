@@ -5,6 +5,7 @@ module.exports = {
   plugins: [
     '~plugins/vuetify.js'
     , '~plugins/tabs.js'
+    , '~plugins/jalali-date.js'
   ],
   head: {
     title: 'graduation-web',

@@ -11,7 +11,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Graduation Website' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ]
   },
   css: [
@@ -19,6 +19,7 @@ module.exports = {
     '@/node_modules/vuetify/dist/vuetify.min.css',
     '@/assets/css/fontiran.css',
     '@/assets/css/bootstrap-grid.min.css',
+    '@/node_modules/@mdi/font/css/materialdesignicons.min.css',
 
 
   ],

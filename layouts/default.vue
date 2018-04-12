@@ -1,52 +1,85 @@
 <template>
   <div>
-    <nuxt/>
+    <v-app style="font-family: IRANSans !important;">
+      <div class="container-fluid">
+        <div class="row">
+          <!--toolbar-->
+          <div class="col-md-10 g-toolbar light-color pr-5 justify-space-between align-items-center">
+            <div class="d-md-flex">
+              <div class="pa-3 g-hovered">
+                <v-icon color="white" small>mdi-settings-outline</v-icon>
+                <span class="pa-1">تنظیمات</span>
+              </div>
+              <div class="pa-3 g-hovered">
+                <v-icon color="white" small>mdi-bell-outline</v-icon>
+                <span class="pa-1">رخدادها</span>
+                <v-icon color="white" small>mdi-chevron-down</v-icon>
+              </div>
+            </div>
+
+            <div>
+              <v-text-field solo label="جستجو..." v-model="first"/>
+            </div>
+
+          </div>
+          <!--side-profiler-->
+          <div class="col-md-2 g-side-profiler white elevation-6 d-md-flex justify-content-center align-items-center">
+            <div class="text-md-center">
+              <v-avatar size="150px"
+                        class="elevation-8">
+                <img src="@/static/avatar.png" alt="">
+              </v-avatar>
+
+              <p class="headline">{{profileData.name}}</p>
+              <p class="title" style="font-family: IRANSans;">{{makeParsi(profileData.stdNumber)}}</p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <nuxt/>
+    </v-app>
+
   </div>
 </template>
 
+<script>
+  import persianJs from 'persianjs';
+
+  export default {
+    data() {
+      return {
+        first: '',
+        toolbarItems: [
+          {
+            title: 'تنظیمات'
+          },
+          {
+            title: 'رخداد ها'
+          },
+
+        ],
+        profileData: {
+          name: 'سید عارف حسینی کیا',
+          stdNumber: '9331034'
+        },
+
+      }
+    },
+    created() {
+    },
+    methods: {
+      makeParsi(num) {
+        return persianJs(num).englishNumber().toString();
+      }
+    },
+  }
+</script>
+
 <style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+  html {
+    direction: rtl;
+    text-align: right !important;
+    /*font-family:IRANSans !important;*/
+  }
 </style>

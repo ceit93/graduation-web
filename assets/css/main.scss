@@ -1,1 +1,45 @@
+$tool-bar-color : #4F5467;
+$light-color : white;
+
+
+.g-hovered{
+  transition: all 0.3s ease-out;
+}
+.g-hovered:hover{
+  cursor: pointer;
+  background-color: #858aa5;
+}
+.input-group--text-field{
+  label{
+
+    text-align: right!important;
+  }
+}
+
+%g-flex{
+  display: flex;
+}
+
+html{
+  flex: 0 0 auto!important;
+}
+
+.light-color{
+  color: $light-color;
+}
+
+
+
+.g-toolbar{
+  @extend %g-flex;
+  background-color: $tool-bar-color;
+}
+.g-side-profiler{
+  position: absolute!important;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+
 

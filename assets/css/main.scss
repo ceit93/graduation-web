@@ -1,5 +1,20 @@
 $tool-bar-color : #4F5467;
 $light-color : white;
+$main-bg: rgb(237, 241, 245);
+
+
+html{
+  background-color: $main-bg;
+}
+.bg-main{
+  background-color: $main-bg;
+}
+.g-w-100{
+  width: 100%;
+}
+.g-w-75{
+  width: 75%;
+}
 
 
 .g-hovered{
@@ -35,11 +50,21 @@ html{
   background-color: $tool-bar-color;
 }
 .g-side-profiler{
+  z-index: 100;
   position: absolute!important;
   top: 0px;
   bottom: 0px;
   left: 0px;
 }
 
+
+
+//customization
+.tabs-component-panels{
+  position: relative!important;
+}
+.tabs-component .tabs-component-tabs{
+  padding-top: 5px;
+}
 
 

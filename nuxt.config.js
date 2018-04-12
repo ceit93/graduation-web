@@ -2,16 +2,19 @@ module.exports = {
   /*
   ** Headers of the page
   */
-  plugins:['~plugins/vuetify.js'],
+  plugins: [
+    '~plugins/vuetify.js'
+    , '~plugins/tabs.js'
+  ],
   head: {
     title: 'graduation-web',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Graduation Website' }
+      {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {hid: 'description', name: 'description', content: 'Graduation Website'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
     ]
   },
   css: [
@@ -20,13 +23,14 @@ module.exports = {
     '@/assets/css/fontiran.css',
     '@/assets/css/bootstrap-grid.min.css',
     '@/node_modules/@mdi/font/css/materialdesignicons.min.css',
+    '@/node_modules/vue-tabs-component/docs/resources/tabs-component.css',
 
 
   ],
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: {color: '#3B8070'},
   /*
   ** Build configuration
   */
@@ -34,7 +38,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',

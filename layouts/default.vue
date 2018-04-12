@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app style="font-family: IRANSans !important;">
+    <v-app style="font-family: IRANSans !important;background-color: #edf1f5 ">
       <div class="container-fluid">
         <div class="row">
           <!--toolbar-->
@@ -21,6 +21,8 @@
               <v-text-field solo label="جستجو..." v-model="first"/>
             </div>
 
+
+
           </div>
           <!--side-profiler-->
           <div class="col-md-2 g-side-profiler white elevation-6 d-md-flex justify-content-center align-items-center">
@@ -36,8 +38,14 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-10 pa-0">
+            <nuxt/>
+          </div>
+        </div>
       </div>
-      <nuxt/>
+
     </v-app>
 
   </div>

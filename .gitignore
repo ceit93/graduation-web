@@ -12,3 +12,5 @@ dist
 
 # WebStorm
 .idea
+
+package-lock.json

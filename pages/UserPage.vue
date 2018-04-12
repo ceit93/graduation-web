@@ -7,6 +7,7 @@
         <tab v-for="(item,index) in tabs"
              :key="index"
              :name="item.name">
+          <nuxt-child/>
 
         </tab>
       </tabs>

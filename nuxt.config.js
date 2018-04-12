@@ -14,6 +14,14 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  css: [
+    '@/assets/css/main.scss',
+    '@/node_modules/vuetify/dist/vuetify.min.css',
+    '@/assets/css/fontiran.css',
+    '@/assets/css/bootstrap-grid.min.css',
+
+
+  ],
   /*
   ** Customize the progress bar color
   */

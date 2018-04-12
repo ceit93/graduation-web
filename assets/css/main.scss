@@ -9,6 +9,10 @@ html{
 .bg-main{
   background-color: $main-bg;
 }
+//text color
+.g-text-dates{
+  color: #90A4AE;
+}
 .g-w-100{
   width: 100%;
 }
@@ -50,8 +54,9 @@ html{
   background-color: $tool-bar-color;
 }
 .g-side-profiler{
+  position: fixed!important;
   z-index: 100;
-  position: absolute!important;
+  //position: absolute!important;
   top: 0px;
   bottom: 0px;
   left: 0px;

@@ -1,60 +1,63 @@
-$tool-bar-color : #4F5467;
-$light-color : white;
+$tool-bar-color: #4F5467;
+$light-color: white;
 $main-bg: rgb(237, 241, 245);
 
+html {
+  background-color: $main-bg;
+}
 
-html{
+.bg-main {
   background-color: $main-bg;
 }
-.bg-main{
-  background-color: $main-bg;
-}
+
 //text color
-.g-text-dates{
+.g-text-dates {
   color: #90A4AE;
 }
-.g-w-100{
+
+.g-w-100 {
   width: 100%;
 }
-.g-w-75{
+
+.g-w-75 {
   width: 75%;
 }
 
-
-.g-hovered{
+.g-hovered {
   transition: all 0.3s ease-out;
 }
-.g-hovered:hover{
+
+.g-hovered:hover {
   cursor: pointer;
   background-color: #858aa5;
 }
-.input-group--text-field{
-  label{
 
-    text-align: right!important;
+.input-group--text-field {
+  label {
+
+    text-align: right !important;
   }
 }
 
-%g-flex{
+%g-flex {
   display: flex;
 }
 
-html{
-  flex: 0 0 auto!important;
+html {
+  flex: 0 0 auto !important;
 }
 
-.light-color{
+.light-color {
   color: $light-color;
 }
 
-
-
-.g-toolbar{
+.g-toolbar {
   @extend %g-flex;
   background-color: $tool-bar-color;
 }
-.g-side-profiler{
-  position: fixed!important;
+
+.g-side-profiler {
+  position: fixed !important;
   z-index: 100;
   //position: absolute!important;
   top: 0px;
@@ -62,14 +65,45 @@ html{
   left: 0px;
 }
 
-
-
 //customization
-.tabs-component-panels{
-  position: relative!important;
+.tabs-component-panels {
+  position: relative !important;
 }
-.tabs-component .tabs-component-tabs{
+
+.tabs-component .tabs-component-tabs {
   padding-top: 5px;
 }
+
+// login
+#cover{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.4;
+  filter: blur(5px);
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+.application{
+  background-color: black!important;
+  font-family: IRANSans!important;
+  label,input{
+    font-size: 0.9rem!important;
+    direction: rtl;
+  }
+
+  .input-group label {
+    transform-origin: top right;
+  }
+  .input-group--text-field label{
+    right: 0;
+    left: auto!important;
+  }
+}
+
 
 

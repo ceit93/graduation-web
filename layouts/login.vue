@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background-color: black;">
     <div id="cover">
       <img src="@/static/cover.png" alt="">
     </div>

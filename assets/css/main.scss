@@ -6,6 +6,11 @@ html {
   background-color: $main-bg;
 }
 
+.mini-toastr{
+  direction: rtl;
+  font-family: IRANSans;
+}
+
 .bg-main {
   background-color: $main-bg;
 }
@@ -89,7 +94,7 @@ html {
   }
 }
 .application{
-  background-color: black!important;
+
   font-family: IRANSans!important;
   label,input{
     font-size: 0.9rem!important;

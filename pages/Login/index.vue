@@ -8,22 +8,30 @@
             <span class="title">ورود به حساب</span>
           </v-card-title>
           <v-card-text>
-            <v-form>
+            <v-form ref="form" v-model="valid" lazy-validation>
               <v-text-field v-model="stdNumber"
                             label="شماره دانشجویی"
                             light
+                            :rules="userRules"
+                            required
+                            @keyup.enter="submit"
               >
-
               </v-text-field>
 
               <v-text-field v-model="password"
                             label="رمز عبور"
                             class="pt-3"
-                            light>
+                            light
+                            :rules="passRules"
+                            required
+                            type="password"
+                            @keyup.enter="submit"
+              >
               </v-text-field>
               <div class="d-flex justify-content-center">
                 <v-btn
                   class="success"
+                  @click="submit"
                 >
                   وارد شوید
                 </v-btn>
@@ -46,8 +54,47 @@
     data() {
       return {
         stdNumber: '',
-        password: ''
+        password: '',
+        valid: '',
+        userRules: [
+          v => !!v || 'لطفا نام کاربری را وارد کنید.',
+        ],
+        passRules: [
+          v => !!v || 'لطفا رمز عبور را وارد کنید.',
+        ]
       }
+    },
+    notifications: {
+      showLoginError: { // You can have any name you want instead of 'showLoginError'
+        title: 'Login Failed',
+        type: 'error' // You also can use 'VueNotifications.types.error' instead of 'error'
+      }
+    },
+    methods: {
+      async submit() {
+
+        if (this.$refs.form.validate()) {
+          try {
+            let result = await this.$axios.post('auth/login', {
+              username: this.stdNumber,
+              password: this.password,
+            });
+
+            window.localStorage.setItem('token', result.data.token);
+            this.$axios.setHeader('Authorization', `Bearer ${window.localStorage.getItem('token')}`);
+            this.$router.push('/userPage')
+
+          } catch (e) {
+            this.showLoginError({title:'شماره دانشجویی یا رمز عبور اشتباه است.'});
+          }
+          // console.log(result);
+
+
+        }
+      }
+    },
+    created() {
+      // this.$axios.setHeader('Access-Control-Allow-Origin','*');
     }
   }
 </script>

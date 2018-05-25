@@ -2,10 +2,25 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  modules: [
+    '@nuxtjs/axios',
+  ],
+
+  axios: {
+    prefix:'/api/',
+    https:true,
+    proxyHeaders:false,
+    proxy: true // Can be also an object with default options
+  },
+
+  proxy: {
+    '/api': 'http://185.136.232.178:3000/',
+  },
   plugins: [
-    '~plugins/vuetify.js'
-    , '~plugins/tabs.js'
-    , '~plugins/jalali-date.js'
+    '~plugins/vuetify.js',
+    '~plugins/tabs.js',
+    '~plugins/jalali-date.js',
+    {src:'~plugins/vue-notification.js',ssr:false}
   ],
   head: {
     title: 'graduation-web',

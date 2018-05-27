@@ -10,7 +10,7 @@
                 <img src="@/static/avatar.png" alt="">
               </v-avatar>
             </nuxt-link>
-            <span class="mr-2 body-2">{{data.owner.name}}</span>
+            <span class="mr-2 body-2">{{data.title}}</span>
           </div>
           <!--post date-->
           <div class="g-text-dates">
@@ -26,32 +26,32 @@
       </v-card-text>
       <v-divider/>
       <!--Comments-->
-      <v-card-text>
-        <comment/>
-        <comment/>
-      </v-card-text>
+      <!--<v-card-text>-->
+        <!--<comment/>-->
+        <!--<comment/>-->
+      <!--</v-card-text>-->
 
-      <div class="text-md-center">
-        <v-expansion-panel class="text-md-center">
-          <v-expansion-panel-content expand-icon="" class="">
-            <span class="blue--text" slot="header">
-              <span>مشاهده بیشتر</span>
-              <v-icon class="blue--text">mdi-chevron-down</v-icon>
-            </span>
-            <div>
-              <v-card>
-                <v-card-text>
-                  <comment/>
-                  <comment/>
-                  <comment/>
-                </v-card-text>
+      <!--<div class="text-md-center">-->
+        <!--<v-expansion-panel class="text-md-center">-->
+          <!--<v-expansion-panel-content expand-icon="" class="">-->
+            <!--<span class="blue&#45;&#45;text" slot="header">-->
+              <!--<span>مشاهده بیشتر</span>-->
+              <!--<v-icon class="blue&#45;&#45;text">mdi-chevron-down</v-icon>-->
+            <!--</span>-->
+            <!--<div>-->
+              <!--<v-card>-->
+                <!--<v-card-text>-->
+                  <!--<comment/>-->
+                  <!--<comment/>-->
+                  <!--<comment/>-->
+                <!--</v-card-text>-->
 
-              </v-card>
+              <!--</v-card>-->
 
-            </div>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </div>
+            <!--</div>-->
+          <!--</v-expansion-panel-content>-->
+        <!--</v-expansion-panel>-->
+      <!--</div>-->
     </v-card>
 
   </div>

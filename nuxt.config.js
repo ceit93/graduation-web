@@ -7,9 +7,9 @@ module.exports = {
   ],
 
   axios: {
-    prefix:'/api/',
-    https:true,
-    proxyHeaders:false,
+    prefix: '/api/',
+    https: true,
+    proxyHeaders: false,
     proxy: true // Can be also an object with default options
   },
 
@@ -20,7 +20,7 @@ module.exports = {
     '~plugins/vuetify.js',
     '~plugins/tabs.js',
     '~plugins/jalali-date.js',
-    {src:'~plugins/vue-notification.js',ssr:false}
+    {src: '~plugins/vue-notification.js', ssr: false}
   ],
   head: {
     title: 'graduation-web',
@@ -40,8 +40,6 @@ module.exports = {
     '@/assets/css/bootstrap-grid.min.css',
     '@/node_modules/@mdi/font/css/materialdesignicons.min.css',
     '@/node_modules/vue-tabs-component/docs/resources/tabs-component.css',
-
-
   ],
   /*
   ** Customize the progress bar color

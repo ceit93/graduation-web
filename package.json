@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@mdi/font": "^2.2.43",
+    "@nuxtjs/auth": "^4.5.1",
     "@nuxtjs/axios": "^5.3.1",
     "mini-toastr": "^0.8.1",
     "node-sass": "^4.8.3",

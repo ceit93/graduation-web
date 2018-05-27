@@ -22,7 +22,6 @@
             </div>
 
 
-
           </div>
           <!--side-profiler-->
           <div class="col-md-2 g-side-profiler white elevation-6 d-md-flex justify-content-center align-items-center">
@@ -34,6 +33,10 @@
 
               <p class="headline">{{profileData.name}}</p>
               <p class="title" style="font-family: IRANSans;">{{makeParsi(profileData.stdNumber)}}</p>
+
+              <v-btn color="red" outline @click="logout">
+                خروج
+              </v-btn>
 
             </div>
           </div>
@@ -55,6 +58,7 @@
   import persianJs from 'persianjs';
 
   export default {
+
     data() {
       return {
         first: '',
@@ -74,11 +78,15 @@
 
       }
     },
-    created() {
+    mounted() {
+
     },
     methods: {
       makeParsi(num) {
         return persianJs(num).englishNumber().toString();
+      },
+      async logout() {
+
       }
     },
   }

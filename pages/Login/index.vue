@@ -2,7 +2,7 @@
 
   <v-container fluid class="d-flex">
     <v-layout class="align-self-center">
-      <v-flex md4 xs12 offset-md4>
+      <v-flex md4 xs12 class="mx-auto">
         <v-card>
           <v-card-title class="blue darken-1 white--text justify-content-center">
             <span class="title">ورود به حساب</span>
@@ -50,7 +50,6 @@
 <script>
   export default {
     layout: 'login',
-    name: "index.vue",
     data() {
       return {
         stdNumber: '',
@@ -79,21 +78,22 @@
               username: this.stdNumber,
               password: this.password,
             });
+            // TODO : fix authentication
+            localStorage.setItem('token', result.data.token);
 
-            window.localStorage.setItem('token', result.data.token);
-            this.$axios.setHeader('Authorization', `Bearer ${window.localStorage.getItem('token')}`);
+            this.$axios.setToken(result.data.token, 'Bearer');
+
             this.$router.push('/userPage')
 
           } catch (e) {
-            this.showLoginError({title:'شماره دانشجویی یا رمز عبور اشتباه است.'});
+
+            this.showLoginError({title: 'شماره دانشجویی یا رمز عبور اشتباه است.'});
           }
-          // console.log(result);
-
-
         }
       }
     },
     created() {
+      console.log(this.$root);
       // this.$axios.setHeader('Access-Control-Allow-Origin','*');
     }
   }

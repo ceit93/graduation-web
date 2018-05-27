@@ -2,39 +2,59 @@
   <div class="bg-main">
     <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100">
 
-    <div>
-      <tabs class="ma-0" :options="{ useUrlFragment: false }">
-        <tab v-for="(item,index) in tabs"
-             :key="index"
-             :name="item.name">
-          <nuxt-child/>
+    <v-tabs color="grey lighten-3">
+      <v-tab v-for="(item,index) in tabs" :key="index">
+        {{item.name}}
+      </v-tab>
+      <v-tab-item
+        v-for="(item1,index1) in tabs" :key="index1">
+        <component :is="item1.component"/>
+      </v-tab-item>
 
-        </tab>
-      </tabs>
-    </div>
+    </v-tabs>
 
 
   </div>
 </template>
 
 <script>
+  import Posts from '@/components/Posts.vue'
+  import Wall from '@/components/Wall.vue'
+
   export default {
     name: "index",
     data() {
       return {
         active: '',
         tabs: [
+          // {
+          //   name: 'آخرین پست ها',
+          //   component: 'LastPosts'
+          // },
           {
-            name: 'آخرین پست ها'
+            name: 'پست های من',
+            component: 'posts'
           },
           {
-            name: 'پست های من'
-          },
-          {
-            name: 'دیوار'
+            name: 'دیوار',
+            component: 'wall'
           }
         ]
       }
+    },
+    created() {
+
+    },
+    methods: {
+      push(route) {
+        console.log("ads")
+        this.$router.push({
+          path: route,
+        })
+      }
+    },
+    components: {
+      Wall, Posts
     }
   }
 </script>

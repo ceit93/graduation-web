@@ -20,7 +20,7 @@ module.exports = {
     }
   },
   router: {
-    middleware: []
+    middleware: ['auth']
   },
 
   axios: {

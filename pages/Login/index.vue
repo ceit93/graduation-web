@@ -74,14 +74,10 @@
 
         if (this.$refs.form.validate()) {
           try {
-            let result = await this.$axios.post('auth/login', {
+            this.$auth.loginWith('local', {data: {
               username: this.stdNumber,
               password: this.password,
-            });
-            // TODO : fix authentication
-            localStorage.setItem('token', result.data.token);
-
-            this.$axios.setToken(result.data.token, 'Bearer');
+            }});
 
             this.$router.push('/userPage')
 

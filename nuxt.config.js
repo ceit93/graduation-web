@@ -4,7 +4,24 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/user', method: 'get', propertyName: 'user' }
+        },
+        tokenRequired: true
+      }
+    }
+  },
+  router: {
+    middleware: []
+  },
 
   axios: {
     prefix: '/api/',
@@ -14,7 +31,7 @@ module.exports = {
   },
 
   proxy: {
-    '/api': 'http://185.136.232.178:3000/',
+    '/api': 'http://185.136.232.178:3000/api',
   },
   plugins: [
     '~plugins/vuetify.js',

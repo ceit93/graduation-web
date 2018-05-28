@@ -78,7 +78,6 @@
               username: this.stdNumber,
               password: this.password,
             }});
-
             this.$router.push('/userPage')
 
           } catch (e) {
@@ -89,7 +88,6 @@
       }
     },
     created() {
-      console.log(this.$root);
       // this.$axios.setHeader('Access-Control-Allow-Origin','*');
     }
   }

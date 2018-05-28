@@ -24,14 +24,16 @@ module.exports = {
   },
 
   axios: {
+    port: '3000',
     prefix: '/api/',
     https: true,
     proxyHeaders: false,
-    proxy: true // Can be also an object with default options
+    proxy: true, // Can be also an object with default options
+    debug: true
   },
 
   proxy: {
-    '/api': 'http://185.136.232.178:3000/api',
+    '/api': 'http://localhost:3000/',
   },
   plugins: [
     '~plugins/vuetify.js',

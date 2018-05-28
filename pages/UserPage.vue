@@ -38,6 +38,14 @@
           {
             name: 'دیوار',
             component: 'wall'
+          },
+          {
+            name: 'ثبت‌نام جشن',
+            component: 'register'
+          },
+          {
+            name: 'ترین‌ها',
+            component: 'Tarins'
           }
         ]
       }

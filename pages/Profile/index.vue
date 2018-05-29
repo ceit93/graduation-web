@@ -1,7 +1,6 @@
 <template>
   <div class="bg-main">
     <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100">
-
     <v-tabs color="grey lighten-3">
       <v-tab v-for="(item,index) in tabs" :key="index">
         {{item.name}}
@@ -10,16 +9,13 @@
         v-for="(item1,index1) in tabs" :key="index1">
         <component :is="item1.component"/>
       </v-tab-item>
-
     </v-tabs>
-
-
   </div>
 </template>
 
 <script>
-  import Posts from '@/components/Posts.vue'
-  import Wall from '@/components/Wall.vue'
+  import Posts from '~/components/Posts.vue'
+  import Wall from '~/components/Wall.vue'
   // import Tarins from '@/components/Tarins.vue'
   // import Register from '@/components/Register.vue'
 

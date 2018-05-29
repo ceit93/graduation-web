@@ -17,7 +17,7 @@
             <span class="title">ورود به حساب</span>
           </v-card-title>
           <v-card-text>
-            <v-form v-model="valid" lazy-validation="">
+            <v-form v-model="valid" lazy-validation="" ref="login">
               <v-text-field v-model="username"
                             label="شماره دانشجویی"
                             light
@@ -81,7 +81,7 @@
     methods: {
       async submit() {
 
-        if (this.$refs.form.validate()) {
+        if (this.$refs.login.validate()) {
           try {
             this.$auth.loginWith('local', {data: {
                 username: this.username,

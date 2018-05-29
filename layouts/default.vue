@@ -1,8 +1,10 @@
 <template>
     <v-app>
+      <top-header></top-header>
       <v-container fluid>
-        <top-header></top-header>
-        <nuxt/>
+        <v-content>
+          <nuxt/>
+        </v-content>
       </v-container>
       <bottom-footer></bottom-footer>
     </v-app>

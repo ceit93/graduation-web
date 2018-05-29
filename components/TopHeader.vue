@@ -26,6 +26,17 @@
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile
+          @click="logout"
+        >
+          <v-list-tile-action>
+            <v-icon>mdi-power</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>خروج</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed app :clipped-left="clipped" class="light-blue darken-4" dark>
@@ -44,7 +55,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat v-for="item in items" :to="item.to" exact :key="item.title">{{item.title}}</v-btn>
-        <v-btn flat @click="this.logout" class="yellow--text text--lighten-1">خروج</v-btn>
+        <v-btn flat @click="this.logout" class="yellow--text text--accent-2">خروج</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>

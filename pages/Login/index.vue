@@ -1,23 +1,33 @@
 <template>
 
-  <v-container fluid class="d-flex">
-    <v-layout class="align-self-center">
-      <v-flex md4 xs12 class="mx-auto">
-        <v-card>
+  <v-container fluid fill-height>
+    <v-layout align-center justify-center row>
+      <!--TODO: Justify these headers to center-->
+      <v-flex xs11>
+        <div class="row text-xs-center">
+          <h1 class="white--text text-xs-center display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1> <br>
+        </div>
+        <div class="row text-xs-center">
+          <h6 class="white--text text-xs-center subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
+        </div>
+      </v-flex>
+      <v-flex xs12 sm8 md4>
+        <v-card class="elevation-12" justify-center>
           <v-card-title class="blue darken-1 white--text justify-content-center">
             <span class="title">ورود به حساب</span>
           </v-card-title>
           <v-card-text>
-            <v-form ref="form" v-model="valid" lazy-validation>
-              <v-text-field v-model="stdNumber"
+            <v-form v-model="valid" lazy-validation="">
+              <v-text-field v-model="username"
                             label="شماره دانشجویی"
                             light
                             :rules="userRules"
                             required
                             @keyup.enter="submit"
-              >
-              </v-text-field>
-
+                            id="username"
+                            prepend-icon="mdi-account"
+                            type="text"
+              ></v-text-field>
               <v-text-field v-model="password"
                             label="رمز عبور"
                             class="pt-3"
@@ -26,24 +36,23 @@
                             required
                             type="password"
                             @keyup.enter="submit"
-              >
-              </v-text-field>
-              <div class="d-flex justify-content-center">
-                <v-btn
-                  class="success"
-                  @click="submit"
-                >
-                  وارد شوید
-                </v-btn>
-              </div>
-
+                            id="password"
+                            prepend-icon="mdi-textbox-password"
+              ></v-text-field>
             </v-form>
           </v-card-text>
+          <v-card-actions class="d-flex justify-content-center">
+              <v-btn
+                class="success"
+                @click="submit"
+              >
+                وارد شوید
+              </v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
   </v-container>
-
 
 </template>
 
@@ -52,7 +61,7 @@
     layout: 'login',
     data() {
       return {
-        stdNumber: '',
+        username: '',
         password: '',
         valid: '',
         userRules: [
@@ -75,9 +84,9 @@
         if (this.$refs.form.validate()) {
           try {
             this.$auth.loginWith('local', {data: {
-              username: this.stdNumber,
-              password: this.password,
-            }});
+                username: this.username,
+                password: this.password,
+              }});
           } catch (e) {
             console.log(e)
             this.showLoginError({title: 'شماره دانشجویی یا رمز عبور اشتباه است.'});

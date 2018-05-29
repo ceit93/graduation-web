@@ -20,7 +20,7 @@ module.exports = {
     },
     options: {
       redirect: {
-        login: '/login',
+        login: '/profile',
         logout: '/login',
         callback: '/login',
         user: '/'
@@ -63,7 +63,7 @@ module.exports = {
   css: [
     '@/assets/css/main.scss',
     '@/node_modules/vuetify/dist/vuetify.min.css',
-    '@/assets/css/fontiran.css',
+    '@/assets/css/iransharp.css',
     '@/assets/css/bootstrap-grid.min.css',
     '@/node_modules/@mdi/font/css/materialdesignicons.min.css',
     '@/node_modules/vue-tabs-component/docs/resources/tabs-component.css',
@@ -71,7 +71,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: {color: '#3B8070'},
+  loading: {color: '#30fff2'},
   /*
   ** Build configuration
   */

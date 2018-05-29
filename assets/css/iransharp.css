@@ -1,0 +1,64 @@
+
+@font-face {
+  font-family: Iranblack;
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/iransharp/IRANBlack.woff');
+}
+@font-face {
+  font-family: Iranblack;
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/iransharp/IRANBlack.woff');
+}
+@font-face {
+  font-family: Iranblack;
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/iransharp/IRANBlack.woff');
+}
+@font-face {
+  font-family: Iranblack;
+  font-style: normal;
+  font-weight: 200;
+  src: url('../fonts/iransharp/IRANBlack.woff');
+}
+@font-face {
+  font-family: Iranblack;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/iransharp/IRANBlack.woff');
+}
+
+
+@font-face {
+  font-family: Iran;
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/iransharp/iransharp.woff');
+}
+@font-face {
+  font-family: Iran;
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/iransharp/iransharp.woff');
+}
+@font-face {
+  font-family: Iran;
+  font-style: normal;
+  font-weight: 300;
+  src: url('../fonts/iransharp/iransharp.woff');
+}
+@font-face {
+  font-family: Iran;
+  font-style: normal;
+  font-weight: 200;
+  src: url('../fonts/iransharp/iransharp.woff');
+}
+@font-face {
+  font-family: Iran;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/iransharp/iransharp.woff');
+}
+

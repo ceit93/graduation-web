@@ -14,9 +14,9 @@
 </template>
 
 <script>
-  import Posts from '~/components/Posts.vue'
-  import Wall from '~/components/Wall.vue'
-  import Tarins from '~/components/Tarins.vue'
+  import Posts from '~/components/Content/Posts.vue'
+  import Wall from '~/components/Content/Wall.vue'
+  import Tarins from '~/components/Content/Tarins.vue'
 
   export default {
     name: "index",

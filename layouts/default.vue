@@ -1,7 +1,7 @@
 <template>
     <v-app>
       <top-header></top-header>
-      <v-container fluid>
+      <v-container fluid full-height>
         <v-content>
           <nuxt/>
         </v-content>

@@ -48,7 +48,8 @@
       </v-btn>
       <nuxt-link :to="'/'" class="user-button">
         <v-btn icon x-large>
-          <img src="~static/avatar.png" class="user-avatar"/>
+          <!--TODO: IMPLEMENT THE USER AVATAR INSTEAD OF THIS STATIC PHOTO-->
+          <img src="avatar.png" class="user-avatar"/>
         </v-btn>
       </nuxt-link>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>

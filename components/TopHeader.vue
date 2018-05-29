@@ -73,6 +73,7 @@
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           { icon: 'mdi-account-plus', title: 'ثبت‌نام', to: '/register'},
+          { icon: 'mdi-account-bell-ring', title: 'نوتیفیکیشن‌ها', to: '/notifs'},
         ],
         title: 'آیین فارغ‌التحصیلی ۹۳',
       }

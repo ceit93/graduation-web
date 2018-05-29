@@ -78,11 +78,8 @@
               username: this.stdNumber,
               password: this.password,
             }});
-            redirect(200, '/userPage')
-            // this.$router.push('/userPage')
-
           } catch (e) {
-
+            console.log(e)
             this.showLoginError({title: 'شماره دانشجویی یا رمز عبور اشتباه است.'});
           }
         }

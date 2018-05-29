@@ -87,6 +87,7 @@
       },
       async logout() {
         await this.$auth.logout()
+        this.$nuxt.$router.replace({'path' : '/login'})
       }
     },
   }

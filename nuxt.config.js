@@ -17,6 +17,14 @@ module.exports = {
         },
         tokenRequired: true
       }
+    },
+    options: {
+      redirect: {
+        login: '/login',
+        logout: '/login',
+        callback: '/login',
+        user: '/'
+      }
     }
   },
   router: {

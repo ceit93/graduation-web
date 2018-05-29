@@ -20,6 +20,8 @@
 <script>
   import Posts from '@/components/Posts.vue'
   import Wall from '@/components/Wall.vue'
+  // import Tarins from '@/components/Tarins.vue'
+  // import Register from '@/components/Register.vue'
 
   export default {
     name: "index",
@@ -39,14 +41,14 @@
             name: 'دیوار',
             component: 'wall'
           },
-          {
-            name: 'ثبت‌نام جشن',
-            component: 'register'
-          },
-          {
-            name: 'ترین‌ها',
-            component: 'Tarins'
-          }
+          // {
+          //   name: 'ثبت‌نام جشن',
+          //   component: 'register'
+          // },
+          // {
+          //   name: 'ترین‌ها',
+          //   component: 'Tarins'
+          // }
         ]
       }
     },

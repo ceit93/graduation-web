@@ -86,7 +86,7 @@
         return persianJs(num).englishNumber().toString();
       },
       async logout() {
-
+        await this.$auth.logout()
       }
     },
   }

@@ -78,7 +78,8 @@
               username: this.stdNumber,
               password: this.password,
             }});
-            this.$router.push('/userPage')
+            redirect(200, '/userPage')
+            // this.$router.push('/userPage')
 
           } catch (e) {
 

@@ -18,7 +18,9 @@
 </template>
 
 <script>
+    import Post from '@/components/Post.vue'
     export default {
+        components: {Post},
         name: "wall",
         data() {
           return {

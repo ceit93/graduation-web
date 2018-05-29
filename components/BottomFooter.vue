@@ -1,11 +1,11 @@
 <template>
-    <v-footer height="auto" :fixed="false">
+    <v-footer height="auto" :fixed="false" dark>
         <v-card
                 flat
                 tile
                 class="lighten-1 white--text text-xs-center" width="100%"
         >
-            <v-card-text class="grey darken-4">
+            <v-card-text class="light-blue darken-4">
                 <v-btn
                         v-for="icon in icons"
                         :key="icon.ico"
@@ -17,7 +17,8 @@
                 >
                     <v-icon size="24px">{{ icon.ico }}</v-icon>
                 </v-btn>
-                <v-flex xs12 text-xs-center white--text v-html="footer">
+                <v-flex xs12 text-xs-center :to="'https://github.com/ceit93'" class="yellow--text text--accent-2 caption">
+                  {{footer}}
                 </v-flex>
             </v-card-text>
         </v-card>
@@ -29,12 +30,10 @@
     name: 'BottomFooter',
     data: () => ({
       icons: [
-        {ico: 'fa fa-facebook', link: 'https://facebook.com/aylandance'},
-        {ico: 'fa fa-youtube', link: 'https://youtube.com/aylandance'},
-        {ico: 'fa fa-instagram', link: 'https://instagram.com/aylandance'},
-        {ico: 'fa fa-paper-plane', link: 'https://t.me/aylandance'}
+        {ico: 'mdi-github-circle', link: 'https://github.com/ceit93'},
+        {ico: 'mdi-telegram', link: 'https://t.me/ceit93'}
       ],
-      footer: 'دانشجویان ورودی ۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'
+      footer: 'دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'
     }),
   }
 </script>

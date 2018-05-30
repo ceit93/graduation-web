@@ -11,7 +11,7 @@
             <v-text-field
               v-model="subject"
               :rules="subjectRules"
-              label="چیچی‌ترین؟"
+              label="چی‌چی‌ترین؟"
               required
             ></v-text-field>
           </v-form>

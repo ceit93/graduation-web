@@ -4,11 +4,13 @@
     <v-layout align-center justify-center row>
       <!--TODO: Justify these headers to center-->
       <v-flex xs11>
-        <div class="row text-xs-center">
-          <h1 class="white--text text-xs-center display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1> <br>
-        </div>
-        <div class="row text-xs-center">
-          <h6 class="white--text text-xs-center subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
+        <div>
+          <v-card-text>
+            <h1 class="white--text text-md-center display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1> <br>
+          </v-card-text>
+          <v-card-text>
+            <h6 class="white--text text-xs-center subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
+          </v-card-text>
         </div>
       </v-flex>
       <v-flex xs12 sm8 md4>

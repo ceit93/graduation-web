@@ -34,6 +34,7 @@
                               :label="tarin.subject"
                               class="input-group--focused"
                               autocomplete
+                              deletable-chips
                               chips
                               flat
                             ></v-select>

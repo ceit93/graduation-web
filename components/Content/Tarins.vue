@@ -76,9 +76,27 @@
         this.fetchPeople()
         this.fetchTarins()
       },
+      notifications: {
+        showSuccess: {
+          title: 'رای شما ذخیره شد.',
+          type: 'success'
+        },
+        showError: {
+          title: 'خطایی رخ داد...',
+          type: 'error'
+        }
+      },
       methods: {
         submit () {
-
+          // this.$axios.post('/folanbisar', {data: {
+          //
+          //   }
+          // }).then(e => {
+          //   this.showSuccess()
+          // }).catch(e => {
+          //   this.showError()
+          // })
+          this.showSuccess()
         },
         async fetchTarins() {
           // this.tarins = await this.$axios.get('polls')

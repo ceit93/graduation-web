@@ -1,5 +1,4 @@
 <template>
-
   <v-container fluid fill-height>
     <v-layout align-center justify-center row>
       <v-flex xs11>
@@ -54,7 +53,6 @@
       </v-flex>
     </v-layout>
   </v-container>
-
 </template>
 
 <script>

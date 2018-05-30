@@ -2,11 +2,10 @@
 
   <v-container fluid fill-height>
     <v-layout align-center justify-center row>
-      <!--TODO: Justify these headers to center-->
       <v-flex xs11>
         <div>
           <v-card-text>
-            <h1 class="white--text text-md-center display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1> <br>
+            <h1 class="white--text text-md-center display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1>
           </v-card-text>
           <v-card-text>
             <h6 class="white--text text-xs-center subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>

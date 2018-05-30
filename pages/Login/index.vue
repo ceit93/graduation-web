@@ -74,24 +74,28 @@
       }
     },
     notifications: {
-      showLoginError: { // You can have any name you want instead of 'showLoginError'
-        title: 'Login Failed',
-        type: 'error' // You also can use 'VueNotifications.types.error' instead of 'error'
+      showLoginError: {
+        title: 'خطای ۴۰۱: شماره دانشجویی و یا رمز عبور اشتباه است.',
+        type: 'error'
+      },
+      showOtherError: {
+        title: 'خطایی رخ داد...',
+        type: 'error'
       }
     },
     methods: {
       async submit() {
-
         if (this.$refs.login.validate()) {
-          try {
-            this.$auth.loginWith('local', {data: {
-                username: this.username,
-                password: this.password,
-              }});
-          } catch (e) {
-            console.log(e)
-            this.showLoginError({title: 'شماره دانشجویی یا رمز عبور اشتباه است.'});
-          }
+          this.$auth.loginWith('local', {data: {
+              username: this.username,
+              password: this.password,
+            }}).catch(e => {
+              const status = e.response.data.statusCode
+              if (status == 401)
+                this.showLoginError()
+              else
+                this.showOtherError()
+            })
         }
       }
     },

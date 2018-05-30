@@ -45,13 +45,28 @@
         ],
       }
     },
+    notifications: {
+      showError: {
+        title: 'خطایی رخ داد...',
+        type: 'error'
+      },
+      showSuccess: {
+        title: 'ترین مورد نظر با موفقیت ثبت شد.',
+        type: 'success'
+      }
+    },
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
           // this.$axios.post('/api/poll/add', {
           //   subject: this.subject
+          // }).then(e => {
+          //   this.showSuccess()
+          // }).catch(e => {
+          //   this.showError()
           // })
           console.log(this.subject)
+          this.showSuccess()
         }
       },
     }

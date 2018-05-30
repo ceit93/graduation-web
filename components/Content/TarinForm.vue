@@ -22,7 +22,7 @@
             @click="submit"
             class="success"
           >
-            <v-icon>add</v-icon>
+            <v-icon small>add</v-icon>
             اضافه کردن یک ترین
           </v-btn>
         </v-card-actions>

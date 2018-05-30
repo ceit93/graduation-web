@@ -3,7 +3,7 @@ $light-color: white;
 $main-bg: rgb(237, 241, 245);
 
 html {
-  background-color: $main-bg;
+  background-color: $light-color;
 }
 
 .mini-toastr{
@@ -12,7 +12,7 @@ html {
 }
 
 .bg-main {
-  background-color: $main-bg;
+  background-color: $light-color;
 }
 
 //text color
@@ -94,6 +94,11 @@ html {
     right: 0;
     left: auto!important;
   }
+}
+
+/* Trying to solve Vuetify bug */
+.container {
+  padding: 0px 0px 0px 0px !important;
 }
 
 

@@ -1,28 +1,63 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-form ref="form" v-model="valid" lazy-validation>
-        یک ترین دلخواه که در لیست نیست اضافه کنید:
-        <div class="row">
-          <div class="xs8 md8 lg8">
-            <v-text-field
-            v-model="subject"
-            :rules="subjectRules"
-            label="چیچی‌ترین؟"
-            required
-            ></v-text-field>
-          </div>
-          <div class="xs4 md4 lg4">
-            <v-btn
-              :disabled="!valid"
-              @click="submit"
-              class="success"
-            >
-              ثبت یک ترین
-            </v-btn>
-          </div>
-        </div>
-      </v-form>
+      <v-layout align-center justify-center row>
+        <v-flex>
+          <v-card flat justify-center>
+            <v-card-title class="justify-content-center">
+              ترین‌های خود را انتخاب کنید
+            </v-card-title>
+            <v-card-actions class="justify-content-center">
+              <v-btn
+                :disabled="!valid"
+                @click="submit"
+                class="success"
+              >
+                <v-icon>how_to_vote</v-icon>
+                ذخیره
+              </v-btn>
+            </v-card-actions>
+            <v-card-text>
+              <v-form>
+                <v-container fluid>
+                  <v-layout row wrap>
+                      <v-flex xs12 md6 v-for="tarin in tarins" :key="tarin.subject" v-if="tarin.approved" align-center justify-center>
+                        <v-layout row wrap>
+                          <v-flex xs3>
+                            <v-subheader>{{tarin.subject}}</v-subheader>
+                          </v-flex>
+                          <v-flex xs5>
+                            <v-select
+                              :items="people"
+                              item-text="name"
+                              item-value="username"
+                              :label="tarin.subject"
+                              class="input-group--focused"
+                              autocomplete
+                              deletable-chips
+                              chips
+                              flat
+                            ></v-select>
+                          </v-flex>
+                        </v-layout>
+                      </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-form>
+            </v-card-text>
+            <v-card-actions class="justify-content-center">
+              <v-btn
+                :disabled="!valid"
+                @click="submit"
+                class="success"
+              >
+                <v-icon>how_to_vote</v-icon>
+                ذخیره
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-card-text>
   </v-card>
 </template>
@@ -32,31 +67,18 @@
       name: 'Tarins',
       data() {
         return {
-          tarins: {},
+          tarins: [],
+          people: [],
           valid: true,
-          subject: '',
-          subjectRules: [
-            v => !!v || 'ترین مورد نظر خود را وارد کنید',
-          ],
         }
       },
       mounted() {
+        this.fetchPeople()
         this.fetchTarins()
       },
       methods: {
         submit () {
-          if (this.$refs.form.validate()) {
-            // Native form submission is not yet supported
-            axios.post('/api/submit', {
-              name: this.name,
-              email: this.email,
-              select: this.select,
-              checkbox: this.checkbox
-            })
-          }
-        },
-        clear () {
-          this.$refs.form.reset()
+
         },
         async fetchTarins() {
           // this.tarins = await this.$axios.get('polls')
@@ -146,6 +168,23 @@
             {subject: 'عجیب ترین', approved: true, votes:{}},
             {subject: 'پررو ترین', approved: true, votes:{}},
             {subject: 'دست و دلباز ترین', approved: true, votes:{}},
+          ]
+        },
+        async fetchPeople() {
+          // this.tarins = await this.$axios.get('people')
+          this.people = [
+            {username: '9331001', name: 'امیر حقیقتی ملکی'},
+            {username: '9331002', name: 'ایمان تبریزیان'},
+            {username: '9331003', name: 'عارف حسینی‌کیا'},
+            {username: '9331004', name: 'مانا پوستی‌زاده'},
+            {username: '9331005', name: 'جعفر جعفری'},
+            {username: '9331006', name: 'اصغر اصغری'},
+            {username: '9331007', name: 'سیب هوایی'},
+            {username: '9331008', name: 'سیب زمینی'},
+            {username: '9331009', name: 'خیار خیاری'},
+            {username: '9331010', name: 'گلاب گلابی'},
+            {username: '9331011', name: 'جعفر جعفری'},
+            {username: '9331012', name: 'محمد محمدی'},
           ]
         }
       }

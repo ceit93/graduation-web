@@ -1,7 +1,7 @@
 <template>
   <v-card-text justify-center>
     <v-layout align-center justify-center row>
-    <v-flex xs12 sm8 md4>
+      <v-flex xs12 sm8 md4>
       <v-card flat justify-center>
         <v-card-title class="justify-content-center">
           یک ترین دلخواه که در لیست ترین‌ها نیست اضافه کنید:
@@ -11,7 +11,7 @@
             <v-text-field
               v-model="subject"
               :rules="subjectRules"
-              label="چیچی‌ترین؟"
+              label="چی‌چی‌ترین؟"
               required
             ></v-text-field>
           </v-form>
@@ -28,7 +28,7 @@
         </v-card-actions>
       </v-card>
     </v-flex>
-  </v-layout>
+    </v-layout>
   </v-card-text>
 </template>
 

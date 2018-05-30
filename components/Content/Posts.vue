@@ -3,7 +3,7 @@
     <v-card-text>
       <div class="d-md-flex justify-content-end">
         <v-btn class="success mx-0">
-          <v-icon color="white" small>mdi-plus</v-icon>
+          <v-icon color="white" small>add</v-icon>
           پست جدید
         </v-btn>
 

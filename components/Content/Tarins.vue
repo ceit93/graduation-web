@@ -18,24 +18,42 @@
               </v-btn>
             </v-card-actions>
             <v-card-text>
-              <v-form ref="form" v-model="valid" lazy-validation>
+              <v-form>
                 <v-container fluid>
-                  <v-layout row wrap v-for="tarin in tarins" :key="tarin.subject" v-if="tarin.approved">
-                      <v-flex xs6 md2>
-                        <v-subheader>{{tarin.subject}}</v-subheader>
-                      </v-flex>
-                      <v-flex xs6 md3>
-                        <v-select
-                          :items="people"
-                          :label="tarin.subject"
-                          class="input-group--focused"
-                          item-value="text"
-                        ></v-select>
+                  <v-layout row wrap>
+                      <v-flex xs12 md6 v-for="tarin in tarins" :key="tarin.subject" v-if="tarin.approved" align-center justify-center>
+                        <v-layout row wrap>
+                          <v-flex xs3>
+                            <v-subheader>{{tarin.subject}}</v-subheader>
+                          </v-flex>
+                          <v-flex xs5>
+                            <v-select
+                              :items="people"
+                              item-text="name"
+                              item-value="username"
+                              :label="tarin.subject"
+                              class="input-group--focused"
+                              autocomplete
+                              chips
+                              flat
+                            ></v-select>
+                          </v-flex>
+                        </v-layout>
                       </v-flex>
                   </v-layout>
                 </v-container>
               </v-form>
             </v-card-text>
+            <v-card-actions class="justify-content-center">
+              <v-btn
+                :disabled="!valid"
+                @click="submit"
+                class="success"
+              >
+                <v-icon>how_to_vote</v-icon>
+                ذخیره
+              </v-btn>
+            </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>
@@ -51,7 +69,6 @@
           tarins: [],
           people: [],
           valid: true,
-          voes: {}
         }
       },
       mounted() {
@@ -60,17 +77,7 @@
       },
       methods: {
         submit () {
-          if (this.$refs.form.validate()) {
-            this.$axios.post('/api/submit', {
-              name: this.name,
-              email: this.email,
-              select: this.select,
-              checkbox: this.checkbox
-            })
-          }
-        },
-        clear () {
-          this.$refs.form.reset()
+
         },
         async fetchTarins() {
           // this.tarins = await this.$axios.get('polls')
@@ -165,12 +172,18 @@
         async fetchPeople() {
           // this.tarins = await this.$axios.get('people')
           this.people = [
-            {username: '9331xxx', name: 'امیر حقیقتی ملکی'},
-            {username: '9331xxx', name: 'ایمان تبریزیان'},
-            {username: '9331xxx', name: 'عارف حسینی‌کیا'},
-            {username: '9331xxx', name: 'مانا پوستی‌زاده'},
-            {username: '9331xxx', name: 'جعفر جعفری'},
-            {username: '9331xxx', name: 'اصغر اصغری'},
+            {username: '9331001', name: 'امیر حقیقتی ملکی'},
+            {username: '9331002', name: 'ایمان تبریزیان'},
+            {username: '9331003', name: 'عارف حسینی‌کیا'},
+            {username: '9331004', name: 'مانا پوستی‌زاده'},
+            {username: '9331005', name: 'جعفر جعفری'},
+            {username: '9331006', name: 'اصغر اصغری'},
+            {username: '9331007', name: 'سیب هوایی'},
+            {username: '9331008', name: 'سیب زمینی'},
+            {username: '9331009', name: 'خیار خیاری'},
+            {username: '9331010', name: 'گلاب گلابی'},
+            {username: '9331011', name: 'جعفر جعفری'},
+            {username: '9331012', name: 'محمد محمدی'},
           ]
         }
       }

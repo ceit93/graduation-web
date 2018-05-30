@@ -4,7 +4,9 @@
       <v-flex xs12 sm8 md4>
       <v-card flat justify-center>
         <v-card-title class="justify-content-center">
-          یک ترین دلخواه که در لیست ترین‌ها نیست اضافه کنید:
+          یک ترین دلخواه
+          <b><span class="red--text"> که در لیست ترین‌ها نیست،</span></b>
+            اضافه کنید:
         </v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>

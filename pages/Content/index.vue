@@ -1,7 +1,7 @@
 <template>
   <div class="bg-main">
     <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100">
-    <v-tabs icons-and-text dark color="light-blue darken-4">
+    <v-tabs icons-and-text dark color="light-blue darken-2">
       <v-tabs-slider color="yellow"></v-tabs-slider>
       <v-tab v-for="(item,index) in tabs" :key="index">
         {{item.name}}

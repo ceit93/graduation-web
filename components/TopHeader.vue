@@ -46,12 +46,16 @@
       <v-btn class="hidden-md-and-up" @click.stop="miniVariant = !miniVariant" icon>
         <v-icon v-html="miniVariant ? 'mdi-arrow-right-drop-circle-outline' : 'mdi-arrow-left-drop-circle-outline'"></v-icon>
       </v-btn>
-      <nuxt-link :to="'/'" class="user-button">
-        <v-btn icon x-large>
-          <!--TODO: IMPLEMENT THE USER AVATAR INSTEAD OF THIS STATIC PHOTO-->
-          <img src="avatar.png" class="user-avatar"/>
-        </v-btn>
-      </nuxt-link>
+      <v-btn :to="'/'" nuxt icon class="user-button">
+        <v-avatar
+          :tile="false"
+          :size="40"
+          color="grey lighten-4"
+        >
+          <!--TODO: IMPLEMENT USER AVATAR-->
+          <img src="avatar.png" :alt="this.$auth.user.name">
+        </v-avatar>
+      </v-btn>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -74,9 +78,8 @@
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           { icon: 'mdi-account-plus', title: 'ثبت‌نام', to: '/register'},
-          { icon: 'mdi-account-bell-ring', title: 'نوتیفیکیشن‌ها', to: '/notifs'},
         ],
-        title: 'آیین فارغ‌التحصیلی ۹۳',
+        title: 'فارغ التحصیلی ۹۳',
       }
     },
     methods: {

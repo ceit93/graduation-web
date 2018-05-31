@@ -1,57 +1,50 @@
 <template>
   <div class="mb-3">
-    <v-card>
+    <v-card class="elevation-5">
+      <v-card-title primary-title>
+        <v-btn icon to="" nuxt>
+          <v-avatar :size="40" class="elevation-2">
+            <!--TODO: Implement the avatar-->
+            <img src="avatar.png" alt="">
+          </v-avatar>
+        </v-btn>
+        <span class="mr-2 body-2">{{postData.title}} - برای &nbsp;</span>
+        <span>
+          <nuxt-link to="">{{postData.to.name}}</nuxt-link>
+        </span>
+        <span v-if="postData.approved && postData.user.username !== username">
+          <v-chip color="green" text-color="white" small>تایید شده</v-chip>
+        </span>
+        <span v-if="!postData.approved && postData.user.username !== username">
+          <v-chip color="orange" outline small dark>در انتظار تایید</v-chip>
+        </span>
+        <v-spacer></v-spacer>
+        <span class="grey--text text--lighten-1">
+            {{postData.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
+        </span>
+        <v-menu bottom left>
+          <v-btn slot="activator" icon>
+            <v-icon>more_horiz</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-if="postData.approved && postData.to.username === username && postData.user.username !== username" @click="dissaprovePost">
+              <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="!postData.approved && postData.to.username === username" @click="approvePost">
+              <v-list-tile-title class="green--text">تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="postData.user.username === username" @click="deletePost">
+              <v-list-tile-title class="red--text">حذف پست</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-card-title>
+      <v-divider></v-divider>
       <v-card-text>
-        <div class="d-md-flex justify-content-between">
-          <!--user name-->
-          <div class="align-items-end d-md-flex ">
-            <nuxt-link to="">
-              <v-avatar size="40px" class="elevation-2">
-                <img src="@/static/avatar.png" alt="">
-              </v-avatar>
-            </nuxt-link>
-            <span class="mr-2 body-2">{{data.title}}</span>
-          </div>
-          <!--post date-->
-          <div class="g-text-dates">
-            {{data.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
-          </div>
-        </div>
-        <v-divider class="mt-2 mb-2"/>
         <div style="text-align:justify;">
-          {{data.text}}
+          {{postData.body}}
         </div>
-
-
       </v-card-text>
-      <v-divider/>
-      <!--Comments-->
-      <!--<v-card-text>-->
-        <!--<comment/>-->
-        <!--<comment/>-->
-      <!--</v-card-text>-->
-
-      <!--<div class="text-md-center">-->
-        <!--<v-expansion-panel class="text-md-center">-->
-          <!--<v-expansion-panel-content expand-icon="" class="">-->
-            <!--<span class="blue&#45;&#45;text" slot="header">-->
-              <!--<span>مشاهده بیشتر</span>-->
-              <!--<v-icon class="blue&#45;&#45;text">mdi-chevron-down</v-icon>-->
-            <!--</span>-->
-            <!--<div>-->
-              <!--<v-card>-->
-                <!--<v-card-text>-->
-                  <!--<comment/>-->
-                  <!--<comment/>-->
-                  <!--<comment/>-->
-                <!--</v-card-text>-->
-
-              <!--</v-card>-->
-
-            <!--</div>-->
-          <!--</v-expansion-panel-content>-->
-        <!--</v-expansion-panel>-->
-      <!--</div>-->
     </v-card>
 
   </div>
@@ -62,12 +55,37 @@
   import Comment from '@/components/Comment.vue'
 
   export default {
-    props: ['data'],
+    props: ['postData'],
     name: "post",
     filters: {
       makeParsi: function (value) {
         if (!value) return '';
         return persianJs(value.toString()).englishNumber().toString();
+      }
+    },
+    computed: {
+      username() {
+        return this.$auth.user.username
+      }
+    },
+    methods: {
+      deletePost() {
+        if (this.postData.user.username === this.$auth.user.username){
+          console.log("deleted")
+          this.$emit('removeMe')
+        }
+      },
+      approvePost() {
+        if (this.postData.to.username === this.$auth.user.username){
+          console.log("approved")
+          this.$emit('approved')
+        }
+      },
+      dissaprovePost() {
+        if (this.postData.to.username === this.$auth.user.username){
+          console.log("DISapproved")
+          this.$emit('disapproved')
+        }
       }
     },
     components: {

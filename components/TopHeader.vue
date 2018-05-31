@@ -49,7 +49,7 @@
       <nuxt-link :to="'/'" class="user-button">
         <v-btn icon x-large>
           <!--TODO: IMPLEMENT THE USER AVATAR INSTEAD OF THIS STATIC PHOTO-->
-          <img src="avatar.png" class="user-avatar"/>
+          <img src="avatar.png" class="user-avatar" :alt="this.$auth.user.name"/>
         </v-btn>
       </nuxt-link>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>
@@ -75,7 +75,7 @@
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           { icon: 'mdi-account-plus', title: 'ثبت‌نام', to: '/register'},
         ],
-        title: 'آیین فارغ‌التحصیلی ۹۳',
+        title: 'فارغ التحصیلی ۹۳',
       }
     },
     methods: {

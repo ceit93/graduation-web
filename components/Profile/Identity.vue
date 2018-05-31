@@ -11,7 +11,7 @@
               color="grey lighten-4"
             >
               <!--TODO: IMPLEMENT USER AVATAR-->
-              <img src="avatar.png" alt="avatar">
+              <img src="avatar.png" :alt="this.$auth.user.name">
             </v-avatar><br>
             <v-btn small>
               تغییر عکس

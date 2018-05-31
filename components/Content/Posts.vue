@@ -4,8 +4,8 @@
       <v-card>
         <v-form v-model="valid" lazy-validation ref="post">
           <v-card-title class="justify-content-center">
-          <h3 class="title">دل‌نوشته جدید ثبت کنید</h3>
-        </v-card-title>
+            <h3 class="title">دل‌نوشته جدید ثبت کنید</h3>
+          </v-card-title>
           <v-card-text>
           <v-container grid-list-md fluid>
             <v-layout row wrap>

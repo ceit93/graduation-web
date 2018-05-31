@@ -24,7 +24,7 @@
     "vue-jalali-moment": "^1.0.0",
     "vue-notifications": "^0.9.0",
     "vue-tabs-component": "^1.4.0",
-    "vuetify": "^1.0.13"
+    "vuetify": "^1.0.18"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

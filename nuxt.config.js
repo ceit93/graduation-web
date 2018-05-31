@@ -17,6 +17,14 @@ module.exports = {
         },
         tokenRequired: true
       }
+    },
+    options: {
+      redirect: {
+        login: '/profile',
+        logout: '/login',
+        callback: '/login',
+        user: '/'
+      }
     }
   },
   router: {
@@ -42,7 +50,7 @@ module.exports = {
     {src: '~plugins/vue-notification.js', ssr: false}
   ],
   head: {
-    title: 'graduation-web',
+    title: 'آیین فارغ‌التحصیلی ۱۳۹۳',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -50,12 +58,13 @@ module.exports = {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'}
     ]
   },
   css: [
     '@/assets/css/main.scss',
     '@/node_modules/vuetify/dist/vuetify.min.css',
-    '@/assets/css/fontiran.css',
+    '@/assets/css/iransharp.css',
     '@/assets/css/bootstrap-grid.min.css',
     '@/node_modules/@mdi/font/css/materialdesignicons.min.css',
     '@/node_modules/vue-tabs-component/docs/resources/tabs-component.css',
@@ -63,7 +72,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: {color: '#3B8070'},
+  loading: {color: '#30fff2'},
   /*
   ** Build configuration
   */

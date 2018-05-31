@@ -13,7 +13,7 @@
     data() {
       return {
         notifs: [
-          {title: 'خوش آمدید', message: 'لطفا تا قبل ۳۱ خرداد محتوا رو تکمیل کنید.', type: 'warn', timeout: 10000},
+          {title: 'خوش اومدین', message: 'لطفا تا قبل ۳۱ خرداد محتوا رو تکمیل کنید.', type: 'warn', timeout: 10000},
         ]
       }
     },

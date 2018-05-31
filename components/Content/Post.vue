@@ -1,24 +1,31 @@
 <template>
   <div class="mb-3">
     <v-card class="elevation-5">
-      <v-card-text>
-        <div class="d-md-flex justify-content-between">
-          <!--user name-->
-          <div class="align-items-end d-md-flex ">
-            <nuxt-link to="">
-              <v-avatar size="40px" class="elevation-2">
-                <!--TODO: Implement the avatar-->
-                <img src="avatar.png" alt="">
-              </v-avatar>
-            </nuxt-link>
-            <span class="mr-2 body-2">{{data.title}} - برای {{data.to}}</span>
-          </div>
-          <!--post date-->
-          <div class="g-text-dates">
+      <v-card-title primary-title>
+        <v-btn icon to="" nuxt>
+          <v-avatar :size="40" class="elevation-2">
+            <!--TODO: Implement the avatar-->
+            <img src="avatar.png" alt="">
+          </v-avatar>
+        </v-btn>
+        <span class="mr-2 body-2">{{data.title}} - برای {{data.to}}</span>
+        <v-spacer></v-spacer>
+        <span class="grey--text text--lighten-1">
             {{data.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
-          </div>
-        </div>
-        <v-divider class="mt-2 mb-2"/>
+        </span>
+        <v-menu bottom left>
+          <v-btn slot="activator" icon>
+            <v-icon>more_horiz</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="(item, i) in menu_items" :key="i">
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-card-title>
+      <v-divider class="mt-2 mb-2"/>
+      <v-card-text>
         <div style="text-align:justify;">
           {{data.body}}
         </div>
@@ -59,6 +66,16 @@
   export default {
     props: ['data'],
     name: "post",
+    data() {
+      return {
+        menu_items: [
+          { title: 'Click Me' },
+          { title: 'Click Me' },
+          { title: 'Click Me' },
+          { title: 'Click Me 2' }
+        ]
+      }
+    },
     filters: {
       makeParsi: function (value) {
         if (!value) return '';

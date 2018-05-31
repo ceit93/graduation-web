@@ -26,7 +26,6 @@
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-
         <v-list-tile
           @click="logout"
         >
@@ -40,17 +39,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar fixed app :clipped-left="clipped" class="light-blue darken-4" dark>
-      <v-btn class="hidden-md-and-up" @click="drawer = !drawer" icon>
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-      <v-btn class="hidden-md-and-up" @click.stop="miniVariant = !miniVariant" icon>
-        <v-icon v-html="miniVariant ? 'mdi-arrow-right-drop-circle-outline' : 'mdi-arrow-left-drop-circle-outline'"></v-icon>
-      </v-btn>
+      <v-toolbar-side-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-btn :to="'/'" nuxt icon class="user-button">
         <v-avatar
           :tile="false"
           :size="40"
           color="grey lighten-4"
+          @click="this.drawer = false"
         >
           <!--TODO: IMPLEMENT USER AVATAR-->
           <img src="avatar.png" :alt="this.$auth.user.name">
@@ -74,7 +69,7 @@
         clipped: true,
         drawer: false,
         fixed: false,
-        miniVariant: true,
+        miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           { icon: 'mdi-account-plus', title: 'ثبت‌نام', to: '/register'},

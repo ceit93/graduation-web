@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height class="grey lighten-5">
+  <v-container fluid fill-height>
     <v-layout align-center justify-center row>
       <v-flex xs12 align-center justify-center>
         <!--Credits: http://fareez.info/blog/countdown-timer-using-vuejs/-->

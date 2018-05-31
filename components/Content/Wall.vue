@@ -2,6 +2,7 @@
   <v-card>
     <v-card-title class="justify-content-center">
       <h3 class="title">دل‌نوشته‌های ثبت‌شده برای شما</h3>
+      <span class="caption grey--text text--darken-1">*فقط دل‌نوشته‌های تایید شده در نشریه منتشر می‌شوند می‌توانید از منوی سمت چپ هر دل‌نوشته نسبت به تایید یا عدم تایید آن اقدام بکنید. تایید شدن یا عدم تایید دل‌نوشته‌ها توسط نویسنده آن دل‌نوشته قابل مشاهده نیست.</span>
     </v-card-title>
     <v-card-text>
       <div v-for="(post,index) in posts"

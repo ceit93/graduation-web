@@ -27,7 +27,7 @@
             <v-icon>more_horiz</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile v-if="postData.approved && postData.to.username === username" @click="dissaprovePost">
+            <v-list-tile v-if="postData.approved && postData.to.username === username && postData.user.username !== username" @click="dissaprovePost">
               <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-if="!postData.approved && postData.to.username === username" @click="approvePost">

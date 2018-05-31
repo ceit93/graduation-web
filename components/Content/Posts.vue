@@ -5,6 +5,7 @@
         <v-form v-model="valid" lazy-validation ref="post">
           <v-card-title class="justify-content-center">
             <h3 class="title">دل‌نوشته جدید ثبت کنید</h3>
+            <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
           <v-container grid-list-md fluid>
@@ -166,7 +167,7 @@
           //     title: this.composed.title,
           //     body: this.composed.body,
           //     images: [],
-          //     user: this.$auth.user.id,
+          //     user: this.$auth.user,
           //     to: author,
           //     approved: false,
           //     date: moment('HH:MM jYYYY/jMM/jD')
@@ -180,7 +181,7 @@
             title: this.composed.title,
             body: this.composed.body,
             images: [],
-            user: this.$auth.user.username,
+            user: this.$auth.user,
             to: recipient,
             approved: false,
             date: '23:23 2018/5/12',

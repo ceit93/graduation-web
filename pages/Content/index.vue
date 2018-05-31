@@ -30,7 +30,7 @@
         active: '',
         tabs: [
           {
-            name: 'دلنوشته‌ها',
+            name: 'دل‌نوشته‌ها',
             icon: 'add_comment',
             component: 'Posts'
           },

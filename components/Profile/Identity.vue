@@ -4,7 +4,7 @@
       <v-flex xs12 align-center justify-center>
         <!--Credits: http://fareez.info/blog/countdown-timer-using-vuejs/-->
         <v-layout row wrap class="ltr mt-5 iranblack light-blue--text text--darken-3">
-          <v-flex xs4 class="text-xs-center">
+          <v-flex xs12 md3 class="text-xs-center">
             <v-avatar
               :tile="false"
               :size="150"
@@ -17,9 +17,10 @@
               تغییر عکس
             </v-btn>
           </v-flex>
-          <v-flex xs8 class="">
+          <v-flex xs12 md9 class="">
             <h1 class="">هم‌ورودی عزیز، {{ this.$auth.user.name }}</h1>
-            <p>لطفا تا تموم نشدن وقت (۳۱ خرداد) مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل کنید.</p>
+            <p>اینجا سایت فارغ‌التحصیلیمونه و از طریق این وب‌اپلیکیشن باید مطالب نشریه رو کامل کنیم و بخشی از کارای جشن رو انجام بدیم.</p>
+            <p>لطفا تا تموم قبل از موعد تکمیل محتوا (۳۱ خرداد)، مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل کنید.</p>
             <p>اینجا رو هم تند تند چک کنید لطفا چون مرتب آپدیت می‌کنیمش!</p>
           </v-flex>
         </v-layout>

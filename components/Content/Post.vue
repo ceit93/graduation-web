@@ -7,10 +7,11 @@
           <div class="align-items-end d-md-flex ">
             <nuxt-link to="">
               <v-avatar size="40px" class="elevation-2">
-                <img src="@/static/avatar.png" alt="">
+                <!--TODO: Implement the avatar-->
+                <img src="avatar.png" alt="">
               </v-avatar>
             </nuxt-link>
-            <span class="mr-2 body-2">{{data.title}}</span>
+            <span class="mr-2 body-2">{{data.title}} - برای {{data.to}}</span>
           </div>
           <!--post date-->
           <div class="g-text-dates">
@@ -19,39 +20,10 @@
         </div>
         <v-divider class="mt-2 mb-2"/>
         <div style="text-align:justify;">
-          {{data.text}}
+          {{data.body}}
         </div>
-
-
       </v-card-text>
       <v-divider/>
-      <!--Comments-->
-      <!--<v-card-text>-->
-        <!--<comment/>-->
-        <!--<comment/>-->
-      <!--</v-card-text>-->
-
-      <!--<div class="text-md-center">-->
-        <!--<v-expansion-panel class="text-md-center">-->
-          <!--<v-expansion-panel-content expand-icon="" class="">-->
-            <!--<span class="blue&#45;&#45;text" slot="header">-->
-              <!--<span>مشاهده بیشتر</span>-->
-              <!--<v-icon class="blue&#45;&#45;text">mdi-chevron-down</v-icon>-->
-            <!--</span>-->
-            <!--<div>-->
-              <!--<v-card>-->
-                <!--<v-card-text>-->
-                  <!--<comment/>-->
-                  <!--<comment/>-->
-                  <!--<comment/>-->
-                <!--</v-card-text>-->
-
-              <!--</v-card>-->
-
-            <!--</div>-->
-          <!--</v-expansion-panel-content>-->
-        <!--</v-expansion-panel>-->
-      <!--</div>-->
     </v-card>
 
   </div>

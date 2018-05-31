@@ -1,11 +1,11 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-card>
-        <v-form v-model="valid" lazy-validation ref="post">
+      <v-form v-model="valid" lazy-validation ref="post">
+        <v-card>
           <v-card-title class="justify-content-center">
             <h3 class="title">دل‌نوشته جدید ثبت کنید</h3>
-            <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
+            <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
           <v-container grid-list-md fluid>
@@ -48,8 +48,8 @@
             ثبت پست
           </v-btn>
         </v-card-actions>
-        </v-form>
-      </v-card>
+        </v-card>
+      </v-form>
       <v-divider></v-divider>
       <v-card>
         <v-card-title class="justify-content-center">
@@ -84,7 +84,7 @@
             _id: '_dummy_id',
             title: 'آری اینچنین بود ای برادر',
             body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-            date: '23:23 2018/5/12',
+            date: new Date(),
             approved: true,
             user: {
               id: '_dummydata',
@@ -101,7 +101,7 @@
             _id: '_dummy_id',
             title: 'آری اینچنین بود ای برادر',
             body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-            date: '23:23 2018/5/12',
+            date: new Date(),
             approved: true,
             user: {
               id: '_dummydata',
@@ -123,11 +123,18 @@
     },
     notifications: {
       showError: {
-        title: 'خطایی رخ داد...',
+        title: 'خطا',
+        message: 'خطایی رخ داد...',
         type: 'error'
       },
-      showSuccess: {
-        title: 'دل‌نوشته شما با موفقیت ثبت شد.',
+      showSubmissionSuccess: {
+        title: 'انجام شد',
+        message: 'دل‌نوشته شما با موفقیت ثبت شد.',
+        type: 'success'
+      },
+      showDeletionSuccess: {
+        title: 'انجام شد',
+        message: 'دل‌نوشته شما با موفقیت حذف شد.',
         type: 'success'
       }
     },
@@ -157,42 +164,44 @@
       },
       submitPost(){
         if(this.$refs.post.validate()){
-
           // Finding the recipient
           let recipient = {}
           for (let i=0; i < this.people.length; i++)
             if (this.people[i].username === this.composed.to)
               recipient = this.people[i]
-          // this.$axios.post('/post/add', {data:{
-          //     title: this.composed.title,
-          //     body: this.composed.body,
-          //     images: [],
-          //     user: this.$auth.user,
-          //     to: author,
-          //     approved: false,
-          //     date: moment('HH:MM jYYYY/jMM/jD')
-          //   }}).then(e => {
-          //   this.showSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
-          // TODO: complete this
-          this.posts.push({
+
+          let content = {
             title: this.composed.title,
             body: this.composed.body,
             images: [],
             user: this.$auth.user,
             to: recipient,
             approved: false,
-            date: '23:23 2018/5/12',
-          })
-          this.showSuccess()
+            date: new Date(),
+          }
+
+          // Posting - TODO: complete this
+          // this.$axios.post('/post/add', {data: content}).then(e => {
+            this.posts.push(content)
+            this.showSubmissionSuccess()
+          // }).catch(r => {
+          //   this.showError()
+          // })
         }
       },
       removePost(index){
-        console.log(index)
-        this.posts.splice(index, 1);
-        this.$nuxt.$router.replace({'path' : '/content'})
+        if (this.posts[index].user.username === this.$auth.user.username){
+          if (window.confirm("آیا مطمئن هستید؟")){
+            // Deleting - TODO: complete this
+            // this.$axios.delete('/posts/' + posts[index]._id).then(e => {
+            this.posts.splice(index, 1);
+            this.$nuxt.$router.replace({'path' : '/content'})
+            this.showDeletionSuccess()
+            // }).catch(r => {
+            //   this.showError()
+            // })
+          }
+        }
       }
     },
     components: {

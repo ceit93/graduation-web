@@ -143,7 +143,8 @@
           //     body: this.composed.body,
           //     images: [],
           //     user: this.$auth.user.id,
-          //     to: this.composed.to
+          //     to: this.composed.to,
+          //     approved: false,
           //     date: moment('HH:MM jYYYY/jMM/jD')
           //   }}).then(e => {
           //   this.showSuccess()
@@ -157,6 +158,7 @@
             images: [],
             user: this.$auth.user.username,
             to: this.composed.to,
+            approved: true,
             date: '23:23 2018/5/12',
           })
           this.showSuccess()

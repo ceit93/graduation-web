@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3">
-    <v-card>
+    <v-card class="elevation-5">
       <v-card-text>
         <div class="d-md-flex justify-content-between">
           <!--user name-->
@@ -23,6 +23,29 @@
           {{data.body}}
         </div>
       </v-card-text>
+
+
+      <!--TODO make the following element conditional-->
+      <v-card-actions>
+        <v-card-actions class="justify-content-center">
+          <v-btn
+            @click="deletePost"
+            color="error"
+          >
+            <v-icon>delete</v-icon>
+            حذف پست
+          </v-btn>
+          تایید پست (انتشار در نشریه)
+          <v-switch
+            v-model="data.approved"
+            color="success"
+            @change="approvePost"
+          ></v-switch>
+        </v-card-actions>
+        <!--END OF TODO-->
+
+
+      </v-card-actions>
       <v-divider/>
     </v-card>
 
@@ -40,6 +63,15 @@
       makeParsi: function (value) {
         if (!value) return '';
         return persianJs(value.toString()).englishNumber().toString();
+      }
+    },
+    methods: {
+      deletePost() {
+        console.log(this.$auth)
+        console.log(this.data)
+      },
+      approvePost(e) {
+        console.log(e)
       }
     },
     components: {

@@ -15,6 +15,26 @@ html {
   background-color: $light-color;
 }
 
+// text fonts
+@media (max-width: 768px) {
+  .ceit-display-1{
+    font-size: 1.6rem
+  }
+  .ceit-subheading{
+    font-size: 1rem;
+  }
+
+}
+@media (min-width: 768px) {
+  .ceit-display-1{
+    font-size: 2.3rem;
+  }
+  .ceit-subheading{
+    font-size: 1.3rem;
+  }
+
+}
+
 //text color
 .g-text-dates {
   color: #90A4AE;

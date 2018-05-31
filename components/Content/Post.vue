@@ -9,6 +9,12 @@
           </v-avatar>
         </v-btn>
         <span class="mr-2 body-2">{{data.title}} - برای {{data.to}}</span>
+        <span v-if="data.approved">
+          <v-chip color="green" text-color="white" small>تایید شده</v-chip>
+        </span>
+        <span v-else>
+          <v-chip color="orange" outline small dark>در انتظار تایید</v-chip>
+        </span>
         <v-spacer></v-spacer>
         <span class="grey--text text--lighten-1">
             {{data.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
@@ -18,8 +24,14 @@
             <v-icon>more_horiz</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile v-for="(item, i) in menu_items" :key="i">
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile v-if="data.approved">
+              <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="!data.approved">
+              <v-list-tile-title class="green--text">تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="deletePost">
+              <v-list-tile-title class="red--text">حذف پست</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>

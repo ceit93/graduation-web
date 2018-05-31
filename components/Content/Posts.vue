@@ -55,9 +55,8 @@
           <h3 class="title">دل‌نوشته‌های ثبت‌شده توسط من</h3>
         </v-card-title>
         <v-card-text>
-          <div v-for="(post,index) in posts"
-               :key="index">
-            <post :data="post"/>
+          <div v-for="(post,index) in posts" :key="index">
+            <post :postData="post" v-on:removeMe="removePost(index)"/>
           </div>
         </v-card-text>
       </v-card>
@@ -73,6 +72,7 @@
     data() {
       return {
         valid: true,
+        event: '',
         composed: {
           to: '',
           title: '',
@@ -80,13 +80,31 @@
         },
         posts: [
           {
+            _id: '_dummy_id',
             title: 'آری اینچنین بود ای برادر',
             body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
             date: '23:23 2018/5/12',
-            approved: false,
+            approved: true,
             user: {
               id: '_dummydata',
-              username: '9331001',
+              username: '9331009',
+              name: 'امیر حقیقتی ملکی'
+            },
+            to: {
+              id: '_dummydata',
+              username: '9331031',
+              name: 'مانا پوستی‌زاده'
+            }
+          },
+          {
+            _id: '_dummy_id',
+            title: 'آری اینچنین بود ای برادر',
+            body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
+            date: '23:23 2018/5/12',
+            approved: true,
+            user: {
+              id: '_dummydata',
+              username: '9331009',
               name: 'امیر حقیقتی ملکی'
             },
             to: {
@@ -108,7 +126,7 @@
         type: 'error'
       },
       showSuccess: {
-        title: 'ترین مورد نظر با موفقیت ثبت شد.',
+        title: 'دل‌نوشته شما با موفقیت ثبت شد.',
         type: 'success'
       }
     },
@@ -122,7 +140,7 @@
       async fetchPeople() {
         // this.tarins = await this.$axios.get('people')
         this.people = [
-          {username: '9331001', name: 'امیر حقیقتی ملکی'},
+          {username: '9331001', name: 'خیار خیاری'},
           {username: '9331002', name: 'ایمان تبریزیان'},
           {username: '9331003', name: 'عارف حسینی‌کیا'},
           {username: '9331004', name: 'مانا پوستی‌زاده'},
@@ -130,7 +148,7 @@
           {username: '9331006', name: 'اصغر اصغری'},
           {username: '9331007', name: 'سیب هوایی'},
           {username: '9331008', name: 'سیب زمینی'},
-          {username: '9331009', name: 'خیار خیاری'},
+          {username: '9331009', name: 'امیر حقیقتی ملکی'},
           {username: '9331010', name: 'گلاب گلابی'},
           {username: '9331011', name: 'جعفر جعفری'},
           {username: '9331012', name: 'محمد محمدی'},
@@ -138,12 +156,18 @@
       },
       submitPost(){
         if(this.$refs.post.validate()){
+
+          // Finding the recipient
+          let recipient = {}
+          for (let i=0; i < this.people.length; i++)
+            if (this.people[i].username === this.composed.to)
+              recipient = this.people[i]
           // this.$axios.post('/post/add', {data:{
           //     title: this.composed.title,
           //     body: this.composed.body,
           //     images: [],
           //     user: this.$auth.user.id,
-          //     to: this.composed.to,
+          //     to: author,
           //     approved: false,
           //     date: moment('HH:MM jYYYY/jMM/jD')
           //   }}).then(e => {
@@ -157,12 +181,17 @@
             body: this.composed.body,
             images: [],
             user: this.$auth.user.username,
-            to: this.composed.to,
-            approved: true,
+            to: recipient,
+            approved: false,
             date: '23:23 2018/5/12',
           })
           this.showSuccess()
         }
+      },
+      removePost(index){
+        console.log(index)
+        this.posts.splice(index, 1);
+        this.$nuxt.$router.replace({'path' : '/content'})
       }
     },
     components: {

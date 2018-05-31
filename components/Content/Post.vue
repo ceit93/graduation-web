@@ -8,64 +8,43 @@
             <img src="avatar.png" alt="">
           </v-avatar>
         </v-btn>
-        <span class="mr-2 body-2">{{data.title}} - برای {{data.to}}</span>
-        <span v-if="data.approved">
+        <span class="mr-2 body-2">{{postData.title}} - برای &nbsp;</span>
+        <span>
+          <nuxt-link to="">{{postData.to.name}}</nuxt-link>
+        </span>
+        <span v-if="postData.approved && postData.user.username !== username">
           <v-chip color="green" text-color="white" small>تایید شده</v-chip>
         </span>
-        <span v-else>
+        <span v-if="!postData.approved && postData.user.username !== username">
           <v-chip color="orange" outline small dark>در انتظار تایید</v-chip>
         </span>
         <v-spacer></v-spacer>
         <span class="grey--text text--lighten-1">
-            {{data.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
+            {{postData.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
         </span>
         <v-menu bottom left>
           <v-btn slot="activator" icon>
             <v-icon>more_horiz</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile v-if="data.approved">
+            <v-list-tile v-if="postData.approved && postData.to.username === username" @click="dissaprovePost">
               <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-if="!data.approved">
+            <v-list-tile v-if="!postData.approved && postData.to.username === username" @click="approvePost">
               <v-list-tile-title class="green--text">تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile @click="deletePost">
+            <v-list-tile v-if="postData.user.username === username" @click="deletePost">
               <v-list-tile-title class="red--text">حذف پست</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
       </v-card-title>
-      <v-divider class="mt-2 mb-2"/>
+      <v-divider></v-divider>
       <v-card-text>
         <div style="text-align:justify;">
-          {{data.body}}
+          {{postData.body}}
         </div>
       </v-card-text>
-
-
-      <!--TODO make the following element conditional-->
-      <v-card-actions>
-        <v-card-actions class="justify-content-center">
-          <v-btn
-            @click="deletePost"
-            color="error"
-          >
-            <v-icon>delete</v-icon>
-            حذف پست
-          </v-btn>
-          تایید پست (انتشار در نشریه)
-          <v-switch
-            v-model="data.approved"
-            color="success"
-            @change="approvePost"
-          ></v-switch>
-        </v-card-actions>
-        <!--END OF TODO-->
-
-
-      </v-card-actions>
-      <v-divider/>
     </v-card>
 
   </div>
@@ -76,31 +55,37 @@
   import Comment from '@/components/Comment.vue'
 
   export default {
-    props: ['data'],
+    props: ['postData'],
     name: "post",
-    data() {
-      return {
-        menu_items: [
-          { title: 'Click Me' },
-          { title: 'Click Me' },
-          { title: 'Click Me' },
-          { title: 'Click Me 2' }
-        ]
-      }
-    },
     filters: {
       makeParsi: function (value) {
         if (!value) return '';
         return persianJs(value.toString()).englishNumber().toString();
       }
     },
+    computed: {
+      username() {
+        return this.$auth.user.username
+      }
+    },
     methods: {
       deletePost() {
-        console.log(this.$auth)
-        console.log(this.data)
+        if (this.postData.user.username === this.$auth.user.username){
+          console.log("deleted")
+          this.$emit('removeMe')
+        }
       },
-      approvePost(e) {
-        console.log(e)
+      approvePost() {
+        if (postData.to.username === this.$auth.user.username){
+          console.log("approved")
+          postData.approved = true
+        }
+      },
+      dissaprovePost() {
+        if (postData.to.username === this.$auth.user.username){
+          console.log("DISapproved")
+          postData.approved = false
+        }
       }
     },
     components: {

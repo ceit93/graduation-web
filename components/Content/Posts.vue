@@ -13,6 +13,7 @@
                 <v-flex xs12>
                   <v-select
                     v-model="composed.to"
+                    :rules="rules.to"
                     :items="people"
                     item-text="name"
                     item-value="username"
@@ -23,18 +24,25 @@
                     deletable-chips
                     chips
                     flat
-                  ></v-select>
+                  />
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field
                     v-model="composed.title"
+                    :rules="rules.title"
                     label="عنوان دل‌نوشته"
                     required
-                  ></v-text-field>
+                  />
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field v-model="composed.body" box multi-line label="متن دل‌نوشته"
-                                placeholder="یادش بخیر اون زمونا..."></v-text-field>
+                  <v-text-field
+                    v-model="composed.body"
+                    :rules="rules.body"
+                    box
+                    required
+                    multi-line
+                    label="متن دل‌نوشته"
+                    placeholder="یادش بخیر اون زمونا..."/>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -52,7 +60,7 @@
           </v-card-actions>
         </v-card>
       </v-form>
-      <v-divider></v-divider>
+      <v-divider/>
       <v-card>
         <v-card-title class="justify-content-center">
           <h3 class="title">دل‌نوشته‌های ثبت‌شده توسط من</h3>
@@ -100,6 +108,12 @@
         },
         valid: true,
         event: '',
+        rules: {
+          to: [v => !!v || 'مشخص کنید این دلنوشته برای کیست'],
+          title: [v => !!v || 'وارد کردن عنوان الزامی است'],
+          body: [v => !!v || 'وارد کردن متن الزامی است'],
+          file: ''
+        },
         composed: {
           to: '',
           title: '',

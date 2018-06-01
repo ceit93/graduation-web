@@ -110,7 +110,7 @@
           {
             _id: '_dummy_id',
             title: 'آری اینچنین بود ای برادر',
-            body:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.\n' +
+            body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.\n' +
             '\n' +
             'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.\n' +
             '\n' +
@@ -222,41 +222,46 @@
       submitPost(e) {
         e.preventDefault();
         let image = e.target[3].files[0];
-        let reader = new FileReader();
-        let imageURL = '';
-
-        // TODO : we dont need fileReader when we post the form into server
-        reader.onload = (e) => {
-          imageURL = e.target.result;
-          if (this.$refs.post.validate()) {
-            // Finding the recipient
-            let recipient = {}
-            for (let i = 0; i < this.people.length; i++)
-              if (this.people[i].username === this.composed.to)
-                recipient = this.people[i]
-            console.log(imageURL);
-            let content = {
-              title: this.composed.title,
-              body: this.composed.body,
-              image: imageURL,
-              user: this.$auth.user,
-              to: recipient,
-              approved: false,
-              date: new Date(),
-            };
+        if (image) {
+          let reader = new FileReader();
+          reader.readAsDataURL(image);
+          // TODO : we dont need fileReader when we post the form into server
+          reader.onload = (e) => {
+            let imageURL = e.target.result;
+            this.validateForm(imageURL);
+          };
+        } else {
+          this.validateForm();
+        }
 
 
-            // Posting - TODO: complete this
-            // this.$axios.post('/post/add', {data: content}).then(e => {
-            this.posts.push(content);
-            this.showSubmissionSuccess()
-            // }).catch(r => {
-            //   this.showError()
-            // })
-          }
-        };
-        reader.readAsDataURL(image);
+      },
+      validateForm(imgURL = '') {
+        if (this.$refs.post.validate()) {
+          // Finding the recipient
+          let recipient = {}
+          for (let i = 0; i < this.people.length; i++)
+            if (this.people[i].username === this.composed.to)
+              recipient = this.people[i]
+          let content = {
+            title: this.composed.title,
+            body: this.composed.body,
+            image: imgURL,
+            user: this.$auth.user,
+            to: recipient,
+            approved: false,
+            date: new Date(),
+          };
 
+
+          // Posting - TODO: complete this
+          // this.$axios.post('/post/add', {data: content}).then(e => {
+          this.posts.push(content);
+          this.showSubmissionSuccess()
+          // }).catch(r => {
+          //   this.showError()
+          // })
+        }
       },
       removePost(index) {
         if (this.posts[index].user.username === this.$auth.user.username) {

@@ -15,6 +15,35 @@ html {
   background-color: $light-color;
 }
 
+// ceit styles
+
+// mobile
+@media (max-width: 768px) {
+  .ceit-display-1 {
+    font-size: 1.6rem
+  }
+  .ceit-subheading {
+    font-size: 1rem;
+  }
+  .ceit-identity-text p {
+    text-align: center;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .ceit-display-1 {
+    font-size: 2.3rem;
+  }
+  .ceit-subheading {
+    font-size: 1.3rem;
+  }
+  .ceit-identity-text p {
+    text-align: right;
+  }
+
+}
+
 //text color
 .g-text-dates {
   color: #90A4AE;
@@ -71,6 +100,14 @@ html {
 }
 
 //customization
+.ql-editor p {
+  font-family: Iran !important;
+  text-align: right !important;
+}
+.dz-image img{
+  width: 100% !important
+}
+
 .tabs-component-panels {
   position: relative !important;
 }
@@ -79,20 +116,20 @@ html {
   padding-top: 5px;
 }
 
-.application{
+.application {
 
-  font-family: Iran!important;
-  label,input{
-    font-size: 0.9rem!important;
+  font-family: Iran !important;
+  label, input {
+    font-size: 0.9rem !important;
     direction: rtl;
   }
 
   .input-group label {
     transform-origin: top right;
   }
-  .input-group--text-field label{
+  .input-group--text-field label {
     right: 0;
-    left: auto!important;
+    left: auto !important;
   }
 }
 

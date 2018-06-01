@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-main">
+  <div class="grey lighten-5">
     <identity></identity>
     <countdown date="June 21, 2018"></countdown>
   </div>

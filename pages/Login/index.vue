@@ -1,13 +1,13 @@
 <template>
-  <v-container fluid fill-height>
-    <v-layout align-center justify-center row>
+  <v-container fluid >
+    <v-layout align-center justify-center row class="mx-0">
       <v-flex xs11>
         <div>
           <v-card-text>
-            <h1 class="white--text text-md-center display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1>
+            <h1 class="white--text text-xs-center ceit-display-1">آیین یادبود فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳</h1>
           </v-card-text>
           <v-card-text>
-            <h6 class="white--text text-xs-center subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
+            <h6 class="white--text text-xs-center ceit-subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
           </v-card-text>
           <v-card-text class="justify-content-center">
             <p v-if="this.code" class="white--text text-xs-center">در حال ورود...</p>

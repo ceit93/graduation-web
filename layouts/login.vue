@@ -2,7 +2,7 @@
   <v-app>
     <v-content class="login-content">
     <div class="cover-bg">
-      <img class="cover-img" src="@/static/cover.png" alt="">
+      <img class="cover-img d-md-block" src="@/static/cover.png" alt="">
     </div>
     <nuxt/>
     </v-content>
@@ -32,5 +32,6 @@
   }
   .cover-img {
     width: 100%;
+    height: 100%;
   }
 </style>

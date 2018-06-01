@@ -106,7 +106,6 @@
             this.$auth.login({data: {code: this.code}, url: '/oauth/aut/authorize'}).catch(e => {
               this.showLoginError()
               console.log(e)
-              this.$nuxt.$router.replace({'path' : '/'})
             })
           } else if(callback) {
             try{
@@ -114,10 +113,10 @@
             } catch (e) {
               this.showLoginError()
               console.log(e)
-              this.$nuxt.$router.replace({'path' : '/'})
             }
           }
         }
+        this.$nuxt.$router.replace({'path' : '/'})
       }
     },
     async mounted () {

@@ -1,10 +1,10 @@
 <template xmlns:v-quill="http://www.w3.org/1999/xhtml">
   <v-card>
     <v-card-text>
-      <v-form v-model="valid" lazy-validation ref="post">
+      <v-form v-model="valid" lazy-validation ref="post" @submit="submitPost">
         <v-card>
           <v-card-title class="justify-content-center">
-            <h3 class="title">دل‌نوشته جدید ثبت کنید</h3>
+            <h3 class="title">دل‌نوشته جدید ثبت کنید</h3> &nbsp;
             <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
@@ -32,39 +32,19 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs8>
-                  <p>متن دلنوشته</p>
-                  <section class="editor-container">
-                    <div class="quill-editor"
-                         ref="myEditor"
-                         @change="onEditorChange"
-                         v-quill:myQuillEditor="editorOption"
-                    >
-                    </div>
-                  </section>
-                </v-flex>
-
-                <v-flex xs4 class="my-1">
-                  <p>عکس</p>
-                  <div class="text-xs-center blue my-2">
-                    <dropzone
-                      id="foo"
-                      ref="uploader"
-                      :options="uploadOptions"
-                      :destroyDropzone="true"
-                      @vdropzone-file-added="checkFile"
-                      @vdropzone-removed-file="removedFile"/>
-                  </div>
+                <v-flex xs12>
+                  <v-text-field v-model="composed.body" box multi-line label="متن دل‌نوشته" placeholder="یادش بخیر اون زمونا..."></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
           </v-card-text>
           <v-card-actions class="d-flex justify-content-center">
-            <v-btn>
+            <input :v-model="composed.file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
+            <v-btn @click="clickFile" type="button">
               <v-icon small>cloud_upload</v-icon>
               آپلود عکس
             </v-btn>
-            <v-btn color="success" @click="submitPost">
+            <v-btn color="success" type="submit">
               <v-icon small>check</v-icon>
               ثبت پست
             </v-btn>
@@ -89,8 +69,6 @@
 <script>
   import Post from '~/components/Content/Post.vue'
   import Dropzone from 'nuxt-dropzone'
-  import 'nuxt-dropzone/dropzone.css'
-
 
   export default {
     name: "posts",
@@ -132,6 +110,7 @@
             _id: '_dummy_id',
             title: 'آری اینچنین بود ای برادر',
             body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
+            image: 'https://realfavicongenerator.net/assets/images/sample/colorful/fb-editor-1.png',
             date: new Date(),
             approved: true,
             user: {
@@ -195,8 +174,8 @@
     },
 
     methods: {
-      onEditorChange($event){
-        this.composed.body = $event.text;
+      clickFile(){
+        this.$refs.file.click()
       },
       async fetchPeople() {
         // this.tarins = await this.$axios.get('people')
@@ -234,33 +213,36 @@
         else
           this.composed.file = '';
       },
-      submitPost() {
-        console.log(this.composed);
-        // if (this.$refs.post.validate()) {
-        //   // Finding the recipient
-        //   let recipient = {}
-        //   for (let i = 0; i < this.people.length; i++)
-        //     if (this.people[i].username === this.composed.to)
-        //       recipient = this.people[i]
-        //
-        //   let content = {
-        //     title: this.composed.title,
-        //     body: this.composed.body,
-        //     images: [],
-        //     user: this.$auth.user,
-        //     to: recipient,
-        //     approved: false,
-        //     date: new Date(),
-        //   }
-        //
-        //   // Posting - TODO: complete this
-        //   // this.$axios.post('/post/add', {data: content}).then(e => {
-        //   this.posts.push(content)
-        //   this.showSubmissionSuccess()
-        //   // }).catch(r => {
-        //   //   this.showError()
-        //   // })
-        // }
+      submitPost(e) {
+        e.preventDefault()
+        console.log(e)
+        console.log(this.composed)
+        // let f = e.target
+        if (this.$refs.post.validate()) {
+          // Finding the recipient
+          let recipient = {}
+          for (let i = 0; i < this.people.length; i++)
+            if (this.people[i].username === this.composed.to)
+              recipient = this.people[i]
+
+          let content = {
+            title: this.composed.title,
+            body: this.composed.body,
+            // image: ,
+            user: this.$auth.user,
+            to: recipient,
+            approved: false,
+            date: new Date(),
+          }
+
+          // Posting - TODO: complete this
+          // this.$axios.post('/post/add', {data: content}).then(e => {
+          this.posts.push(content)
+          this.showSubmissionSuccess()
+          // }).catch(r => {
+          //   this.showError()
+          // })
+        }
       },
       removePost(index) {
         if (this.posts[index].user.username === this.$auth.user.username) {

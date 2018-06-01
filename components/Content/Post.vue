@@ -40,6 +40,7 @@
         </v-menu>
       </v-card-title>
       <v-divider></v-divider>
+      <v-card-media v-if="postData.image" :src="postData.image" height="200px" contain></v-card-media>
       <v-card-text>
         <div style="text-align:justify;">
           {{postData.body}}

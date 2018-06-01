@@ -74,7 +74,7 @@
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           { icon: 'mdi-account-plus', title: 'ثبت‌نام', to: '/register'},
         ],
-        title: 'فارغ التحصیلی ۹۳',
+        title: 'فارغ‌التحصیلی ۹۳',
       }
     },
     methods: {

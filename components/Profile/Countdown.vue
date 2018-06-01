@@ -1,9 +1,9 @@
 <template>
   <v-container fluid fill-height>
-    <v-layout align-center justify-center row>
+    <v-layout align-center justify-center row class="mx-0">
       <v-flex xs12 align-center justify-center>
         <!--Credits: http://fareez.info/blog/countdown-timer-using-vuejs/-->
-        <v-layout row wrap class="ltr mt-5 iranblack light-blue--text text--darken-3 text-xs-center">
+        <v-layout row wrap class="ltr mt-5 iranblack light-blue--text text--darken-3 text-xs-center mx-0">
           <v-flex xs3 class="text-xs-center">
             <h1 class="">{{ convertToPersian(days) }}</h1>
             <p class="iranblack">روز</p>

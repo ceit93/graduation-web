@@ -231,7 +231,7 @@
 
 <style lang="scss" scoped>
   .editor-container {
-    width: 60%;
+    width: 100%;
     /*margin: 0 auto;*/
     padding: 5px 0;
 

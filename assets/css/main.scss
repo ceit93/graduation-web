@@ -15,13 +15,18 @@ html {
   background-color: $light-color;
 }
 
-// text fonts
+// ceit styles
+
+// mobile
 @media (max-width: 768px) {
   .ceit-display-1{
     font-size: 1.6rem
   }
   .ceit-subheading{
     font-size: 1rem;
+  }
+  .ceit-identity-text p{
+    text-align: center;
   }
 
 }
@@ -31,6 +36,9 @@ html {
   }
   .ceit-subheading{
     font-size: 1.3rem;
+  }
+  .ceit-identity-text p{
+    text-align: right;
   }
 
 }

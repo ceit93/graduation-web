@@ -27,7 +27,9 @@
             <v-icon>more_horiz</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile v-if="postData.approved && postData.to.username === username && postData.user.username !== username" @click="dissaprovePost">
+            <v-list-tile
+              v-if="postData.approved && postData.to.username === username && postData.user.username !== username"
+              @click="dissaprovePost">
               <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-if="!postData.approved && postData.to.username === username" @click="approvePost">
@@ -39,13 +41,17 @@
           </v-list>
         </v-menu>
       </v-card-title>
-      <v-divider></v-divider>
-      <v-card-media v-if="postData.image" :src="postData.image" height="200px" contain></v-card-media>
+      <v-divider/>
+      <img v-if="postData.image"
+           :src="postData.image"
+           class="ceit-post-image">
+
       <v-card-text>
-        <div style="text-align:justify;">
+        <div style="text-align:justify;" class="pa-2">
           {{postData.body}}
         </div>
       </v-card-text>
+      <div style="clear: both"></div>
     </v-card>
 
   </div>
@@ -71,19 +77,19 @@
     },
     methods: {
       deletePost() {
-        if (this.postData.user.username === this.$auth.user.username){
+        if (this.postData.user.username === this.$auth.user.username) {
           console.log("deleted")
           this.$emit('removeMe')
         }
       },
       approvePost() {
-        if (this.postData.to.username === this.$auth.user.username){
+        if (this.postData.to.username === this.$auth.user.username) {
           console.log("approved")
           this.$emit('approved')
         }
       },
       dissaprovePost() {
-        if (this.postData.to.username === this.$auth.user.username){
+        if (this.postData.to.username === this.$auth.user.username) {
           console.log("DISapproved")
           this.$emit('disapproved')
         }

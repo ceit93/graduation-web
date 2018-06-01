@@ -58,6 +58,11 @@
 <script>
   export default {
     layout: 'login',
+    computed: {
+      code () {
+        return this.$route.query.code
+      }
+    },
     data() {
       return {
         username: '',
@@ -97,8 +102,16 @@
         }
       }
     },
-    created() {
-      // this.$axios.setHeader('Access-Control-Allow-Origin','*');
+    async mounted () {
+      if (this.$auth.loggedIn) {
+
+      } else {
+        if (this.code) {
+          this.$auth.login({data: {code: this.code}, url: '/oauth/aut/authorize'})
+        } else {
+          this.$store.dispatch('redirectToLogin')
+        }
+      }
     }
   }
 </script>

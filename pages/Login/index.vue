@@ -9,48 +9,55 @@
           <v-card-text>
             <h6 class="white--text text-xs-center ceit-subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
           </v-card-text>
+          <v-card-text class="justify-content-center">
+            <p v-if="this.code" class="white--text text-xs-center">در حال ورود...</p>
+            <div class="text-xs-center">
+              <v-btn large outline color="success" class="text-xs-center" @click="attemptLogin(true)" :disabled="this.code">ورود به سایت</v-btn>
+            </div>
+          </v-card-text>
+
         </div>
       </v-flex>
-      <v-flex xs12 sm8 md4 class="ma-2 mt-5">
-        <v-card class="elevation-12" justify-center>
-          <v-card-title class="blue darken-1 white--text justify-content-center">
-            <span class="title">ورود به حساب</span>
-          </v-card-title>
-          <v-card-text>
-            <v-form v-model="valid" lazy-validation="" ref="login">
-              <v-text-field v-model="username"
-                            label="شماره دانشجویی"
-                            light
-                            :rules="userRules"
-                            required
-                            @keyup.enter="submit"
-                            id="username"
-                            prepend-icon="mdi-account"
-                            type="text"
-              ></v-text-field>
-              <v-text-field v-model="password"
-                            label="رمز عبور"
-                            class="pt-3"
-                            light
-                            :rules="passRules"
-                            required
-                            type="password"
-                            @keyup.enter="submit"
-                            id="password"
-                            prepend-icon="mdi-textbox-password"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
-          <v-card-actions class="d-flex justify-content-center">
-              <v-btn
-                class="success"
-                @click="submit"
-              >
-                وارد شوید
-              </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
+      <!--<v-flex xs12 sm8 md4>-->
+        <!--<v-card class="elevation-12" justify-center>-->
+          <!--<v-card-title class="blue darken-1 white&#45;&#45;text justify-content-center">-->
+            <!--<span class="title">ورود به حساب</span>-->
+          <!--</v-card-title>-->
+          <!--<v-card-text>-->
+            <!--<v-form v-model="valid" lazy-validation="" ref="login">-->
+              <!--<v-text-field v-model="username"-->
+                            <!--label="شماره دانشجویی"-->
+                            <!--light-->
+                            <!--:rules="userRules"-->
+                            <!--required-->
+                            <!--@keyup.enter="submit"-->
+                            <!--id="username"-->
+                            <!--prepend-icon="mdi-account"-->
+                            <!--type="text"-->
+              <!--&gt;</v-text-field>-->
+              <!--<v-text-field v-model="password"-->
+                            <!--label="رمز عبور"-->
+                            <!--class="pt-3"-->
+                            <!--light-->
+                            <!--:rules="passRules"-->
+                            <!--required-->
+                            <!--type="password"-->
+                            <!--@keyup.enter="submit"-->
+                            <!--id="password"-->
+                            <!--prepend-icon="mdi-textbox-password"-->
+              <!--&gt;</v-text-field>-->
+            <!--</v-form>-->
+          <!--</v-card-text>-->
+          <!--<v-card-actions class="d-flex justify-content-center">-->
+              <!--<v-btn-->
+                <!--class="success"-->
+                <!--@click="submit"-->
+              <!--&gt;-->
+                <!--وارد شوید-->
+              <!--</v-btn>-->
+          <!--</v-card-actions>-->
+        <!--</v-card>-->
+      <!--</v-flex>-->
     </v-layout>
   </v-container>
 </template>
@@ -58,6 +65,11 @@
 <script>
   export default {
     layout: 'login',
+    computed: {
+      code () {
+        return this.$route.query.code
+      }
+    },
     data() {
       return {
         username: '',
@@ -95,10 +107,19 @@
                 this.showOtherError()
             })
         }
+      },
+      attemptLogin(callback) {
+        if (!this.$auth.loggedIn) {
+          if (this.code) {
+            this.$auth.login({data: {code: this.code}, url: '/oauth/aut/authorize'})
+          } else if(callback) {
+            this.$store.dispatch('redirectToLogin')
+          }
+        }
       }
     },
-    created() {
-      // this.$axios.setHeader('Access-Control-Allow-Origin','*');
+    async mounted () {
+      this.attemptLogin(false)
     }
   }
 </script>

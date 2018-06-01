@@ -32,15 +32,29 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12>
+                <v-flex xs8>
                   <p>متن دلنوشته</p>
                   <section class="editor-container">
                     <div class="quill-editor"
-                         :content="composed.body"
+                         ref="myEditor"
+                         @change="onEditorChange"
                          v-quill:myQuillEditor="editorOption"
                     >
                     </div>
                   </section>
+                </v-flex>
+
+                <v-flex xs4 class="my-1">
+                  <p>عکس</p>
+                  <div class="text-xs-center blue my-2">
+                    <dropzone
+                      id="foo"
+                      ref="uploader"
+                      :options="uploadOptions"
+                      :destroyDropzone="true"
+                      @vdropzone-file-added="checkFile"
+                      @vdropzone-removed-file="removedFile"/>
+                  </div>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -74,12 +88,26 @@
 
 <script>
   import Post from '~/components/Content/Post.vue'
+  import Dropzone from 'nuxt-dropzone'
+  import 'nuxt-dropzone/dropzone.css'
 
 
   export default {
     name: "posts",
+
     data() {
       return {
+        removeFlag: true,
+        uploadOptions: {
+          url: (files) => {
+            this.composed.file = files[0];
+            return "";
+          },
+          maxFiles: 1,
+          addRemoveLinks: true,
+          acceptedFiles: 'image/*',
+          thumbnailWidth: 300,
+        },
         editorOption: {
           placeholder: '',
           // some quill options
@@ -96,7 +124,8 @@
         composed: {
           to: '',
           title: '',
-          body: ''
+          body: '',
+          file: ''
         },
         posts: [
           {
@@ -139,6 +168,7 @@
     },
     mounted() {
       this.fetchPeople()
+      // this.insertEmoji('🙂');
     },
     notifications: {
       showError: {
@@ -163,7 +193,11 @@
         return persianJs(value.toString()).englishNumber().toString();
       }
     },
+
     methods: {
+      onEditorChange($event){
+        this.composed.body = $event.text;
+      },
       async fetchPeople() {
         // this.tarins = await this.$axios.get('people')
         this.people = [
@@ -181,32 +215,52 @@
           {username: '9331012', name: 'محمد محمدی'},
         ]
       },
-      submitPost() {
-        if (this.$refs.post.validate()) {
-          // Finding the recipient
-          let recipient = {}
-          for (let i = 0; i < this.people.length; i++)
-            if (this.people[i].username === this.composed.to)
-              recipient = this.people[i]
-
-          let content = {
-            title: this.composed.title,
-            body: this.composed.body,
-            images: [],
-            user: this.$auth.user,
-            to: recipient,
-            approved: false,
-            date: new Date(),
-          }
-
-          // Posting - TODO: complete this
-          // this.$axios.post('/post/add', {data: content}).then(e => {
-          this.posts.push(content)
-          this.showSubmissionSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
+      checkFile(file) {
+        if (this.composed.file !== '') {
+          this.removeFlag = false;
+          this.$refs.uploader.removeFile(file);
+          this.showError({
+            title: 'خطا',
+            message: 'شما تنها می توانید یک عکس برای هر پست آپلود کنید.',
+            type: 'error'
+          });
         }
+      },
+      removedFile() {
+        // programmatically
+        if (!this.removeFlag)
+          this.removeFlag = true;
+        // clicked by user
+        else
+          this.composed.file = '';
+      },
+      submitPost() {
+        console.log(this.composed);
+        // if (this.$refs.post.validate()) {
+        //   // Finding the recipient
+        //   let recipient = {}
+        //   for (let i = 0; i < this.people.length; i++)
+        //     if (this.people[i].username === this.composed.to)
+        //       recipient = this.people[i]
+        //
+        //   let content = {
+        //     title: this.composed.title,
+        //     body: this.composed.body,
+        //     images: [],
+        //     user: this.$auth.user,
+        //     to: recipient,
+        //     approved: false,
+        //     date: new Date(),
+        //   }
+        //
+        //   // Posting - TODO: complete this
+        //   // this.$axios.post('/post/add', {data: content}).then(e => {
+        //   this.posts.push(content)
+        //   this.showSubmissionSuccess()
+        //   // }).catch(r => {
+        //   //   this.showError()
+        //   // })
+        // }
       },
       removePost(index) {
         if (this.posts[index].user.username === this.$auth.user.username) {
@@ -225,6 +279,7 @@
     },
     components: {
       Post,
+      Dropzone
     }
   }
 </script>

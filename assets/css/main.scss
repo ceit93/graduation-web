@@ -19,25 +19,26 @@ html {
 
 // mobile
 @media (max-width: 768px) {
-  .ceit-display-1{
+  .ceit-display-1 {
     font-size: 1.6rem
   }
-  .ceit-subheading{
+  .ceit-subheading {
     font-size: 1rem;
   }
-  .ceit-identity-text p{
+  .ceit-identity-text p {
     text-align: center;
   }
 
 }
+
 @media (min-width: 768px) {
-  .ceit-display-1{
+  .ceit-display-1 {
     font-size: 2.3rem;
   }
-  .ceit-subheading{
+  .ceit-subheading {
     font-size: 1.3rem;
   }
-  .ceit-identity-text p{
+  .ceit-identity-text p {
     text-align: right;
   }
 
@@ -99,9 +100,12 @@ html {
 }
 
 //customization
-.ql-editor p{
-  font-family: Iran!important;
-  text-align: right!important;
+.ql-editor p {
+  font-family: Iran !important;
+  text-align: right !important;
+}
+.dz-image img{
+  width: 100% !important
 }
 
 .tabs-component-panels {
@@ -112,20 +116,20 @@ html {
   padding-top: 5px;
 }
 
-.application{
+.application {
 
-  font-family: Iran!important;
-  label,input{
-    font-size: 0.9rem!important;
+  font-family: Iran !important;
+  label, input {
+    font-size: 0.9rem !important;
     direction: rtl;
   }
 
   .input-group label {
     transform-origin: top right;
   }
-  .input-group--text-field label{
+  .input-group--text-field label {
     right: 0;
-    left: auto!important;
+    left: auto !important;
   }
 }
 

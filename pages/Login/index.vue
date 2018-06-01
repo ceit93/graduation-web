@@ -104,18 +104,20 @@
         if (!this.$auth.loggedIn) {
           if (this.code) {
             this.$auth.login({data: {code: this.code}, url: '/oauth/aut/authorize'}).catch(e => {
-              this.showLoginError()
-              console.log(e)
+              this.onLoginError(e)
             })
           } else if(callback) {
             try{
               this.$store.dispatch('redirectToLogin')
             } catch (e) {
-              this.showLoginError()
-              console.log(e)
+              this.onLoginError(e)
             }
           }
         }
+      },
+      onLoginError(e) {
+        this.showLoginError()
+        console.log(e)
         this.$nuxt.$router.replace({'path' : '/'})
       }
     },

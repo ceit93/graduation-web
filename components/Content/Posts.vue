@@ -33,7 +33,8 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field v-model="composed.body" box multi-line label="متن دل‌نوشته" placeholder="یادش بخیر اون زمونا..."></v-text-field>
+                  <v-text-field v-model="composed.body" box multi-line label="متن دل‌نوشته"
+                                placeholder="یادش بخیر اون زمونا..."></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -174,7 +175,7 @@
     },
 
     methods: {
-      clickFile(){
+      clickFile() {
         this.$refs.file.click()
       },
       async fetchPeople() {
@@ -213,37 +214,45 @@
         else
           this.composed.file = '';
       },
+
       submitPost(e) {
-        e.preventDefault()
-        console.log(e)
-        console.log(this.composed)
-        // TODO: complete the following
-        // let f = e.target.get folan file
-        if (this.$refs.post.validate()) {
-          // Finding the recipient
-          let recipient = {}
-          for (let i = 0; i < this.people.length; i++)
-            if (this.people[i].username === this.composed.to)
-              recipient = this.people[i]
+        e.preventDefault();
+        let image = e.target[3].files[0];
+        let reader = new FileReader();
+        let imageURL = '';
 
-          let content = {
-            title: this.composed.title,
-            body: this.composed.body,
-            // image: ,
-            user: this.$auth.user,
-            to: recipient,
-            approved: false,
-            date: new Date(),
+        // TODO : we dont need fileReader when we post the form into server
+        reader.onload = (e) => {
+          imageURL = e.target.result;
+          if (this.$refs.post.validate()) {
+            // Finding the recipient
+            let recipient = {}
+            for (let i = 0; i < this.people.length; i++)
+              if (this.people[i].username === this.composed.to)
+                recipient = this.people[i]
+            console.log(imageURL);
+            let content = {
+              title: this.composed.title,
+              body: this.composed.body,
+              image: imageURL,
+              user: this.$auth.user,
+              to: recipient,
+              approved: false,
+              date: new Date(),
+            };
+
+
+            // Posting - TODO: complete this
+            // this.$axios.post('/post/add', {data: content}).then(e => {
+            this.posts.push(content);
+            this.showSubmissionSuccess()
+            // }).catch(r => {
+            //   this.showError()
+            // })
           }
+        };
+        reader.readAsDataURL(image);
 
-          // Posting - TODO: complete this
-          // this.$axios.post('/post/add', {data: content}).then(e => {
-          this.posts.push(content)
-          this.showSubmissionSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
-        }
       },
       removePost(index) {
         if (this.posts[index].user.username === this.$auth.user.username) {

@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-quill="http://www.w3.org/1999/xhtml">
   <v-card>
     <v-card-text>
       <v-form v-model="valid" lazy-validation ref="post">
@@ -8,46 +8,53 @@
             <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
-          <v-container grid-list-md fluid>
-            <v-layout row wrap>
-              <v-flex xs12>
-                <v-select
-              v-model="composed.to"
-              :items="people"
-              item-text="name"
-              item-value="username"
-              label="دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)"
-              class="input-group--focused"
-              required
-              autocomplete
-              deletable-chips
-              chips
-              flat
-            ></v-select>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field
-                  v-model="composed.title"
-                  label="عنوان دل‌نوشته"
-                  required
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field v-model="composed.body" box multi-line label="متن دل‌نوشته" placeholder="یادش بخیر اون زمونا..."></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-text>
+            <v-container grid-list-md fluid>
+              <v-layout row wrap>
+                <v-flex xs12>
+                  <v-select
+                    v-model="composed.to"
+                    :items="people"
+                    item-text="name"
+                    item-value="username"
+                    label="دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)"
+                    class="input-group--focused"
+                    required
+                    autocomplete
+                    deletable-chips
+                    chips
+                    flat
+                  ></v-select>
+                </v-flex>
+                <v-flex xs12>
+                  <v-text-field
+                    v-model="composed.title"
+                    label="عنوان دل‌نوشته"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12>
+                  <p>متن دلنوشته</p>
+                  <section class="editor-container">
+                    <div class="quill-editor"
+                         :content="composed.body"
+                         v-quill:myQuillEditor="editorOption"
+                    >
+                    </div>
+                  </section>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
           <v-card-actions class="d-flex justify-content-center">
-          <v-btn>
-            <v-icon small>cloud_upload</v-icon>
-            آپلود عکس
-          </v-btn>
-          <v-btn color="success" @click="submitPost">
-            <v-icon small>check</v-icon>
-            ثبت پست
-          </v-btn>
-        </v-card-actions>
+            <v-btn>
+              <v-icon small>cloud_upload</v-icon>
+              آپلود عکس
+            </v-btn>
+            <v-btn color="success" @click="submitPost">
+              <v-icon small>check</v-icon>
+              ثبت پست
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-form>
       <v-divider></v-divider>
@@ -68,10 +75,22 @@
 <script>
   import Post from '~/components/Content/Post.vue'
 
+
   export default {
     name: "posts",
     data() {
       return {
+        editorOption: {
+          placeholder: '',
+          // some quill options
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block'],
+              [{'list': 'ordered'}, {'list': 'bullet'}],
+            ]
+          }
+        },
         valid: true,
         event: '',
         composed: {
@@ -144,7 +163,7 @@
         return persianJs(value.toString()).englishNumber().toString();
       }
     },
-    methods:{
+    methods: {
       async fetchPeople() {
         // this.tarins = await this.$axios.get('people')
         this.people = [
@@ -162,11 +181,11 @@
           {username: '9331012', name: 'محمد محمدی'},
         ]
       },
-      submitPost(){
-        if(this.$refs.post.validate()){
+      submitPost() {
+        if (this.$refs.post.validate()) {
           // Finding the recipient
           let recipient = {}
-          for (let i=0; i < this.people.length; i++)
+          for (let i = 0; i < this.people.length; i++)
             if (this.people[i].username === this.composed.to)
               recipient = this.people[i]
 
@@ -182,20 +201,20 @@
 
           // Posting - TODO: complete this
           // this.$axios.post('/post/add', {data: content}).then(e => {
-            this.posts.push(content)
-            this.showSubmissionSuccess()
+          this.posts.push(content)
+          this.showSubmissionSuccess()
           // }).catch(r => {
           //   this.showError()
           // })
         }
       },
-      removePost(index){
-        if (this.posts[index].user.username === this.$auth.user.username){
-          if (window.confirm("آیا مطمئن هستید؟")){
+      removePost(index) {
+        if (this.posts[index].user.username === this.$auth.user.username) {
+          if (window.confirm("آیا مطمئن هستید؟")) {
             // Deleting - TODO: complete this
             // this.$axios.delete('/posts/' + posts[index]._id).then(e => {
             this.posts.splice(index, 1);
-            this.$nuxt.$router.replace({'path' : '/content'})
+            this.$nuxt.$router.replace({'path': '/content'})
             this.showDeletionSuccess()
             // }).catch(r => {
             //   this.showError()
@@ -205,11 +224,22 @@
       }
     },
     components: {
-      Post
+      Post,
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .editor-container {
+    width: 60%;
+    /*margin: 0 auto;*/
+    padding: 5px 0;
+
+    .quill-editor {
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  }
 
 </style>

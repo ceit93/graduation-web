@@ -14,15 +14,14 @@ module.exports = {
           login: { url: '/auth/login', method: 'post', propertyName: 'token' },
           logout: { url: '/auth/logout', method: 'post' },
           user: { url: '/auth/user', method: 'get', propertyName: 'user' }
-        },
-        tokenRequired: true
+        }
       }
     },
     options: {
       redirect: {
         login: '/profile',
         logout: '/login',
-        callback: '/login',
+        callback: '/',
         user: '/'
       }
     }

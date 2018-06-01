@@ -217,7 +217,8 @@
         e.preventDefault()
         console.log(e)
         console.log(this.composed)
-        // let f = e.target
+        // TODO: complete the following
+        // let f = e.target.get folan file
         if (this.$refs.post.validate()) {
           // Finding the recipient
           let recipient = {}

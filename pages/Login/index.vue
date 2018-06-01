@@ -10,9 +10,9 @@
             <h6 class="white--text text-xs-center ceit-subheading">دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر</h6>
           </v-card-text>
           <v-card-text class="justify-content-center">
-            <p v-if="this.code" class="white--text text-xs-center">در حال ورود...</p>
+            <p v-if="this.code != null" class="white--text text-xs-center">...در حال ورود</p>
             <div class="text-xs-center">
-              <v-btn large outline color="success" class="text-xs-center" @click="attemptLogin(true)" :disabled="this.code">ورود به سایت</v-btn>
+              <v-btn large outline color="success" class="text-xs-center" @click="attemptLogin(true)" :disabled="this.code != null">ورود به سایت</v-btn>
             </div>
           </v-card-text>
 
@@ -85,10 +85,6 @@
     },
     notifications: {
       showLoginError: {
-        title: 'خطای ۴۰۱: شماره دانشجویی و یا رمز عبور اشتباه است.',
-        type: 'error'
-      },
-      showOtherError: {
         title: 'خطایی رخ داد...',
         type: 'error'
       }
@@ -100,20 +96,26 @@
               username: this.username,
               password: this.password,
             }}).catch(e => {
-              const status = e.response.data.statusCode
-              if (status == 401)
-                this.showLoginError()
-              else
-                this.showOtherError()
+              this.showLoginError()
             })
         }
       },
       attemptLogin(callback) {
         if (!this.$auth.loggedIn) {
           if (this.code) {
-            this.$auth.login({data: {code: this.code}, url: '/oauth/aut/authorize'})
+            this.$auth.login({data: {code: this.code}, url: '/oauth/aut/authorize'}).catch(e => {
+              this.showLoginError()
+              console.log(e)
+              this.$nuxt.$router.replace({'path' : '/'})
+            })
           } else if(callback) {
-            this.$store.dispatch('redirectToLogin')
+            try{
+              this.$store.dispatch('redirectToLogin')
+            } catch (e) {
+              this.showLoginError()
+              console.log(e)
+              this.$nuxt.$router.replace({'path' : '/'})
+            }
           }
         }
       }

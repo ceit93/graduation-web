@@ -6,8 +6,12 @@
   export default {
     name: "content",
     layout: 'content',
+    // fetch ({ store, redirect }) {
+    //   return redirect('/content/wall/' + store.$auth.user.username)
+    // },
+    // TODO: remove the followin
     fetch ({ store, redirect }) {
-      return redirect('/content/wall/' + store.$auth.user.username)
+      return redirect('/landing')
     },
   }
 </script>

@@ -189,21 +189,12 @@
           ]
         },
         async fetchPeople() {
-          // this.tarins = await this.$axios.get('people')
-          this.people = [
-            {username: '9331001', name: 'امیر حقیقتی ملکی'},
-            {username: '9331002', name: 'ایمان تبریزیان'},
-            {username: '9331003', name: 'عارف حسینی‌کیا'},
-            {username: '9331004', name: 'مانا پوستی‌زاده'},
-            {username: '9331005', name: 'جعفر جعفری'},
-            {username: '9331006', name: 'اصغر اصغری'},
-            {username: '9331007', name: 'سیب هوایی'},
-            {username: '9331008', name: 'سیب زمینی'},
-            {username: '9331009', name: 'خیار خیاری'},
-            {username: '9331010', name: 'گلاب گلابی'},
-            {username: '9331011', name: 'جعفر جعفری'},
-            {username: '9331012', name: 'محمد محمدی'},
-          ]
+          await this.$axios.get('/users/students').then(e => {
+            this.people = e.data
+          }).catch(e => {
+            console.log(e)
+            this.showError()
+          })
         }
       }
     }

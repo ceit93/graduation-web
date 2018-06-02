@@ -36,5 +36,14 @@
 </script>
 
 <style scoped>
-
+@media (max-width: 768px) {
+  .ceit-identity-text p {
+    text-align: center;
+  }
+}
+@media (min-width: 768px) {
+  .ceit-identity-text p {
+    text-align: right;
+  }
+}
 </style>

@@ -195,14 +195,8 @@
           };
           // Posting - TODO: complete this
           // this.$axios.post('/post/add', {data: content}).then(e => {
-          this.posts.push(content)
           this.showSubmissionSuccess()
-          this.$refs.post.reset()
-          this.$vuetify.goTo(99999999, {
-              duration: 300,
-              offset: +1000,
-              easing: 'easeInOutCubic'
-          })
+          this.$nuxt.$router.replace({'path' : '/content/wall'})
           // }).catch(r => {
           //   this.showError()
           // })

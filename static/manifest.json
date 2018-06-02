@@ -1,6 +1,7 @@
 {
-    "name": "CEIT 93 Graduation",
+    "name": "فارغ‌التحصیلی ورودی ۱۳۹۳",
     "short_name": "CEIT 93",
+    "start_uri": "/?standalone=true",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

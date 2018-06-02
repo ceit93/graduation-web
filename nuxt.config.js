@@ -55,7 +55,7 @@ module.exports = {
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {name: 'msapplication-TileColor', content: '#ffffff'},
       {name: 'theme-color', content: '#ffffff'},
-      {hid: 'description', name: 'description', content: 'Graduation Website'},
+      {hid: 'description', name: 'description', content: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'},
       {property: 'og:title', content: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳'},
       {property: 'og:type', content: 'website'},
       {property: 'og:site_name', content: 'آیین فارغ‌التحصیلی ۱۳۹۳'},

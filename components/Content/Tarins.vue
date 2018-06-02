@@ -7,10 +7,11 @@
             <v-card-title class="justify-content-center">
               ترین‌های خود را انتخاب کنید
             </v-card-title>
+            <v-form ref="tarins" @submit="submit">
             <v-card-actions class="justify-content-center">
               <v-btn
                 :disabled="!valid"
-                @click="submit"
+                type="submit"
                 class="success"
               >
                 <v-icon>how_to_vote</v-icon>
@@ -18,7 +19,6 @@
               </v-btn>
             </v-card-actions>
             <v-card-text>
-              <v-form>
                 <v-container fluid>
                   <v-layout row wrap>
                       <v-flex xs12 md6 v-for="tarin in tarins" :key="tarin.subject" v-if="tarin.approved" align-center justify-center>
@@ -43,18 +43,18 @@
                       </v-flex>
                   </v-layout>
                 </v-container>
-              </v-form>
             </v-card-text>
             <v-card-actions class="justify-content-center">
               <v-btn
                 :disabled="!valid"
-                @click="submit"
+                type="submit"
                 class="success"
               >
                 <v-icon>how_to_vote</v-icon>
                 ذخیره
               </v-btn>
             </v-card-actions>
+            </v-form>
           </v-card>
         </v-flex>
       </v-layout>
@@ -69,6 +69,7 @@
         return {
           tarins: [],
           people: [],
+          votes: [],
           valid: true,
         }
       },
@@ -87,21 +88,31 @@
         }
       },
       methods: {
-        submit () {
-          // this.$axios.post('/folanbisar', {data: {
-          //
+        submit (e) {
+          e.preventDefault()
+          console.log(this.$refs.tarins)
+          // TODO
+          // this.$axios.post('/poll/submit', {data: {
+          //     user: this.$auth.user,
           //   }
           // }).then(e => {
           //   this.showSuccess()
           // }).catch(e => {
           //   this.showError()
           // })
-          this.showSuccess()
+          // this.showSuccess()
         },
         async fetchTarins() {
+          // Get current user's votes
+          this.$axios.get('polls').then(e => {
+            //TODO
+            console.log('got it!')
+            console.log(e)
+          })
+
+          // Get the titles
           this.$axios.get('qualifications').then(e => {
             this.tarins = e.data.quals
-            console.log('got it!')
           }).catch(e => {
             console.log(e)
             this.showError()

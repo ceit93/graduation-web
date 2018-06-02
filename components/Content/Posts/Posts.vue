@@ -60,17 +60,17 @@
           </v-card-actions>
         </v-card>
       </v-form>
-      <v-divider/>
-      <v-card>
-        <v-card-title class="justify-content-center">
-          <h3 class="title">دل‌نوشته‌های ثبت‌شده توسط من</h3>
-        </v-card-title>
-        <v-card-text>
-          <div v-for="(post,index) in posts" :key="index">
-            <post :postData="post" v-on:removeMe="removePost(index)"/>
-          </div>
-        </v-card-text>
-      </v-card>
+      <!--<v-divider/>-->
+      <!--<v-card>-->
+        <!--<v-card-title class="justify-content-center">-->
+          <!--<h3 class="title">دل‌نوشته‌های ثبت‌شده توسط من</h3>-->
+        <!--</v-card-title>-->
+        <!--<v-card-text>-->
+          <!--<div v-for="(post,index) in posts" :key="index">-->
+            <!--<post :postData="post" v-on:removeMe="removePost(index)"/>-->
+          <!--</div>-->
+        <!--</v-card-text>-->
+      <!--</v-card>-->
     </v-card-text>
   </v-card>
 </template>

@@ -15,10 +15,6 @@
           easing: 'easeInOutCubic'
         })
       },
-      //TODO: remove this
-      fetch ({ store, redirect }) {
-        return redirect('/landing')
-      },
     }
 </script>
 

@@ -106,10 +106,6 @@
         return 30 + (this.fields[2].value * 30);
       }
     },
-    //TODO: remove this
-    fetch ({ store, redirect }) {
-      return redirect('/landing')
-    },
   }
 </script>
 

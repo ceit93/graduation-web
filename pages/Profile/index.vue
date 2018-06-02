@@ -44,10 +44,6 @@
       }
     },
     components: {Identity, Countdown },
-    //TODO: remove this
-    fetch ({ store, redirect }) {
-      return redirect('/landing')
-    },
   }
 </script>
 

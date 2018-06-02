@@ -6,12 +6,8 @@
   export default {
     name: "content",
     layout: 'content',
-    // fetch ({ store, redirect }) {
-    //   return redirect('/content/wall/' + store.$auth.user.username)
-    // },
-    //TODO: remove this
     fetch ({ store, redirect }) {
-      return redirect('/landing')
+      return redirect('/content/wall/' + store.$auth.user.username)
     },
   }
 </script>

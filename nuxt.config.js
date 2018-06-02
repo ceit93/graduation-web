@@ -28,7 +28,7 @@ module.exports = {
     }
   },
   router: {
-    middleware: ['auth']
+    middleware: ['auth', 'redirect-to-landing']
   },
 
   axios: {

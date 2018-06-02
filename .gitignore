@@ -16,3 +16,6 @@ dist
 package-lock.json
 yarn-error.log
 yarn.lock
+
+# PWA Module
+sw.*

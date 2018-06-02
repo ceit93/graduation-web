@@ -4,7 +4,8 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/pwa'
   ],
 
   auth: {
@@ -49,29 +50,27 @@ module.exports = {
     {src: '~plugins/vue-notification.js', ssr: false}
   ],
   head: {
-    title: 'آیین فارغ‌التحصیلی ۱۳۹۳',
+    title: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳',
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {name: 'msapplication-TileColor', content: '#ffffff'},
       {name: 'theme-color', content: '#ffffff'},
       {hid: 'description', name: 'description', content: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'},
-      {property: 'og:title', content: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳'},
-      {property: 'og:type', content: 'website'},
-      {property: 'og:site_name', content: 'آیین فارغ‌التحصیلی ۱۳۹۳'},
-      {property: 'og:description', content: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'},
-      {property: 'og:description', content: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'},
-      {property: 'og:url', content: 'https://ceit93.ir'},
-      {property: 'og:image', content: 'https://ceit93.ir/logo.png'},
-      {property: 'og:locale', content: 'fa_IR'},
+      // {property: 'og:title', content: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳'},
+      // {property: 'og:type', content: 'website'},
+      // {property: 'og:site_name', content: 'آیین فارغ‌التحصیلی ۱۳۹۳'},
+      // {property: 'og:description', content: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'},
+      // {property: 'og:description', content: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'},
+      // {property: 'og:url', content: 'https://ceit93.ir'},
+      // {property: 'og:image', content: 'https://ceit93.ir/logo.png'},
+      // {property: 'og:locale', content: 'fa_IR'},
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-      {rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes:'180x180'},
       {rel: 'icon', type: 'image/png', href: '/favicon-32x32.png', sizes:'32x32'},
       {rel: 'icon', type: 'image/png', href: '/favicon-16x16.png', sizes:'16x16'},
       {rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5'},
-      {rel: 'manifest', href: '/manifest.json'},
       {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'},
     ]
   },
@@ -104,5 +103,26 @@ module.exports = {
         })
       }
     }
+  },
+
+  /*
+   * PWA Module
+   */
+  meta: {
+    mobileAppIOS: true,
+    appleStatusBarStyle: 'default',
+    name: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳',
+    author: 'AUT CEIT Students - Class of 2018',
+    description: 'وب‌اپلیکیشن فارغ‌التحصیلی دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر',
+    theme_color: '#01579B',
+    lang: 'fa',
+    ogHost: 'https://ceit93.ir',
+    nativeUI: true
+  },
+  manifest: {
+    name: "فارغ‌التحصیلی ورودی ۱۳۹۳",
+    short_name: "CEIT 93",
+    theme_color: "#01579B",
+    background_color: "#ffffff",
   }
 }

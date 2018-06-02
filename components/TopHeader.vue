@@ -48,7 +48,8 @@
           @click="this.drawer = false"
         >
           <!--TODO: IMPLEMENT USER AVATAR-->
-          <img src="@/static/logo.png" :alt="this.$auth.user.name">
+          <img v-if="this.$auth.loggedIn" src="@/static/logo.png" :alt="this.$auth.user.name">
+          <img v-else src="@/static/logo.png">
         </v-avatar>
       </v-btn>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>

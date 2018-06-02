@@ -17,7 +17,7 @@
               <p class="white--text text-xs-center">چهار سال دیگر از عمر آبی این آسمان گذشت</p>
               <p class="white--text text-xs-center">و ما زندگی را تنفس نمودیم و درس را بهانه</p>
               <p class="white--text text-xs-center">حال هنگامه جشن است و سرور</p>
-              <p class="white--text text-xs-center">باز دیگر گرد هم می‌آییم تا این شادی را، به تعداد برگ برگ خاطراتمان تقسیم کنیم</p>
+              <p class="white--text text-xs-center">بار دیگر گرد هم می‌آییم تا این شادی را، به تعداد برگ برگ خاطراتمان تقسیم کنیم</p>
             </v-card-text>
             <v-card-text class="white--text">
               <p class="text-xs-center iranblack light-blue--text text--darken-3">هم‌کلاسی عزیز، {{this.$auth.user.name}}، ممنون از ورودتون به سایت. لطفا به بقیه ۹۳‌ای‌ها هم اطلاع بدید تا حتما قبل از شروع کار سایت، وارد سایت بشوند؛</p>

@@ -36,7 +36,10 @@
         console.log(this.notifs)
       }
     },
-    components: {Identity, Countdown }
+    components: {Identity, Countdown },
+    fetch ({ store, redirect }) {
+        return redirect('/landing')
+    },
   }
 </script>
 

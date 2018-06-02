@@ -22,9 +22,9 @@
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex xs6>
+      <v-flex xs6 v-if="!button.hidden">
         <v-layout column>
-          <v-btn large color="info" nuxt to="/content">تکمیل محتوا</v-btn>
+          <v-btn large :outline="this.button.outline" :disabled="this.button.disabled" color="info" nuxt :to="this.button.to">{{this.button.title}}</v-btn>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -39,7 +39,7 @@
           this.now = Math.trunc((new Date()).getTime() / 1000)
         },1000)
       },
-      props : ['date'],
+      props : ['date', 'button'],
       data() {
         return {
           now: Math.trunc((new Date()).getTime() / 1000),

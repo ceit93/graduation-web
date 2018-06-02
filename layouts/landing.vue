@@ -1,19 +1,13 @@
 <template>
   <v-app>
-    <v-content class="login-content">
-    <div class="cover-bg">
-      <img class="cover-img d-md-block" src="@/static/cover.png" alt="">
-    </div>
     <nuxt/>
-    </v-content>
   </v-app>
 
 </template>
 
 <script>
   export default {
-
-    name: "login"
+    name: "landing"
   }
 </script>
 

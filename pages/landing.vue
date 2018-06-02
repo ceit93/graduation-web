@@ -20,6 +20,7 @@
               <p class="white--text text-xs-center">باز دیگر گرد هم می‌آییم تا این شادی را، به تعداد برگ برگ خاطراتمان تقسیم کنیم</p>
             </v-card-text>
             <v-card-text class="white--text">
+              <p class="text-xs-center iranblack light-blue--text text--darken-3">هم‌کلاسی عزیز، {{this.$auth.user.name}}، ممنون از ورودتون به سایت. لطفا به بقیه ۹۳‌ای‌ها هم اطلاع بدید تا حتما قبل از شروع کار سایت، وارد سایت بشوند؛</p>
               <p class="text-xs-center iranblack light-blue--text text--darken-3">:زمان باقی‌‌مانده برای شروع</p>
               <countdown date="June 6, 2018" :button="this.button"></countdown>
             </v-card-text>
@@ -41,8 +42,19 @@
       }
     },
     name: "landing",
+    notifications: {
+      showLoggedIn: {
+        title: 'ورود با موفقیت انجام شد.',
+        message: 'لطفا به بقیه ۹۳ای‌ها هم اطلاع بدید که حتما قبل از شروع به کار سایت لاگین بکنند. در غیر اینصورت قادر نخواهیم بود که محتوای کافی رو فراهم کنیم. ممنون!',
+        type: 'info',
+        timeout: 10000
+      }
+    },
     components: {Countdown},
     layout: 'landing',
+    mounted() {
+      this.showLoggedIn()
+    }
   }
 </script>
 

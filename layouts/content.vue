@@ -32,14 +32,14 @@
       return {
         tabs: [
           {
-            name: 'دل‌نوشته‌ها',
-            icon: 'add_comment',
-            to: '/content/posts'
-          },
-          {
-            name: 'دیوار من',
+            name: 'دیوار دل‌نوشته‌ها',
             icon: 'list',
             to: '/content/wall'
+          },
+          {
+            name: 'دل‌نوشته جدید',
+            icon: 'add_comment',
+            to: '/content/wall/new'
           },
           {
             name: 'ترین‌ها',

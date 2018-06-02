@@ -2,16 +2,13 @@
   <div class="mb-3">
     <v-card class="elevation-5">
       <v-card-title primary-title>
-        <v-btn icon to="" nuxt>
+        <v-btn icon :to="'/content/wall/' + postData.user.username" nuxt>
           <v-avatar :size="40" class="elevation-2">
             <!--TODO: Implement the avatar-->
             <img src="@/static/avatar.png" alt="">
           </v-avatar>
         </v-btn>
-        <span class="mr-2 body-2">{{postData.title}} - برای &nbsp;</span>
-        <span>
-          <nuxt-link to="">{{postData.to.name}}</nuxt-link>
-        </span>
+        <span class="mr-2 body-2">{{postData.title}}</span>
         <span v-if="postData.approved && postData.user.username !== username">
           <v-chip color="green" text-color="white" small>تایید شده</v-chip>
         </span>
@@ -28,14 +25,18 @@
           </v-btn>
           <v-list>
             <v-list-tile
-              v-if="postData.approved && postData.to.username === username && postData.user.username !== username"
+              v-if="canDisapprove"
               @click="dissaprovePost">
               <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-if="!postData.approved && postData.to.username === username" @click="approvePost">
+            <v-list-tile
+              v-if="canApprove"
+              @click="approvePost">
               <v-list-tile-title class="green--text">تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile v-if="postData.user.username === username" @click="deletePost">
+            <v-list-tile
+              v-if="canDelete"
+              @click="deletePost">
               <v-list-tile-title class="red--text">حذف پست</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -59,7 +60,7 @@
 
 <script>
   export default {
-    props: ['postData'],
+    props: ['postData', 'belongsToLoggedInUser'],
     name: "post",
     filters: {
       makeParsi: function (value) {
@@ -70,6 +71,15 @@
     computed: {
       username() {
         return this.$auth.user.username
+      },
+      canDelete() {
+        return this.postData.user.username === this.$auth.user.username
+      },
+      canApprove() {
+        return !this.postData.approved && this.belongsToLoggedInUser
+      },
+      canDisapprove() {
+        return this.postData.approved && this.belongsToLoggedInUser
       }
     },
     methods: {

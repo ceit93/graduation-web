@@ -1,25 +1,14 @@
 <template>
-  <wall :user="user"></wall>
+  <div></div>
 </template>
 
 <script>
-    import Wall from "~/components/Content/Wall";
     export default {
       name: "index",
       layout: 'content',
-      components: {Wall},
-      computed: {
-        user(){
-          return this.$auth.user
-        }
+      fetch ({ store, redirect }) {
+        return redirect('/content/wall/' + store.$auth.user.username)
       },
-      mounted() {
-        this.$vuetify.goTo('#tabs', {
-          duration: 300,
-          offset: -100,
-          easing: 'easeInOutCubic'
-        })
-      }
     }
 </script>
 

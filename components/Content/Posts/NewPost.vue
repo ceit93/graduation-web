@@ -78,7 +78,6 @@
 <script>
   import Post from '~/components/Content/Posts/Post.vue'
   export default {
-    props: ['posts'],
     name: "posts",
     data() {
       return {
@@ -123,7 +122,6 @@
     },
     mounted() {
       this.fetchPeople()
-      // this.insertEmoji('🙂');
     },
     notifications: {
       showError: {
@@ -135,11 +133,6 @@
         title: 'انجام شد',
         message: 'دل‌نوشته شما با موفقیت ثبت شد.',
         type: 'success'
-      },
-      showDeletionSuccess: {
-        title: 'انجام شد',
-        message: 'دل‌نوشته شما با موفقیت حذف شد.',
-        type: 'success'
       }
     },
     filters: {
@@ -148,7 +141,6 @@
         return persianJs(value.toString()).englishNumber().toString();
       }
     },
-
     methods: {
       clickFile() {
         this.$refs.file.click()
@@ -170,26 +162,6 @@
           {username: '9331012', name: 'محمد محمدی'},
         ]
       },
-      checkFile(file) {
-        if (this.composed.file !== '') {
-          this.removeFlag = false;
-          this.$refs.uploader.removeFile(file);
-          this.showError({
-            title: 'خطا',
-            message: 'شما تنها می توانید یک عکس برای هر پست آپلود کنید.',
-            type: 'error'
-          });
-        }
-      },
-      removedFile() {
-        // programmatically
-        if (!this.removeFlag)
-          this.removeFlag = true;
-        // clicked by user
-        else
-          this.composed.file = '';
-      },
-
       submitPost(e) {
         e.preventDefault();
         let image = e.target[3].files[0];
@@ -204,8 +176,6 @@
         } else {
           this.validateForm();
         }
-
-
       },
       validateForm(imgURL = '') {
         if (this.$refs.post.validate()) {
@@ -223,8 +193,6 @@
             approved: false,
             date: new Date(),
           };
-
-
           // Posting - TODO: complete this
           // this.$axios.post('/post/add', {data: content}).then(e => {
           this.posts.push(content)

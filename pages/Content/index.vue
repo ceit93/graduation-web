@@ -7,7 +7,7 @@
     name: "content",
     layout: 'content',
     fetch ({ store, redirect }) {
-      return redirect('/content/posts')
+      return redirect('/content/wall')
     },
   }
 </script>

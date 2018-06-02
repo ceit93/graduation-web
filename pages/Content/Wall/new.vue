@@ -1,14 +1,14 @@
 <template>
-  <posts :posts="posts"></posts>
+  <new-post></new-post>
 </template>
 
 <script>
-  import Posts from '~/components/Content/Posts/Posts.vue'
+  import NewPost from '~/components/Content/Posts/NewPost.vue'
 
   export default {
     name: "index",
     layout: 'content',
-    components: {Posts},
+    components: {NewPost},
     computed: {
       posts() {
         return [

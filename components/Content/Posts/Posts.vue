@@ -1,4 +1,4 @@
-<template xmlns:v-quill="http://www.w3.org/1999/xhtml">
+<template>
   <v-card>
     <v-card-text>
       <v-form v-model="valid" lazy-validation ref="post" @submit="submitPost">
@@ -76,12 +76,9 @@
 </template>
 
 <script>
-  import Post from '~/components/Content/Post.vue'
-  import Dropzone from 'nuxt-dropzone'
-
+  import Post from '~/components/Content/Posts/Post.vue'
   export default {
     name: "posts",
-
     data() {
       return {
         removeFlag: true,
@@ -292,10 +289,7 @@
         }
       }
     },
-    components: {
-      Post,
-      Dropzone
-    }
+    components: {Post}
   }
 </script>
 

@@ -40,7 +40,7 @@ module.exports = {
   },
 
   proxy: {
-    '/api': 'http://localhost:3000/',
+    '/api': process.env.PROXY_API_URL || 'http://localhost:3000/',
   },
   plugins: [
     '~plugins/vuetify.js',

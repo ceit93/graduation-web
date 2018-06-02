@@ -60,15 +60,15 @@
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
-          // this.$axios.post('/api/poll/add', {
-          //   subject: this.subject
-          // }).then(e => {
-          //   this.showSuccess()
-          // }).catch(e => {
-          //   this.showError()
-          // })
-          console.log(this.subject)
-          this.showSuccess()
+          this.$axios.post('/qualification/create', {
+            subject: this.subject
+          }).then(e => {
+            this.showSuccess()
+            console.log(e)
+          }).catch(e => {
+            this.showError()
+            console.log(e)
+          })
         }
       },
     }

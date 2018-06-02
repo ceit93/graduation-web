@@ -24,17 +24,21 @@
             <v-icon>more_horiz</v-icon>
           </v-btn>
           <v-list>
-            <!--<v-list-tile-->
-              <!--v-if="postData.approved && postData.user.username === username && postData.user.username !== username"-->
-              <!--@click="dissaprovePost">-->
-              <!--<v-list-tile-title class="red&#45;&#45;text">عدم تایید</v-list-tile-title>-->
-            <!--</v-list-tile>-->
-            <!--<v-list-tile v-if="!postData.approved && postData.to.username === username" @click="approvePost">-->
-              <!--<v-list-tile-title class="green&#45;&#45;text">تایید</v-list-tile-title>-->
-            <!--</v-list-tile>-->
-            <!--<v-list-tile v-if="postData.user.username === username" @click="deletePost">-->
-              <!--<v-list-tile-title class="red&#45;&#45;text">حذف پست</v-list-tile-title>-->
-            <!--</v-list-tile>-->
+            <v-list-tile
+              v-if="canDisapprove"
+              @click="dissaprovePost">
+              <v-list-tile-title class="red--text">عدم تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile
+              v-if="canApprove"
+              @click="approvePost">
+              <v-list-tile-title class="green--text">تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile
+              v-if="canDelete"
+              @click="deletePost">
+              <v-list-tile-title class="red--text">حذف پست</v-list-tile-title>
+            </v-list-tile>
           </v-list>
         </v-menu>
       </v-card-title>
@@ -56,7 +60,7 @@
 
 <script>
   export default {
-    props: ['postData'],
+    props: ['postData', 'belongsToLoggedInUser'],
     name: "post",
     filters: {
       makeParsi: function (value) {
@@ -67,6 +71,15 @@
     computed: {
       username() {
         return this.$auth.user.username
+      },
+      canDelete() {
+        return this.postData.user.username === this.$auth.user.username
+      },
+      canApprove() {
+        return !this.postData.approved && this.belongsToLoggedInUser
+      },
+      canDisapprove() {
+        return this.postData.approved && this.belongsToLoggedInUser
       }
     },
     methods: {

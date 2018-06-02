@@ -12,7 +12,11 @@
     <v-card-text>
       <div v-for="(post,index) in user.posts"
            :key="index">
-        <post :postData="post" @approved="approvePost(index)" @disapproved="disapprovePost(index)"/>
+        <post
+          :postData="post"
+          :belongsToLoggedInUser="access"
+          @approved="approvePost(index)"
+          @disapproved="disapprovePost(index)"/>
       </div>
     </v-card-text>
   </v-card>
@@ -24,6 +28,11 @@
       components: {Post},
       props: ['user'],
       name: "wall",
+      computed: {
+        access() {
+          return this.user.username === this.$auth.user.username
+        }
+      },
       notifications: {
         showError: {
           title: 'خطا',

@@ -7,7 +7,7 @@
     name: "content",
     layout: 'content',
     fetch ({ store, redirect }) {
-      return redirect('/content/wall/' + this.$auth.user.username)
+      return redirect('/content/wall/' + store.$auth.user.username)
     },
   }
 </script>

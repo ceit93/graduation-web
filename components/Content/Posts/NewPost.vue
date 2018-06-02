@@ -174,10 +174,10 @@
             this.validateForm(imageURL);
           };
         } else {
-          this.validateForm();
+          this.validateForm(null);
         }
       },
-      validateForm(imgURL = '') {
+      validateForm(imgURL) {
         if (this.$refs.post.validate()) {
           // Finding the recipient
           let recipient = {}
@@ -208,7 +208,7 @@
             // Deleting - TODO: complete this
             // this.$axios.delete('/posts/' + posts[index]._id).then(e => {
             this.posts.splice(index, 1);
-            this.$nuxt.$router.replace({'path': '/content'})
+            this.$nuxt.$router.replace({'path': '/content/wall/'})
             this.showDeletionSuccess()
             // }).catch(r => {
             //   this.showError()

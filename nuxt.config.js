@@ -19,7 +19,7 @@ module.exports = {
     },
     options: {
       redirect: {
-        login: '/landing',
+        login: '/profile',
         logout: '/login',
         callback: '/',
         user: '/'

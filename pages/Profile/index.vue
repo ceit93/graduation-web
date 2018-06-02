@@ -1,7 +1,7 @@
 <template>
   <div class="grey lighten-5">
     <identity></identity>
-    <countdown date="June 21, 2018"></countdown>
+    <countdown date="June 21, 2018" button=""></countdown>
   </div>
 </template>
 
@@ -12,6 +12,13 @@
     name: "index",
     data() {
       return {
+        button: {
+          hidden: false,
+          title: 'تکمیل محتوا',
+          outline: false,
+          disabled: false,
+          to: '/content'
+        },
         notifs: [
           {title: 'خوش اومدین', message: 'لطفا تا قبل ۳۱ خرداد محتوا رو تکمیل کنید.', type: 'warn', timeout: 10000},
         ]
@@ -37,9 +44,9 @@
       }
     },
     components: {Identity, Countdown },
-    // TODO: remove this
+    //TODO: remove this
     fetch ({ store, redirect }) {
-        return redirect('/landing')
+      return redirect('/landing')
     },
   }
 </script>

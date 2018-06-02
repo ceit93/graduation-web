@@ -9,7 +9,7 @@
     // fetch ({ store, redirect }) {
     //   return redirect('/content/wall/' + store.$auth.user.username)
     // },
-    // TODO: remove the followin
+    //TODO: remove this
     fetch ({ store, redirect }) {
       return redirect('/landing')
     },

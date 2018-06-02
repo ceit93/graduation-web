@@ -8,7 +8,7 @@
     name: "index",
     fetch ({ store, redirect }) {
       if (store.$auth.loggedIn) {
-        return redirect('/profile')
+        return redirect('/landing')
       }
       else
         return redirect('/login')

@@ -96,5 +96,20 @@
 </script>
 
 <style scoped>
+  @media (max-width: 768px) {
+    .ceit-post-image {
+      width: 100%;
+      float: none;
+      margin: 0;
+      padding: 10px;
+    }
+  }
 
+  @media (min-width: 768px) {
+    .ceit-post-image {
+      width: 400px;
+      float: left;
+      padding: 16px;
+    }
+  }
 </style>

@@ -36,7 +36,7 @@
 
 <script>
   export default {
-    name: 'Tarins',
+    name: 'TarinForm',
     data() {
       return {
         tarins: {},

@@ -48,7 +48,7 @@
           @click="this.drawer = false"
         >
           <!--TODO: IMPLEMENT USER AVATAR-->
-          <img src="logo.png" :alt="this.$auth.user.name">
+          <img src="@/static/logo.png" :alt="this.$auth.user.name">
         </v-avatar>
       </v-btn>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>
@@ -72,7 +72,7 @@
         miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
-          { icon: 'mdi-account-plus', title: 'ثبت‌نام', to: '/register'},
+          { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
         ],
         title: 'فارغ‌التحصیلی ۹۳',
       }

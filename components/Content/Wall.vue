@@ -15,9 +15,10 @@
 </template>
 
 <script>
-    import Post from '~/components/Content/Post.vue'
+    import Post from '~/components/Content/Posts/Post.vue'
     export default {
       components: {Post},
+      props: ['user'],
       name: "wall",
       data() {
         return {

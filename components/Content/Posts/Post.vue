@@ -5,7 +5,7 @@
         <v-btn icon to="" nuxt>
           <v-avatar :size="40" class="elevation-2">
             <!--TODO: Implement the avatar-->
-            <img src="avatar.png" alt="">
+            <img src="@/static/avatar.png" alt="">
           </v-avatar>
         </v-btn>
         <span class="mr-2 body-2">{{postData.title}} - برای &nbsp;</span>
@@ -58,9 +58,6 @@
 </template>
 
 <script>
-  import persianJS from 'persianjs';
-  import Comment from '@/components/Comment.vue'
-
   export default {
     props: ['postData'],
     name: "post",
@@ -95,9 +92,6 @@
         }
       }
     },
-    components: {
-      Comment
-    }
   }
 </script>
 

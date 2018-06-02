@@ -128,5 +128,22 @@
 </script>
 
 <style scoped>
+@media (max-width: 768px) {
+  .ceit-display-1 {
+    font-size: 1.6rem;
+  }
+  .ceit-subheading {
+    font-size: 1rem;
+  }
+}
 
+@media (min-width: 768px) {
+  .ceit-display-1 {
+    font-size: 2.3rem;
+  }
+
+  .ceit-subheading {
+    font-size: 1.3rem;
+  }
+}
 </style>

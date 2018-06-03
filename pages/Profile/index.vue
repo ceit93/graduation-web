@@ -44,6 +44,7 @@
       }
     },
     components: {Identity, Countdown },
+    middleware: 'redirect-to-landing' // TODO remove this
   }
 </script>
 

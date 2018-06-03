@@ -106,6 +106,7 @@
         return 30 + (this.fields[2].value * 30);
       }
     },
+    middleware: 'redirect-to-landing' // TODO remove this
   }
 </script>
 

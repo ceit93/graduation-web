@@ -13,5 +13,9 @@
 </script>
 
 <style scoped>
-
+  html {
+    direction: rtl;
+    text-align: right !important;
+    font-family:Iran !important;
+  }
 </style>

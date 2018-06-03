@@ -65,7 +65,15 @@ module.exports = {
       {rel: 'icon', type: 'image/png', href: '/favicon-16x16.png', sizes:'16x16'},
       {rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5'},
       {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'},
-    ]
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-640x1136.png', media:'(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'},
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-750x1294.png', media:'(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'},
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-1242x2148.png', media:'(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'},
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-1125x2436.png', media:'(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'},
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-1536x2048.png', media:'(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)'},
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-1668x2224.png', media:'(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)'},
+      {rel: 'apple-touch-startup-image', href: 'apple-splash-2048x2732.png', media:'(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)'},
+
+]
   },
   css: [
     '@/assets/css/main.scss',
@@ -113,7 +121,7 @@ module.exports = {
     nativeUI: true
   },
   manifest: {
-    name: "فارغ‌التحصیلی ورودی ۱۳۹۳",
+    name: "CEIT 93",
     short_name: "CEIT 93",
     theme_color: "#01579B",
     background_color: "#ffffff",

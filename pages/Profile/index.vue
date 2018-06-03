@@ -19,9 +19,7 @@
           disabled: false,
           to: '/content'
         },
-        notifs: [
-          {title: 'خوش اومدین', message: 'لطفا تا قبل ۳۱ خرداد محتوا رو تکمیل کنید.', type: 'warn', timeout: 10000},
-        ]
+        notifs: []
       }
     },
     notifications: {
@@ -31,17 +29,18 @@
         type: 'info'
       }
     },
+    asyncData(context) {
+      return context.$axios.get('/notifications')
+        .then((res) => {
+          return { notifs: res.data.notifications }
+        }).catch(e => {
+          console.log('error')
+        })
+    },
     mounted() {
-      this.fetchNotifs()
       this.notifs.forEach(notif => {
         this.showNotif(notif)
       })
-    },
-    methods: {
-      async fetchNotifs() {
-        // this.notifs = this.$axios.get('/notifications')
-        console.log(this.notifs)
-      }
     },
     components: {Identity, Countdown },
   }

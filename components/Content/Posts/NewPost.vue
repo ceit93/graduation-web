@@ -16,7 +16,7 @@
                     :rules="rules.to"
                     :items="people"
                     item-text="name"
-                    item-value="username"
+                    item-value="objectID"
                     label="دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)"
                     class="input-group--focused"
                     required
@@ -60,17 +60,7 @@
           </v-card-actions>
         </v-card>
       </v-form>
-      <!--<v-divider/>-->
-      <!--<v-card>-->
-        <!--<v-card-title class="justify-content-center">-->
-          <!--<h3 class="title">دل‌نوشته‌های ثبت‌شده توسط من</h3>-->
-        <!--</v-card-title>-->
-        <!--<v-card-text>-->
-          <!--<div v-for="(post,index) in posts" :key="index">-->
-            <!--<post :postData="post" v-on:removeMe="removePost(index)"/>-->
-          <!--</div>-->
-        <!--</v-card-text>-->
-      <!--</v-card>-->
+
     </v-card-text>
   </v-card>
 </template>
@@ -81,28 +71,6 @@
     name: "posts",
     data() {
       return {
-        removeFlag: true,
-        uploadOptions: {
-          url: (files) => {
-            this.composed.file = files[0];
-            return "";
-          },
-          maxFiles: 1,
-          addRemoveLinks: true,
-          acceptedFiles: 'image/*',
-          thumbnailWidth: 300,
-        },
-        editorOption: {
-          placeholder: '',
-          // some quill options
-          modules: {
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['blockquote', 'code-block'],
-              [{'list': 'ordered'}, {'list': 'bullet'}],
-            ]
-          }
-        },
         valid: true,
         event: '',
         rules: {
@@ -119,9 +87,6 @@
         },
         people: []
       }
-    },
-    mounted() {
-      this.fetchPeople()
     },
     notifications: {
       showError: {
@@ -146,78 +111,50 @@
         this.$refs.file.click()
       },
       async fetchPeople() {
-        // this.tarins = await this.$axios.get('people')
-        this.people = [
-          {username: '9331001', name: 'خیار خیاری'},
-          {username: '9331002', name: 'ایمان تبریزیان'},
-          {username: '9331003', name: 'عارف حسینی‌کیا'},
-          {username: '9331004', name: 'مانا پوستی‌زاده'},
-          {username: '9331005', name: 'جعفر جعفری'},
-          {username: '9331006', name: 'اصغر اصغری'},
-          {username: '9331007', name: 'سیب هوایی'},
-          {username: '9331008', name: 'سیب زمینی'},
-          {username: '9331009', name: 'امیر حقیقتی ملکی'},
-          {username: '9331010', name: 'گلاب گلابی'},
-          {username: '9331011', name: 'جعفر جعفری'},
-          {username: '9331012', name: 'محمد محمدی'},
-        ]
+        this.people = await this.$axios.get('users/students')
+          .then((res) => {
+            return res.data
+          }).catch(e => {
+          })
       },
       submitPost(e) {
-        e.preventDefault();
-        let image = e.target[3].files[0];
-        if (image) {
-          let reader = new FileReader();
-          reader.readAsDataURL(image);
-          // TODO : we dont need fileReader when we post the form into server
-          reader.onload = (e) => {
-            let imageURL = e.target.result;
-            this.validateForm(imageURL);
-          };
-        } else {
-          this.validateForm(null);
+        e.preventDefault()
+        // recipient Object ID
+        let recipient = this.people.filter(x => x.objectID === this.composed.to)
+        if (recipient.length !== 1)
+          recipient = this.composed.to
+        else
+          recipient = recipient[0]
+        console.log(recipient)
+        let content = {
+          title: this.composed.title,
+          body: this.composed.body,
+          // image: imgURL, TODO
+          user: this.$auth.user,
+          approved: false,
+          date: new Date(),
+        };
+        if (recipient.objectID === this.$auth.user.id){ // Post to self wall
+          this.$axios.post('/posts', content).then(e => {
+            this.showSubmissionSuccess()
+          }).catch(r => {
+            this.showError()
+          })
+        } else { // Post to someone else's wall
+          this.$axios.post('/posts/wall/' + recipient, content).then(e => {
+
+            this.showSubmissionSuccess()
+          }).catch(r => {
+            this.showError()
+          })
         }
+        this.$nuxt.$router.replace({'path' : '/content/wall' + recipient.username})
       },
-      validateForm(imgURL) {
-        if (this.$refs.post.validate()) {
-          // Finding the recipient
-          let recipient = {}
-          for (let i = 0; i < this.people.length; i++)
-            if (this.people[i].username === this.composed.to)
-              recipient = this.people[i]
-          let content = {
-            title: this.composed.title,
-            body: this.composed.body,
-            image: imgURL,
-            user: this.$auth.user,
-            to: recipient,
-            approved: false,
-            date: new Date(),
-          };
-          // Posting - TODO: complete this
-          // this.$axios.post('/post/add', {data: content}).then(e => {
-          this.showSubmissionSuccess()
-          this.$nuxt.$router.replace({'path' : '/content/wall'})
-          // }).catch(r => {
-          //   this.showError()
-          // })
-        }
-      },
-      removePost(index) {
-        if (this.posts[index].user.username === this.$auth.user.username) {
-          if (window.confirm("آیا مطمئن هستید؟")) {
-            // Deleting - TODO: complete this
-            // this.$axios.delete('/posts/' + posts[index]._id).then(e => {
-            this.posts.splice(index, 1);
-            this.$nuxt.$router.replace({'path': '/content/wall/'})
-            this.showDeletionSuccess()
-            // }).catch(r => {
-            //   this.showError()
-            // })
-          }
-        }
-      }
     },
-    components: {Post}
+    components: {Post},
+    mounted() {
+      this.fetchPeople()
+    }
   }
 </script>
 

@@ -45,7 +45,6 @@
         <v-avatar
           :tile="true"
           :size="50"
-          @click="this.drawer = false"
         >
           <!--TODO: IMPLEMENT USER AVATAR-->
           <img v-if="this.$auth.loggedIn" src="@/static/logo.png" :alt="this.$auth.user.name">

@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title class="justify-content-center">
-      <v-btn icon :to="'/content/wall/' + user.username" nuxt>
+      <v-btn icon :to="'/content/wall/' + this.user.username" nuxt>
         <v-avatar :size="40" class="elevation-2">
           <!--TODO: Implement the avatar-->
           <img src="@/static/avatar.png" alt="">
@@ -10,13 +10,16 @@
       <h3 class="title">دیوارِ {{user.name}}</h3>
     </v-card-title>
     <v-card-text>
+      <h2 v-if="user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">ای بابا :(</h2>
+      <h4 v-if="user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته...</h4>
       <div v-for="(post,index) in user.posts"
            :key="index">
         <post
           :postData="post"
           :belongsToLoggedInUser="access"
-          @approved="approvePost(index)"
-          @disapproved="disapprovePost(index)"/>
+          @approved="approvePost(post._id, index)"
+          @removeMe="removePost(post._id, index)"
+          @disapproved="disapprovePost(post._id, index)"/>
       </div>
     </v-card-text>
   </v-card>
@@ -51,23 +54,34 @@
         }
       },
       methods: {
-        approvePost(index){
-          user.posts[index].approved = true
-          // Posting - TODO: complete this
-          // this.$axios.post('/posts/' + this.posts[index]._id, {data: this.posts[index]}).then(e => {
-          this.showApprovingSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
+        async approvePost(id, index){
+          await this.$axios.post('/posts/' + id, {approved: true}).then(e => {
+            this.showApprovingSuccess()
+            user.posts[index].approved = true
+          }).catch(r => {
+            this.showError()
+          })
         },
-        disapprovePost(index){
-          user.posts[index].approved = false
-          // Posting - TODO: complete this
-          // this.$axios.post('/posts/' + this.posts[index]._id, {data: this.posts[index]}).then(e => {
-          this.showDisapprovingSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
+        async disapprovePost(id, index){
+          await this.$axios.post('/posts/' + id, {approved: false}).then(e => {
+            this.showApprovingSuccess()
+            user.posts[index].approved = true
+          }).catch(r => {
+            this.showError()
+          })
+        },
+        async removePost(index) {
+          if (this.posts[index].user._id === this.$auth.user._id) {
+            if (window.confirm("آیا مطمئن هستید؟")) {
+              this.$axios.delete('/posts/' + id).then(e => {
+                this.posts.splice(index, 1);
+                this.showDeletionSuccess()
+                this.$nuxt.$router.replace({'path': '/content/wall/'})
+              }).catch(r => {
+                this.showError()
+              })
+            }
+          }
         }
       }
     }

@@ -67,6 +67,7 @@
 
 <script>
   import Post from '~/components/Content/Posts/Post.vue'
+
   export default {
     name: "posts",
     data() {
@@ -118,37 +119,53 @@
           })
       },
       submitPost(e) {
-        e.preventDefault()
-        // recipient Object ID
-        let recipient = this.people.filter(x => x.objectID === this.composed.to)
-        if (recipient.length !== 1)
-          recipient = this.composed.to
-        else
-          recipient = recipient[0]
-        console.log(recipient)
-        let content = {
-          title: this.composed.title,
-          body: this.composed.body,
-          // image: imgURL, TODO
-          user: this.$auth.user,
-          approved: false,
-          date: new Date(),
-        };
-        if (recipient.objectID === this.$auth.user.id){ // Post to self wall
-          this.$axios.post('/posts', content).then(e => {
-            this.showSubmissionSuccess()
-          }).catch(r => {
-            this.showError()
-          })
-        } else { // Post to someone else's wall
-          this.$axios.post('/posts/wall/' + recipient, content).then(e => {
+        e.preventDefault();
+        if (this.$refs.post.validate()) {
+          let image = e.target[3].files[0];
+          // recipient Object ID
+          let recipient = this.people.filter(x => x.objectID === this.composed.to);
+          if (recipient.length !== 1)
+            recipient = this.composed.to;
+          else
+            recipient = recipient[0];
 
-            this.showSubmissionSuccess()
-          }).catch(r => {
-            this.showError()
-          })
+          let content = {
+            title: this.composed.title,
+            body: this.composed.body,
+            image: image === undefined ? '' : image,
+            user: this.$auth.user,
+            approved: false,
+            date: new Date(),
+          };
+          // initiate and fill formData
+          let formData = new FormData();
+          Object.keys(content).forEach((e) => {
+            formData.append(e, content[e]);
+          });
+          if (recipient.objectID === this.$auth.user._id) { // Post to self wall
+            this.$axios.post('/posts', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }).then(e => {
+              this.showSubmissionSuccess()
+            }).catch(r => {
+              this.showError()
+            })
+          } else { // Post to someone else's wall
+            this.$axios.post('/posts/wall/' + recipient.objectID, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }).then(e => {
+
+              this.showSubmissionSuccess()
+            }).catch(r => {
+              this.showError()
+            })
+          }
+          this.$nuxt.$router.replace({'path': '/content/wall' + recipient.username})
         }
-        this.$nuxt.$router.replace({'path' : '/content/wall' + recipient.username})
       },
     },
     components: {Post},

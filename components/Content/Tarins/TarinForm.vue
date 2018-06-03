@@ -2,33 +2,33 @@
   <v-card-text justify-center>
     <v-layout align-center justify-center row>
       <v-flex xs12 sm8 md4>
-      <v-card flat justify-center>
-        <v-card-title class="justify-content-center">
-          یک ترین دلخواه
-          <b><span class="red--text"> که در لیست ترین‌ها نیست،</span></b>
-            اضافه کنید:
-        </v-card-title>
-        <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              v-model="subject"
-              :rules="subjectRules"
-              label="چی‌چی ترین؟"
-              required
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions class="d-flex justify-content-center">
-          <v-btn
-            :disabled="!valid"
-            @click="submit"
-            class="success"
-          >
-            <v-icon small>add</v-icon>
-            اضافه کردن یک ترین
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+        <v-form ref="form" v-model="valid" lazy-validation @submit="submit">
+          <v-card flat justify-center>
+            <v-card-title class="justify-content-center">
+              یک ترین دلخواه
+              <b><span class="red--text"> که در لیست ترین‌ها نیست،</span></b>
+                اضافه کنید:
+            </v-card-title>
+            <v-card-text>
+                <v-text-field
+                  v-model="subject"
+                  :rules="subjectRules"
+                  label="چی‌چی ترین؟"
+                  required
+                ></v-text-field>
+            </v-card-text>
+            <v-card-actions class="d-flex justify-content-center">
+              <v-btn
+                :disabled="!valid"
+                type="submit"
+                class="success"
+              >
+                <v-icon small>add</v-icon>
+                اضافه کردن یک ترین
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-form>
     </v-flex>
     </v-layout>
   </v-card-text>
@@ -58,13 +58,14 @@
       }
     },
     methods: {
-      submit () {
+      submit (e) {
+        e.preventDefault()
         if (this.$refs.form.validate()) {
           this.$axios.post('/qualification/create', {
             subject: this.subject
           }).then(e => {
             this.showSuccess()
-            console.log(e)
+            this.$refs.form.reset()
           }).catch(e => {
             this.showError()
             console.log(e)

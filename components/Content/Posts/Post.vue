@@ -90,16 +90,12 @@
         }
       },
       approvePost() {
-        if (this.postData.to.username === this.$auth.user.username) {
-          console.log("approved")
-          this.$emit('approved')
-        }
+        console.log("approved")
+        this.$emit('approved')
       },
       dissaprovePost() {
-        if (this.postData.to.username === this.$auth.user.username) {
-          console.log("DISapproved")
-          this.$emit('disapproved')
-        }
+        console.log("DISapproved")
+        this.$emit('disapproved')
       }
     },
   }

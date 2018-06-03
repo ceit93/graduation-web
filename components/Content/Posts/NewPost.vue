@@ -142,31 +142,25 @@
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          if (recipient.objectID === this.$auth.user._id) { // Post to self wall
-            this.$axios.post('/posts', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            }).then(e => {
-              this.showSubmissionSuccess()
-            }).catch(r => {
-              this.showError()
-            })
-          } else { // Post to someone else's wall
-            this.$axios.post('/posts/wall/' + recipient.objectID, formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            }).then(e => {
-
-              this.showSubmissionSuccess()
-            }).catch(r => {
-              this.showError()
-            })
-          }
-          this.$nuxt.$router.replace({'path': '/content/wall' + recipient.username})
+          let path = 'posts/'
+          if (recipient.objectID !== this.$auth.user._id)// Post to someone else's wall
+            path += 'wall/' + recipient.objectID
+          let redirect = recipient.username
+          this.submitWithAxios(formData, path, redirect)
         }
       },
+      submitWithAxios(data, path, redirect) {
+        this.$axios.post(path, data, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(e => {
+          this.showSubmissionSuccess()
+          this.$nuxt.$router.replace({'path': redirect})
+        }).catch(r => {
+          this.showError()
+        })
+      }
     },
     components: {Post},
     mounted() {

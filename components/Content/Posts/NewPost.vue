@@ -88,17 +88,6 @@
         people: []
       }
     },
-    asyncData(context) {
-      return context.$axios.get(`users/students`)
-        .then((res) => {
-          console.log("USERS are:")
-          console.log(res.data)
-          return { people: res.data.users }
-        }).catch(e => {
-          console.log('error')
-          console.log({name: 'خل و چل'})
-        })
-    },
     notifications: {
       showError: {
         title: 'خطا',
@@ -122,21 +111,21 @@
         this.$refs.file.click()
       },
       async fetchPeople() {
-        let ff = await context.$axios.get(`users/students`)
+        this.people = await this.$axios.get('users/students')
           .then((res) => {
-            console.log("USERS are:")
-            console.log(res.data)
-            return { people: res.data.users }
+            return res.data
           }).catch(e => {
-            console.log('error')
-            console.log({name: 'خل و چل'})
           })
-        console.log(ff)
-        this.people = ff
       },
       submitPost(e) {
         e.preventDefault()
-        let recipient = composed.to
+        // recipient Object ID
+        let recipient = this.people.filter(x => x.objectID === this.composed.to)
+        if (recipient.length !== 1)
+          recipient = this.composed.to
+        else
+          recipient = recipient[0]
+        console.log(recipient)
         let content = {
           title: this.composed.title,
           body: this.composed.body,
@@ -145,20 +134,27 @@
           approved: false,
           date: new Date(),
         };
-        console.log(content)
-        if (recipient === this.$auth.user.id){
-          this.$axios.post('/posts', {data: content}).then(e => {
+        if (recipient.objectID === this.$auth.user.id){ // Post to self wall
+          this.$axios.post('/posts', content).then(e => {
             this.showSubmissionSuccess()
-            this.$nuxt.$router.replace({'path' : '/content/wall'})
           }).catch(r => {
             this.showError()
           })
-        } else {
+        } else { // Post to someone else's wall
+          this.$axios.post('/posts/wall/' + recipient, content).then(e => {
 
+            this.showSubmissionSuccess()
+          }).catch(r => {
+            this.showError()
+          })
         }
+        this.$nuxt.$router.replace({'path' : '/content/wall' + recipient.username})
       },
     },
-    components: {Post}
+    components: {Post},
+    mounted() {
+      this.fetchPeople()
+    }
   }
 </script>
 

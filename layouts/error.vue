@@ -8,6 +8,7 @@
       props: ['error'],
       //TODO: remove this
       mounted () {
+        console.log(error)
         // this.$nuxt.$router.replace({'path' : '/'})
       },
     }

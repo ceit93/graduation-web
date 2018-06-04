@@ -5,7 +5,7 @@
         <v-flex>
           <v-card flat justify-center>
             <v-card-title class="justify-content-center">
-              ترین‌های خود را انتخاب کنید
+              <h3>ترین‌های خود را انتخاب کنید</h3>
             </v-card-title>
             <v-form ref="tarins" @submit="submit">
             <v-card-actions class="justify-content-center">
@@ -20,29 +20,58 @@
             </v-card-actions>
             <v-card-text>
                 <v-container fluid>
-                  <v-layout row wrap>
-                      <v-flex xs12 md6 v-for="(tarin, index) in votes" :key="tarin.title" align-center justify-center>
-                        <v-layout row wrap>
-                          <v-flex xs3>
-                            <v-subheader>{{tarin.title}}</v-subheader>
-                          </v-flex>
-                          <v-flex xs5>
-                            <v-select
-                              :items="people"
-                              item-text="name"
-                              item-value="username"
-                              :label="tarin.title"
-                              class="input-group--focused"
-                              v-model="votes[index].std_numbers"
-                              :value="tarin.candidate"
-                              autocomplete
-                              deletable-chips
-                              chips
-                              flat
-                            ></v-select>
-                          </v-flex>
-                        </v-layout>
-                      </v-flex>
+                  <v-layout row wrap class="text-xs-center mx-0">
+                    <v-flex xs12 md6 v-for="tarin in votes" :key="tarin._id" align-center justify-center class="text-xs-center">
+                      <v-layout row wrap class="text-xs-center mx-0">
+                        <v-flex xs3 class="text-xs-center">
+                          <v-subheader>{{tarin.qualification.title}}</v-subheader>
+                        </v-flex>
+                        <v-flex xs6>
+                          <v-select
+                            :items="people"
+                            item-text="name"
+                            item-value="objectID"
+                            item-avatar="avatar"
+                            :label="tarin.qualification.title"
+                            class="input-group--focused"
+                            v-model="tarin.candidate"
+                            autocomplete
+                            deletable-chips
+                            cache-items
+                            chips
+                            dense
+                          >
+                            <template slot="selection" slot-scope="data">
+                              <v-chip
+                                :selected="data.selected"
+                                :key="JSON.stringify(data.item)"
+                                close
+                                class="chip--select-multi ceit-chip"
+                                @input="data.parent.selectItem(data.item)"
+                              >
+                                <v-avatar class="ceit-search-avatar">
+                                  <img :src="data.item.avatar">
+                                </v-avatar>
+                                {{ data.item.name }}
+                              </v-chip>
+                            </template>
+                            <template slot="item" slot-scope="data">
+                              <template v-if="typeof data.item !== 'object'">
+                                <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                              </template>
+                              <template v-else>
+                                <v-list-tile-avatar>
+                                  <img :src="data.item.avatar">
+                                </v-list-tile-avatar>
+                                <v-list-tile-content>
+                                  <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
+                                </v-list-tile-content>
+                              </template>
+                            </template>
+                          </v-select>
+                        </v-flex>
+                      </v-layout>
+                    </v-flex>
                   </v-layout>
                 </v-container>
             </v-card-text>
@@ -67,17 +96,11 @@
 <script>
     export default {
       name: 'Tarins',
+      props: ['people', 'votes'],
       data() {
         return {
-          tarins: [],
-          people: [],
-          votes: [],
           valid: true,
         }
-      },
-      mounted() {
-        this.fetchPeople()
-        this.fetchTarins()
       },
       notifications: {
         showSuccess: {
@@ -92,128 +115,14 @@
       methods: {
         submit (e) {
           e.preventDefault()
-           this.$axios.post('/poll/submit', {data: {
-               votes: this.votes
-             }
-           }).then(e => {
-             this.showSuccess()
-           }).catch(e => {
-             this.showError()
-           })
-           this.showSuccess()
-        },
-        async fetchTarins() {
-          // Get current user's votes
-          this.$axios.get('polls').then(e => {
-            //TODO
-            console.log('got it!')
-            console.log(e)
-          })
-
-          // Get the titles
-          this.$axios.get('qualifications').then(e => {
-            this.votes = e.data.quals
-            console.log(this.tarins)
+          this.$axios.post('/poll/submit', {
+            votes: this.votes
+          }).then(e => {
+            this.showSuccess()
           }).catch(e => {
-            console.log(e)
             this.showError()
           })
-//           this.tarins = [
-//             {title: 'اجتماعی ترین', approved: true},
-//             {title: 'احساسی ترین', approved: true},
-//             {title: 'بپیچون ترین', approved: true},
-//             {title: 'بدشانس ترین', approved: true},
-//             {title: 'پر حرف ترین', approved: true},
-//             {title: 'پرکار ترین', approved: true},
-//             {title: 'تدریس یار ترین', approved: true},
-//             {title: 'تغییر پیدا کرده ترین', approved: true},
-//             {title: 'جزوه نویس ترین', approved: true},
-//             {title: 'جو بده ترین', approved: true},
-//             {title: 'خسته ترین', approved: true},
-//             {title: 'خوش خنده ترین', approved: true},
-//             {title: 'خوش شانس ترین', approved: true},
-//             {title: 'رک ترین', approved: true},
-//             {title: 'خوش برخورد ترین', approved: true},
-//             {title: 'شاخ ترین', approved: true},
-//             {title: 'شکمو ترین', approved: true},
-//             {title: 'سم ترین', approved: true},
-//             {title: 'خجسته ترین', approved: true},
-//             {title: 'شوخ طبع ترین', approved: true},
-//             {title: 'کپ زن ترین', approved: true},
-//             {title: 'کم پیدا ترین', approved: true},
-//             {title: 'مودب ترین', approved: true},
-//             {title: 'پر استرس ترین', approved: true},
-//             {title: 'نمره بگیر ترین', approved: true},
-//             {title: 'ورزشکار ترین', approved: true},
-//             {title: 'دوست داشتنی ترین', approved: true},
-//             {title: 'یعقوب برو ترین', approved: true},
-//             {title: 'خوش اخلاق ترین', approved: true},
-//             {title: 'بیخیال ترین', approved: true},
-//             {title: 'یخ ترین', approved: true},
-//             {title: 'پایه ترین', approved: true},
-//             {title: 'خجالتی ترین', approved: true},
-//             {title: 'مهربون ترین', approved: true},
-//             {title: 'نرد ترین', approved: true},
-//             {title: 'با جنبه ترین', approved: true},
-//             {title: 'با مرام ترین', approved: true},
-//             {title: 'آنلاین ترین', approved: true},
-//             {title: 'کم حافظه ترین', approved: true},
-//             {title: 'هنرمند ترین', approved: true},
-//             {title: 'تیکه پرون ترین', approved: true},
-//             {title: 'خوش خواب ترین', approved: true},
-//             {title: 'جدی ترین', approved: true},
-//             {title: 'دلسوز ترین', approved: true},
-//             {title: 'بد امتحان بده ترین', approved: true},
-//             {title: 'خونسرد ترین', approved: true},
-//             {title: 'رئیس ترین', approved: true},
-//             {title: 'آروم ترین', approved: true},
-//             {title: 'علاف ترین', approved: true},
-//             {title: 'زود سر کلاس برو ترین', approved: true},
-//             {title: 'سحرخیز ترین', approved: true},
-//             {title: 'زود رنج ترین', approved: true},
-//             {title: 'صدا قشنگ ترین', approved: true},
-//             {title: 'گیج ترین', approved: true},
-//             {title: 'مغرور ترین', approved: true},
-//             {title: 'منطقی ترین', approved: true},
-//             {title: 'پر انرژی ترین', approved: true},
-//             {title: 'پیگیر ترین', approved: true},
-//             {title: 'با جذبه ترین', approved: true},
-//             {title: 'پر سر و صدا ترین', approved: true},
-//             {title: 'بی احساس ترین', approved: true},
-//             {title: 'بی تفاوت ترین', approved: true},
-//             {title: 'سوال بپرس ترین', approved: true},
-//             {title: 'تمدید کن ترین', approved: true},
-//             {title: 'جغدترین', approved: true},
-//             {title: 'متاخر ترین', approved: true},
-//             {title: 'سرکلاس بیرون برو ترین', approved: true},
-//             {title: 'خوش تیپ ترین', approved: true},
-//             {title: 'تنبل ترین ', approved: true},
-//             {title: 'کیوت ترین', approved: true},
-//             {title: 'آویزون استاد ترین', approved: true},
-//             {title: 'جنتلمن ترین', approved: true},
-//             {title: 'سیاسی ترین', approved: true},
-//             {title: 'مسئولیت پذیر ترین', approved: true},
-//             {title: 'ته نشین ترین', approved: true},
-//             {title: 'کلاس بپیچون ترین ', approved: true},
-//             {title: 'کافه برو ترین', approved: true},
-//             {title: 'غرغرو ترین', approved: true},
-//             {title: 'ساکت ترین', approved: true},
-//             {title: 'فیلم بین ترین', approved: true},
-//             {title: 'کتابخون ترین', approved: true},
-//             {title: 'کنسل کن ترین', approved: true},
-//             {title: 'عجیب ترین', approved: true},
-//             {title: 'پررو ترین', approved: true},
-//             {title: 'دست و دلباز ترین', approved: true},
-//           ]
         },
-        async fetchPeople() {
-          this.$axios.get('/users/students').then(e => {
-            this.people = e.data
-          }).catch(e => {
-            console.log(e)
-            this.showError()
-          })
-        }
       }
     }
 </script>
@@ -221,5 +130,17 @@
 <style scoped>
   .tarins-panel {
     direction: rtl;
+  }
+  .ceit-search {
+    text-align: right !important;
+  }
+  .ceit-search-avatar {
+    margin-left: 8px !important;
+    margin-right: 0px !important;
+  }
+  .ceit-chip{
+    .chip__content{
+      padding: 0px 12px 0px 4px !important;
+    }
   }
 </style>

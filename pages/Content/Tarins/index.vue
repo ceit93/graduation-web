@@ -35,8 +35,6 @@
         }
       },
       mounted() {
-        console.log(this.people)
-        console.log(this.votes)
         this.$vuetify.goTo('#tabs', {
           duration: 300,
           offset: -100,

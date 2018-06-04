@@ -72,10 +72,6 @@
           valid: true,
         }
       },
-      mounted() {
-        this.fetchPeople()
-        this.fetchTarins()
-      },
       notifications: {
         showSuccess: {
           title: 'رای شما ذخیره شد.',
@@ -97,34 +93,6 @@
             this.showError()
           })
         },
-
-        async fetchTarins() {
-          // Get current user's votes
-          this.$axios.get('polls').then(e => {
-            //TODO
-            console.log('got it!')
-            console.log(e)
-          })
-
-          // Get the titles
-//          this.$axios.get('qualifications').then(e => {
-//            this.votes = e.data.quals
-//            console.log(this.tarins)
-//          }).catch(e => {
-//            console.log(e)
-//            this.showError()
-//          })
-        },
-
-        async fetchPeople() {
-          this.$axios.get('/users/students').then(e => {
-            this.people = e.data
-          }).catch(e => {
-            console.log(e)
-            this.showError()
-          })
-        }
-
       }
     }
 </script>

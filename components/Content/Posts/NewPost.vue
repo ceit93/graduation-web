@@ -19,6 +19,7 @@
                     :item_value="'objectID'"
                     :item_avatar="'avatar'"
                     :label="'دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
+                    :placeholder="'گیرنده دل‌نوشته...'"
                     :style_class="'input-group--focused'"
                     :required="true"
                     :autocomplete="true"

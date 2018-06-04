@@ -12,8 +12,8 @@
             >
               <img
                 v-show="!loading"
-                :src="avatarSrc"
-                :alt="this.$auth.user.name">
+                :src="$auth.user.avatar"
+                :alt="$auth.user.name">
               <v-progress-circular
                 v-show="loading"
                 indeterminate
@@ -53,7 +53,6 @@
     data() {
       return {
         avatar: '',
-        avatarSrc: '',
         loading: false,
       }
     },
@@ -72,15 +71,12 @@
           header: {
             'Content-Type': 'multipart/form-data'
           }
-        }).then((res) => {
-          this.avatarSrc = res.data.avatar;
+        }).then(async(res) => {
+          await this.$auth.fetchUser();
           this.loading = false;
         });
 
       }
-    },
-    created() {
-      this.avatarSrc = this.$auth.user.avatar
     }
   }
 </script>

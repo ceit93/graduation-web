@@ -24,7 +24,35 @@
                     deletable-chips
                     chips
                     flat
-                  />
+                  >
+                    <template slot="selection" slot-scope="data">
+                      <v-chip
+                        :selected="data.selected"
+                        :key="JSON.stringify(data.item)"
+                        close
+                        class="chip--select-multi"
+                        @input="data.parent.selectItem(data.item)"
+                      >
+                        <v-avatar>
+                          <img :src="data.item.avatar">
+                        </v-avatar>
+                        {{ data.item.name }}
+                      </v-chip>
+                    </template>
+                    <template slot="item" slot-scope="data">
+                      <template v-if="typeof data.item !== 'object'">
+                        <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                      </template>
+                      <template v-else>
+                        <v-list-tile-avatar>
+                          <img :src="data.item.avatar">
+                        </v-list-tile-avatar>
+                        <v-list-tile-content>
+                          <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
+                        </v-list-tile-content>
+                      </template>
+                    </template>
+                  </v-select>
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field
@@ -181,5 +209,7 @@
       overflow-y: auto;
     }
   }
-
+  .ceit-search {
+    text-align: right !important;
+  }
 </style>

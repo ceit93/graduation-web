@@ -10,16 +10,18 @@
       <h3 class="title">دیوارِ {{user.name}}</h3>
     </v-card-title>
     <v-card-text>
-      <h2 v-if="user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">ای بابا :(</h2>
-      <h4 v-if="user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته...</h4>
-      <div v-for="(post,index) in user.posts"
+      <h2 v-if="canHaveWall && user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">ای بابا :(</h2>
+      <h4 v-if="canHaveWall && user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته...</h4>
+      <h2 v-if="!canHaveWall" class="grey--text text-xs-center">شما ۹۳ای نیستید :(</h2>
+      <h4 v-if="!canHaveWall" class="grey--text text-xs-center">امکان داشتن دیوار دل‌نوشته‌ها رو فقط ۹۳ای‌ها دارن. درعوض، شما می‌تونین رو دیوار ۹۳‌ای‌ها براشون دل‌نوشته بنویسید. برای این‌کار می‌تونید به صفحه دل‌نوشته جدید مراجعه کنید.</h4>
+      <div v-if="canHaveWall" v-for="(post,index) in user.posts"
            :key="index">
         <post
           :postData="post"
           :belongsToLoggedInUser="access"
-          @approved="approvePost(post._id, index)"
-          @removeMe="removePost(post._id, index)"
-          @disapproved="disapprovePost(post._id, index)"/>
+          @approved="approved(index)"
+          @deleted="removed(index)"
+          @disapproved="disapproved(index)"/>
       </div>
     </v-card-text>
   </v-card>
@@ -34,6 +36,13 @@
       computed: {
         access() {
           return this.user.username === this.$auth.user.username
+        },
+        canHaveWall() {
+          for (let number of this.$auth.user.std_numbers) {
+            if (number.match('^9331[0-9]{3}$'))
+              return true
+          }
+          return false
         }
       },
       notifications: {
@@ -54,37 +63,16 @@
         }
       },
       methods: {
-        approvePost(id, index){
-          this.$axios.post('/posts/' + id, {approved: true})
-            .then(e => {
-            this.showApprovingSuccess()
-            user.posts[index].approved = true
-          }).catch(r => {
-            this.showError()
-          })
+        approved(index){
+          this.$emit('approved', index)
         },
-        async disapprovePost(id, index){
-          await this.$axios.post('/posts/' + id, {approved: false}).then(e => {
-            this.showApprovingSuccess()
-            user.posts[index].approved = true
-          }).catch(r => {
-            this.showError()
-          })
+        disapproved(index){
+          this.$emit('disapproved', index)
         },
-        async removePost(index) {
-          if (this.posts[index].user._id === this.$auth.user._id) {
-            if (window.confirm("آیا مطمئن هستید؟")) {
-              this.$axios.delete('/posts/' + id).then(e => {
-                this.posts.splice(index, 1);
-                this.showDeletionSuccess()
-                this.$nuxt.$router.replace({'path': '/content/wall/'})
-              }).catch(r => {
-                this.showError()
-              })
-            }
-          }
+        removed(index) {
+          this.$emit('deleted', index)
         }
-      }
+      },
     }
 </script>
 

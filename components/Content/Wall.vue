@@ -3,8 +3,8 @@
     <v-card-title class="justify-content-center">
       <v-btn icon :to="'/content/wall/' + this.user.username" nuxt>
         <v-avatar :size="40" class="elevation-2">
-          <!--TODO: Implement the avatar-->
-          <img src="@/static/avatar.png" alt="">
+          <img :src="$auth.user.avatar ? $auth.user.avatar : '$auth.user.avatar' "
+               :alt="$auth.user.name">
         </v-avatar>
       </v-btn>
       <h3 class="title">دیوارِ {{user.name}}</h3>

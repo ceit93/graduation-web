@@ -5,7 +5,8 @@
         <v-btn icon :to="'/content/wall/' + postData.user.username" nuxt>
           <v-avatar :size="40" class="elevation-2">
             <!--TODO: Implement the avatar-->
-            <img src="@/static/avatar.png" alt="">
+            <img :src="$auth.user.avatar ? $auth.user.avatar : '$auth.user.avatar' "
+                 :alt="$auth.user.name">
           </v-avatar>
         </v-btn>
         <span class="mr-2 body-2">{{postData.title}}</span>

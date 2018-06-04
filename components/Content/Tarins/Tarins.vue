@@ -27,48 +27,20 @@
                           <v-subheader>{{tarin.qualification.title}}</v-subheader>
                         </v-flex>
                         <v-flex xs6>
-                          <v-select
-                            :items="people"
-                            item-text="name"
-                            item-value="objectID"
-                            item-avatar="avatar"
-                            :label="tarin.qualification.title"
-                            class="input-group--focused"
+                          <search-select
                             v-model="tarin.candidate"
-                            autocomplete
-                            deletable-chips
-                            cache-items
-                            chips
-                            dense
-                          >
-                            <template slot="selection" slot-scope="data">
-                              <v-chip
-                                :selected="data.selected"
-                                :key="JSON.stringify(data.item)"
-                                close
-                                class="chip--select-multi ceit-chip"
-                                @input="data.parent.selectItem(data.item)"
-                              >
-                                <v-avatar class="ceit-search-avatar">
-                                  <img :src="data.item.avatar">
-                                </v-avatar>
-                                {{ data.item.name }}
-                              </v-chip>
-                            </template>
-                            <template slot="item" slot-scope="data">
-                              <template v-if="typeof data.item !== 'object'">
-                                <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                              </template>
-                              <template v-else>
-                                <v-list-tile-avatar>
-                                  <img :src="data.item.avatar">
-                                </v-list-tile-avatar>
-                                <v-list-tile-content>
-                                  <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
-                                </v-list-tile-content>
-                              </template>
-                            </template>
-                          </v-select>
+                            :items="people"
+                            :item_text="'name'"
+                            :item_value="'objectID'"
+                            :item_avatar="'avatar'"
+                            :label="tarin.qualification.title"
+                            :style_class="'input-group--focused'"
+                            :autocomplete="true"
+                            :deletable_chips="true"
+                            :cache_items="true"
+                            :chips="true"
+                            :dense="true"
+                          ></search-select>
                         </v-flex>
                       </v-layout>
                     </v-flex>
@@ -94,8 +66,10 @@
 </template>
 
 <script>
+    import SearchSelect from "../../Profile/SearchSelect";
     export default {
       name: 'Tarins',
+      components: {SearchSelect},
       props: ['people', 'votes'],
       data() {
         return {

@@ -22,8 +22,9 @@
                     :style_class="'input-group--focused'"
                     :required="true"
                     :autocomplete="true"
-                    :deletable-chips="true"
+                    :deletable_chips="true"
                     :chips="true"
+                    :cache_items="true"
                     :dense="true"
                     :flat="true"
                   ></search-select>

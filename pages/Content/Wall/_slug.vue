@@ -1,8 +1,42 @@
 <template>
-  <wall :user="user"
+  <div>
+    <v-card>
+      <v-card-text>
+        <v-select
+          append-icon="search"
+          placeholder="جستجوی ۹۳ای‌ها"
+          :items="people"
+          item-text="name"
+          item-value="username"
+          item-avatar="avatar"
+          v-model="search"
+          solo
+          autocomplete
+          cache-items
+          combobox
+          dense
+        >
+          <template slot="item" slot-scope="data">
+            <template v-if="typeof data.item !== 'object'">
+              <v-list-tile-content v-text="data.item"></v-list-tile-content>
+            </template>
+            <template v-else>
+              <v-list-tile-avatar>
+                <img :src="data.item.avatar">
+              </v-list-tile-avatar>
+              <v-list-tile-content>
+                <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
+              </v-list-tile-content>
+            </template>
+          </template>
+        </v-select>
+      </v-card-text>
+    </v-card>
+    <wall :user="user"
       @approved="approvePost"
       @deleted="removePost"
       @disapproved="disapprovePost"></wall>
+  </div>
 </template>
 
 <script>
@@ -10,16 +44,28 @@
   export default {
     name: "slug",
     layout: 'content',
-    asyncData (context) {
-      return context.$axios.get(`users/${context.params.slug}`)
+    data() {
+      return {
+        search: ''
+      }
+    },
+    async asyncData (context) {
+      let user = await context.$axios.get(`users/${context.params.slug}`)
         .then((res) => {
-          console.log("USER IS:")
-          console.log(res.data)
-          return { user: res.data.user }
+          return res.data.user
         }).catch(e => {
-          console.log('error')
-          console.log({name: 'خل و چل'})
+          return { }
         })
+      let people = await context.$axios.get('users/students')
+        .then(e => {
+          return e.data
+        }).catch(e => {
+          return {}
+        })
+      return {
+        user: user,
+        people: people
+      }
     },
     components: {Wall},
     async mounted() {
@@ -47,5 +93,7 @@
 </script>
 
 <style scoped>
-
+  .ceit-search {
+    text-align: right !important;
+  }
 </style>

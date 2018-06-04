@@ -3,7 +3,6 @@
     <v-card>
       <v-card-text>
         <search-select
-          :append_icon="'search'"
           v-model="search"
           :items="people"
           :item_text="'name'"
@@ -12,10 +11,10 @@
           :label="'جستجوی ۹۳ای‌ها'"
           :style_class="'input-group--focused'"
           :autocomplete="true"
-          :solo="true"
           :cache_items="true"
           :dense="true"
-          :combobox="true"
+          :append_icon="'search'"
+          :placeholder="'جستجوی یک ۹۳ ای...'"
           @input="gotoWall"
         ></search-select>
       </v-card-text>
@@ -35,7 +34,7 @@
     layout: 'content',
     data() {
       return {
-        search: ''
+        search: null
       }
     },
     async asyncData (context) {

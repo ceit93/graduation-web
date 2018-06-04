@@ -8,6 +8,7 @@
     :item-value="item_value"
     :item-avatar="item_avatar"
     :label="label"
+    :placeholder="placeholder"
     :deletable-chips="deletable"
     :required="required"
     :flat="flat"
@@ -69,7 +70,8 @@
       'append_icon',
       'cache_items',
       'dense',
-      'combobox'
+      'combobox',
+      'placeholder'
     ],
     methods: {
       input(value){

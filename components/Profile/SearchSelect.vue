@@ -13,6 +13,10 @@
     :flat="flat"
     :solo="solo"
     :class="style_class"
+    :append-icon="append_icon"
+    :cache-items="cache_items"
+    :dense="dense"
+    :combobox="combobox"
     autocomplete
     chips
   >
@@ -61,11 +65,14 @@
       'required',
       'flat',
       'solo',
-      'style_class'
+      'style_class',
+      'append_icon',
+      'cache_items',
+      'dense',
+      'combobox'
     ],
     methods: {
       input(value){
-        console.log(value)
         this.$emit('input', value)
       }
     }

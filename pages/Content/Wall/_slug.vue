@@ -2,35 +2,22 @@
   <div>
     <v-card>
       <v-card-text>
-        <v-select
-          append-icon="search"
-          label="جستجوی ۹۳ای‌ها"
-          :items="people"
-          item-text="name"
-          item-value="username"
-          item-avatar="avatar"
+        <search-select
+          :append_icon="'search'"
           v-model="search"
+          :items="people"
+          :item_text="'name'"
+          :item_value="'username'"
+          :item_avatar="'avatar'"
+          :label="'جستجوی ۹۳ای‌ها'"
+          :style_class="'input-group--focused'"
+          :autocomplete="true"
+          :solo="true"
+          :cache_items="true"
+          :dense="true"
+          :combobox="true"
           @input="gotoWall"
-          solo
-          autocomplete
-          cache-items
-          combobox
-          dense
-        >
-          <template slot="item" slot-scope="data">
-            <template v-if="typeof data.item !== 'object'">
-              <v-list-tile-content v-text="data.item"></v-list-tile-content>
-            </template>
-            <template v-else>
-              <v-list-tile-avatar>
-                <img :src="data.item.avatar">
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
-              </v-list-tile-content>
-            </template>
-          </template>
-        </v-select>
+        ></search-select>
       </v-card-text>
     </v-card>
     <wall :user="user"
@@ -42,6 +29,7 @@
 
 <script>
   import Wall from "~/components/Content/Wall";
+  import SearchSelect from "~/components/Profile/SearchSelect.vue";
   export default {
     name: "slug",
     layout: 'content',
@@ -68,7 +56,7 @@
         people: people
       }
     },
-    components: {Wall},
+    components: {Wall, SearchSelect},
     async mounted() {
       this.$vuetify.goTo('#tabs', {
         duration: 300,
@@ -89,9 +77,8 @@
         console.log(index)
         this.user.posts.splice(index, 1);
       },
-      gotoWall() {
-        let username = this.search.username
-        this.$nuxt.$router.replace({'path' : username})
+      gotoWall(username) {
+        this.$nuxt.$router.replace({'path' : this.search})
       }
     }
   }
@@ -100,5 +87,14 @@
 <style scoped>
   .ceit-search {
     text-align: right !important;
+  }
+  .ceit-search-avatar {
+    margin-left: 8px !important;
+    margin-right: 0px !important;
+  }
+  .ceit-chip{
+    .chip__content{
+      padding: 0px 12px 0px 4px !important;
+    }
   }
 </style>

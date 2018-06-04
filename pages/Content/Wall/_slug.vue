@@ -4,12 +4,13 @@
       <v-card-text>
         <v-select
           append-icon="search"
-          placeholder="جستجوی ۹۳ای‌ها"
+          label="جستجوی ۹۳ای‌ها"
           :items="people"
           item-text="name"
           item-value="username"
           item-avatar="avatar"
           v-model="search"
+          @input="gotoWall"
           solo
           autocomplete
           cache-items
@@ -87,6 +88,10 @@
       removePost(index) {
         console.log(index)
         this.user.posts.splice(index, 1);
+      },
+      gotoWall() {
+        let username = this.search.username
+        this.$nuxt.$router.replace({'path' : username})
       }
     }
   }

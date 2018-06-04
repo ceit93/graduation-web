@@ -11,48 +11,21 @@
             <v-container grid-list-md fluid>
               <v-layout row wrap>
                 <v-flex xs12>
-                  <v-select
+                  <search-select
                     v-model="composed.to"
                     :rules="rules.to"
                     :items="people"
-                    item-text="name"
-                    item-value="objectID"
-                    label="دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)"
-                    class="input-group--focused"
-                    required
-                    autocomplete
-                    deletable-chips
-                    chips
-                    flat
-                  >
-                    <template slot="selection" slot-scope="data">
-                      <v-chip
-                        :selected="data.selected"
-                        :key="JSON.stringify(data.item)"
-                        close
-                        class="chip--select-multi"
-                        @input="data.parent.selectItem(data.item)"
-                      >
-                        <v-avatar>
-                          <img :src="data.item.avatar">
-                        </v-avatar>
-                        {{ data.item.name }}
-                      </v-chip>
-                    </template>
-                    <template slot="item" slot-scope="data">
-                      <template v-if="typeof data.item !== 'object'">
-                        <v-list-tile-content v-text="data.item"></v-list-tile-content>
-                      </template>
-                      <template v-else>
-                        <v-list-tile-avatar>
-                          <img :src="data.item.avatar">
-                        </v-list-tile-avatar>
-                        <v-list-tile-content>
-                          <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
-                        </v-list-tile-content>
-                      </template>
-                    </template>
-                  </v-select>
+                    :item_text="'name'"
+                    :item_value="'objectID'"
+                    :item_avatar="'avatar'"
+                    :label="'دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
+                    :style_class="'input-group--focused'"
+                    :required="true"
+                    :autocomplete="true"
+                    :deletable-chips="true"
+                    :chips="true"
+                    :flat="true"
+                  ></search-select>
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field
@@ -95,6 +68,7 @@
 
 <script>
   import Post from '~/components/Content/Posts/Post.vue'
+  import SearchSelect from "~/components/Profile/SearchSelect.vue";
 
   export default {
     name: "posts",
@@ -190,7 +164,7 @@
         })
       }
     },
-    components: {Post},
+    components: {SearchSelect, Post},
     mounted() {
       this.fetchPeople()
     }
@@ -211,5 +185,14 @@
   }
   .ceit-search {
     text-align: right !important;
+  }
+  .ceit-search-avatar {
+    margin-left: 8px !important;
+    margin-right: 0px !important;
+  }
+  .ceit-chip{
+    .chip__content{
+      padding: 0px 12px 0px 4px !important;
+    }
   }
 </style>

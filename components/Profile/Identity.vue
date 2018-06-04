@@ -10,7 +10,6 @@
               :size="150"
               color="grey lighten-4"
             >
-              <!--TODO: IMPLEMENT USER AVATAR-->
               <img
                 v-show="!loading"
                 :src="avatarSrc"

@@ -19,3 +19,5 @@ yarn.lock
 
 # PWA Module
 sw.*
+static/OneSignalSDKUpdaterWorker.js
+static/OneSignalSDKWorker.js

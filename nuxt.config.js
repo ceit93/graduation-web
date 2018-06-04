@@ -5,6 +5,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    '@nuxtjs/onesignal',
     '@nuxtjs/pwa'
   ],
 
@@ -125,5 +126,19 @@ module.exports = {
     short_name: "CEIT 93",
     theme_color: "#01579B",
     background_color: "#ffffff",
+  },
+
+  /*
+   * One-Signal
+   */
+  oneSignal: {
+    init: {
+      appID: '84d77cfd-3bb3-4dcf-a8c4-6ca4c373386d',
+      autoRegister: false,
+      notifyButton: {
+        enable: true,
+      },
+      allowLocalhostAsSecureOrigin: true,
+    }
   }
 }

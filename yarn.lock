@@ -114,6 +114,10 @@
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/meta/-/meta-2.2.1.tgz#ad7c8658ef0357cdef56856a9ff21d595102e089"
 
+"@nuxtjs/onesignal@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/onesignal/-/onesignal-2.0.0.tgz#efcc6d2506bc888c930d9c9dca5622a668efe1c2"
+
 "@nuxtjs/proxy@^1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@nuxtjs/proxy/-/proxy-1.2.4.tgz#41aafac58854f14e28aed17238936bb6404e6071"

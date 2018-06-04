@@ -1,13 +1,15 @@
 <template>
-  <div>خطا</div>
+  <div>{{error}}</div>
 </template>
 
 <script>
     export default {
       name: "error",
+      props: ['error'],
       //TODO: remove this
       mounted () {
-        this.$nuxt.$router.replace({'path' : '/'})
+        console.log(error)
+        // this.$nuxt.$router.replace({'path' : '/'})
       },
     }
 </script>

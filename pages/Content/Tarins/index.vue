@@ -1,5 +1,5 @@
 <template>
-  <tarins></tarins>
+  <tarins :votes="this.votes" :people="this.people"></tarins>
 </template>
 
 <script>
@@ -8,7 +8,35 @@
       name: "index",
       components: {Tarins},
       layout: 'content',
+      data() {
+        return {
+          votes: [],
+          people: []
+        }
+      },
+      async asyncData (context) {
+        let {people} = await context.$axios.get('/users/students')
+          .then((res) => {
+            return { people: res.data }
+          }).catch(e => {
+            console.log('error')
+            return []
+          })
+        let {votes} = await context.$axios.get('/polls')
+          .then(e => {
+          return {votes: e.data}
+        }).catch(e => {
+          console.log('error')
+          return []
+        })
+        return {
+          votes: votes,
+          people: people
+        }
+      },
       mounted() {
+        console.log(this.people)
+        console.log(this.votes)
         this.$vuetify.goTo('#tabs', {
           duration: 300,
           offset: -100,

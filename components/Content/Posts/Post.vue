@@ -85,16 +85,16 @@
     methods: {
       deletePost() {
         if (this.postData.user.username === this.$auth.user.username) {
-          console.log("deleted")
-          this.$emit('removeMe')
+          this.$axios.$delete('/posts/' + this.postData._id)
+          this.$emit('deleted')
         }
       },
-      approvePost() {
-        console.log("approved")
+      async approvePost() {
+        await this.$axios.$post('/posts/' + this.postData._id, {data: {approved: true}})
         this.$emit('approved')
       },
-      dissaprovePost() {
-        console.log("DISapproved")
+      async dissaprovePost() {
+        await this.$axios.$post('/posts/' + this.postData._id, {data: {approved: false}})
         this.$emit('disapproved')
       }
     },

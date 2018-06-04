@@ -11,16 +11,36 @@
               color="grey lighten-4"
             >
               <!--TODO: IMPLEMENT USER AVATAR-->
-              <img src="avatar.png" :alt="this.$auth.user.name">
-            </v-avatar><br>
-            <v-btn small>
+              <img
+                v-show="!loading"
+                :src="avatarSrc"
+                :alt="this.$auth.user.name">
+              <v-progress-circular
+                v-show="loading"
+                indeterminate
+                color="primary"/>
+            </v-avatar>
+            <br>
+            <input
+              :v-model="avatar"
+              name="image"
+              type="file"
+              ref="avatar"
+              accept="image/*"
+              style="display: none;"
+              @change="uploadAvatar">
+            <v-btn
+              @click="changeAvatar"
+              small>
               تغییر عکس
             </v-btn>
           </v-flex>
           <v-flex xs12 md9 class="ceit-identity-text">
             <h1 class="mb-2">هم‌ورودی عزیز، {{ this.$auth.user.name }}</h1>
-            <p>اینجا سایت فارغ‌التحصیلیمونه و از طریق این وب‌اپلیکیشن باید مطالب نشریه رو کامل کنیم و بخشی از کارای جشن رو انجام بدیم.</p>
-            <p>لطفا تا تموم قبل از موعد تکمیل محتوا (۳۱ خرداد)، مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل کنید.</p>
+            <p>اینجا سایت فارغ‌التحصیلیمونه و از طریق این وب‌اپلیکیشن باید مطالب نشریه رو کامل کنیم و بخشی از کارای جشن
+              رو انجام بدیم.</p>
+            <p>لطفا تا تموم قبل از موعد تکمیل محتوا (۳۱ خرداد)، مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل
+              کنید.</p>
             <p>اینجا رو هم تند تند چک کنید لطفا چون مرتب آپدیت می‌کنیمش!</p>
           </v-flex>
         </v-layout>
@@ -30,20 +50,52 @@
 </template>
 
 <script>
-    export default {
-        name: "Identity"
+  export default {
+    data() {
+      return {
+        avatar: '',
+        avatarSrc: '',
+        loading: false,
+      }
+    },
+    name: "Identity",
+    methods: {
+      changeAvatar() {
+        this.$refs.avatar.click();
+      },
+      uploadAvatar(e) {
+        this.loading = true;
+        this.avatar = e.target.files[0];
+        let formData = new FormData();
+        formData.append('user', this.$auth.user);
+        formData.append('avatar', this.avatar);
+        this.$axios.post('/profie', formData, {
+          header: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then((res) => {
+          this.avatarSrc = res.data.avatar;
+          this.loading = false;
+        });
+
+      }
+    },
+    created() {
+      this.avatarSrc = this.$auth.user.avatar
     }
+  }
 </script>
 
 <style scoped>
-@media (max-width: 768px) {
-  .ceit-identity-text p {
-    text-align: center;
+  @media (max-width: 768px) {
+    .ceit-identity-text p {
+      text-align: center;
+    }
   }
-}
-@media (min-width: 768px) {
-  .ceit-identity-text p {
-    text-align: right;
+
+  @media (min-width: 768px) {
+    .ceit-identity-text p {
+      text-align: right;
+    }
   }
-}
 </style>

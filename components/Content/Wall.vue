@@ -54,8 +54,9 @@
         }
       },
       methods: {
-        async approvePost(id, index){
-          await this.$axios.post('/posts/' + id, {approved: true}).then(e => {
+        approvePost(id, index){
+          this.$axios.post('/posts/' + id, {approved: true})
+            .then(e => {
             this.showApprovingSuccess()
             user.posts[index].approved = true
           }).catch(r => {

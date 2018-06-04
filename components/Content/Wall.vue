@@ -10,8 +10,8 @@
       <h3 class="title">دیوارِ {{user.name}}</h3>
     </v-card-title>
     <v-card-text>
-      <h2 v-if="canHaveWall && user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">ای بابا :(</h2>
-      <h4 v-if="canHaveWall && user.posts === null || user.posts.length === 0" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته...</h4>
+      <h2 v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>
+      <h4 v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته...</h4>
       <h2 v-if="!canHaveWall" class="grey--text text-xs-center">شما ۹۳ای نیستید :(</h2>
       <h4 v-if="!canHaveWall" class="grey--text text-xs-center">امکان داشتن دیوار دل‌نوشته‌ها رو فقط ۹۳ای‌ها دارن. درعوض، شما می‌تونین رو دیوار ۹۳‌ای‌ها براشون دل‌نوشته بنویسید. برای این‌کار می‌تونید به صفحه دل‌نوشته جدید مراجعه کنید.</h4>
       <div v-if="canHaveWall" v-for="(post,index) in user.posts"

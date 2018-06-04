@@ -24,6 +24,7 @@
                     :autocomplete="true"
                     :deletable-chips="true"
                     :chips="true"
+                    :dense="true"
                     :flat="true"
                   ></search-select>
                 </v-flex>

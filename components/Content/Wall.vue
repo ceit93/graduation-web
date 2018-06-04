@@ -17,9 +17,9 @@
         <post
           :postData="post"
           :belongsToLoggedInUser="access"
-          @approved="approvePost(post._id, index)"
-          @removeMe="removePost(post._id, index)"
-          @disapproved="disapprovePost(post._id, index)"/>
+          @approved="approved(index)"
+          @deleted="removed(index)"
+          @disapproved="disapproved(index)"/>
       </div>
     </v-card-text>
   </v-card>
@@ -54,34 +54,14 @@
         }
       },
       methods: {
-        async approvePost(id, index){
-          await this.$axios.post('/posts/' + id, {approved: true}).then(e => {
-            this.showApprovingSuccess()
-            user.posts[index].approved = true
-          }).catch(r => {
-            this.showError()
-          })
+        approved(index){
+          this.$emit('approved', index)
         },
-        async disapprovePost(id, index){
-          await this.$axios.post('/posts/' + id, {approved: false}).then(e => {
-            this.showApprovingSuccess()
-            user.posts[index].approved = true
-          }).catch(r => {
-            this.showError()
-          })
+        disapproved(index){
+          this.$emit('disapproved', index)
         },
-        async removePost(index) {
-          if (this.posts[index].user._id === this.$auth.user._id) {
-            if (window.confirm("آیا مطمئن هستید؟")) {
-              this.$axios.delete('/posts/' + id).then(e => {
-                this.posts.splice(index, 1);
-                this.showDeletionSuccess()
-                this.$nuxt.$router.replace({'path': '/content/wall/'})
-              }).catch(r => {
-                this.showError()
-              })
-            }
-          }
+        removed(index) {
+          this.$emit('deleted', index)
         }
       }
     }

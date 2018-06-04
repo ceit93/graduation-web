@@ -1,5 +1,8 @@
 <template>
-  <wall :user="user"></wall>
+  <wall :user="user"
+      @approved="approvePost"
+      @deleted="removePost"
+      @disapproved="disapprovePost"></wall>
 </template>
 
 <script>
@@ -26,6 +29,20 @@
         easing: 'easeInOutCubic'
       })
     },
+    methods: {
+      approvePost(index){
+        console.log(index)
+        this.user.posts[index].approved = true
+      },
+      disapprovePost(index){
+        console.log(index)
+        this.user.posts[index].approved = false
+      },
+      removePost(index) {
+        console.log(index)
+        this.user.posts.splice(index, 1);
+      }
+    }
   }
 </script>
 

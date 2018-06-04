@@ -82,20 +82,62 @@
         return this.postData.approved && this.belongsToLoggedInUser
       }
     },
+    notifications: {
+      showError: {
+        title: 'خطا',
+        message: 'خطایی رخ داد...',
+        type: 'error'
+      },
+      showApprovingSuccess: {
+        title: 'انجام شد',
+        message: 'دل‌نوشته روی دیوار شما نمایش داده می‌شود.',
+        type: 'success'
+      },
+      showDisapprovingSuccess: {
+        title: 'انجام شد',
+        message: 'دل‌نوشته روی دیوار شما نمایش داده نمی‌شود.',
+        type: 'success'
+      },
+      showDeletingSuccess: {
+        title: 'انجام شد',
+        message: 'دل‌نوشته روی دیوار شما نمایش داده نمی‌شود.',
+        type: 'success'
+      }
+    },
     methods: {
       deletePost() {
         if (this.postData.user.username === this.$auth.user.username) {
-          this.$axios.$delete('/posts/' + this.postData._id)
-          this.$emit('deleted')
+          if (window.confirm("آیا مطمئن هستید؟")) {
+            this.$axios.delete('/posts/' + this.postData._id)
+              .then(e => {
+                this.showDeletingSuccess()
+                this.$emit('deleted')
+              }).catch(e => {
+                this.showError()
+                console.log(e)
+            })
+          }
         }
       },
       async approvePost() {
-        await this.$axios.$post('/posts/' + this.postData._id, {data: {approved: true}})
-        this.$emit('approved')
+        this.$axios.post('/posts/' + this.postData._id, {data: {approved: true}})
+          .then(e => {
+            this.showApprovingSuccess()
+            this.$emit('approved')
+          }).catch(e => {
+            this.showError()
+            console.log(e)
+          })
       },
-      async dissaprovePost() {
-        await this.$axios.$post('/posts/' + this.postData._id, {data: {approved: false}})
-        this.$emit('disapproved')
+      dissaprovePost() {
+        this.$axios.post('/posts/' + this.postData._id, {data: {approved: false}})
+          .then(e => {
+            this.showDisapprovingSuccess()
+            this.$emit('disapproved')
+          }).catch(e => {
+            this.showError()
+            console.log(e)
+          })
       }
     },
   }

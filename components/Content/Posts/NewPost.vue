@@ -170,9 +170,9 @@
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          let path = 'posts/'
+          let path = 'posts'
           if (recipient.objectID !== this.$auth.user._id)// Post to someone else's wall
-            path += 'wall/' + recipient.objectID
+            path += 'wall' + recipient.objectID
           let redirect = recipient.username
           this.submitWithAxios(formData, path, redirect)
         }

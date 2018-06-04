@@ -1,5 +1,5 @@
 <template>
-  <div>{{error}}</div>
+  <div>{{this.error}}</div>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
       props: ['error'],
       //TODO: remove this
       mounted () {
-        console.log(error)
+        console.log(this.error)
         // this.$nuxt.$router.replace({'path' : '/'})
       },
     }

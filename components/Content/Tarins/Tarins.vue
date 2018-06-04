@@ -26,19 +26,49 @@
                         <v-flex xs3 class="text-xs-center">
                           <v-subheader>{{tarin.qualification.title}}</v-subheader>
                         </v-flex>
-                        <v-flex xs5>
+                        <v-flex xs6>
                           <v-select
                             :items="people"
                             item-text="name"
                             item-value="objectID"
+                            item-avatar="avatar"
                             :label="tarin.qualification.title"
                             class="input-group--focused"
                             v-model="tarin.candidate"
                             autocomplete
                             deletable-chips
+                            cache-items
                             chips
                             dense
-                          ></v-select>
+                          >
+                            <template slot="selection" slot-scope="data">
+                              <v-chip
+                                :selected="data.selected"
+                                :key="JSON.stringify(data.item)"
+                                close
+                                class="chip--select-multi ceit-chip"
+                                @input="data.parent.selectItem(data.item)"
+                              >
+                                <v-avatar class="ceit-search-avatar">
+                                  <img :src="data.item.avatar">
+                                </v-avatar>
+                                {{ data.item.name }}
+                              </v-chip>
+                            </template>
+                            <template slot="item" slot-scope="data">
+                              <template v-if="typeof data.item !== 'object'">
+                                <v-list-tile-content v-text="data.item"></v-list-tile-content>
+                              </template>
+                              <template v-else>
+                                <v-list-tile-avatar>
+                                  <img :src="data.item.avatar">
+                                </v-list-tile-avatar>
+                                <v-list-tile-content>
+                                  <v-list-tile-title class="ceit-search" v-html="data.item.name"></v-list-tile-title>
+                                </v-list-tile-content>
+                              </template>
+                            </template>
+                          </v-select>
                         </v-flex>
                       </v-layout>
                     </v-flex>
@@ -100,5 +130,17 @@
 <style scoped>
   .tarins-panel {
     direction: rtl;
+  }
+  .ceit-search {
+    text-align: right !important;
+  }
+  .ceit-search-avatar {
+    margin-left: 8px !important;
+    margin-right: 0px !important;
+  }
+  .ceit-chip{
+    .chip__content{
+      padding: 0px 12px 0px 4px !important;
+    }
   }
 </style>

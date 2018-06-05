@@ -26,7 +26,6 @@
       }
     },
     mounted() {
-      console.log(this.error)
       // this.$nuxt.$router.replace({'path' : '/'})
     },
   }

@@ -34,7 +34,7 @@
         .then((res) => {
           return { notifs: res.data.notifications }
         }).catch(e => {
-          console.log('error')
+          context.error({statusCode: 500, message: 'خطای سرور...'})
         })
     },
     mounted() {

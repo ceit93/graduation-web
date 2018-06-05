@@ -64,8 +64,6 @@
       },
       methods: {
         doAction(action){
-          console.log('action is:')
-          console.log(action)
           this.$emit(action.name)
         }
       }

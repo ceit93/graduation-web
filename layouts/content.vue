@@ -83,7 +83,6 @@
         })
       },
       goBack(action){
-        console.log(action)
         this.$nuxt.$router.go(-1)
       },
       async logout() {

@@ -58,9 +58,6 @@
       }
     },
     name: "Identity",
-    mounted() {
-      console.log(this.$helper.avatar(this.$auth.user))
-    },
     methods: {
       changeAvatar() {
         this.$refs.avatar.click();

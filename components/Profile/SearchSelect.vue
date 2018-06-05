@@ -83,7 +83,7 @@
       input(value){
         this.$emit('input', value)
       }
-    }
+    },
   }
 </script>
 

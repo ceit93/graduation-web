@@ -78,15 +78,12 @@
     },
     methods: {
       approvePost(index){
-        console.log(index)
         this.user.posts[index].approved = true
       },
       disapprovePost(index){
-        console.log(index)
         this.user.posts[index].approved = false
       },
       removePost(index) {
-        console.log(index)
         this.user.posts.splice(index, 1);
       },
       gotoWall(username) {

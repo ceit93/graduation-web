@@ -124,7 +124,6 @@
       },
       onLoginError(e) {
         this.showLoginError()
-        console.log(e)
         this.$nuxt.$router.replace({'path' : '/'})
       }
     },

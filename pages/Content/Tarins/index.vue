@@ -25,16 +25,15 @@
           .then((res) => {
             return { people: res.data }
           }).catch(e => {
-            console.log('error')
-            return []
+            context.error({statusCode: 500, message: 'خطای سرور...'})
           })
         let {votes} = await context.$axios.get('/polls')
           .then(e => {
-          return {votes: e.data}
-        }).catch(e => {
-          console.log('error')
-          return []
-        })
+            return {votes: e.data}
+          }).catch(e => {
+              context.error({statusCode: 500, message: 'خطای سرور...'})
+            return []
+          })
         return {
           votes: votes,
           people: people

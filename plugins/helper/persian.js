@@ -3,7 +3,9 @@ export default {
   install(Vue,options){
     Vue.prototype.$persianJS = {
       arabicChar: function(str) {
-        return persianJs(str.toString()).arabicChar().toString()
+        if (str !== undefined && str !== null)
+          return persianJs(str.toString()).arabicChar().toString()
+        return str
       },
       persianNumber: function (str) {
         return persianJs(str.toString()).persianNumber().toString()

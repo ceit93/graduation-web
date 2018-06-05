@@ -20,6 +20,7 @@
                     :item_avatar="'avatar'"
                     :label="'دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
                     :placeholder="'گیرنده دل‌نوشته...'"
+                    :prepend_icon="'contacts'"
                     :style_class="'input-group--focused'"
                     :required="true"
                     :autocomplete="true"
@@ -35,6 +36,7 @@
                     v-model="composed.title"
                     :rules="rules.title"
                     label="عنوان دل‌نوشته"
+                    append-icon="title"
                     required
                   />
                 </v-flex>
@@ -75,6 +77,7 @@
 
   export default {
     name: "posts",
+    props: ['people'],
     data() {
       return {
         valid: true,
@@ -91,7 +94,6 @@
           body: '',
           file: ''
         },
-        people: []
       }
     },
     notifications: {
@@ -109,19 +111,12 @@
     filters: {
       makeParsi: function (value) {
         if (!value) return '';
-        return persianJs(value.toString()).englishNumber().toString();
+        return this.$persianJs(value.toString()).englishNumber().toString();
       }
     },
     methods: {
       clickFile() {
         this.$refs.file.click()
-      },
-      async fetchPeople() {
-        this.people = await this.$axios.get('users/students')
-          .then((res) => {
-            return res.data
-          }).catch(e => {
-          })
       },
       submitPost(e) {
         e.preventDefault();
@@ -168,9 +163,6 @@
       }
     },
     components: {SearchSelect, Post},
-    mounted() {
-      this.fetchPeople()
-    }
   }
 </script>
 

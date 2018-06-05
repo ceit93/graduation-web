@@ -14,6 +14,7 @@
                   v-model="subject"
                   :rules="subjectRules"
                   label="چی‌چی ترین؟"
+                  append-icon="bookmark"
                   required
                 ></v-text-field>
             </v-card-text>

@@ -2,20 +2,15 @@ export default {
   install(Vue,options){
     Vue.prototype.$helper = {
       avatar: function(object) {
-        if (object)
-          if (object.avatar)
-            if (object.avatar !== '' && object.avatar !== 'undefined')
+        if (object) {
+          if (object.avatar) {
+            if (object.avatar !== '' || object.avatar !== 'undefined')
               return object.avatar
-        return '/avatar.png'
-      },
-      prettyPeople: function(people){
-        let res = []
-        for (let person of people){
-          person.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
-          res.push(person)
+            return '/' + object.gender + '-avatar.png'
+          }
+          return '/' + object.gender + '-avatar.png'
         }
-        res = this.sortBy(res, 'std_numbers')
-        return res
+        return '/avatar.png'
       },
       sortBy: function(array, sortBy) {
         return array.sort((a,b) => {

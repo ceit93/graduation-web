@@ -1,5 +1,5 @@
 <template>
-  <tarins :votes="this.votes" :people="this.people"></tarins>
+  <tarins :votes="this.votes" :people="this.prettyPeople"></tarins>
 </template>
 
 <script>
@@ -8,10 +8,16 @@
       name: "index",
       components: {Tarins},
       layout: 'content',
-      data() {
-        return {
-          votes: [],
-          people: []
+      computed: {
+        prettyPeople() {
+          let res = []
+          for (let person of this.people){
+            person.name = this.$persianJS.arabicChar(person.name)
+            person.avatar = this.$helper.avatar(person)
+            res.push(person)
+          }
+          res = this.$helper.sortBy(res, 'std_numbers')
+          return res
         }
       },
       async asyncData (context) {

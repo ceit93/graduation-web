@@ -12,9 +12,9 @@
           :style_class="'input-group--focused'"
           :autocomplete="true"
           :cache_items="true"
-          :dense="true"
-          :append_icon="'search'"
-          :placeholder="'جستجوی یک ۹۳ ای...'"
+          :dense="false"
+          :prepend_icon="'search'"
+          :placeholder="'جستجوی یک ۹۳ای...'"
           @input="gotoWall"
         ></search-select>
       </v-card-text>
@@ -39,7 +39,15 @@
     },
     computed: {
       prettyPeople() {
-        return this.$helper.prettyPeople(this.people)
+        let res = []
+        for (let person of this.people){
+          let newPerson = Object.assign({}, person)
+          newPerson.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          newPerson.avatar = this.$helper.avatar(person)
+          res.push(newPerson)
+        }
+        res = this.$helper.sortBy(res, 'std_numbers')
+        return res
       }
     },
     async asyncData (context) {
@@ -47,13 +55,13 @@
         .then((res) => {
           return res.data.user
         }).catch(e => {
-          return { }
+          context.error({ statusCode: 404, message: 'کاربر مورد نظر یافت می‌نشود...' })
         })
       let people = await context.$axios.get('users/students')
         .then(e => {
           return e.data
         }).catch(e => {
-          return {}
+          context.error({ statusCode: 500, message: e.toString() })
         })
       return {
         user: user,

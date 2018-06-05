@@ -15,6 +15,7 @@
     :solo="solo"
     :class="style_class"
     :append-icon="append_icon"
+    :prepend-icon="prepend_icon"
     :cache-items="cache_items"
     :dense="dense"
     :combobox="combobox"
@@ -73,7 +74,8 @@
       'dense',
       'combobox',
       'placeholder',
-      'solo_inverted'
+      'solo_inverted',
+      'prepend_icon'
     ],
     methods: {
       input(value){

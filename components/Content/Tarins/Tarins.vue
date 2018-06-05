@@ -15,18 +15,35 @@
                 class="success"
               >
                 <v-icon>how_to_vote</v-icon>
-                ذخیره
+                ذخیره رای
               </v-btn>
+              <v-dialog v-model="dialog">
+                <v-chip color="info" outline dark slot="activator" @click.native.stop="dialog = true" small>راهنمایی (؟)</v-chip>
+                <v-card>
+                  <v-card-text>
+                    <h3>در طول ۴ سال گذشته از نظر شما «ترین‌های» ۹۳‌ای کیا بودن؟!</h3>
+                    <p>
+                      برای هر «ترین» کاندیدای خودتون رو انتخاب کنید و بعدش که انتخابتون تموم شد با زدن دکمه «ذخیره رای» رای‌تون رو ذخیره کنید.
+                    </p>
+                    <p>
+                      هر زمانی که خواستید میتونید از این صفحه خارج شید و بعدا برگردید به سراغ رای‌هاتون و اون‌هارو رو ویرایش کنید.
+                    </p>
+                  </v-card-text>
+                  <v-card-actions class="d-flex justify-content-center">
+                    <v-btn color="info" large @click.native="dialog = false">باشه</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-card-actions>
             <v-card-text>
                 <v-container fluid>
                   <v-layout row wrap class="text-xs-center mx-0">
-                    <v-flex xs12 md6 v-for="tarin in votes" :key="tarin._id" align-center justify-center class="text-xs-center">
+                    <v-flex xs12 md12 lg6 v-for="tarin in votes" :key="tarin._id" align-center justify-center class="text-xs-center">
                       <v-layout row wrap class="text-xs-center mx-0">
-                        <v-flex xs3 class="text-xs-center">
+                        <v-flex md3 class="text-xs-center hidden-xs-only">
                           <v-subheader>{{tarin.qualification.title}}</v-subheader>
                         </v-flex>
-                        <v-flex xs6>
+                        <v-flex md6>
                           <search-select
                             v-model="tarin.candidate"
                             :items="people"
@@ -38,6 +55,7 @@
                             :autocomplete="true"
                             :deletable_chips="true"
                             :cache_items="true"
+                            :append_icon="'star'"
                             :chips="true"
                             :dense="true"
                           ></search-select>
@@ -54,8 +72,25 @@
                 class="success"
               >
                 <v-icon>how_to_vote</v-icon>
-                ذخیره
+                ذخیره رای
               </v-btn>
+              <v-dialog v-model="dialog">
+                <v-chip color="info" outline dark slot="activator" @click.native.stop="dialog = true" small>راهنمایی (؟)</v-chip>
+                <v-card>
+                  <v-card-text>
+                    <h3>در طول ۴ سال گذشته از نظر شما «ترین‌های» ۹۳‌ای کیا بودن؟!</h3>
+                    <p>
+                      برای هر «ترین» کاندیدای خودتون رو انتخاب کنید و بعدش که انتخابتون تموم شد با زدن دکمه «ذخیره رای» رای‌تون رو ذخیره کنید.
+                    </p>
+                    <p>
+                      هر زمانی که خواستید میتونید از این صفحه خارج شید و بعدا برگردید به سراغ رای‌هاتون و اون‌ها رو ویرایش کنید.
+                    </p>
+                  </v-card-text>
+                  <v-card-actions class="d-flex justify-content-center">
+                    <v-btn color="info" large @click.native="dialog = false">باشه</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-card-actions>
             </v-form>
           </v-card>
@@ -74,6 +109,7 @@
       data() {
         return {
           valid: true,
+          dialog: false
         }
       },
       notifications: {

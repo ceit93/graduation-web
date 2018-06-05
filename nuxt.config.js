@@ -37,7 +37,7 @@ module.exports = {
     https: true,
     proxyHeaders: false,
     proxy: true, // Can be also an object with default options
-    debug: true
+    debug: false
   },
 
   proxy: {

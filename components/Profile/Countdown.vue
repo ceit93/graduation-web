@@ -34,12 +34,12 @@
 <script>
     export default {
       name: "Countdown",
+      props : ['date', 'button'],
       mounted() {
         window.setInterval(() => {
           this.now = Math.trunc((new Date()).getTime() / 1000)
         },1000)
       },
-      props : ['date', 'button'],
       data() {
         return {
           now: Math.trunc((new Date()).getTime() / 1000),
@@ -70,7 +70,10 @@
           return '0'
         },
         diff: function() {
-          return this.unix - this.now
+          let d = this.unix - this.now
+          if (d <= 0)
+            this.$emit('end')
+          return d
         },
         cssClass: function() {
           if (this.diff > 0)

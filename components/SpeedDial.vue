@@ -57,8 +57,8 @@
         return {
           fab: false,
           navs: [
-            {name: 'up', icon:'keyboard_arrow_up', color: 'error', dark: true},
-            {name: 'back', icon:'keyboard_arrow_left', color: 'warning', dark: true},
+            {name: 'up', icon:'keyboard_arrow_up', color: 'info', dark: true},
+            {name: 'back', icon:'keyboard_arrow_left', color: 'light-blue darken-4', dark: true},
           ]
         }
       },

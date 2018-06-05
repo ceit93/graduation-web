@@ -33,7 +33,7 @@
         <v-avatar class="ceit-search-avatar">
           <img :src="data.item.avatar">
         </v-avatar>
-        {{ this.$persianJS.arabicChar(data.item.name) }}
+        {{ data.item.name }}
       </v-chip>
     </template>
     <template slot="item" slot-scope="data">

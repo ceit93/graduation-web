@@ -26,12 +26,11 @@
 
                 </v-flex>
                 <span class="title blue g-w-100 white--text pa-3 text-xs-center elevation-3">
-                  <!--TODO : Make number farsi-->
                   <span>
                     هزینه ثبت نام:
                   </span>
                   <span style="font-size: 30px">
-                   {{cost}}
+                   {{this.$persianJS.englishNumber(this.cost)}}
                   </span>
 
                   <span style="font-size: 9px;">

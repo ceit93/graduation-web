@@ -49,7 +49,6 @@
 </template>
 
 <script>
-  import persianJS from '~/node_modules/persianjs'
   export default {
     data() {
       return {

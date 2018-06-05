@@ -1,6 +1,5 @@
 import persianJS from '~/node_modules/persianjs'
 export default {
-
   install(Vue,options){
     Vue.prototype.$persianJS = {
       arabicChar: function(str) {

@@ -36,6 +36,7 @@
         easing: 'easeInOutCubic'
       })
     },
+    middleware: 'redirect-to-landing' // TODO remove this
   }
 </script>
 

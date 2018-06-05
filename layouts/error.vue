@@ -19,6 +19,7 @@
   export default {
     name: "error",
     props: ['error'],
+    layput: 'default',
     computed: {
       errorCode() {
         return this.$persianJS.englishNumber('' + this.error.statusCode)

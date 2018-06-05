@@ -22,7 +22,7 @@
           </v-tabs>
           <v-card flat>
             <nuxt/>
-            <speed-dial></speed-dial>
+            <speed-dial :actions="this.actions" @up="this.goUp" @back="this.goBack"></speed-dial>
           </v-card>
         </div>
       </v-content>
@@ -44,7 +44,7 @@
         tabs: [
           {
             name: 'دیوار دل‌نوشته‌ها',
-            icon: 'list',
+            icon: 'mdi-account-card-details',
             to: '/content/wall'
           },
           {
@@ -63,11 +63,28 @@
             to: '/content/tarins/new'
           },
         ],
+        actions: [
+          {name: 'wall', icon:'list', to: '/content/wall/', color: 'black', dark: true},
+          {name: 'newPost', icon:'add_comment', to: '/content/wall/new/', color: 'indigo', dark: true},
+          {name: 'tarins', icon:'star', to: '/content/tarins/', color: 'orange', dark: true},
+          {name: 'newTarin', icon:'bookmark', to: '/content/tarins/new/', color: 'green', dark: true},
+        ]
       }
     },
     methods: {
       makeParsi(num) {
         return persianJs(num).englishNumber().toString();
+      },
+      goUp(action) {
+        this.$vuetify.goTo('#tabs', {
+          duration: 300,
+          offset: -100,
+          easing: 'easeInOutCubic'
+        })
+      },
+      goBack(action){
+        console.log(action)
+        this.$nuxt.$router.go(-1)
       },
       async logout() {
         await this.$auth.logout()

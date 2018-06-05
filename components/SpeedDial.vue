@@ -21,6 +21,19 @@
       <v-icon>close</v-icon>
     </v-btn>
     <v-btn
+      v-for="action in this.navs"
+      :key="action.name"
+      fab
+      dark
+      small
+      :color="action.color"
+      nuxt
+      :to="action.to"
+      @click="doAction(action)"
+    >
+      <v-icon>{{action.icon}}</v-icon>
+    </v-btn>
+    <v-btn
       v-for="action in this.actions"
       :key="action.name"
       fab
@@ -29,7 +42,7 @@
       :color="action.color"
       nuxt
       :to="action.to"
-      @click="doMethod(action)"
+      @click="doAction(action)"
     >
       <v-icon>{{action.icon}}</v-icon>
     </v-btn>
@@ -39,34 +52,22 @@
 <script>
     export default {
       name: "SpeedDial",
+      props: ['actions'],
       data(){
         return {
           fab: false,
-          actions: [
-            {name: 'wall', icon:'list', to: '/content/wall/', color: 'black', dark: true},
-            {name: 'newPost', icon:'add_comment', to: '/content/wall/new/', color: 'indigo', dark: true},
-            {name: 'tarins', icon:'star', to: '/content/tarins/', color: 'orange', dark: true},
-            {name: 'newTarin', icon:'bookmark', to: '/content/tarins/new/', color: 'green', dark: true},
-            {name: 'up', icon:'keyboard_arrow_up', to: '', color: 'error', dark: true},
-
+          navs: [
+            {name: 'up', icon:'keyboard_arrow_up', color: 'error', dark: true},
+            {name: 'back', icon:'keyboard_arrow_left', color: 'warning', dark: true},
           ]
         }
       },
       methods: {
-        doMethod(action){
-          switch (action.name) {
-            case 'up':
-              this.$vuetify.goTo('#tabs', {
-                duration: 300,
-                offset: -100,
-                easing: 'easeInOutCubic'
-              })
-              break;
-
-            default:
-              break;
-          }
-        },
+        doAction(action){
+          console.log('action is:')
+          console.log(action)
+          this.$emit(action.name)
+        }
       }
     }
 </script>

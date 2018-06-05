@@ -170,7 +170,7 @@
       },
       showDeletingSuccess: {
         title: 'انجام شد',
-        message: 'دل‌نوشته روی دیوار شما نمایش داده نمی‌شود.',
+        message: 'دل‌نوشته مورد نظر حذف شد.',
         type: 'success'
       }
     },

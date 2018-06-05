@@ -48,7 +48,7 @@ module.exports = {
     '~plugins/tabs.js',
     '~plugins/jalali-date.js',
     {src: '~plugins/vue-notification.js', ssr: false},
-    '~plugins/persianJS/index.js'
+    '~plugins/helper/index.js'
   ],
   head: {
     title: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳',

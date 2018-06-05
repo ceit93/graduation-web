@@ -77,12 +77,12 @@ module.exports = {
 ]
   },
   css: [
-    '@/assets/css/main.scss',
-    '@/node_modules/vuetify/dist/vuetify.min.css',
-    '@/assets/css/iransharp.css',
-    '@/assets/css/bootstrap-grid.min.css',
-    '@/node_modules/@mdi/font/css/materialdesignicons.min.css',
-    '@/node_modules/vue-tabs-component/docs/resources/tabs-component.css',
+    '~/assets/css/main.scss',
+    '~/node_modules/vuetify/dist/vuetify.min.css',
+    '~/assets/css/iransharp.css',
+    '~/assets/css/bootstrap-grid.min.css',
+    '~/node_modules/@mdi/font/css/materialdesignicons.min.css',
+    '~/node_modules/vue-tabs-component/docs/resources/tabs-component.css',
   ],
   /*
   ** Customize the progress bar color

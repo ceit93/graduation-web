@@ -20,6 +20,7 @@
       </v-card-text>
     </v-card>
     <wall :user="user"
+      :canHaveWall="canHaveWall"
       @approved="approvePost"
       @deleted="removePost"
       @disapproved="disapprovePost"></wall>
@@ -48,6 +49,13 @@
         }
         res = this.$helper.sortBy(res, 'std_numbers')
         return res
+      },
+      canHaveWall(){
+        for (let person of this.people) {
+          if (person.objectID === this.user._id)
+            return true
+        }
+        return false
       }
     },
     async asyncData (context) {

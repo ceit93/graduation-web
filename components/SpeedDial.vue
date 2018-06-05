@@ -21,28 +21,17 @@
       <v-icon>close</v-icon>
     </v-btn>
     <v-btn
+      v-for="action in this.actions"
+      :key="action.name"
       fab
       dark
       small
-      color="green"
+      :color="action.color"
+      nuxt
+      :to="action.to"
+      @click="doMethod(action)"
     >
-      <v-icon>edit</v-icon>
-    </v-btn>
-    <v-btn
-      fab
-      dark
-      small
-      color="indigo"
-    >
-      <v-icon>add</v-icon>
-    </v-btn>
-    <v-btn
-      fab
-      dark
-      small
-      color="red"
-    >
-      <v-icon>delete</v-icon>
+      <v-icon>{{action.icon}}</v-icon>
     </v-btn>
   </v-speed-dial>
 </template>
@@ -52,8 +41,32 @@
       name: "SpeedDial",
       data(){
         return {
-          fab: false
+          fab: false,
+          actions: [
+            {name: 'wall', icon:'list', to: '/content/wall/', color: 'black', dark: true},
+            {name: 'newPost', icon:'add_comment', to: '/content/wall/new/', color: 'indigo', dark: true},
+            {name: 'tarins', icon:'star', to: '/content/tarins/', color: 'orange', dark: true},
+            {name: 'newTarin', icon:'bookmark', to: '/content/tarins/new/', color: 'green', dark: true},
+            {name: 'up', icon:'keyboard_arrow_up', to: '', color: 'error', dark: true},
+
+          ]
         }
+      },
+      methods: {
+        doMethod(action){
+          switch (action.name) {
+            case 'up':
+              this.$vuetify.goTo('#tabs', {
+                duration: 300,
+                offset: -100,
+                easing: 'easeInOutCubic'
+              })
+              break;
+
+            default:
+              break;
+          }
+        },
       }
     }
 </script>

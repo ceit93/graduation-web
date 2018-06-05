@@ -18,23 +18,13 @@
           :key="i"
           v-for="(item, i) in items"
           exact
+          class="ceit-tile"
         >
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile
-          @click="logout"
-          class="yellow--text text--accent-2"
-        >
-          <v-list-tile-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>خروج</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -53,7 +43,6 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat v-for="item in items" :to="item.to" exact :key="item.title">{{item.title}}</v-btn>
-        <v-btn flat @click="this.logout" class="yellow--text text--accent-2">خروج</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -71,16 +60,11 @@
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'}, TODO uncomment this line
+          { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},
         ],
         title: 'فارغ‌التحصیلی ۹۳',
       }
     },
-    methods: {
-      async logout() {
-        await this.$auth.logout()
-        this.$nuxt.$router.replace({'path' : '/login'})
-      }
-    }
   }
 </script>
 

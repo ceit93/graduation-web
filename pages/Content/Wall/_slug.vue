@@ -13,8 +13,8 @@
           :autocomplete="true"
           :cache_items="true"
           :dense="false"
-          :append_icon="'search'"
-          :placeholder="'جستجوی یک ۹۳ ای...'"
+          :prepend_icon="'search'"
+          :placeholder="'جستجوی یک ۹۳ای...'"
           @input="gotoWall"
         ></search-select>
       </v-card-text>

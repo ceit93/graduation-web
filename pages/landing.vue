@@ -22,7 +22,7 @@
             <v-card-text class="white--text">
               <p class="text-xs-center iranblack light-blue--text text--darken-3">هم‌کلاسی عزیز، {{this.$auth.user.name}}، ممنون از ورودتون به سایت. لطفا به بقیه ۹۳‌ای‌ها هم اطلاع بدید تا حتما قبل از شروع کار سایت، وارد سایت بشوند؛</p>
               <p class="text-xs-center iranblack light-blue--text text--darken-3">:زمان باقی‌‌مانده برای شروع</p>
-              <countdown date="June 6, 2018" :button="this.button"></countdown>
+              <countdown date="June 5, 2018" :button="this.button" @deadline="this.goToProfile"></countdown>
             </v-card-text>
           </div>
         </v-flex>
@@ -39,6 +39,11 @@
         button: {
           hidden: true
         }
+      }
+    },
+    methods: {
+      goToProfile() {
+        this.$nuxt.$router.replace({'path' : '/'})
       }
     },
     name: "landing",

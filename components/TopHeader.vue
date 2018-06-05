@@ -31,7 +31,7 @@
           class="yellow--text text--accent-2"
         >
           <v-list-tile-action>
-            <v-icon>mdi-power</v-icon>
+            <v-icon>mdi-exit-to-app</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>خروج</v-list-tile-title>
@@ -39,17 +39,14 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped" class="light-blue darken-4" dark>
+    <v-toolbar fixed app :clipped-left="clipped" class="light-blue darken-4" dark id="toolbar">
       <v-toolbar-side-icon @click="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
       <v-btn :to="'/'" nuxt icon class="user-button">
         <v-avatar
           :tile="true"
           :size="50"
-          @click="this.drawer = false"
         >
-          <!--TODO: IMPLEMENT USER AVATAR-->
-          <img v-if="this.$auth.loggedIn" src="@/static/logo.png" :alt="this.$auth.user.name">
-          <img v-else src="@/static/logo.png">
+          <img src="/logo.png" alt="بهترین وب‌اپلیکیشن فارغ‌التحصیلی">
         </v-avatar>
       </v-btn>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>
@@ -73,7 +70,7 @@
         miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
-          { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
+          // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'}, TODO uncomment this line
         ],
         title: 'فارغ‌التحصیلی ۹۳',
       }

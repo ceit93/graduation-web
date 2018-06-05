@@ -3,21 +3,21 @@
     <v-layout align-center justify-center row class="mx-0">
       <v-flex xs12 align-center justify-center>
         <!--Credits: http://fareez.info/blog/countdown-timer-using-vuejs/-->
-        <v-layout row wrap class="ltr mt-5 iranblack light-blue--text text--darken-3 text-xs-center mx-0">
+        <v-layout row wrap :class="this.cssClass">
           <v-flex xs3 class="text-xs-center">
-            <h1 class="">{{ convertToPersian(days) }}</h1>
+            <h1 class="">{{ this.$persianJS.englishNumber(days) }}</h1>
             <p class="iranblack">روز</p>
           </v-flex>
           <v-flex xs3 class="text-xs-center">
-            <h1 class="">{{ convertToPersian(hours) }}</h1>
+            <h1 class="">{{ this.$persianJS.englishNumber(hours) }}</h1>
             <p>ساعت</p>
           </v-flex>
           <v-flex xs3 class="text-xs-center">
-            <h1 class="">{{ convertToPersian(minutes) }}</h1>
+            <h1 class="">{{ this.$persianJS.englishNumber(minutes) }}</h1>
             <p>دقیقه</p>
           </v-flex>
           <v-flex xs3 class="text-xs-center">
-            <h1 class="">{{ convertToPersian(seconds) }}</h1>
+            <h1 class="">{{ this.$persianJS.englishNumber(seconds) }}</h1>
             <p>ثانیه</p>
           </v-flex>
         </v-layout>
@@ -34,26 +34,15 @@
 <script>
     export default {
       name: "Countdown",
+      props : ['date', 'button'],
       mounted() {
         window.setInterval(() => {
           this.now = Math.trunc((new Date()).getTime() / 1000)
         },1000)
       },
-      props : ['date', 'button'],
       data() {
         return {
           now: Math.trunc((new Date()).getTime() / 1000),
-        }
-      },
-      methods: {
-        convertToPersian(num) {
-          return num.replace(/\d+/g, function(digit) {
-            var ret = ''
-            for (var i = 0, len = digit.length; i < len; i++) {
-              ret += String.fromCharCode(digit.charCodeAt(i) + 1728)
-            }
-            return ret
-          })
         }
       },
       computed: {
@@ -61,16 +50,35 @@
           return Math.trunc(Date.parse(this.date) / 1000)
         },
         seconds: function () {
-          return ((this.unix - this.now) % 60).toString()
+          if (this.diff > 0)
+            return ((this.unix - this.now) % 60).toString()
+          return '0'
         },
         minutes: function() {
-          return (Math.trunc((this.unix - this.now) / 60) % 60).toString()
+          if (this.diff > 0)
+            return (Math.trunc((this.unix - this.now) / 60) % 60).toString()
+          return '0'
         },
         hours: function() {
-          return (Math.trunc((this.unix - this.now) / 60 / 60) % 24).toString()
+          if (this.diff > 0)
+            return (Math.trunc((this.unix - this.now) / 60 / 60) % 24).toString()
+          return '0'
         },
         days: function() {
-          return (Math.trunc((this.unix - this.now) / 60 / 60 / 24)).toString()
+          if (this.diff > 0)
+            return (Math.trunc((this.unix - this.now) / 60 / 60 / 24)).toString()
+          return '0'
+        },
+        diff: function() {
+          let d = this.unix - this.now
+          if (d <= 0)
+            this.$emit('deadline')
+          return d
+        },
+        cssClass: function() {
+          if (this.diff > 0)
+            return 'ltr mt-5 iranblack light-blue--text text--darken-3 text-xs-center mx-0';
+          return 'ltr mt-5 iranblack light-blue--text text--darken-3 text-xs-center mx-0 blink'
         }
       }
     }
@@ -82,5 +90,13 @@
  }
  .ltr {
    direction: ltr;
+ }
+ .blink {
+   animation: blinker 1.5s linear infinite;
+ }
+ @keyframes blinker {
+   50% {
+     opacity: 0.2;
+   }
  }
 </style>

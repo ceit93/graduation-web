@@ -11,26 +11,32 @@
             <v-container grid-list-md fluid>
               <v-layout row wrap>
                 <v-flex xs12>
-                  <v-select
+                  <search-select
                     v-model="composed.to"
                     :rules="rules.to"
                     :items="people"
-                    item-text="name"
-                    item-value="username"
-                    label="دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)"
-                    class="input-group--focused"
-                    required
-                    autocomplete
-                    deletable-chips
-                    chips
-                    flat
-                  />
+                    :item_text="'name'"
+                    :item_value="'objectID'"
+                    :item_avatar="'avatar'"
+                    :label="'دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
+                    :placeholder="'گیرنده دل‌نوشته...'"
+                    :prepend_icon="'contacts'"
+                    :style_class="'input-group--focused'"
+                    :required="true"
+                    :autocomplete="true"
+                    :deletable_chips="true"
+                    :chips="true"
+                    :cache_items="true"
+                    :dense="true"
+                    :flat="true"
+                  ></search-select>
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field
                     v-model="composed.title"
                     :rules="rules.title"
                     label="عنوان دل‌نوشته"
+                    append-icon="title"
                     required
                   />
                 </v-flex>
@@ -60,49 +66,20 @@
           </v-card-actions>
         </v-card>
       </v-form>
-      <!--<v-divider/>-->
-      <!--<v-card>-->
-        <!--<v-card-title class="justify-content-center">-->
-          <!--<h3 class="title">دل‌نوشته‌های ثبت‌شده توسط من</h3>-->
-        <!--</v-card-title>-->
-        <!--<v-card-text>-->
-          <!--<div v-for="(post,index) in posts" :key="index">-->
-            <!--<post :postData="post" v-on:removeMe="removePost(index)"/>-->
-          <!--</div>-->
-        <!--</v-card-text>-->
-      <!--</v-card>-->
+
     </v-card-text>
   </v-card>
 </template>
 
 <script>
   import Post from '~/components/Content/Posts/Post.vue'
+  import SearchSelect from "~/components/Profile/SearchSelect.vue";
+
   export default {
     name: "posts",
+    props: ['people'],
     data() {
       return {
-        removeFlag: true,
-        uploadOptions: {
-          url: (files) => {
-            this.composed.file = files[0];
-            return "";
-          },
-          maxFiles: 1,
-          addRemoveLinks: true,
-          acceptedFiles: 'image/*',
-          thumbnailWidth: 300,
-        },
-        editorOption: {
-          placeholder: '',
-          // some quill options
-          modules: {
-            toolbar: [
-              ['bold', 'italic', 'underline', 'strike'],
-              ['blockquote', 'code-block'],
-              [{'list': 'ordered'}, {'list': 'bullet'}],
-            ]
-          }
-        },
         valid: true,
         event: '',
         rules: {
@@ -117,11 +94,7 @@
           body: '',
           file: ''
         },
-        people: []
       }
-    },
-    mounted() {
-      this.fetchPeople()
     },
     notifications: {
       showError: {
@@ -138,86 +111,58 @@
     filters: {
       makeParsi: function (value) {
         if (!value) return '';
-        return persianJs(value.toString()).englishNumber().toString();
+        return this.$persianJs(value.toString()).englishNumber().toString();
       }
     },
     methods: {
       clickFile() {
         this.$refs.file.click()
       },
-      async fetchPeople() {
-        // this.tarins = await this.$axios.get('people')
-        this.people = [
-          {username: '9331001', name: 'خیار خیاری'},
-          {username: '9331002', name: 'ایمان تبریزیان'},
-          {username: '9331003', name: 'عارف حسینی‌کیا'},
-          {username: '9331004', name: 'مانا پوستی‌زاده'},
-          {username: '9331005', name: 'جعفر جعفری'},
-          {username: '9331006', name: 'اصغر اصغری'},
-          {username: '9331007', name: 'سیب هوایی'},
-          {username: '9331008', name: 'سیب زمینی'},
-          {username: '9331009', name: 'امیر حقیقتی ملکی'},
-          {username: '9331010', name: 'گلاب گلابی'},
-          {username: '9331011', name: 'جعفر جعفری'},
-          {username: '9331012', name: 'محمد محمدی'},
-        ]
-      },
       submitPost(e) {
         e.preventDefault();
-        let image = e.target[3].files[0];
-        if (image) {
-          let reader = new FileReader();
-          reader.readAsDataURL(image);
-          // TODO : we dont need fileReader when we post the form into server
-          reader.onload = (e) => {
-            let imageURL = e.target.result;
-            this.validateForm(imageURL);
-          };
-        } else {
-          this.validateForm(null);
-        }
-      },
-      validateForm(imgURL) {
         if (this.$refs.post.validate()) {
-          // Finding the recipient
-          let recipient = {}
-          for (let i = 0; i < this.people.length; i++)
-            if (this.people[i].username === this.composed.to)
-              recipient = this.people[i]
+          let image = e.target[3].files[0];
+          // recipient Object ID
+          let recipient = this.people.filter(x => x.objectID === this.composed.to);
+          if (recipient.length !== 1)
+            recipient = this.composed.to;
+          else
+            recipient = recipient[0];
+
           let content = {
             title: this.composed.title,
             body: this.composed.body,
-            image: imgURL,
+            image: image === undefined ? '' : image,
             user: this.$auth.user,
-            to: recipient,
             approved: false,
             date: new Date(),
           };
-          // Posting - TODO: complete this
-          // this.$axios.post('/post/add', {data: content}).then(e => {
-          this.showSubmissionSuccess()
-          this.$nuxt.$router.replace({'path' : '/content/wall'})
-          // }).catch(r => {
-          //   this.showError()
-          // })
+          // initiate and fill formData
+          let formData = new FormData();
+          Object.keys(content).forEach((e) => {
+            formData.append(e, content[e]);
+          });
+          let path = 'posts/'
+          if (recipient.objectID !== this.$auth.user._id)// Post to someone else's wall
+            path += 'wall/' + recipient.objectID
+          let redirect = recipient.username
+          this.submitWithAxios(formData, path, redirect)
         }
       },
-      removePost(index) {
-        if (this.posts[index].user.username === this.$auth.user.username) {
-          if (window.confirm("آیا مطمئن هستید؟")) {
-            // Deleting - TODO: complete this
-            // this.$axios.delete('/posts/' + posts[index]._id).then(e => {
-            this.posts.splice(index, 1);
-            this.$nuxt.$router.replace({'path': '/content/wall/'})
-            this.showDeletionSuccess()
-            // }).catch(r => {
-            //   this.showError()
-            // })
+      submitWithAxios(data, path, redirect) {
+        this.$axios.post(path, data, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
           }
-        }
+        }).then(e => {
+          this.showSubmissionSuccess()
+          this.$nuxt.$router.replace({'path': redirect})
+        }).catch(r => {
+          this.showError()
+        })
       }
     },
-    components: {Post}
+    components: {SearchSelect, Post},
   }
 </script>
 
@@ -233,5 +178,16 @@
       overflow-y: auto;
     }
   }
-
+  .ceit-search {
+    text-align: right !important;
+  }
+  .ceit-search-avatar {
+    margin-left: 8px !important;
+    margin-right: 0px !important;
+  }
+  .ceit-chip{
+    .chip__content{
+      padding: 0px 12px 0px 4px !important;
+    }
+  }
 </style>

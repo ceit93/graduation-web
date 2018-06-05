@@ -4871,9 +4871,9 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
-persianjs@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/persianjs/-/persianjs-0.3.0.tgz#fe7fdbf8bd6a41abd54ab4a53c95248f63c82fd4"
+persianjs@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/persianjs/-/persianjs-0.4.0.tgz#52c53a111926f8426763ac937c5063756a7e74f2"
 
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"

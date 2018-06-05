@@ -13,7 +13,6 @@
       else
         return redirect('/login')
     },
-    middleware: 'redirect-to-landing' // TODO remove this
   }
 </script>
 

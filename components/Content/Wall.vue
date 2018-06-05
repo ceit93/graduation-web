@@ -1,22 +1,32 @@
 <template>
   <v-card>
     <v-card-title class="justify-content-center">
-      <v-btn icon :to="'/content/wall/' + user.username" nuxt>
+      <v-btn icon :to="'/content/wall/' + this.user.username" nuxt>
         <v-avatar :size="40" class="elevation-2">
-          <!--TODO: Implement the avatar-->
-          <img src="@/static/avatar.png" alt="">
+          <img :src="this.$helper.avatar(user)"
+               :alt="this.$persianJS.arabicChar(user.name)">
         </v-avatar>
       </v-btn>
-      <h3 class="title">دیوارِ {{user.name}}</h3>
+      <h3 class="title">دیوارِ {{this.$persianJS.arabicChar(user.name)}}</h3>
     </v-card-title>
     <v-card-text>
-      <div v-for="(post,index) in user.posts"
+      <h2 v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>
+      <p v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته.
+        <nuxt-link to="/content/wall/new">دل‌نوشته جدید</nuxt-link>
+        بنویسید...
+      </p>
+      <h2 v-if="!canHaveWall" class="grey--text text-xs-center">کاربر مورد نظر ۹۳ای نیست :(</h2>
+      <p v-if="!canHaveWall" class="grey--text text-xs-center">امکان داشتن دیوار دل‌نوشته‌ها رو فقط ۹۳ای‌ها دارن. می‌تونید رو دیوار ۹۳‌ای‌ها براشون دل‌نوشته بنویسید. برای این‌کار به صفحه
+        <nuxt-link to="/content/wall/new">دل‌نوشته جدید</nuxt-link>
+        مراجعه کنید.</p>
+      <div v-if="canHaveWall" v-for="(post,index) in user.posts"
            :key="index">
         <post
           :postData="post"
           :belongsToLoggedInUser="access"
-          @approved="approvePost(index)"
-          @disapproved="disapprovePost(index)"/>
+          @approved="approved(index)"
+          @deleted="removed(index)"
+          @disapproved="disapproved(index)"/>
       </div>
     </v-card-text>
   </v-card>
@@ -31,6 +41,13 @@
       computed: {
         access() {
           return this.user.username === this.$auth.user.username
+        },
+        canHaveWall() {
+          for (let number of this.user.std_numbers) {
+            if (number.match('^9331[0-9]{3}$'))
+              return true
+          }
+          return false
         }
       },
       notifications: {
@@ -51,25 +68,16 @@
         }
       },
       methods: {
-        approvePost(index){
-          user.posts[index].approved = true
-          // Posting - TODO: complete this
-          // this.$axios.post('/posts/' + this.posts[index]._id, {data: this.posts[index]}).then(e => {
-          this.showApprovingSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
+        approved(index){
+          this.$emit('approved', index)
         },
-        disapprovePost(index){
-          user.posts[index].approved = false
-          // Posting - TODO: complete this
-          // this.$axios.post('/posts/' + this.posts[index]._id, {data: this.posts[index]}).then(e => {
-          this.showDisapprovingSuccess()
-          // }).catch(r => {
-          //   this.showError()
-          // })
+        disapproved(index){
+          this.$emit('disapproved', index)
+        },
+        removed(index) {
+          this.$emit('deleted', index)
         }
-      }
+      },
     }
 </script>
 

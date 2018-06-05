@@ -1,61 +1,109 @@
 <template>
-  <wall :user="user"></wall>
+  <div>
+    <v-card class="elevation-2">
+      <v-card-text>
+        <search-select
+          v-model="search"
+          :items="prettyPeople"
+          :item_text="'name'"
+          :item_value="'username'"
+          :item_avatar="'avatar'"
+          :label="'جستجوی ۹۳ای‌ها'"
+          :style_class="'input-group--focused'"
+          :autocomplete="true"
+          :cache_items="true"
+          :dense="false"
+          :prepend_icon="'search'"
+          :placeholder="'جستجوی یک ۹۳ای...'"
+          @input="gotoWall"
+        ></search-select>
+      </v-card-text>
+    </v-card>
+    <wall :user="user"
+      @approved="approvePost"
+      @deleted="removePost"
+      @disapproved="disapprovePost"></wall>
+  </div>
 </template>
 
 <script>
   import Wall from "~/components/Content/Wall";
+  import SearchSelect from "~/components/Profile/SearchSelect.vue";
   export default {
-    name: "_slug",
+    name: "slug",
     layout: 'content',
-    components: {Wall},
-    computed: {
-      user(){
-        let user = {
-          username: '9331009',
-          name: 'امیر حقیقتی ملکی',
-          posts: [
-            {
-              _id: '_dummy_id',
-              title: 'آری اینچنین بود ای برادر',
-              body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-              date: new Date(),
-              approved: true,
-              user: {
-                id: '_dummydata',
-                username: '9331001',
-                name: 'ایمان تبریزیان'
-              },
-            },
-            {
-              _id: '_dummy_id',
-              title: 'آری اینچنین بود ای برادر',
-              body: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.',
-              date: new Date(),
-              approved: false,
-              user: {
-                id: '_dummydata',
-                username: '9331009',
-                name: 'امیر حقیقتی ملکی'
-              }
-            },
-          ]
-        }
-        console.log("USER DONE:")
-        console.log(user)
-        return user
+    data() {
+      return {
+        search: null
       }
     },
-    mounted() {
+    computed: {
+      prettyPeople() {
+        let res = []
+        for (let person of this.people){
+          let newPerson = Object.assign({}, person)
+          newPerson.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          newPerson.avatar = this.$helper.avatar(person)
+          res.push(newPerson)
+        }
+        res = this.$helper.sortBy(res, 'std_numbers')
+        return res
+      }
+    },
+    async asyncData (context) {
+      let user = await context.$axios.get(`users/${context.params.slug}`)
+        .then((res) => {
+          return res.data.user
+        }).catch(e => {
+          context.error({ statusCode: 404, message: 'کاربر مورد نظر یافت می‌نشود...' })
+        })
+      let people = await context.$axios.get('users/students')
+        .then(e => {
+          return e.data
+        }).catch(e => {
+          context.error({ statusCode: 500, message: e.toString() })
+        })
+      return {
+        user: user,
+        people: people
+      }
+    },
+    components: {Wall, SearchSelect},
+    async mounted() {
       this.$vuetify.goTo('#tabs', {
         duration: 300,
         offset: -100,
         easing: 'easeInOutCubic'
       })
     },
-    middleware: 'redirect-to-landing' // TODO remove this
+    methods: {
+      approvePost(index){
+        this.user.posts[index].approved = true
+      },
+      disapprovePost(index){
+        this.user.posts[index].approved = false
+      },
+      removePost(index) {
+        this.user.posts.splice(index, 1);
+      },
+      gotoWall(username) {
+        this.$nuxt.$router.replace({'path' : this.search})
+      }
+    }
   }
 </script>
 
 <style scoped>
-
+  .ceit-search {
+    text-align: right !important;
+  }
+  .ceit-search-avatar {
+    margin-left: 8px !important;
+    margin-right: 0px !important;
+  }
+  .ceit-chip{
+    .chip__content{
+      padding: 0px 12px 0px 4px !important;
+    }
+  }
 </style>

@@ -1,0 +1,22 @@
+export default {
+  install(Vue,options){
+    Vue.prototype.$helper = {
+      avatar: function(object) {
+        if (object) {
+          if (object.avatar) {
+            if (object.avatar !== '' || object.avatar !== 'undefined')
+              return object.avatar
+            return '/' + object.gender + '-avatar.png'
+          }
+          return '/' + object.gender + '-avatar.png'
+        }
+        return '/avatar.png'
+      },
+      sortBy: function(array, sortBy) {
+        return array.sort((a,b) => {
+          return (a[sortBy] > b[sortBy]) ? 1 : ((b[sortBy] > a[sortBy]) ? -1 : 0)
+        })
+      }
+    };
+  }
+};

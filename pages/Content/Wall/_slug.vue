@@ -41,9 +41,12 @@
       prettyPeople() {
         let res = []
         for (let person of this.people){
-          person.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
-          person.avatar = this.$helper.avatar(person)
-          res.push(person)
+          let newPerson = Object.assign({}, person)
+          newPerson.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          newPerson.avatar = this.$helper.avatar(person)
+          console.log(newPerson.avatar)
+          console.log(newPerson)
+          res.push(newPerson)
         }
         res = this.$helper.sortBy(res, 'std_numbers')
         return res
@@ -60,7 +63,7 @@
         .then(e => {
           return e.data
         }).catch(e => {
-          context.error({ statusCode: '5xx', message: e.toString() })
+          context.error({ statusCode: 500, message: e.toString() })
         })
       return {
         user: user,

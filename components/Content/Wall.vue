@@ -11,7 +11,10 @@
     </v-card-title>
     <v-card-text>
       <h2 v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>
-      <h4 v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته...</h4>
+      <p v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته.
+        <nuxt-link to="/content/wall/new">دل‌نوشته جدید</nuxt-link>
+        بنویسید...
+      </p>
       <h2 v-if="!canHaveWall" class="grey--text text-xs-center">کاربر مورد نظر ۹۳ای نیست :(</h2>
       <p v-if="!canHaveWall" class="grey--text text-xs-center">امکان داشتن دیوار دل‌نوشته‌ها رو فقط ۹۳ای‌ها دارن. می‌تونید رو دیوار ۹۳‌ای‌ها براشون دل‌نوشته بنویسید. برای این‌کار به صفحه
         <nuxt-link to="/content/wall/new">دل‌نوشته جدید</nuxt-link>

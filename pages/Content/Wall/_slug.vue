@@ -12,7 +12,7 @@
           :style_class="'input-group--focused'"
           :autocomplete="true"
           :cache_items="true"
-          :dense="true"
+          :dense="false"
           :append_icon="'search'"
           :placeholder="'جستجوی یک ۹۳ ای...'"
           @input="gotoWall"
@@ -42,6 +42,7 @@
         let res = []
         for (let person of this.people){
           person.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          person.avatar = this.$helper.avatar(person)
           res.push(person)
         }
         res = this.$helper.sortBy(res, 'std_numbers')
@@ -53,13 +54,13 @@
         .then((res) => {
           return res.data.user
         }).catch(e => {
-          return { }
+          context.error({ statusCode: 404, message: 'کاربر مورد نظر یافت می‌نشود...' })
         })
       let people = await context.$axios.get('users/students')
         .then(e => {
           return e.data
         }).catch(e => {
-          return {}
+          context.error({ statusCode: '5xx', message: e.toString() })
         })
       return {
         user: user,

@@ -46,9 +46,7 @@
           :tile="true"
           :size="50"
         >
-          <!--TODO: IMPLEMENT USER AVATAR-->
-          <img v-if="this.$auth.loggedIn" src="@/static/logo.png" :alt="this.$auth.user.name">
-          <img v-else src="@/static/logo.png">
+          <img src="/logo.png" alt="بهترین وب‌اپلیکیشن فارغ‌التحصیلی">
         </v-avatar>
       </v-btn>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>

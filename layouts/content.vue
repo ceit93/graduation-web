@@ -64,7 +64,7 @@
           },
         ],
         actions: [
-          {name: 'wall', icon:'list', to: '/content/wall/', color: 'black', dark: true},
+          {name: 'wall', icon:'mdi-account-card-details', to: '/content/wall/', color: 'black', dark: true},
           {name: 'newPost', icon:'add_comment', to: '/content/wall/new/', color: 'indigo', dark: true},
           {name: 'tarins', icon:'star', to: '/content/tarins/', color: 'orange', dark: true},
           {name: 'newTarin', icon:'bookmark', to: '/content/tarins/new/', color: 'green', dark: true},

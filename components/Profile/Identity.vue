@@ -12,8 +12,8 @@
             >
               <img
                 v-show="!loading"
-                :src="$auth.user.avatar ? $auth.user.avatar : '/avatar.png'"
-                :alt="$auth.user.name">
+                :src="this.$helper.avatar(this.$auth.user)"
+                :alt="this.$persianJS.arabicChar(this.$auth.user.name)">
               <v-progress-circular
                 v-show="loading"
                 indeterminate
@@ -57,6 +57,9 @@
       }
     },
     name: "Identity",
+    mounted() {
+      console.log(this.$helper.avatar(this.$auth.user))
+    },
     methods: {
       changeAvatar() {
         this.$refs.avatar.click();

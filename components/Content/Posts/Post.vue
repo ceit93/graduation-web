@@ -60,15 +60,30 @@
         <span class="grey--text text--lighten-1">
             {{postData.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
         </span>
-        <v-btn icon small fab class="hidden-xs-only" color="success" v-if="canApprove" @click="approvePost" alt="تایید">
-          <v-icon>check</v-icon>
-        </v-btn>
-        <v-btn icon small fab class="hidden-xs-only" color="warning" v-if="canDisapprove" @click="dissaprovePost" alt="عدم تایید">
-          <v-icon>clear</v-icon>
-        </v-btn>
-        <v-btn icon small fab class="hidden-xs-only" color="error" v-if="canDelete" @click="deletePost" alt="حذف پست">
-          <v-icon>delete</v-icon>
-        </v-btn>
+
+
+        <v-tooltip top class="hidden-xs-only" v-if="canApprove">
+          <v-btn icon small fab class="hidden-xs-only" v-if="canApprove" slot="activator" color="success"  @click="approvePost" alt="تایید">
+            <v-icon>check</v-icon>
+          </v-btn>
+          <span>تایید دل‌نوشته</span>
+        </v-tooltip>
+
+
+        <v-tooltip top class="hidden-xs-only" v-if="canDisapprove">
+          <v-btn icon small fab class="hidden-xs-only" v-if="canDisapprove" slot="activator" color="warning"  @click="dissaprovePost" alt="عدم تایید">
+            <v-icon>clear</v-icon>
+          </v-btn>
+          <span>عدم تایید دل‌نوشته</span>
+        </v-tooltip>
+
+        <v-tooltip top class="hidden-xs-only" v-if="canDelete">
+          <v-btn icon small fab class="hidden-xs-only" v-if="canDelete" slot="activator" color="error" @click="deletePost" alt="حذف دل‌نوشته">
+            <v-icon>delete</v-icon>
+          </v-btn>
+          <span>حذف دل‌نوشته</span>
+        </v-tooltip>
+
         <v-menu bottom left class="hidden-sm-and-up">
           <v-btn slot="activator" icon>
             <v-icon>more_horiz</v-icon>

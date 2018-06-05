@@ -72,7 +72,7 @@
         diff: function() {
           let d = this.unix - this.now
           if (d <= 0)
-            this.$emit('end')
+            this.$emit('deadline')
           return d
         },
         cssClass: function() {

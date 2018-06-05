@@ -101,5 +101,12 @@ html {
   padding: 0px 0px 0px 0px !important;
 }
 
-
-
+.tabs__container{
+  transform: translateX(0px)!important;
+}
+.tabs__item{
+  font-size: 0.75rem;
+}
+.tabs__div{
+  margin: 0px!important;
+}

@@ -5,7 +5,15 @@
       <v-content>
         <div class="bg-main">
           <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100">
-          <v-tabs icons-and-text dark id="tabs" color="light-blue darken-2" style="margin-top: -10px;">
+          <!--style="margin-top: -10px;"-->
+          <v-tabs
+            right
+            style="direction: rtl;text-align: right;justify-content: right"
+            icons-and-text
+            dark
+            id="tabs"
+            color="light-blue darken-2"
+            >
             <v-tabs-slider color="yellow"></v-tabs-slider>
             <v-tab v-for="(item,index) in tabs" :to="item.to" :key="index">
               {{item.name}}
@@ -28,6 +36,7 @@
   import TopHeader from "~/components/TopHeader";
   import BottomFooter from "../components/BottomFooter";
   import SpeedDial from "../components/SpeedDial";
+
   export default {
     components: {SpeedDial, BottomFooter, TopHeader},
     data() {
@@ -62,7 +71,7 @@
       },
       async logout() {
         await this.$auth.logout()
-        this.$nuxt.$router.replace({'path' : '/login'})
+        this.$nuxt.$router.replace({'path': '/login'})
       },
     },
   }
@@ -72,6 +81,6 @@
   html {
     direction: rtl;
     text-align: right !important;
-    font-family:Iran !important;
+    font-family: Iran !important;
   }
 </style>

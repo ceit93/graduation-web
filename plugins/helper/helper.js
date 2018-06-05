@@ -7,6 +7,10 @@ export default {
             if (object.avatar !== '' && object.avatar !== 'undefined')
               return object.avatar
         return '/avatar.png'
+      },
+
+      sortBy: function(array, sortBy, order) {
+
       }
     };
   }

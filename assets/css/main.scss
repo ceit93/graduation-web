@@ -69,8 +69,9 @@ html {
   bottom: 0px;
   left: 0px;
 }
-.g-content-bg-image{
-  margin-bottom:-7px !important
+
+.g-content-bg-image {
+  margin-bottom: -7px !important
 }
 
 //customization
@@ -107,15 +108,22 @@ html {
 .tabs__container {
   transform: translateX(0px) !important;
 }
-.menu__content--select{
+
+.menu__content--select {
   direction: ltr;
 }
-.list__tile{
+
+.list__tile {
   direction: rtl;
 }
+
 .tabs__div {
   margin: 0px !important;
 }
-.chip__content{
-  padding: 0px!important;
+
+.tarins-select {
+  .chip__content {
+    padding: 0px !important;
+  }
 }
+

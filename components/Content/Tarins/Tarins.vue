@@ -45,6 +45,7 @@
                         </v-flex>
                         <v-flex md6>
                           <search-select
+                            class="tarins-select"
                             v-model="tarin.candidate"
                             :items="people"
                             :item_text="'name'"

@@ -22,7 +22,7 @@
       return {
         actions: [
           {name: 'profile', icon:'account_circle', to: '/profile', color: 'light-blue darken-4', dark: true},
-          {name: 'register', icon:'mdi-account-plus', to: '/register', color: 'indigo', dark: true},
+          // {name: 'register', icon:'mdi-account-plus', to: '/register', color: 'indigo', dark: true}, // TODO: uncomment this line
           {name: 'logout', icon:'mdi-exit-to-app', to: '/logout/', color: 'danger', dark: true},
         ]
       }

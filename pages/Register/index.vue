@@ -88,6 +88,7 @@
         ]
       }
     },
+    middleware: 'redirect-to-profile', // TODO remove this line
     methods:{
       submit(){
         if (this.$refs.form.validate()) {

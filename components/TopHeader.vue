@@ -70,7 +70,7 @@
         miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
-          { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
+          // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'}, TODO uncomment this line
         ],
         title: 'فارغ‌التحصیلی ۹۳',
       }

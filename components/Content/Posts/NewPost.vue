@@ -20,6 +20,7 @@
                     :item_avatar="'avatar'"
                     :label="'دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
                     :placeholder="'گیرنده دل‌نوشته...'"
+                    :prepend_icon="'contacts'"
                     :style_class="'input-group--focused'"
                     :required="true"
                     :autocomplete="true"
@@ -35,6 +36,7 @@
                     v-model="composed.title"
                     :rules="rules.title"
                     label="عنوان دل‌نوشته"
+                    append-icon="title"
                     required
                   />
                 </v-flex>

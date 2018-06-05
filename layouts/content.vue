@@ -14,6 +14,7 @@
           </v-tabs>
           <v-card flat>
             <nuxt/>
+            <speed-dial></speed-dial>
           </v-card>
         </div>
       </v-content>
@@ -26,8 +27,9 @@
   import persianJs from 'persianjs';
   import TopHeader from "~/components/TopHeader";
   import BottomFooter from "../components/BottomFooter";
+  import SpeedDial from "../components/SpeedDial";
   export default {
-    components: {BottomFooter, TopHeader},
+    components: {SpeedDial, BottomFooter, TopHeader},
     data() {
       return {
         tabs: [
@@ -51,7 +53,7 @@
             icon: 'add',
             to: '/content/tarins/new'
           },
-        ]
+        ],
       }
     },
     methods: {

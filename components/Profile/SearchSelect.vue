@@ -20,14 +20,15 @@
     :dense="dense"
     :combobox="combobox"
     :solo-inverted="solo_inverted"
+    :clearable="clearable"
     autocomplete
     chips
+    id="search-select"
   >
     <template slot="selection" slot-scope="data">
       <v-chip
         :selected="data.selected"
         :key="JSON.stringify(data.item)"
-        close
         class="chip--select-multi ceit-chip"
         @input="data.parent.selectItem(data.item)"
       >
@@ -75,7 +76,8 @@
       'combobox',
       'placeholder',
       'solo_inverted',
-      'prepend_icon'
+      'prepend_icon',
+      'clearable'
     ],
     methods: {
       input(value){
@@ -90,12 +92,10 @@
     text-align: right !important;
   }
   .ceit-search-avatar {
-    margin-left: 8px !important;
+    margin-left: 6px !important;
     margin-right: 0px !important;
   }
-  .ceit-chip{
-    .chip__content{
-      padding: 0px 12px 0px 4px !important;
-    }
+  .chip--removable .chip__content{
+    padding: 0 0 0 0 !important;
   }
 </style>

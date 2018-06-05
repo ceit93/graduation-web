@@ -110,20 +110,16 @@ html {
 }
 
 .menu__content--select {
-  direction: ltr;
+  direction: ltr !important;
 }
 
 .list__tile {
-  direction: rtl;
+  direction: rtl !important;
 }
 
 .tabs__div {
   margin: 0px !important;
 }
-
-.tarins-select {
-  .chip__content {
-    padding: 0px !important;
-  }
+.ceit-chip > .chip__content{
+  padding: 0 0px 0 12px !important;
 }
-

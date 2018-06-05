@@ -55,9 +55,9 @@
                             :style_class="'input-group--focused'"
                             :autocomplete="true"
                             :deletable_chips="true"
+                            :clearable="true"
                             :cache_items="true"
                             :append_icon="'star'"
-                            :chips="true"
                             :dense="true"
                           ></search-select>
                         </v-flex>

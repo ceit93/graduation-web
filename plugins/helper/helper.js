@@ -1,10 +1,11 @@
 export default {
   install(Vue,options){
     Vue.prototype.$helper = {
-      getAavatr: function(avatar) {
-        if (avatar)
-          if (avatar !== '' && avatar !== 'undefined')
-            return avatar
+      avatar: function(object) {
+        if (object)
+          if (object.avatar)
+            if (object.avatar !== '' && object.avatar !== 'undefined')
+              return object.avatar
         return '/avatar.png'
       }
     };

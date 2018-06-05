@@ -6,7 +6,7 @@ html {
   background-color: $light-color;
 }
 
-.mini-toastr{
+.mini-toastr {
   direction: rtl;
   font-family: Iran;
 }
@@ -69,6 +69,9 @@ html {
   bottom: 0px;
   left: 0px;
 }
+.g-content-bg-image{
+  margin-bottom:-7px !important
+}
 
 //customization
 .tabs-component-panels {
@@ -101,12 +104,12 @@ html {
   padding: 0px 0px 0px 0px !important;
 }
 
-.tabs__container{
-  transform: translateX(0px)!important;
+.tabs__container {
+  transform: translateX(0px) !important;
 }
-.tabs__item{
-  font-size: 0.75rem;
+.menu__content--select{
+  direction: ltr;
 }
-.tabs__div{
-  margin: 0px!important;
+.tabs__div {
+  margin: 0px !important;
 }

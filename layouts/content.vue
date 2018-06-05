@@ -4,7 +4,7 @@
     <v-container fluid full-height>
       <v-content>
         <div class="bg-main">
-          <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100">
+          <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100 g-content-bg-image">
           <!--style="margin-top: -10px;"-->
           <v-tabs
             right
@@ -13,7 +13,7 @@
             dark
             id="tabs"
             color="light-blue darken-2"
-            >
+          >
             <v-tabs-slider color="yellow"></v-tabs-slider>
             <v-tab v-for="(item,index) in tabs" :to="item.to" :key="index">
               {{item.name}}
@@ -82,5 +82,18 @@
     direction: rtl;
     text-align: right !important;
     font-family: Iran !important;
+  }
+
+  /*mobile*/
+  @media (max-width: 768px) {
+    .tabs__item {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .tabs__item {
+      font-size: 1rem;
+    }
   }
 </style>

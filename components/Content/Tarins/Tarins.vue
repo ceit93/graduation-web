@@ -38,12 +38,12 @@
             <v-card-text>
                 <v-container fluid>
                   <v-layout row wrap class="text-xs-center mx-0">
-                    <v-flex xs12 md6 v-for="tarin in votes" :key="tarin._id" align-center justify-center class="text-xs-center">
+                    <v-flex xs12 md12 lg6 v-for="tarin in votes" :key="tarin._id" align-center justify-center class="text-xs-center">
                       <v-layout row wrap class="text-xs-center mx-0">
-                        <v-flex xs3 class="text-xs-center">
+                        <v-flex md3 class="text-xs-center hidden-xs-only">
                           <v-subheader>{{tarin.qualification.title}}</v-subheader>
                         </v-flex>
-                        <v-flex xs6>
+                        <v-flex md6>
                           <search-select
                             v-model="tarin.candidate"
                             :items="people"

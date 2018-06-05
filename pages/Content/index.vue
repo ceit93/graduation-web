@@ -9,7 +9,6 @@
     fetch ({ store, redirect }) {
       return redirect('/content/wall/' + store.$auth.user.username)
     },
-    middleware: 'redirect-to-landing' // TODO remove this
   }
 </script>
 

@@ -2,6 +2,9 @@
   <div class="mx-auto">
     <h1 class="grey--text text-xs-center">ای بابا :(</h1>
     <p class="grey--text text-xs-center">خطای {{this.errorCode}}: {{this.error.message}}</p>
+    <div class="xs12 md5">
+      <v-btn></v-btn>
+    </div>
   </div>
 </template>
 

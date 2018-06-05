@@ -47,7 +47,8 @@ module.exports = {
     '~plugins/vuetify.js',
     '~plugins/tabs.js',
     '~plugins/jalali-date.js',
-    {src: '~plugins/vue-notification.js', ssr: false}
+    {src: '~plugins/vue-notification.js', ssr: false},
+    '~plugins/persian.js'
   ],
   head: {
     title: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳',

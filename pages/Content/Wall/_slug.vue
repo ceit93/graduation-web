@@ -4,7 +4,7 @@
       <v-card-text>
         <search-select
           v-model="search"
-          :items="people"
+          :items="enhancedPeople"
           :item_text="'name'"
           :item_value="'username'"
           :item_avatar="'avatar'"
@@ -35,6 +35,19 @@
     data() {
       return {
         search: null
+      }
+    },
+    computed: {
+      enhancedPeople() {
+        let res = []
+        for (let person of this.people){
+          person.name = this.$persianJS.arabicChar(person.name)
+          // for (let i in person.std_numbers){
+          //   person.std_numbers[i] = this.$persianJS.englishNumber(person.std_numbers[i])
+          // }
+          res.push(person)
+        }
+        return res
       }
     },
     async asyncData (context) {

@@ -18,6 +18,7 @@
     :cache-items="cache_items"
     :dense="dense"
     :combobox="combobox"
+    :solo-inverted="solo_inverted"
     autocomplete
     chips
   >
@@ -32,7 +33,7 @@
         <v-avatar class="ceit-search-avatar">
           <img :src="data.item.avatar">
         </v-avatar>
-        {{ data.item.name }}
+        {{ this.$persianJS.arabicChar(data.item.name) }}
       </v-chip>
     </template>
     <template slot="item" slot-scope="data">
@@ -71,7 +72,8 @@
       'cache_items',
       'dense',
       'combobox',
-      'placeholder'
+      'placeholder',
+      'solo_inverted'
     ],
     methods: {
       input(value){

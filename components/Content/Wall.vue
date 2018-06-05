@@ -7,7 +7,7 @@
                :alt="$auth.user.name">
         </v-avatar>
       </v-btn>
-      <h3 class="title">دیوارِ {{user.name}}</h3>
+      <h3 class="title">دیوارِ {{this.$persianJS.arabicChar(user.name)}}</h3>
     </v-card-title>
     <v-card-text>
       <h2 v-if="canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>

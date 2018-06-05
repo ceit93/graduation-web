@@ -18,7 +18,6 @@
           res.push(person)
         }
         res = this.$helper.sortBy(res, 'std_numbers')
-        console.log(res)
         return res
       }
     },

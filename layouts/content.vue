@@ -50,7 +50,7 @@
           },
           {
             name: 'افزودن ترین دلخواه',
-            icon: 'add',
+            icon: 'bookmark',
             to: '/content/tarins/new'
           },
         ],

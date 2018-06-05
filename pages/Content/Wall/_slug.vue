@@ -44,8 +44,6 @@
           let newPerson = Object.assign({}, person)
           newPerson.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
           newPerson.avatar = this.$helper.avatar(person)
-          console.log(newPerson.avatar)
-          console.log(newPerson)
           res.push(newPerson)
         }
         res = this.$helper.sortBy(res, 'std_numbers')

@@ -39,12 +39,7 @@
     },
     computed: {
       prettyPeople() {
-        let res = []
-        for (let person of this.people){
-          person.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
-          res.push(person)
-        }
-        return res
+        return this.$helper.prettyPeople(this.people)
       }
     },
     async asyncData (context) {

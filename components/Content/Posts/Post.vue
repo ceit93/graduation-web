@@ -4,7 +4,7 @@
       <v-card-title primary-title>
         <v-btn icon :to="'/content/wall/' + postData.user.username" nuxt>
           <v-avatar :size="40" class="elevation-2">
-            <img :src="postData.user.avatar ? postData.user.avatar : '/avatar.png'">
+            <img :src="this.$helper.avatar(postData.user)">
           </v-avatar>
         </v-btn>
         <span class="mr-2 body-2">{{postData.title}}</span>

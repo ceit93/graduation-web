@@ -3,8 +3,8 @@
     <v-card-title class="justify-content-center">
       <v-btn icon :to="'/content/wall/' + this.user.username" nuxt>
         <v-avatar :size="40" class="elevation-2">
-          <img :src="user.avatar ? user.avatar : '/avatar.png'"
-               :alt="user.name">
+          <img :src="this.$helper.avatar(user)"
+               :alt="this.$persianJS.arabicChar(user.name)">
         </v-avatar>
       </v-btn>
       <h3 class="title">دیوارِ {{this.$persianJS.arabicChar(user.name)}}</h3>

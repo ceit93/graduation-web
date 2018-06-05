@@ -2,7 +2,7 @@
     <v-app>
       <top-header></top-header>
       <v-container fluid full-height>
-        <v-content>
+        <v-content style="height: 100%">
           <nuxt/>
         </v-content>
       </v-container>

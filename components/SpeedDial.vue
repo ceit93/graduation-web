@@ -1,7 +1,7 @@
 <template>
   <v-speed-dial
     v-model="fab"
-    :absolute="fale"
+    :absolute="false"
     :fixed="true"
     bottom
     left

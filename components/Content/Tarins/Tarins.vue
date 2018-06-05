@@ -38,6 +38,7 @@
                             :autocomplete="true"
                             :deletable_chips="true"
                             :cache_items="true"
+                            :append_icon="'star'"
                             :chips="true"
                             :dense="true"
                           ></search-select>

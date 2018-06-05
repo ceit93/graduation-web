@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card>
+    <v-card class="elevation-2">
       <v-card-text>
         <search-select
           v-model="search"
-          :items="people"
+          :items="prettyPeople"
           :item_text="'name'"
           :item_value="'username'"
           :item_avatar="'avatar'"
@@ -35,6 +35,16 @@
     data() {
       return {
         search: null
+      }
+    },
+    computed: {
+      prettyPeople() {
+        let res = []
+        for (let person of this.people){
+          person.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          res.push(person)
+        }
+        return res
       }
     },
     async asyncData (context) {

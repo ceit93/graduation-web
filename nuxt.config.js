@@ -5,7 +5,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
 
   auth: {
@@ -47,7 +47,8 @@ module.exports = {
     '~plugins/vuetify.js',
     '~plugins/tabs.js',
     '~plugins/jalali-date.js',
-    {src: '~plugins/vue-notification.js', ssr: false}
+    {src: '~plugins/vue-notification.js', ssr: false},
+    '~plugins/helper/index.js'
   ],
   head: {
     title: 'آیین فارغ‌التحصیلی دانشجویان ورودی ۱۳۹۳',

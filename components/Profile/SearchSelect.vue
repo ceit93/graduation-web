@@ -18,6 +18,7 @@
     :cache-items="cache_items"
     :dense="dense"
     :combobox="combobox"
+    :solo-inverted="solo_inverted"
     autocomplete
     chips
   >
@@ -71,7 +72,8 @@
       'cache_items',
       'dense',
       'combobox',
-      'placeholder'
+      'placeholder',
+      'solo_inverted'
     ],
     methods: {
       input(value){

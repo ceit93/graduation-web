@@ -20,7 +20,7 @@
     "mini-toastr": "^0.8.1",
     "node-sass": "^4.8.3",
     "nuxt": "^1.0.0",
-    "persianjs": "^0.3.0",
+    "persianjs": "^0.4.0",
     "sass-loader": "^6.0.7",
     "vue-jalali-moment": "^1.0.0",
     "vue-notifications": "^0.9.0",

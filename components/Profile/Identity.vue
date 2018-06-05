@@ -77,8 +77,24 @@
         }).then(async(res) => {
           await this.$auth.fetchUser();
           this.loading = false;
+          this.showUploadSuccess()
+        }).catch(e => {
+          this.showUploadFailure()
+          console.log(e)
         });
 
+      }
+    },
+    notifications: {
+      showUploadSuccess: {
+        title: 'چه عکسی!',
+        message: 'آپلود عکس با موفقیت انجام شد.',
+        type: 'success'
+      },
+      showUploadFailure: {
+        title: 'خطا',
+        message: 'خطایی رخ داد...',
+        type: 'error'
       }
     }
   }

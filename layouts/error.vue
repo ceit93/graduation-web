@@ -1,10 +1,11 @@
 <template>
   <div class="mx-auto">
-    <h1 class="grey--text text-xs-center">ای بابا :(</h1>
+    <h1 class="grey--text text-xs-center mt-5">ای بابا :(</h1>
     <p class="grey--text text-xs-center">خطای {{this.errorCode}}: {{this.error.message}}</p>
-    <div class="xs12 md5">
-      <v-btn></v-btn>
-    </div>
+    <v-btn nuxt to="/" color="info" outline>
+      <v-icon small>loop&nbsp;</v-icon>
+      بازگشت به صفحه اصلی
+    </v-btn>
   </div>
 </template>
 

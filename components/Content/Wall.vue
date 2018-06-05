@@ -11,7 +11,9 @@
     </v-card-title>
     <v-card-text>
       <h2 v-if="this.canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>
-      <p v-if="this.canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار {{user.name}} دل‌نوشته‌ای ننوشته.
+      <p v-if="this.canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار
+        {{this.$persianJS.arabicChar(user.name)}}
+        دل‌نوشته‌ای ننوشته.
         <nuxt-link to="/content/wall/new">دل‌نوشته جدید</nuxt-link>
         بنویسید...
       </p>

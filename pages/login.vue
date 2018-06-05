@@ -70,6 +70,7 @@
 <script>
   export default {
     layout: 'landing',
+    name: 'login',
     computed: {
       code () {
         return this.$route.query.code

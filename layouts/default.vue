@@ -4,7 +4,7 @@
       <v-container fluid full-height>
         <v-content style="height: 100%">
           <nuxt/>
-          <speed-dial :actions="actions" @up="goUp" @back="goBack"></speed-dial>
+          <speed-dial :actions="actions" @up="goUp" @back="goBack" @logout="logout"></speed-dial>
         </v-content>
       </v-container>
       <bottom-footer></bottom-footer>
@@ -23,7 +23,7 @@
         actions: [
           {name: 'profile', icon:'account_circle', to: '/profile', color: 'light-blue darken-4', dark: true},
           // {name: 'register', icon:'mdi-account-plus', to: '/register', color: 'indigo', dark: true}, // TODO: uncomment this line
-          {name: 'logout', icon:'mdi-exit-to-app', to: '/logout/', color: 'danger', dark: true},
+          {name: 'logout', icon:'mdi-exit-to-app', to:'/logout', color: 'warning', dark: true},
         ]
       }
     },

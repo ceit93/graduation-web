@@ -3,7 +3,7 @@
     <v-card-title class="justify-content-center">
       <v-btn icon :to="'/content/wall/' + this.user.username" nuxt>
         <v-avatar :size="40" class="elevation-2">
-          <img :src="user.avatar"
+          <img :src="user.avatar ? user.avatar : '/avatar.png'"
                :alt="user.name">
         </v-avatar>
       </v-btn>

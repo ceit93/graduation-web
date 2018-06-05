@@ -12,7 +12,7 @@
             >
               <img
                 v-show="!loading"
-                :src="$auth.user.avatar"
+                :src="$auth.user.avatar ? $auth.user.avatar : '/avatar.png'"
                 :alt="$auth.user.name">
               <v-progress-circular
                 v-show="loading"

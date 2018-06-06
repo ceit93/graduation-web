@@ -46,6 +46,19 @@
     >
       <v-icon>{{action.icon}}</v-icon>
     </v-btn>
+    <v-btn
+      v-for="action in this.last"
+      :key="action.name"
+      fab
+      dark
+      small
+      :color="action.color"
+      nuxt
+      :to="action.to"
+      @click="doAction(action)"
+    >
+      <v-icon>{{action.icon}}</v-icon>
+    </v-btn>
   </v-speed-dial>
 </template>
 
@@ -57,15 +70,45 @@
         return {
           fab: false,
           navs: [
-            {name: 'up', icon:'keyboard_arrow_up', color: 'info', dark: true},
+            {name: 'up', icon:'keyboard_arrow_up', color: 'warning', dark: true},
             {name: 'back', icon:'keyboard_arrow_left', color: 'light-blue darken-4', dark: true},
+          ],
+          last: [
+            {name: 'logout', icon:'mdi-exit-to-app', to:'/logout', color: 'black', dark: true},
           ]
         }
       },
       methods: {
         doAction(action){
           this.$emit(action.name)
-        }
+          switch (action) {
+            case 'up':
+              this.goUp()
+              break
+            case 'back':
+              this.goBack()
+              break
+            case 'logout':
+              this.logout()
+              break
+            default:
+              break
+          }
+        },
+        goUp(){
+          this.$vuetify.goTo('#toolbar', {
+            duration: 300,
+            offset: -10,
+            easing: 'easeInOutCubic'
+          })
+        },
+        goBack(){
+          this.$nuxt.$router.go(-1)
+        },
+        async logout() {
+          await this.$auth.logout()
+          this.$nuxt.$router.replace({'path': '/login'})
+        },
       }
     }
 </script>

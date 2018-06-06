@@ -20,14 +20,14 @@
                 <v-flex xs12 v-for="interview in this.interviewsChunk()" :key="interview._id" align-center justify-center class="text-xs-center">
                   <v-layout row wrap justify-center class="text-xs-center mx-0">
                     <v-flex xs12 md4>
-                      <v-subheader>{{interview.question.text}}</v-subheader>
+                      <v-subheader class="blue--text">{{interview.question.text}}</v-subheader>
                     </v-flex>
-                    <v-flex xs12 md8 class="mx-2">
+                    <v-flex xs12 md6 class="mx-2">
                       <v-text-field
-                        v-model="tarin.candidate"
-                        :placeholder="'یه جواب کوتاه...'"
+                        v-model="interview.answer"
+                        placeholder="یه جواب کوتاه..."
                         :label="interview.question.text"
-                        append_icon="format_quote"
+                        prepend-icon="format_quote"
                       ></v-text-field>
                     </v-flex>
                   </v-layout>
@@ -64,14 +64,14 @@
       },
       computed: {
         pagesCount() {
-          return Math.ceil(this.people.length / this.perPage)
+          return Math.ceil(this.interviews.length / this.perPage)
         }
       },
       methods: {
-        votesChunk(){
+        interviewsChunk(){
           let start = this.perPage * (this.page - 1)
-          console.log(this.votes.slice(start, start + this.perPage))
-          return this.votes.slice(start, start + this.perPage)
+          console.log(this.interviews.slice(start, start + this.perPage))
+          return this.interviews.slice(start, start + this.perPage)
         }
       },
       mounted(){

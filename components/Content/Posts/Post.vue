@@ -2,11 +2,14 @@
   <div class="mb-3">
     <v-card class="elevation-5">
       <v-card-title primary-title>
-        <v-btn icon :to="'/content/wall/' + postData.user.username" nuxt>
-          <v-avatar :size="40" class="elevation-2">
-            <img :src="this.$helper.avatar(postData.user)">
-          </v-avatar>
-        </v-btn>
+        <v-tooltip left>
+          <v-btn icon slot="activator" :to="'/content/wall/' + postData.user.username" nuxt>
+            <v-avatar :size="40" class="elevation-2">
+              <img :src="this.$helper.avatar(postData.user)">
+            </v-avatar>
+          </v-btn>
+          <span>{{this.$persianJS.arabicChar(postData.user.name)}}</span>
+        </v-tooltip>
         <span class="mr-2 body-2">{{postData.title}}</span>
         <span v-if="postData.approved && postData.user.username !== username">
           <v-dialog v-model="dialog">

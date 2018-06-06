@@ -13,13 +13,16 @@
         <h1 class="mr-2 iranblack">{{postData.title}}</h1>
         <span v-if="postData.approved && postData.user.username !== username">
           <v-dialog v-model="dialog">
-            <v-chip color="green" text-color="white" slot="activator" @click.native.stop="dialog = true" small>تایید شده (؟)</v-chip>
+            <v-chip color="info" text-color="white" slot="activator" @click.native.stop="dialog = true" small>
+              <v-icon small>check</v-icon>
+              تایید شده (؟)
+            </v-chip>
             <v-card>
               <v-card-text>
                 <p class="green--text">این دل‌نوشته تایید شده که یعنی در صفحه مربوط به شما در نشریه یادبود فارغ‌التحصیلی چاپ میشه و همچنین روی دیوار شما برای عموم قابل نمایشه.</p>
                 <p>عملیات مربوط به هر دل‌نوشته رو می‌تونید از منوی سمت چپ هر دل‌نوشته انجام بدید:</p>
                 <p>
-                  <v-icon color="success" small>check</v-icon>
+                  <v-icon color="info" small>check</v-icon>
                   اگر دل‌نوشته‌ای رو تایید کنید، تو صفحه مربوط به شما در نشریه یادبود فارغ‌التحصیلی میاد و روی دیوارتون نمایش داده می‌شه.
                 </p>
                 <p>

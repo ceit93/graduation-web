@@ -4,13 +4,13 @@
       <v-card-title primary-title>
         <v-tooltip left>
           <v-btn icon slot="activator" :to="'/content/wall/' + postData.user.username" nuxt>
-            <v-avatar :size="40" class="elevation-2">
+            <v-avatar :size="50" class="elevation-2">
               <img :src="this.$helper.avatar(postData.user)">
             </v-avatar>
           </v-btn>
           <span>{{this.$persianJS.arabicChar(postData.user.name)}}</span>
         </v-tooltip>
-        <span class="mr-2 body-2">{{postData.title}}</span>
+        <h1 class="mr-2 iranblack">{{postData.title}}</h1>
         <span v-if="postData.approved && postData.user.username !== username">
           <v-dialog v-model="dialog">
             <v-chip color="green" text-color="white" slot="activator" @click.native.stop="dialog = true" small>تایید شده (؟)</v-chip>
@@ -117,6 +117,7 @@
 
       <v-card-text>
         <div style="text-align:justify;" class="pa-2">
+          <span class="iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</span>:
           {{postData.body}}
         </div>
       </v-card-text>

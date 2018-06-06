@@ -34,7 +34,7 @@
               تغییر عکس
             </v-btn>
           </v-flex>
-          <v-flex xs12 md9 class="ceit-identity-text">
+          <v-flex xs12 md9 class="ceit-identity-text mx-3">
             <h1>{{ this.$persianJS.arabicChar(this.$auth.user.name) }}</h1>
             <h2 class="ma-2">خوش اومدی!</h2>
             <p>اینجا سایت فارغ‌التحصیلی ما ۹۳‌ای‌هاس و با همین وب‌اپلیکیشن باید مطالب نشریه رو کامل کنیم و بخشی از کارای جشن

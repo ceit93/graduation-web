@@ -6,7 +6,7 @@
       <div class="d-flex justify-content-center">
         <v-btn nuxt to="/" color="info" outline style="flex: none!important;">
           <v-icon small>home&nbsp;</v-icon>
-          رفتن به صفحه اصلی
+          صفحه اصلی
         </v-btn>
       </div>
       <div class="d-flex justify-content-center">

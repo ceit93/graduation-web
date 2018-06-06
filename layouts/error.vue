@@ -5,13 +5,17 @@
       <p class="grey--text text-xs-center">خطای {{this.errorCode}}: {{this.error.message}}</p>
       <div class="d-flex justify-content-center">
         <v-btn nuxt to="/" color="info" outline style="flex: none!important;">
-          <v-icon small>loop&nbsp;</v-icon>
-          بازگشت به صفحه اصلی
+          <v-icon small>home&nbsp;</v-icon>
+          رفتن به صفحه اصلی
         </v-btn>
       </div>
-
+      <div class="d-flex justify-content-center">
+        <v-btn @click="goBack" color="info" outline style="flex: none!important;">
+          <v-icon small>chevron_right&nbsp;</v-icon>
+          بازگشت
+        </v-btn>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -28,6 +32,11 @@
     mounted() {
       // this.$nuxt.$router.replace({'path' : '/'})
     },
+    methods: {
+      goBack(){
+        this.$nuxt.$router.go(-1)
+      }
+    }
   }
 </script>
 

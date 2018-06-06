@@ -22,7 +22,7 @@
           </v-tabs>
           <v-card flat>
             <nuxt/>
-            <speed-dial :actions="this.actions" @up="this.goUp" @back="this.goBack"></speed-dial>
+            <speed-dial :actions="this.actions"></speed-dial>
           </v-card>
         </div>
       </v-content>
@@ -64,30 +64,17 @@
           },
         ],
         actions: [
-          {name: 'wall', icon:'mdi-account-card-details', to: '/content/wall/', color: 'black', dark: true},
-          {name: 'newPost', icon:'add_comment', to: '/content/wall/new/', color: 'indigo', dark: true},
+          {name: 'profile', icon:'home', to: '/profile', color: 'success', dark: true},
+          {name: 'wall', icon:'mdi-account-card-details', to: '/content/wall/', color: 'purple', dark: true},
+          // {name: 'newPost', icon:'add_comment', to: '/content/wall/new/', color: 'indigo', dark: true},
           {name: 'tarins', icon:'star', to: '/content/tarins/', color: 'orange', dark: true},
-          {name: 'newTarin', icon:'bookmark', to: '/content/tarins/new/', color: 'green', dark: true},
+          // {name: 'newTarin', icon:'bookmark', to: '/content/tarins/new/', color: 'green', dark: true},
         ]
       }
     },
     methods: {
       makeParsi(num) {
         return persianJs(num).englishNumber().toString();
-      },
-      goUp(action) {
-        this.$vuetify.goTo('#tabs', {
-          duration: 300,
-          offset: -100,
-          easing: 'easeInOutCubic'
-        })
-      },
-      goBack(action){
-        this.$nuxt.$router.go(-1)
-      },
-      async logout() {
-        await this.$auth.logout()
-        this.$nuxt.$router.replace({'path': '/login'})
       },
     },
   }

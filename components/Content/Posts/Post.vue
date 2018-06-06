@@ -2,21 +2,27 @@
   <div class="mb-3">
     <v-card class="elevation-5">
       <v-card-title primary-title>
-        <v-btn icon :to="'/content/wall/' + postData.user.username" nuxt>
-          <v-avatar :size="40" class="elevation-2">
-            <img :src="this.$helper.avatar(postData.user)">
-          </v-avatar>
-        </v-btn>
-        <span class="mr-2 body-2">{{postData.title}}</span>
+        <v-tooltip left>
+          <v-btn icon slot="activator" :to="'/content/wall/' + postData.user.username" nuxt>
+            <v-avatar :size="50" class="elevation-2">
+              <img :src="this.$helper.avatar(postData.user)">
+            </v-avatar>
+          </v-btn>
+          <span>{{this.$persianJS.arabicChar(postData.user.name)}}</span>
+        </v-tooltip>
+        <h1 class="mr-2 iranblack">{{postData.title}}</h1>
         <span v-if="postData.approved && postData.user.username !== username">
           <v-dialog v-model="dialog">
-            <v-chip color="green" text-color="white" slot="activator" @click.native.stop="dialog = true" small>تایید شده (؟)</v-chip>
+            <v-chip color="info" text-color="white" slot="activator" @click.native.stop="dialog = true" small>
+              <v-icon small>check</v-icon>
+              تایید شده (؟)
+            </v-chip>
             <v-card>
               <v-card-text>
                 <p class="green--text">این دل‌نوشته تایید شده که یعنی در صفحه مربوط به شما در نشریه یادبود فارغ‌التحصیلی چاپ میشه و همچنین روی دیوار شما برای عموم قابل نمایشه.</p>
                 <p>عملیات مربوط به هر دل‌نوشته رو می‌تونید از منوی سمت چپ هر دل‌نوشته انجام بدید:</p>
                 <p>
-                  <v-icon color="success" small>check</v-icon>
+                  <v-icon color="info" small>check</v-icon>
                   اگر دل‌نوشته‌ای رو تایید کنید، تو صفحه مربوط به شما در نشریه یادبود فارغ‌التحصیلی میاد و روی دیوارتون نمایش داده می‌شه.
                 </p>
                 <p>
@@ -114,6 +120,7 @@
 
       <v-card-text>
         <div style="text-align:justify;" class="pa-2">
+          <span class="iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</span>:
           {{postData.body}}
         </div>
       </v-card-text>

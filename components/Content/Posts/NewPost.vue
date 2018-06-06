@@ -55,13 +55,17 @@
           </v-card-text>
           <v-card-actions class="d-flex justify-content-center">
             <input :v-model="composed.file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
+            <v-btn @click="clear"  color="warning">
+              <v-icon small>refresh</v-icon>
+              شروع مجدد
+            </v-btn>
             <v-btn @click="clickFile" type="button">
               <v-icon small>cloud_upload</v-icon>
               آپلود عکس
             </v-btn>
             <v-btn color="success" type="submit">
               <v-icon small>check</v-icon>
-              ثبت پست
+              ثبت دل‌نوشته
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -115,6 +119,10 @@
       }
     },
     methods: {
+      clear(){
+        this.$refs.post.reset()
+        this.$refs.file.value = ''
+      },
       clickFile() {
         this.$refs.file.click()
       },

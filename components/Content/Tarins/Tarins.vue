@@ -29,7 +29,6 @@
                         :item_value="'_id'"
                         :item_avatar="'avatar'"
                         :label="tarin.qualification.title"
-                        :style_class="'input-group--focused'"
                         :autocomplete="true"
                         :deletable_chips="true"
                         :clearable="true"
@@ -80,12 +79,8 @@
       methods: {
         votesChunk(){
           let start = this.perPage * (this.page - 1)
-          console.log(this.votes.slice(start, start + this.perPage))
           return this.votes.slice(start, start + this.perPage)
         }
-      },
-      mounted(){
-        console.log('hello!')
       },
     }
 </script>

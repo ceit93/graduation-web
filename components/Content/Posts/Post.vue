@@ -24,7 +24,7 @@
                   اگر دل‌نوشته‌ای در حالت انتظار بمونه و تایید نشه، توی نشریه نمیاد و فقط نویسنده و گیرنده (کسی که دل‌نوشته براش نوشته شده) می‌تونن اون رو ببینن.</p>
                 <p>
                   <v-icon color="error" small>delete</v-icon>&nbsp;
-                  فقط هم نویسنده اجازه پاک کردن یک پست رو داره و در صورت پاک کردن، عملیات قابل بازگشت نیست.</p>
+                  فقط هم نویسنده اجازه پاک کردن یک دل‌نوشته رو داره و در صورت پاک کردن، عملیات قابل بازگشت نیست.</p>
               </v-card-text>
               <v-card-actions class="d-flex justify-content-center">
                 <v-btn color="info" large @click.native="dialog = false">باشه</v-btn>
@@ -102,7 +102,7 @@
             <v-list-tile
               v-if="canDelete"
               @click="deletePost">
-              <v-list-tile-title class="red--text">حذف پست</v-list-tile-title>
+              <v-list-tile-title class="red--text">حذف دل‌نوشته</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>

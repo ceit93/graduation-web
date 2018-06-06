@@ -1,12 +1,33 @@
 <template>
   <v-card>
     <v-card-title class="justify-content-center">
-      <v-btn icon :to="'/content/wall/' + this.user.username" nuxt>
-        <v-avatar :size="40" class="elevation-2">
-          <img :src="this.$helper.avatar(user)"
-               :alt="this.$persianJS.arabicChar(user.name)">
-        </v-avatar>
-      </v-btn>
+      <v-dialog v-model="dialog" max-width="40vw">
+        <v-btn icon slot="activator">
+          <v-avatar :size="40" class="elevation-2">
+            <img :src="this.$helper.avatar(user)"
+                 :alt="this.$persianJS.arabicChar(user.name)">
+          </v-avatar>
+        </v-btn>
+        <v-card>
+          <v-card-media :src="this.$helper.avatar(user)" height="40vw">
+            <v-layout column class="media">
+              <v-card-title>
+                <v-btn dark icon @click.native="dialog = false">
+                  <v-icon color="info">chevron_right</v-icon>
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn dark icon class="mr-3" nuxt :to="user.username">
+                  <v-icon color="info">account_circle</v-icon>
+                </v-btn>
+              </v-card-title>
+              <v-spacer></v-spacer>
+              <v-card-title class="text-xs-center hidden-xs-only justify-content-center">
+                <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.arabicChar(user.name)}}</h1>
+              </v-card-title>
+            </v-layout>
+          </v-card-media>
+        </v-card>
+      </v-dialog>
       <h3 class="title iranblack">دیوارِ {{this.$persianJS.arabicChar(user.name)}}</h3>
     </v-card-title>
     <v-card-text>
@@ -40,6 +61,11 @@
       components: {Post},
       props: ['user', 'canHaveWall'],
       name: "wall",
+      data() {
+        return {
+          dialog: false
+        }
+      },
       computed: {
         access() {
           return this.user.username === this.$auth.user.username

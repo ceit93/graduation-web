@@ -8,12 +8,12 @@
             <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
-            <post-editor :post="composed" image="" :people="prettyPeople"></post-editor>
+            <post-editor :post="post" image="" :people="prettyPeople"></post-editor>
           </v-card-text>
           <v-card-actions>
             <v-container>
               <v-layout align-center justify-center row wrap class="text-xs-center">
-                <input :v-model="composed.file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
+                <input :v-model="file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
                 <v-flex xs12 md4>
                   <v-btn @click="clear" large color="warning" type="button">
                     <v-icon small>refresh</v-icon>
@@ -49,12 +49,8 @@
     components: {PostEditor},
     data() {
       return {
-        composed: {
-          user: '',
-          title: '',
-          body: '',
-        },
-        valid: true
+        valid: true,
+        file: ''
       }
     },
     computed: {
@@ -69,13 +65,23 @@
         return res
       }
     },
-    asyncData(context){
-      return context.$axios.get('users/students')
+    async asyncData(context){
+      let post = await context.$axios.get(`posts/${context.params.slug}`)
+        .then((res) => {
+          return res.data
+        }).catch(e => {
+          context.error({ statusCode: 404, message: 'دل‌نوشته مورد نظر یافت می‌نشود...' })
+        })
+      let people = await context.$axios.get('users/students')
         .then(e => {
-          return {people: e.data}
+          return e.data
         }).catch(e => {
           context.error({ statusCode: 500, message: 'خطای سرور...' })
         })
+      return {
+        post: post,
+        people: people
+      }
     },
     mounted() {
       this.$vuetify.goTo('#tabs', {
@@ -107,18 +113,17 @@
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
-          console.log(e)
           let image = e.target[3].files[0]
           // recipient Object ID
-          let recipient = this.people.filter(x => x._id === this.composed.user);
+          let recipient = this.people.filter(x => x._id === this.post.user);
           if (recipient.length !== 1)
-            recipient = this.composed.user;
+            recipient = this.post.user;
           else
             recipient = recipient[0];
 
           let content = {
-            title: this.composed.title,
-            body: this.composed.body,
+            title: this.post.title,
+            body: this.post.body,
             image: image === undefined ? '' : image,
             user: this.$auth.user,
             approved: false,
@@ -129,14 +134,14 @@
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          let path = 'posts'
-          if (recipient._id !== this.$auth.user._id)// Post to someone else's wall
-            path += '/wall/' + recipient._id
+          let path = 'posts/' + this.post._id
           let redirect = recipient.username
-          this.submitWithAxios(formData, path, redirect)
+          console.log(formData)
+          this.submitWithAxios({data: formData}, path, redirect)
         }
       },
       submitWithAxios(data, path, redirect) {
+        console.log("submitting...")
         this.$axios.post(path, data, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -146,6 +151,7 @@
           this.$nuxt.$router.replace({'path': redirect})
         }).catch(r => {
           this.showError()
+          console.log(r)
         })
       }
     },

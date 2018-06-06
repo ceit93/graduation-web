@@ -11,7 +11,7 @@
           <span>{{this.$persianJS.arabicChar(postData.user.name)}}</span>
         </v-tooltip>
         <h1 class="mr-2 iranblack">{{postData.title}}</h1>
-        <span v-if="postData.approved && postData.user.username !== username">
+        <span v-if="postData.approved && (postData.user.username !== username || canDelete)">
           <v-dialog v-model="dialog">
             <v-chip color="info" text-color="white" slot="activator" @click.native.stop="dialog = true" small>
               <v-icon small>check</v-icon>
@@ -38,7 +38,7 @@
             </v-card>
           </v-dialog>
         </span>
-        <span v-if="!postData.approved && postData.user.username !== username">
+        <span v-if="!postData.approved && (postData.user.username !== username || canDelete)">
           <v-dialog v-model="dialog">
             <v-chip color="orange" outline dark slot="activator" @click.native.stop="dialog = true" small>در انتظار تایید (؟)</v-chip>
             <v-card>
@@ -84,6 +84,13 @@
         </v-tooltip>
 
         <v-tooltip top class="hidden-xs-only" v-if="canDelete">
+          <v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">
+            <v-icon>edit</v-icon>
+          </v-btn>
+          <span>ویرایش دل‌نوشته</span>
+        </v-tooltip>
+
+        <v-tooltip top class="hidden-xs-only" v-if="canDelete">
           <v-btn icon small fab class="hidden-xs-only" v-if="canDelete" slot="activator" color="error" @click="deletePost" alt="حذف دل‌نوشته">
             <v-icon>delete</v-icon>
           </v-btn>
@@ -104,6 +111,12 @@
               v-if="canDisapprove"
               @click="dissaprovePost">
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile
+              v-if="canDelete">
+              <v-list-tile-title class="blue--text">
+                <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
+              </v-list-tile-title>
             </v-list-tile>
             <v-list-tile
               v-if="canDelete"

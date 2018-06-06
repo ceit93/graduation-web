@@ -7,7 +7,7 @@
       <v-btn
         :disabled="!valid"
         @click="submit"
-        class="success"
+        class="info"
       >
         <v-icon>how_to_vote</v-icon>
         ذخیره رای
@@ -30,12 +30,12 @@
         </v-card>
       </v-dialog>
     </v-card-actions>
-    <tarins :votes="this.votes" :people="this.prettyPeople"></tarins>
+    <tarins :perPage="20" :votes="this.votes" :people="this.prettyPeople" @updated="removeProgress" @ubeforeUpdate="showProgress"></tarins>
     <v-card-actions class="justify-content-center">
       <v-btn
         :disabled="!valid"
         @click="submit"
-        class="success"
+        class="info"
       >
         <v-icon>how_to_vote</v-icon>
         ذخیره رای
@@ -70,7 +70,9 @@
       data() {
         return {
           valid: true,
-          dialog: false
+          dialog: false,
+          progress: true,
+          page: 1
         }
       },
       computed: {
@@ -83,7 +85,7 @@
           }
           res = this.$helper.sortBy(res, 'std_numbers')
           return res
-        }
+        },
       },
       async asyncData (context) {
         let {people} = await context.$axios.get('/users/students')
@@ -122,6 +124,12 @@
         }
       },
       methods: {
+        removeProgress(){
+          this.progress = false
+        },
+        showProgress(){
+          this.progress = true
+        },
         submit() {
           this.$axios.post('/poll/submit', {
             votes: this.votes
@@ -136,5 +144,4 @@
 </script>
 
 <style scoped>
-
 </style>

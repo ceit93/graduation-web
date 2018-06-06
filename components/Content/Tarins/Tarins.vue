@@ -4,9 +4,20 @@
       <v-flex xs12>
         <v-card flat class="justify-content-center justify-center" height="100%">
           <v-card-text class="text-xs-center">
+            <div class="text-xs-center">
+              <v-pagination
+                :length="pagesCount"
+                next-icon="chevron_left"
+                prev-icon="chevron_right"
+                color="info"
+                v-model="page"
+                circle class="ceit-ltr">
+              </v-pagination>
+              <p class="grey--text">صفحه {{this.$persianJS.englishNumber(page)}}</p>
+            </div>
             <v-container>
               <v-layout row wrap align-center justify-center>
-                <v-flex xs12 sm12 md6 v-for="tarin in votes" :key="tarin._id" align-center justify-center class="text-xs-center">
+                <v-flex xs12 sm12 md6 v-for="tarin in this.votesChunk()" :key="tarin._id" align-center justify-center class="text-xs-center">
                   <v-layout row wrap justify-center class="text-xs-center mx-0">
                     <v-flex xs12 lg8 class="mx-2">
                       <search-select
@@ -31,6 +42,17 @@
                 </v-flex>
               </v-layout>
             </v-container>
+            <p class="grey--text">صفحه {{this.$persianJS.englishNumber(page)}}</p>
+            <div class="text-xs-center">
+              <v-pagination
+                :length="pagesCount"
+                next-icon="chevron_left"
+                prev-icon="chevron_right"
+                color="info"
+                v-model="page"
+                circle class="ceit-ltr">
+              </v-pagination>
+            </div>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -43,12 +65,36 @@
     export default {
       name: 'Tarins',
       components: {SearchSelect},
-      props: ['people', 'votes'],
+      props: ['people', 'votes', 'perPage'],
       data() {
         return {
-          dialog: false
+          dialog: false,
+          page: 1,
         }
       },
+      computed: {
+        pagesCount() {
+          return Math.ceil(this.people.length / this.perPage)
+        }
+      },
+      methods: {
+        votesChunk(){
+          let start = this.perPage * (this.page - 1)
+          console.log(this.votes.slice(start, start + this.perPage))
+          return this.votes.slice(start, start + this.perPage)
+        }
+      },
+      mounted(){
+        console.log('hello!')
+      },
+      beforeUpdate(){
+        this.$emit('beforeUpdate')
+        console.log('updating...')
+      },
+      updated(){
+        this.$emit('updated')
+        console.log('updated.')
+      }
     }
 </script>
 

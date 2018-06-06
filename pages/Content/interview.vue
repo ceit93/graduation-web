@@ -70,7 +70,8 @@
     layout: 'content',
     data(){
       return {
-        dialog: false
+        dialog: false,
+        valid: true
       }
     },
     mounted() {

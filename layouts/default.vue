@@ -22,6 +22,7 @@
       return {
         actions: [
           {name: 'profile', icon:'home', to: '/profile', color: 'success', dark: true},
+          {name: 'wall', icon:'mdi-account-card-details', to: '/content/wall/', color: 'purple', dark: true},
           // {name: 'register', icon:'mdi-account-plus', to: '/register', color: 'indigo', dark: true}, // TODO: uncomment this line
         ]
       }

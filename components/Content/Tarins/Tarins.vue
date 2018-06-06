@@ -13,7 +13,7 @@
                 v-model="page"
                 circle class="ceit-ltr">
               </v-pagination>
-              <p class="grey--text">صفحه {{this.$persianJS.englishNumber(page)}}</p>
+              <p class="grey--text">صفحه {{this.$persianJS.englishNumber(page)}} از {{this.$persianJS.englishNumber(pagesCount)}}</p>
             </div>
             <v-container>
               <v-layout row wrap align-center justify-center>
@@ -42,7 +42,7 @@
                 </v-flex>
               </v-layout>
             </v-container>
-            <p class="grey--text">صفحه {{this.$persianJS.englishNumber(page)}}</p>
+            <p class="grey--text">صفحه {{this.$persianJS.englishNumber(page)}} از {{this.$persianJS.englishNumber(pagesCount)}}</p>
             <div class="text-xs-center">
               <v-pagination
                 :length="pagesCount"

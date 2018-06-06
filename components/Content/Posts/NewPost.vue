@@ -61,7 +61,7 @@
             </v-btn>
             <v-btn color="success" type="submit">
               <v-icon small>check</v-icon>
-              ثبت پست
+              ثبت دل‌نوشته
             </v-btn>
           </v-card-actions>
         </v-card>

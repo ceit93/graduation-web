@@ -16,16 +16,16 @@
                     :rules="rules.to"
                     :items="people"
                     :item_text="'name'"
-                    :item_value="'objectID'"
+                    :item_value="'_id'"
                     :item_avatar="'avatar'"
-                    :label="'دل‌نوشته برای چه کسی است؟ (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
+                    :label="'گیرنده (در صورتی که برای خود می نویسید نیز اسم خود را انتخاب کنید)'"
                     :placeholder="'گیرنده دل‌نوشته...'"
                     :prepend_icon="'contacts'"
                     :style_class="'input-group--focused'"
                     :required="true"
                     :autocomplete="true"
                     :deletable_chips="true"
-                    :chips="true"
+                    :clearable="true"
                     :cache_items="true"
                     :dense="true"
                     :flat="true"
@@ -123,7 +123,7 @@
         if (this.$refs.post.validate()) {
           let image = e.target[3].files[0];
           // recipient Object ID
-          let recipient = this.people.filter(x => x.objectID === this.composed.to);
+          let recipient = this.people.filter(x => x._id === this.composed.to);
           if (recipient.length !== 1)
             recipient = this.composed.to;
           else
@@ -142,9 +142,9 @@
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          let path = 'posts/'
-          if (recipient.objectID !== this.$auth.user._id)// Post to someone else's wall
-            path += 'wall/' + recipient.objectID
+          let path = 'posts'
+          if (recipient._id !== this.$auth.user._id)// Post to someone else's wall
+            path += '/wall/' + recipient._id
           let redirect = recipient.username
           this.submitWithAxios(formData, path, redirect)
         }

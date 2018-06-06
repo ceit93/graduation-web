@@ -52,7 +52,7 @@
       },
       canHaveWall(){
         for (let person of this.people) {
-          if (person.objectID === this.user._id)
+          if (person._id === this.user._id)
             return true
         }
         return false

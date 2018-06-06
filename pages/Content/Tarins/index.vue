@@ -30,7 +30,7 @@
         </v-card>
       </v-dialog>
     </v-card-actions>
-    <tarins :perPage="20" :votes="this.votes" :people="this.prettyPeople" @updated="removeProgress" @ubeforeUpdate="showProgress"></tarins>
+    <tarins :perPage="20" :votes="this.votes" :people="this.prettyPeople"></tarins>
     <v-card-actions class="justify-content-center">
       <v-btn
         :disabled="!valid"
@@ -124,12 +124,6 @@
         }
       },
       methods: {
-        removeProgress(){
-          this.progress = false
-        },
-        showProgress(){
-          this.progress = true
-        },
         submit() {
           this.$axios.post('/poll/submit', {
             votes: this.votes

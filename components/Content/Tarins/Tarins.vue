@@ -87,14 +87,6 @@
       mounted(){
         console.log('hello!')
       },
-      beforeUpdate(){
-        this.$emit('beforeUpdate')
-        console.log('updating...')
-      },
-      updated(){
-        this.$emit('updated')
-        console.log('updated.')
-      }
     }
 </script>
 

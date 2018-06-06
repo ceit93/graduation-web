@@ -27,7 +27,7 @@
                         v-model="tarin.candidate"
                         :placeholder="'یه جواب کوتاه...'"
                         :label="interview.question.text"
-                        append_icon="star"
+                        append_icon="format_quote"
                       ></v-text-field>
                     </v-flex>
                   </v-layout>

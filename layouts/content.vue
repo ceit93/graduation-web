@@ -8,9 +8,11 @@
           <!--style="margin-top: -10px;"-->
           <v-tabs
             right
-            style="direction: rtl;text-align: right;justify-content: right"
-            icons-and-text
+            :icons-and-text="true"
+            :fixed-tabs="true"
+            :grow="true"
             dark
+            v-model="tab"
             id="tabs"
             color="light-blue darken-2"
           >
@@ -53,6 +55,11 @@
             to: '/content/wall/new'
           },
           {
+            name: 'کوتاه‌پاسخ‌ها',
+            icon: 'format_quote',
+            to: '/content/interview'
+          },
+          {
             name: 'ترین‌ها',
             icon: 'star',
             to: '/content/tarins'
@@ -85,18 +92,5 @@
     direction: rtl;
     text-align: right !important;
     font-family: Iran !important;
-  }
-
-  /*mobile*/
-  @media (max-width: 768px) {
-    .tabs__item {
-      font-size: 0.75rem;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .tabs__item {
-      font-size: 1rem;
-    }
   }
 </style>

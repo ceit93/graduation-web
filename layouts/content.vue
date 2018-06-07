@@ -25,7 +25,7 @@
           </v-tabs>
           <v-card flat>
             <nuxt/>
-            <speed-dial :actions="this.actions"></speed-dial>
+            <speed-dial :actions="actions" @up="goUp" @back="goBack" @logout="logout"></speed-dial>
           </v-card>
         </div>
       </v-content>
@@ -83,6 +83,20 @@
     methods: {
       makeParsi(num) {
         return persianJs(num).englishNumber().toString();
+      },
+      goUp(){
+        this.$vuetify.goTo('#toolbar', {
+          duration: 300,
+          offset: -10,
+          easing: 'easeInOutCubic'
+        })
+      },
+      goBack(){
+        this.$nuxt.$router.go(-1)
+      },
+      async logout() {
+        await this.$auth.logout()
+        this.$nuxt.$router.replace({'path': '/login'})
       },
     },
   }

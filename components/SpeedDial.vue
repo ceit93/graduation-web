@@ -81,34 +81,7 @@
       methods: {
         doAction(action){
           this.$emit(action.name)
-          switch (action) {
-            case 'up':
-              this.goUp()
-              break
-            case 'back':
-              this.goBack()
-              break
-            case 'logout':
-              this.logout()
-              break
-            default:
-              break
-          }
-        },
-        goUp(){
-          this.$vuetify.goTo('#toolbar', {
-            duration: 300,
-            offset: -10,
-            easing: 'easeInOutCubic'
-          })
-        },
-        goBack(){
-          this.$nuxt.$router.go(-1)
-        },
-        async logout() {
-          await this.$auth.logout()
-          this.$nuxt.$router.replace({'path': '/login'})
-        },
+        }
       }
     }
 </script>

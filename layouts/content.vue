@@ -7,16 +7,17 @@
           <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100 g-content-bg-image">
           <!--style="margin-top: -10px;"-->
           <v-tabs
-            right
-            :icons-and-text="true"
-            :fixed-tabs="true"
-            :grow="true"
             dark
-            v-model="tab"
+            icons-and-text
+            centered
+            grow
+            fixed-tabs
+            show-arrows
             id="tabs"
+            slider-color="yellow"
             color="light-blue darken-2"
+            class="ltr"
           >
-            <v-tabs-slider color="yellow"></v-tabs-slider>
             <v-tab v-for="(item,index) in tabs" :to="item.to" :key="index">
               {{item.name}}
               <v-icon>{{item.icon}}</v-icon>
@@ -45,19 +46,9 @@
       return {
         tabs: [
           {
-            name: 'دیوار دل‌نوشته‌ها',
-            icon: 'mdi-account-card-details',
-            to: '/content/wall'
-          },
-          {
-            name: 'دل‌نوشته جدید',
-            icon: 'add_comment',
-            to: '/content/wall/new'
-          },
-          {
-            name: 'کوتاه‌پاسخ‌ها',
-            icon: 'format_quote',
-            to: '/content/interview'
+            name: 'افزودن ترین دلخواه',
+            icon: 'bookmark',
+            to: '/content/tarins/new'
           },
           {
             name: 'ترین‌ها',
@@ -65,9 +56,19 @@
             to: '/content/tarins'
           },
           {
-            name: 'افزودن ترین دلخواه',
-            icon: 'bookmark',
-            to: '/content/tarins/new'
+            name: 'کوتاه‌پاسخ‌ها',
+            icon: 'format_quote',
+            to: '/content/interview'
+          },
+          {
+            name: 'دل‌نوشته جدید',
+            icon: 'add_comment',
+            to: '/content/wall/new'
+          },
+          {
+            name: 'دیوار دل‌نوشته‌ها',
+            icon: 'mdi-account-card-details',
+            to: '/content/wall'
           },
         ],
         actions: [
@@ -92,5 +93,8 @@
     direction: rtl;
     text-align: right !important;
     font-family: Iran !important;
+  }
+  .ltr{
+    direction: ltr;
   }
 </style>

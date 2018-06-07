@@ -3,7 +3,7 @@
     <v-card-title class="justify-content-center">
       <v-dialog v-model="dialog" max-width="40vw">
         <v-btn icon slot="activator">
-          <v-avatar :size="40" class="elevation-2">
+          <v-avatar :size="50" class="elevation-2">
             <img :src="this.$helper.avatar(user)"
                  :alt="this.$persianJS.userName(user)">
           </v-avatar>

@@ -4,7 +4,7 @@
       <v-card-title primary-title>
         <v-dialog v-model="dialog2" max-width="40vw">
           <v-btn icon slot="activator">
-            <v-avatar :size="40" class="elevation-2">
+            <v-avatar :size="50" class="elevation-2">
               <img :src="this.$helper.avatar(postData.user)"
                    :alt="this.$persianJS.userName(postData.user)">
             </v-avatar>

@@ -5,7 +5,7 @@
         <v-btn icon slot="activator">
           <v-avatar :size="40" class="elevation-2">
             <img :src="this.$helper.avatar(user)"
-                 :alt="this.$persianJS.arabicChar(user.name)">
+                 :alt="this.$persianJS.userName(user)">
           </v-avatar>
         </v-btn>
         <v-card>
@@ -22,18 +22,18 @@
               </v-card-title>
               <v-spacer></v-spacer>
               <v-card-title class="text-xs-center hidden-xs-only justify-content-center">
-                <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.arabicChar(user.name)}}</h1>
+                <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.userName(user)}}</h1>
               </v-card-title>
             </v-layout>
           </v-card-media>
         </v-card>
       </v-dialog>
-      <h3 class="title iranblack">دیوارِ {{this.$persianJS.arabicChar(user.name)}}</h3>
+      <h3 class="title iranblack">دیوارِ {{this.$persianJS.userName(user)}}</h3>
     </v-card-title>
     <v-card-text>
       <h2 v-if="this.canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>
       <p v-if="this.canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">هنوز کسی روی دیوار
-        {{this.$persianJS.arabicChar(user.name)}}
+        {{this.$persianJS.userName(user)}}
         دل‌نوشته‌ای ننوشته.
         <nuxt-link to="/content/wall/new">دل‌نوشته جدید</nuxt-link>
         بنویسید...

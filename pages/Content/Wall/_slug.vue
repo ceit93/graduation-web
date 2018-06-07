@@ -43,7 +43,7 @@
         let res = []
         for (let person of this.people){
           let newPerson = Object.assign({}, person)
-          newPerson.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          newPerson.name = this.$persianJS.userName(person) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
           newPerson.avatar = this.$helper.avatar(person)
           res.push(newPerson)
         }

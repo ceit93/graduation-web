@@ -136,12 +136,10 @@
           });
           let path = 'posts/' + this.post._id
           let redirect = recipient.username
-          console.log(formData)
           this.submitWithAxios({data: formData}, path, redirect)
         }
       },
       submitWithAxios(data, path, redirect) {
-        console.log("submitting...")
         this.$axios.post(path, data, {
           headers: {
             'Content-Type': 'multipart/form-data'

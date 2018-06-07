@@ -33,7 +33,7 @@
                         :deletable_chips="true"
                         :clearable="true"
                         :cache_items="true"
-                        :append_icon="'star'"
+                        :prepend_icon="'mdi-trophy-award'"
                         :dense="true"
                       ></search-select>
                     </v-flex>

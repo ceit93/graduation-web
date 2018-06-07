@@ -7,14 +7,17 @@
           <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100 g-content-bg-image">
           <!--style="margin-top: -10px;"-->
           <v-tabs
-            right
-            style="direction: rtl;text-align: right;justify-content: right"
-            icons-and-text
             dark
+            icons-and-text
+            centered
+            grow
+            fixed-tabs
+            show-arrows
             id="tabs"
+            slider-color="yellow"
             color="light-blue darken-2"
+            class="ltr"
           >
-            <v-tabs-slider color="yellow"></v-tabs-slider>
             <v-tab v-for="(item,index) in tabs" :to="item.to" :key="index">
               {{item.name}}
               <v-icon>{{item.icon}}</v-icon>
@@ -43,14 +46,9 @@
       return {
         tabs: [
           {
-            name: 'دیوار دل‌نوشته‌ها',
-            icon: 'mdi-account-card-details',
-            to: '/content/wall'
-          },
-          {
-            name: 'دل‌نوشته جدید',
-            icon: 'add_comment',
-            to: '/content/wall/new'
+            name: 'افزودن ترین دلخواه',
+            icon: 'bookmark',
+            to: '/content/tarins/new'
           },
           {
             name: 'ترین‌ها',
@@ -58,9 +56,19 @@
             to: '/content/tarins'
           },
           {
-            name: 'افزودن ترین دلخواه',
-            icon: 'bookmark',
-            to: '/content/tarins/new'
+            name: 'کوتاه‌پاسخ‌ها',
+            icon: 'format_quote',
+            to: '/content/interview'
+          },
+          {
+            name: 'دل‌نوشته جدید',
+            icon: 'add_comment',
+            to: '/content/wall/new'
+          },
+          {
+            name: 'دیوار دل‌نوشته‌ها',
+            icon: 'mdi-account-card-details',
+            to: '/content/wall'
           },
         ],
         actions: [
@@ -86,17 +94,7 @@
     text-align: right !important;
     font-family: Iran !important;
   }
-
-  /*mobile*/
-  @media (max-width: 768px) {
-    .tabs__item {
-      font-size: 0.75rem;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .tabs__item {
-      font-size: 1rem;
-    }
+  .ltr{
+    direction: ltr;
   }
 </style>

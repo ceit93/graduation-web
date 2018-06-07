@@ -17,25 +17,18 @@
             </div>
             <v-container>
               <v-layout row wrap align-center justify-center>
-                <v-flex xs12 sm12 md6 v-for="tarin in this.votesChunk()" :key="tarin._id" align-center justify-center class="text-xs-center">
+                <v-flex xs12 v-for="interview in this.interviewsChunk()" :key="interview._id" align-center justify-center class="text-xs-center">
                   <v-layout row wrap justify-center class="text-xs-center mx-0">
-                    <v-flex xs12 lg8 class="mx-2">
-                      <search-select
-                        class="tarins-select"
-                        v-model="tarin.candidate"
-                        :placeholder="tarin.qualification.title + ' ۹۳ای ...'"
-                        :items="people"
-                        :item_text="'name'"
-                        :item_value="'_id'"
-                        :item_avatar="'avatar'"
-                        :label="tarin.qualification.title"
-                        :autocomplete="true"
-                        :deletable_chips="true"
-                        :clearable="true"
-                        :cache_items="true"
-                        :append_icon="'star'"
-                        :dense="true"
-                      ></search-select>
+                    <v-flex xs12 md4>
+                      <v-subheader class="blue--text">{{interview.question.text}}</v-subheader>
+                    </v-flex>
+                    <v-flex xs12 md6 class="mx-2">
+                      <v-text-field
+                        v-model="interview.answer"
+                        placeholder="یه جواب کوتاه..."
+                        :label="interview.question.text"
+                        prepend-icon="format_quote"
+                      ></v-text-field>
                     </v-flex>
                   </v-layout>
                 </v-flex>
@@ -60,11 +53,9 @@
 </template>
 
 <script>
-    import SearchSelect from "../../Profile/SearchSelect";
     export default {
-      name: 'Tarins',
-      components: {SearchSelect},
-      props: ['people', 'votes', 'perPage'],
+      name: "Interviews",
+      props: ['interviews', 'perPage'],
       data() {
         return {
           dialog: false,
@@ -73,32 +64,22 @@
       },
       computed: {
         pagesCount() {
-          return Math.ceil(this.people.length / this.perPage)
+          return Math.ceil(this.interviews.length / this.perPage)
         }
       },
       methods: {
-        votesChunk(){
+        interviewsChunk(){
           let start = this.perPage * (this.page - 1)
-          return this.votes.slice(start, start + this.perPage)
+          console.log(this.interviews.slice(start, start + this.perPage))
+          return this.interviews.slice(start, start + this.perPage)
         }
+      },
+      mounted(){
+        console.log('hello!')
       },
     }
 </script>
 
 <style scoped>
-  .tarins-panel {
-    direction: rtl;
-  }
-  .ceit-search {
-    text-align: right !important;
-  }
-  .ceit-search-avatar {
-    margin-left: 8px !important;
-    margin-right: 0px !important;
-  }
-  .ceit-chip{
-    .chip__content{
-      padding: 0px 12px 0px 4px !important;
-    }
-  }
+
 </style>

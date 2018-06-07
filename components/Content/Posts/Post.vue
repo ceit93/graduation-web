@@ -2,16 +2,35 @@
   <div class="mb-3">
     <v-card class="elevation-5">
       <v-card-title primary-title>
-        <v-tooltip left>
-          <v-btn icon slot="activator" :to="'/content/wall/' + postData.user.username" nuxt>
-            <v-avatar :size="50" class="elevation-2">
-              <img :src="this.$helper.avatar(postData.user)">
+        <v-dialog v-model="dialog2" max-width="40vw">
+          <v-btn icon slot="activator">
+            <v-avatar :size="40" class="elevation-2">
+              <img :src="this.$helper.avatar(postData.user)"
+                   :alt="this.$persianJS.arabicChar(postData.user.name)">
             </v-avatar>
           </v-btn>
-          <span>{{this.$persianJS.arabicChar(postData.user.name)}}</span>
-        </v-tooltip>
+          <v-card>
+            <v-card-media :src="this.$helper.avatar(postData.user)" height="40vw">
+              <v-layout column class="media">
+                <v-card-title>
+                  <v-btn dark icon @click.native="dialog2 = false">
+                    <v-icon color="info">chevron_right</v-icon>
+                  </v-btn>
+                  <v-spacer></v-spacer>
+                  <v-btn dark icon class="mr-3" nuxt :to="postData.user.username">
+                    <v-icon color="info">account_circle</v-icon>
+                  </v-btn>
+                </v-card-title>
+                <v-spacer></v-spacer>
+                <v-card-title class="text-xs-center hidden-xs-only justify-content-center">
+                  <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</h1>
+                </v-card-title>
+              </v-layout>
+            </v-card-media>
+          </v-card>
+        </v-dialog>
         <h1 class="mr-2 iranblack">{{postData.title}}</h1>
-        <span v-if="postData.approved && (postData.user.username !== username || canDelete)">
+        <span v-if="postData.approved && (postData.user.username !== this.username || canDelete)">
           <v-dialog v-model="dialog">
             <v-chip color="info" text-color="white" slot="activator" @click.native.stop="dialog = true" small>
               <v-icon small>check</v-icon>
@@ -38,7 +57,7 @@
             </v-card>
           </v-dialog>
         </span>
-        <span v-if="!postData.approved && (postData.user.username !== username || canDelete)">
+        <span v-if="!postData.approved && (postData.user.username !== this.username || canDelete)">
           <v-dialog v-model="dialog">
             <v-chip color="orange" outline dark slot="activator" @click.native.stop="dialog = true" small>در انتظار تایید (؟)</v-chip>
             <v-card>
@@ -83,12 +102,12 @@
           <span>عدم تایید دل‌نوشته</span>
         </v-tooltip>
 
-        <v-tooltip top class="hidden-xs-only" v-if="canDelete">
-          <v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">
-            <v-icon>edit</v-icon>
-          </v-btn>
-          <span>ویرایش دل‌نوشته</span>
-        </v-tooltip>
+        <!--<v-tooltip top class="hidden-xs-only" v-if="canDelete"> TODO: complete the functionality-->
+          <!--<v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">-->
+            <!--<v-icon>edit</v-icon>-->
+          <!--</v-btn>-->
+          <!--<span>ویرایش دل‌نوشته</span>-->
+        <!--</v-tooltip>-->
 
         <v-tooltip top class="hidden-xs-only" v-if="canDelete">
           <v-btn icon small fab class="hidden-xs-only" v-if="canDelete" slot="activator" color="error" @click="deletePost" alt="حذف دل‌نوشته">
@@ -112,12 +131,12 @@
               @click="dissaprovePost">
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile
-              v-if="canDelete">
-              <v-list-tile-title class="blue--text">
-                <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
-              </v-list-tile-title>
-            </v-list-tile>
+            <!--<v-list-tile TODO: complete the functionality-->
+              <!--v-if="canDelete">-->
+              <!--<v-list-tile-title class="blue&#45;&#45;text">-->
+                <!--<nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>-->
+              <!--</v-list-tile-title>-->
+            <!--</v-list-tile>-->
             <v-list-tile
               v-if="canDelete"
               @click="deletePost">
@@ -149,7 +168,8 @@
     name: "post",
     data(){
       return {
-        dialog: false
+        dialog: false,
+        dialog2: false
       }
     },
     filters: {

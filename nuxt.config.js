@@ -6,6 +6,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/pwa',
+    ['@nuxtjs/google-analytics', {id: 'UA-120518365-1'}]
   ],
 
   auth: {

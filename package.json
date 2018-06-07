@@ -2,7 +2,11 @@
   "name": "graduation-web",
   "version": "1.0.0",
   "description": "Graduation Website",
-  "author": "Iman Tabrizian <tabrizian@outlook.com>",
+  "contributors": [
+    "Iman Tabrizian <tabrizian@outlook.com>",
+    "Amir Haghighati <haghighati.amir@gmail.com>",
+    "Aref Hoseinikia <haji4ref@gmail.com>"
+  ],
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -16,6 +20,7 @@
     "@mdi/font": "^2.2.43",
     "@nuxtjs/auth": "^4.5.1",
     "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/pwa": "^2.0.8",
     "mini-toastr": "^0.8.1",
     "node-sass": "^4.8.3",

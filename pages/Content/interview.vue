@@ -9,7 +9,7 @@
         @click="submit"
         class="info"
       >
-        <v-icon>how_to_vote</v-icon>
+        <v-icon>mdi-file-delimited</v-icon>
         ذخیره کوتاه‌پاسخ‌ها
       </v-btn>
       <v-dialog v-model="dialog">
@@ -37,8 +37,8 @@
         @click="submit"
         class="info"
       >
-        <v-icon>how_to_vote</v-icon>
-        ذخیره رای
+        <v-icon>mdi-file-delimited</v-icon>
+        ذخیره کوتاه‌پاسخ‌ها
       </v-btn>
       <v-dialog v-model="dialog">
         <v-chip color="info" outline dark slot="activator" @click.native.stop="dialog = true" small>راهنمایی (؟)</v-chip>

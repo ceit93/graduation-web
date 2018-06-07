@@ -42,11 +42,11 @@
 </template>
 
 <script>
-  // import PostEditor from '~/components/content/Posts/PostEditor'
+  import PostEditor from '~/components/content/Posts/PostEditor'
   export default {
     name: "index",
     layout: 'content',
-    // components: {PostEditor},
+    components: {PostEditor},
     data() {
       return {
         valid: true,

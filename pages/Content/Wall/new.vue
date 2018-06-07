@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import PostEditor from '~/components/content/Posts/PostEditor'
+  import PostEditor from '~/components/Content/Posts/PostEditor'
   export default {
     name: "index",
     layout: 'content',

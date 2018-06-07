@@ -91,17 +91,32 @@
         type: 'error'
       }
     },
-    asyncData (context) {
-      return context.$axios.get('/interviews')
+    async asyncData (context) {
+      let interviews = await context.$axios.get('/interviews')
         .then((res) => {
-          return { interviews: res.data }
+          return res.data.interviews
         }).catch(e => {
           context.error({statusCode: 500, message: 'خطای سرور...'})
         })
+      let questions = await context.$axios.get('/questions')
+        .then((res) => {
+          return res.data.questions
+        }).catch(e => {
+          context.error({statusCode: 500, message: 'خطای سرور...'})
+        })
+      let temp = questions.map(x => {
+        return {question: x, answer: ''}
+      })
+      interviews = temp.map(x => Object.assign(x, interviews.find(interview => interview.question._id === x.question._id)))
+      return {
+        interviews: interviews,
+        questions: questions,
+      }
+
     },
     methods: {
       submit() {
-        this.$axios.post('/interviews/submit', {
+        this.$axios.post('/interviews', {
           interviews: this.interviews
         }).then(e => {
           this.showSuccess()

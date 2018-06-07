@@ -8,7 +8,7 @@
             <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
-            <post-editor :post="post" image="" :people="prettyPeople"></post-editor>
+            <post-editor :post="post" image="" :people="prettyPeople" :owner="owner"></post-editor>
           </v-card-text>
           <v-card-actions>
             <v-container>
@@ -50,7 +50,8 @@
     data() {
       return {
         valid: true,
-        file: ''
+        file: '',
+        owner: ''
       }
     },
     computed: {
@@ -89,7 +90,10 @@
         offset: -100,
         easing: 'easeInOutCubic'
       })
+      console.log(this.post._id)
+      this.getPostOwner()
     },
+
     notifications: {
       showError: {
         title: 'خطا',
@@ -150,6 +154,15 @@
         }).catch(r => {
           this.showError()
           console.log(r)
+        })
+      },
+      getPostOwner(){
+        this.$axios.get('/posts/owner/'+ this.post._id).then(e =>
+        {
+          console.log("owner")
+          this.owner = e.data._id
+        }).catch(e => {
+          context.error({ statusCode: 500, message: 'خطای سرور...' })
         })
       }
     },

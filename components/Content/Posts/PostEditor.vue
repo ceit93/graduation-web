@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12>
         <search-select
-          v-model="post.user"
+          v-model="owner"
           :rules="rules.recipient"
           :items="people"
           :item_text="'name'"
@@ -52,7 +52,7 @@
   import SearchSelect from "~/components/Profile/SearchSelect.vue";
   export default {
     name: "PostEditor",
-    props: ['people', 'post'],
+    props: ['people', 'post', 'owner'],
     data() {
       return {
         rules: {

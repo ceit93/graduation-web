@@ -102,12 +102,12 @@
           <span>عدم تایید دل‌نوشته</span>
         </v-tooltip>
 
-        <!--<v-tooltip top class="hidden-xs-only" v-if="canDelete"> TODO: complete the functionality-->
-          <!--<v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">-->
-            <!--<v-icon>edit</v-icon>-->
-          <!--</v-btn>-->
-          <!--<span>ویرایش دل‌نوشته</span>-->
-        <!--</v-tooltip>-->
+        <v-tooltip top class="hidden-xs-only" v-if="canDelete"> TODO: complete the functionality
+          <v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">
+            <v-icon>edit</v-icon>
+          </v-btn>
+          <span>ویرایش دل‌نوشته</span>
+        </v-tooltip>
 
         <v-tooltip top class="hidden-xs-only" v-if="canDelete">
           <v-btn icon small fab class="hidden-xs-only" v-if="canDelete" slot="activator" color="error" @click="deletePost" alt="حذف دل‌نوشته">
@@ -131,12 +131,12 @@
               @click="dissaprovePost">
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            <!--<v-list-tile TODO: complete the functionality-->
-              <!--v-if="canDelete">-->
-              <!--<v-list-tile-title class="blue&#45;&#45;text">-->
-                <!--<nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>-->
-              <!--</v-list-tile-title>-->
-            <!--</v-list-tile>-->
+            <v-list-tile TODO: complete the functionality
+              v-if="canDelete">
+              <v-list-tile-title class="blue--text">
+                <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
+              </v-list-tile-title>
+            </v-list-tile>
             <v-list-tile
               v-if="canDelete"
               @click="deletePost">

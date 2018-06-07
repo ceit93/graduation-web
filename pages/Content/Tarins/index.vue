@@ -79,7 +79,7 @@
         prettyPeople() {
           let res = []
           for (let person of this.people){
-            person.name = this.$persianJS.arabicChar(person.name)
+            person.name = this.$persianJS.userName(person)
             person.avatar = this.$helper.avatar(person)
             res.push(person)
           }

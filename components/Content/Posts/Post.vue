@@ -4,9 +4,9 @@
       <v-card-title primary-title>
         <v-dialog v-model="dialog2" max-width="40vw">
           <v-btn icon slot="activator">
-            <v-avatar :size="40" class="elevation-2">
+            <v-avatar :size="50" class="elevation-2">
               <img :src="this.$helper.avatar(postData.user)"
-                   :alt="this.$persianJS.arabicChar(postData.user.name)">
+                   :alt="this.$persianJS.userName(postData.user)">
             </v-avatar>
           </v-btn>
           <v-card>
@@ -23,7 +23,7 @@
                 </v-card-title>
                 <v-spacer></v-spacer>
                 <v-card-title class="text-xs-center hidden-xs-only justify-content-center">
-                  <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</h1>
+                  <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.userName(postData.user)}}</h1>
                 </v-card-title>
               </v-layout>
             </v-card-media>
@@ -152,7 +152,7 @@
 
       <v-card-text>
         <div style="text-align:justify;" class="pa-2">
-          <span class="iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</span>:
+          <span class="iranblack">{{this.$persianJS.userName(postData.user)}}</span>:
           {{postData.body}}
         </div>
       </v-card-text>

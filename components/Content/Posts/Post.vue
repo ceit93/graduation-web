@@ -102,7 +102,7 @@
           <span>عدم تایید دل‌نوشته</span>
         </v-tooltip>
 
-        <v-tooltip top class="hidden-xs-only" v-if="canDelete"> TODO: complete the functionality
+        <v-tooltip top class="hidden-xs-only" v-if="canDelete">
           <v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">
             <v-icon>edit</v-icon>
           </v-btn>
@@ -131,7 +131,7 @@
               @click="dissaprovePost">
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile TODO: complete the functionality
+            <v-list-tile
               v-if="canDelete">
               <v-list-tile-title class="blue--text">
                 <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>

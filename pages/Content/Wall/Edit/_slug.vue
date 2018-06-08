@@ -90,7 +90,6 @@
         offset: -100,
         easing: 'easeInOutCubic'
       })
-      console.log(this.post._id)
       this.getPostOwner()
     },
 
@@ -159,7 +158,6 @@
       getPostOwner(){
         this.$axios.get('/posts/owner/'+ this.post._id).then(e =>
         {
-          console.log("owner")
           this.owner = e.data._id
         }).catch(e => {
           context.error({ statusCode: 500, message: 'خطای سرور...' })

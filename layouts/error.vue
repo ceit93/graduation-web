@@ -39,7 +39,7 @@
       }
     },
     mounted() {
-      // this.$nuxt.$router.replace({'path' : '/'})
+      console.log(this.error)
     },
     methods: {
       goBack(){

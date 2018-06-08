@@ -20,8 +20,8 @@
         <v-card-actions class="d-flex justify-content-center">
           <v-btn
             :href="info.redirect_uri"
-            :flat="this.code"
-            :loading="this.code"
+            :flat="this.$helper.isValid(this.code)"
+            :loading="this.$helper.isValid(this.code)"
             large class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"
             dark
             color="grey darken-4">ورود</v-btn>
@@ -94,7 +94,8 @@
     }
   }
 
-  .login-content { 
+  .login-content {
     background-color: #29b473;
   }
 </style>
+

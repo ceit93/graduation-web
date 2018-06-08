@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs12>
         <search-select
-          v-model="owner"
+          v-model="post.recipient"
           :rules="rules.recipient"
           :items="people"
           :item_text="'name'"
@@ -16,6 +16,7 @@
           :required="true"
           :autocomplete="true"
           :deletable_chips="true"
+          :disabled="recipientLocked"
           :clearable="true"
           :cache_items="true"
           :dense="true"
@@ -31,18 +32,18 @@
           required
         />
       </v-flex>
-      <v-flex xs12>
+      <v-flex xs12 :md9="post.image">
         <v-text-field
           v-model="post.body"
           :rules="rules.body"
-          box
           required
-          multi-line
+          textarea
+          :rows="8"
           label="متن دل‌نوشته"
           placeholder="یادش بخیر اون زمونا..."/>
       </v-flex>
-      <v-flex xs6 v-if="post.image !== ''">
-        <img :src="post.image">
+      <v-flex xs12 md3 v-if="post.image !== ''">
+        <img :src="post.image" width="100%">
       </v-flex>
     </v-layout>
   </v-container>
@@ -52,7 +53,7 @@
   import SearchSelect from "~/components/Profile/SearchSelect.vue";
   export default {
     name: "PostEditor",
-    props: ['people', 'post', 'owner'],
+    props: ['people', 'post', 'recipientLocked'],
     data() {
       return {
         rules: {

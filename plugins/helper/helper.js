@@ -16,6 +16,11 @@ export default {
         return array.sort((a,b) => {
           return (a[sortBy] > b[sortBy]) ? 1 : ((b[sortBy] > a[sortBy]) ? -1 : 0)
         })
+      },
+      isValid: function(key) {
+        if (key !== undefined && key !== null)
+          return key !== ''
+        return false
       }
     };
   }

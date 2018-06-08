@@ -4,29 +4,34 @@
       <v-form v-model="valid" lazy-validation ref="post" @submit="submitPost">
         <v-card>
           <v-card-title class="justify-content-center">
-            <h3 class="title">دل‌نوشته جدید ثبت کنید</h3> &nbsp;
-            <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
+            <h3 class="title">ویرایش دل‌نوشته</h3> &nbsp;
           </v-card-title>
           <v-card-text>
-            <post-editor :post="post" image="" :people="prettyPeople" :owner="owner"></post-editor>
+            <post-editor :post="post" :people="prettyPeople" :recipientLocked="true"></post-editor>
           </v-card-text>
           <v-card-actions>
             <v-container>
               <v-layout align-center justify-center row wrap class="text-xs-center">
                 <input :v-model="file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
-                <v-flex xs12 md4>
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
                   <v-btn @click="clear" large color="warning" type="button">
                     <v-icon small>refresh</v-icon>
                     شروع مجدد
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 md4 class="mt-2">
-                  <v-btn @click="clickFile" large type="button">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)" v-if="this.$helper.isValid(post.image)">
+                  <v-btn @click="removeImage" :disabled="!this.$helper.isValid(post.image)" large color="error" type="button">
+                    <v-icon small>delete</v-icon>
+                    حذف عکس
+                  </v-btn>
+                </v-flex>
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)" class="mt-2">
+                  <v-btn @click="clickFile" :disabled="this.$helper.isValid(post.image)" large type="button">
                     <v-icon small>cloud_upload</v-icon>
                     آپلود عکس
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 md4 class="mt-2">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)" class="mt-2">
                   <v-btn color="success" large type="submit">
                     <v-icon small>check</v-icon>
                     ثبت دل‌نوشته
@@ -51,7 +56,6 @@
       return {
         valid: true,
         file: '',
-        owner: ''
       }
     },
     computed: {
@@ -64,7 +68,7 @@
         }
         res = this.$helper.sortBy(res, 'std_numbers')
         return res
-      }
+      },
     },
     async asyncData(context){
       let post = await context.$axios.get(`posts/${context.params.slug}`)
@@ -73,6 +77,14 @@
         }).catch(e => {
           context.error({ statusCode: 404, message: 'دل‌نوشته مورد نظر یافت می‌نشود...' })
         })
+      let owner = await context.$axios.get(`/posts/owner/${context.params.slug}`)
+        .then(e =>{
+          return e.data
+        }).catch(e => {
+          context.error({ statusCode: 500, message: 'خطای سرور...' })
+          console.log(e)
+        })
+      post.recipient = owner._id
       let people = await context.$axios.get('users/students')
         .then(e => {
           return e.data
@@ -81,7 +93,8 @@
         })
       return {
         post: post,
-        people: people
+        people: people,
+        owner: owner
       }
     },
     mounted() {
@@ -90,8 +103,6 @@
         offset: -100,
         easing: 'easeInOutCubic'
       })
-      console.log(this.post._id)
-      this.getPostOwner()
     },
 
     notifications: {
@@ -108,30 +119,29 @@
     },
     methods: {
       clear(){
-        this.$refs.post.reset()
+        this.post.title = ''
+        this.post.body = ''
         this.$refs.file.value = ''
+        this.post.image = undefined
       },
       clickFile() {
         this.$refs.file.click()
+      },
+      removeImage(){
+        this.post.image = undefined
       },
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
           let image = e.target[3].files[0]
-          // recipient Object ID
-          let recipient = this.people.filter(x => x._id === this.post.user);
-          if (recipient.length !== 1)
-            recipient = this.post.user;
-          else
-            recipient = recipient[0];
-
+          if (!this.$helper.isValid(this.post.image)){
+            this.post.image = image
+          }
           let content = {
             title: this.post.title,
             body: this.post.body,
-            image: image === undefined ? '' : image,
-            user: this.$auth.user,
+            image: this.post.image,
             approved: false,
-            date: new Date(),
           };
           // initiate and fill formData
           let formData = new FormData();
@@ -139,7 +149,8 @@
             formData.append(e, content[e]);
           });
           let path = 'posts/' + this.post._id
-          let redirect = recipient.username
+          let redirect = this.owner.username
+          console.log(content)
           this.submitWithAxios({data: formData}, path, redirect)
         }
       },
@@ -156,15 +167,6 @@
           console.log(r)
         })
       },
-      getPostOwner(){
-        this.$axios.get('/posts/owner/'+ this.post._id).then(e =>
-        {
-          console.log("owner")
-          this.owner = e.data._id
-        }).catch(e => {
-          context.error({ statusCode: 500, message: 'خطای سرور...' })
-        })
-      }
     },
   }
 </script>

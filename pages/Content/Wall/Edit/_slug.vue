@@ -7,12 +7,12 @@
             <h3 class="title">ویرایش دل‌نوشته</h3> &nbsp;
           </v-card-title>
           <v-card-text>
-            <post-editor :post="post" :people="prettyPeople" :recipientLocked="true"></post-editor>
+            <post-editor :post="post" :people="prettyPeople" :recipientLocked="true" :loading="loading"></post-editor>
           </v-card-text>
           <v-card-actions>
             <v-container>
               <v-layout align-center justify-center row wrap class="text-xs-center">
-                <input :v-model="file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
+                <input :v-model="file" @change="uploadImage" name="image" type="file" ref="file" accept="image/*" style="display: none;">
                 <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
                   <v-btn @click="clear" large color="warning" type="button">
                     <v-icon small>refresh</v-icon>
@@ -31,7 +31,7 @@
                     آپلود عکس
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)" class="mt-2">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :disabled="loading" :md3="this.$helper.isValid(post.image)" class="mt-2">
                   <v-btn color="success" large type="submit">
                     <v-icon small>check</v-icon>
                     ثبت دل‌نوشته
@@ -56,6 +56,7 @@
       return {
         valid: true,
         file: '',
+        loading: true
       }
     },
     computed: {
@@ -130,6 +131,26 @@
       removeImage(){
         this.post.image = undefined
       },
+      uploadImage(e) {
+        console.log('uploading...')
+        this.loading = true;
+        this.post.image = e.target.files[0];
+        let formData = new FormData();
+        formData.append('post', this.post._id);
+        formData.append('image', this.post.image);
+        this.$axios.post(`/posts/${this.post._id}/image`, formData, {
+          header: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then((res) => {
+
+          console.log("GOT IT YEA!")
+          this.loading = false;
+          this.post.image = res.image
+        }).catch(e => {
+          console.log(e)
+        });
+      },
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
@@ -148,20 +169,18 @@
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          let path = 'posts/' + this.post._id
+          let path = '/posts/' + this.post._id
           let redirect = this.owner.username
           console.log(content)
-          this.submitWithAxios({data: formData}, path, redirect)
+          console.log(path)
+          this.submitWithAxios(content, path, redirect)
         }
+
       },
       submitWithAxios(data, path, redirect) {
-        this.$axios.post(path, data, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then(e => {
+        this.$axios.post(path, {data: data}).then(e => {
           this.showSubmissionSuccess()
-          this.$nuxt.$router.replace({'path': redirect})
+          // this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
         }).catch(r => {
           this.showError()
           console.log(r)
@@ -170,6 +189,7 @@
     },
   }
 </script>
+
 
 <style scoped>
 </style>

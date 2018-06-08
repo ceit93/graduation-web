@@ -32,7 +32,7 @@
           required
         />
       </v-flex>
-      <v-flex xs12 :md9="post.image">
+      <v-flex xs12 :md9="this.$helper.isValid(post.image)">
         <v-text-field
           v-model="post.body"
           :rules="rules.body"
@@ -42,8 +42,12 @@
           label="متن دل‌نوشته"
           placeholder="یادش بخیر اون زمونا..."/>
       </v-flex>
-      <v-flex xs12 md3 v-if="post.image !== ''">
+      <v-flex xs12 md3 v-if="this.$helper.isValid(post.image)">
         <img :src="post.image" width="100%">
+        <v-progress-circular
+          v-show="loading"
+          indeterminate
+          color="primary"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -53,7 +57,7 @@
   import SearchSelect from "~/components/Profile/SearchSelect.vue";
   export default {
     name: "PostEditor",
-    props: ['people', 'post', 'recipientLocked'],
+    props: ['people', 'post', 'recipientLocked', 'loading'],
     data() {
       return {
         rules: {

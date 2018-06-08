@@ -107,7 +107,6 @@
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
-          console.log(e)
           let image = e.target[3].files[0]
           // recipient Object ID
           let recipient = this.people.filter(x => x._id === this.composed.recipient);
@@ -128,14 +127,16 @@
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          let path = 'posts'
+          let path = '/posts'
           if (recipient._id !== this.$auth.user._id)// Post to someone else's wall
             path += '/wall/' + recipient._id
           let redirect = recipient.username
+          console.log(formData)
           this.submitWithAxios(formData, path, redirect)
         }
       },
       submitWithAxios(data, path, redirect) {
+        debugger
         this.$axios.post(path, data, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -145,6 +146,7 @@
           this.$nuxt.$router.replace({'path': redirect})
         }).catch(r => {
           this.showError()
+          console.log(r)
         })
       }
     },

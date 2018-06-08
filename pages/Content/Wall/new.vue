@@ -8,10 +8,10 @@
             <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
-            <post-editor :post="composed" image="" :people="prettyPeople"></post-editor>
+            <post-editor :post="composed" :recipientLocked="false" :people="prettyPeople"></post-editor>
           </v-card-text>
           <v-card-actions>
-            <v-container>
+            <v-container fluid>
               <v-layout align-center justify-center row wrap class="text-xs-center">
                 <input :v-model="composed.file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
                 <v-flex xs12 md4>
@@ -50,7 +50,7 @@
     data() {
       return {
         composed: {
-          user: '',
+          recipient: '',
           title: '',
           body: '',
         },
@@ -110,9 +110,9 @@
           console.log(e)
           let image = e.target[3].files[0]
           // recipient Object ID
-          let recipient = this.people.filter(x => x._id === this.composed.user);
+          let recipient = this.people.filter(x => x._id === this.composed.recipient);
           if (recipient.length !== 1)
-            recipient = this.composed.user;
+            recipient = this.composed.recipient;
           else
             recipient = recipient[0];
 
@@ -122,7 +122,6 @@
             image: image === undefined ? '' : image,
             user: this.$auth.user,
             approved: false,
-            date: new Date(),
           };
           // initiate and fill formData
           let formData = new FormData();

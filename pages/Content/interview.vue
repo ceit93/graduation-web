@@ -1,7 +1,7 @@
 <template>
   <v-card class="justify-content-center justify-center">
     <v-card-title class="justify-content-center">
-      <h3>ترین‌های خود را انتخاب کنید</h3>
+      <h3>کوتاه‌پاسخ‌های شما</h3>
     </v-card-title>
     <v-card-actions class="justify-content-center">
       <v-btn

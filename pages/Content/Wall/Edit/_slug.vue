@@ -175,7 +175,6 @@
           console.log(path)
           this.submitWithAxios(content, path, redirect)
         }
-
       },
       submitWithAxios(data, path, redirect) {
         this.$axios.post(path, {data: data}).then(e => {
@@ -186,10 +185,17 @@
           console.log(r)
         })
       },
+      getPostOwner(){
+        this.$axios.get('/posts/owner/'+ this.post._id).then(e =>
+        {
+          this.owner = e.data._id
+        }).catch(e => {
+          context.error({ statusCode: 500, message: 'خطای سرور...' })
+        })
+      }
     },
   }
 </script>
-
 
 <style scoped>
 </style>

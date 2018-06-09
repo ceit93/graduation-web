@@ -12,26 +12,31 @@
           <v-card-actions>
             <v-container>
               <v-layout align-center justify-center row wrap class="text-xs-center">
-                <input :v-model="file" @change="uploadImage" name="image" type="file" ref="file" accept="image/*" style="display: none;">
+                <input :v-model="file" @change="uploadImage" name="image" type="file" ref="file" accept="image/*"
+                       style="display: none;">
                 <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
                   <v-btn @click="clear" large color="warning" type="button">
                     <v-icon small>refresh</v-icon>
                     شروع مجدد
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)" v-if="this.$helper.isValid(post.image)">
-                  <v-btn @click="removeImage" :disabled="!this.$helper.isValid(post.image)" large color="error" type="button">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)"
+                        v-if="this.$helper.isValid(post.image)">
+                  <v-btn @click="removeImage" :disabled="!this.$helper.isValid(post.image)" large color="error"
+                         type="button">
                     <v-icon small>delete</v-icon>
                     حذف عکس
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)" class="mt-2">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)"
+                        class="mt-2">
                   <v-btn @click="clickFile" :disabled="this.$helper.isValid(post.image)" large type="button">
                     <v-icon small>cloud_upload</v-icon>
                     آپلود عکس
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :disabled="loading" :md3="this.$helper.isValid(post.image)" class="mt-2">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :disabled="loading"
+                        :md3="this.$helper.isValid(post.image)" class="mt-2">
                   <v-btn color="success" large type="submit">
                     <v-icon small>check</v-icon>
                     ثبت دل‌نوشته
@@ -48,6 +53,7 @@
 
 <script>
   import PostEditor from '~/components/Content/Posts/PostEditor'
+
   export default {
     name: "index",
     layout: 'content',
@@ -62,7 +68,7 @@
     computed: {
       prettyPeople() {
         let res = []
-        for (let person of this.people){
+        for (let person of this.people) {
           person.name = this.$persianJS.userName(person)
           person.avatar = this.$helper.avatar(person)
           res.push(person)
@@ -71,18 +77,18 @@
         return res
       },
     },
-    async asyncData(context){
+    async asyncData(context) {
       let post = await context.$axios.get(`posts/${context.params.slug}`)
         .then((res) => {
           return res.data
         }).catch(e => {
-          context.error({ statusCode: 404, message: 'دل‌نوشته مورد نظر یافت می‌نشود...' })
+          context.error({statusCode: 404, message: 'دل‌نوشته مورد نظر یافت می‌نشود...'})
         })
       let owner = await context.$axios.get(`/posts/owner/${context.params.slug}`)
-        .then(e =>{
+        .then(e => {
           return e.data
         }).catch(e => {
-          context.error({ statusCode: 500, message: 'خطای سرور...' })
+          context.error({statusCode: 500, message: 'خطای سرور...'})
           console.log(e)
         })
       post.recipient = owner._id
@@ -90,7 +96,7 @@
         .then(e => {
           return e.data
         }).catch(e => {
-          context.error({ statusCode: 500, message: 'خطای سرور...' })
+          context.error({statusCode: 500, message: 'خطای سرور...'})
         })
       return {
         post: post,
@@ -119,7 +125,7 @@
       }
     },
     methods: {
-      clear(){
+      clear() {
         this.post.title = ''
         this.post.body = ''
         this.$refs.file.value = ''
@@ -128,25 +134,25 @@
       clickFile() {
         this.$refs.file.click()
       },
-      removeImage(){
+      removeImage() {
         this.post.image = undefined
       },
       uploadImage(e) {
-        console.log('uploading...')
         this.loading = true;
-        this.post.image = e.target.files[0];
+        // first get the image file from input
+        // Note : post.image should be url not Object !!!
+        let uploadImage = e.target.files[0];
         let formData = new FormData();
         formData.append('post', this.post._id);
-        formData.append('image', this.post.image);
+        formData.append('image', uploadImage);
         this.$axios.post(`/posts/${this.post._id}/image`, formData, {
           header: {
             'Content-Type': 'multipart/form-data'
           }
         }).then((res) => {
-
-          console.log("GOT IT YEA!")
           this.loading = false;
-          this.post.image = res.image
+          // here we save url returned from back into our post.
+          this.post.image = res.data.image
         }).catch(e => {
           console.log(e)
         });
@@ -155,7 +161,7 @@
         e.preventDefault();
         if (this.$refs.post.validate()) {
           let image = e.target[3].files[0]
-          if (!this.$helper.isValid(this.post.image)){
+          if (!this.$helper.isValid(this.post.image)) {
             this.post.image = image
           }
           let content = {
@@ -185,12 +191,11 @@
           console.log(r)
         })
       },
-      getPostOwner(){
-        this.$axios.get('/posts/owner/'+ this.post._id).then(e =>
-        {
+      getPostOwner() {
+        this.$axios.get('/posts/owner/' + this.post._id).then(e => {
           this.owner = e.data._id
         }).catch(e => {
-          context.error({ statusCode: 500, message: 'خطای سرور...' })
+          context.error({statusCode: 500, message: 'خطای سرور...'})
         })
       }
     },

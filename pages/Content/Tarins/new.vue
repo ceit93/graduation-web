@@ -8,13 +8,6 @@
       name: "new",
       components: {TarinForm},
       layout: 'content',
-      mounted() {
-        this.$vuetify.goTo('#tabs', {
-          duration: 300,
-          offset: -100,
-          easing: 'easeInOutCubic'
-        })
-      },
     }
 </script>
 

@@ -63,9 +63,9 @@
 
 <script>
   import Tarins from "~/components/Content/Tarins/Tarins";
-  import Interviews from "../../components/Content/Interviews";
+  import Interviews from "../../../components/Content/Interviews";
   export default {
-    name: "interview",
+    name: "Index",
     components: {Interviews},
     layout: 'content',
     data(){
@@ -73,13 +73,6 @@
         dialog: false,
         valid: true
       }
-    },
-    mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
     },
     notifications: {
       showSuccess: {

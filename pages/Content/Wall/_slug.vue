@@ -77,13 +77,6 @@
       }
     },
     components: {Wall, SearchSelect},
-    async mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
-    },
     methods: {
       approvePost(index){
         this.user.posts[index].approved = true

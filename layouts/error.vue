@@ -3,7 +3,7 @@
     <v-container>
       <div class="d-flex justify-content-center mt-3">
             <v-flex xs6 sm5 md3 style="flex: none !important;">
-              <img src="/icon.png" width="100%"/>
+              <img src="/logo.png" width="100%"/>
             </v-flex>
       </div>
       <div class="mx-auto d-flex align-items-center" style="height: 100%">

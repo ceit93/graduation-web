@@ -105,14 +105,6 @@
         owner: owner
       }
     },
-    mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
-    },
-
     notifications: {
       showError: {
         title: 'خطا',

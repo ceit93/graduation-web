@@ -21,6 +21,7 @@
     :combobox="combobox"
     :solo-inverted="solo_inverted"
     :clearable="clearable"
+    :disabled="disabled"
     autocomplete
     chips
     id="search-select"
@@ -77,7 +78,8 @@
       'placeholder',
       'solo_inverted',
       'prepend_icon',
-      'clearable'
+      'clearable',
+      'disabled'
     ],
     methods: {
       input(value){

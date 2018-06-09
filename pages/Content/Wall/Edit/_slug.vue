@@ -12,9 +12,9 @@
           <v-card-actions>
             <v-container>
               <v-layout align-center justify-center row wrap class="text-xs-center">
-                <input :v-model="file" @change="uploadImage" name="image" type="file" ref="file" accept="image/*"
+                <input :v-model="file" name="image" type="file" ref="file" accept="image/*"
                        style="display: none;">
-                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
+                <v-flex xs12 @change="fileChanged" :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
                   <v-btn @click="clear" large color="warning" type="button">
                     <v-icon small>refresh</v-icon>
                     شروع مجدد
@@ -62,7 +62,8 @@
       return {
         valid: true,
         file: '',
-        loading: true
+        loading: true,
+        fileChange: false
       }
     },
     computed: {
@@ -136,38 +137,21 @@
       },
       removeImage() {
         this.post.image = undefined
+        this.$refs.file.value = ''
       },
-      uploadImage(e) {
-        this.loading = true;
-        // first get the image file from input
-        // Note : post.image should be url not Object !!!
-        let uploadImage = e.target.files[0];
-        let formData = new FormData();
-        formData.append('post', this.post._id);
-        formData.append('image', uploadImage);
-        this.$axios.post(`/posts/${this.post._id}/image`, formData, {
-          header: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then((res) => {
-          this.loading = false;
-          // here we save url returned from back into our post.
-          this.post.image = res.data.image
-        }).catch(e => {
-          console.log(e)
-        });
+      fileChanged(e) {
+        this.fileChange = true
       },
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
+          console.log(e.target[3].files)
+          console.log(this.file)
           let image = e.target[3].files[0]
-          if (!this.$helper.isValid(this.post.image)) {
-            this.post.image = image
-          }
           let content = {
             title: this.post.title,
             body: this.post.body,
-            image: this.post.image,
+            image: this.fileChange ? image : this.post.image,
             approved: false,
           };
           // initiate and fill formData
@@ -185,19 +169,12 @@
       submitWithAxios(data, path, redirect) {
         this.$axios.post(path, {data: data}).then(e => {
           this.showSubmissionSuccess()
-          // this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
+          this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
         }).catch(r => {
           this.showError()
           console.log(r)
         })
       },
-      getPostOwner() {
-        this.$axios.get('/posts/owner/' + this.post._id).then(e => {
-          this.owner = e.data._id
-        }).catch(e => {
-          context.error({statusCode: 500, message: 'خطای سرور...'})
-        })
-      }
     },
   }
 </script>

@@ -44,10 +44,6 @@
       </v-flex>
       <v-flex xs12 md3 v-if="this.$helper.isValid(post.image)">
         <img :src="post.image" width="100%">
-        <v-progress-circular
-          v-show="loading"
-          indeterminate
-          color="primary"/>
       </v-flex>
     </v-layout>
   </v-container>

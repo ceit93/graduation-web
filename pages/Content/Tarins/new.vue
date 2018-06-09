@@ -1,5 +1,10 @@
 <template>
-  <tarin-form></tarin-form>
+  <tarin-form
+    action="/qualification/create"
+    title="ترین جدید خود را پیشنهاد دهید"
+    label="چی‌چی‌ترین؟"
+    icon="bookmark"
+  ></tarin-form>
 </template>
 
 <script>

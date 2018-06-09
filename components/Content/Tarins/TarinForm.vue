@@ -5,16 +5,16 @@
         <v-form ref="form" v-model="valid" lazy-validation @submit="submit">
           <v-card flat justify-center>
             <v-card-title class="justify-content-center">
-              یک ترین دلخواه
-              <b><span class="red--text"> که در لیست ترین‌ها نیست،</span></b>
-                اضافه کنید:
+              {{title}}
+              <b><span class="red--text"> که در لیست نیست،</span></b>
+                پیشنهاد کنید:
             </v-card-title>
             <v-card-text>
                 <v-text-field
                   v-model="subject"
                   :rules="subjectRules"
-                  label="چی‌چی ترین؟"
-                  append-icon="bookmark"
+                  :label="label"
+                  :append-icon="icon"
                   required
                 ></v-text-field>
             </v-card-text>
@@ -25,7 +25,7 @@
                 class="success"
               >
                 <v-icon small>add</v-icon>
-                اضافه کردن یک ترین
+                افزودن پیشنهاد
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -38,13 +38,13 @@
 <script>
   export default {
     name: 'TarinForm',
+    props: ['action', 'title', 'label', 'icon'],
     data() {
       return {
-        tarins: {},
         valid: true,
         subject: '',
         subjectRules: [
-          v => !!v || 'ترین مورد نظر خود را وارد کنید',
+          v => !!v || 'آیتم پیشنهادی خود را وارد کنید.',
         ],
       }
     },
@@ -54,7 +54,7 @@
         type: 'error'
       },
       showSuccess: {
-        title: 'ترین مورد نظر با موفقیت ثبت شد.',
+        title: 'پیشنهاد شما با موفقیت ثبت شد',
         type: 'success'
       }
     },
@@ -62,7 +62,7 @@
       submit (e) {
         e.preventDefault()
         if (this.$refs.form.validate()) {
-          this.$axios.post('/qualification/create', {
+          this.$axios.post(this.action, {
             subject: this.subject
           }).then(e => {
             this.showSuccess()

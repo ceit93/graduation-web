@@ -1,5 +1,13 @@
 <template>
   <v-card class="justify-content-center justify-center">
+    <v-card-actions class="justify-content-center">
+      <v-flex xs12 md6>
+        <v-btn large block dark color="info" append to="new" nuxt>
+          <v-icon>plus</v-icon>&nbsp;
+          کوتاه‌سوال جدید پیشنهاد کنید
+        </v-btn>
+      </v-flex>
+    </v-card-actions>
     <v-card-title class="justify-content-center">
       <h3>کوتاه‌پاسخ‌های شما</h3>
     </v-card-title>

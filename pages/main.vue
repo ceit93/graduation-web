@@ -10,7 +10,6 @@
                                     <!--<span>{{item.name}}</span>-->
             </v-card>
                     <!--</v-btn>-->
-
                 <!--</div>-->
         </v-layout>
     </v-container>

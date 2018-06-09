@@ -21,8 +21,9 @@
             <v-card-actions class="d-flex justify-content-center">
               <v-btn
                 :disabled="!valid"
+                outline
                 type="submit"
-                class="success"
+                color="light-blue"
               >
                 <v-icon small>add</v-icon>
                 افزودن پیشنهاد
@@ -37,8 +38,8 @@
 
 <script>
   export default {
-    name: 'TarinForm',
-    props: ['action', 'title', 'label', 'icon'],
+    name: 'SuggestionForm',
+    props: ['title', 'label', 'icon'],
     data() {
       return {
         valid: true,
@@ -48,30 +49,10 @@
         ],
       }
     },
-    notifications: {
-      showError: {
-        title: 'خطایی رخ داد...',
-        type: 'error'
-      },
-      showSuccess: {
-        title: 'پیشنهاد شما با موفقیت ثبت شد',
-        type: 'success'
-      }
-    },
     methods: {
       submit (e) {
         e.preventDefault()
-        if (this.$refs.form.validate()) {
-          this.$axios.post(this.action, {
-            subject: this.subject
-          }).then(e => {
-            this.showSuccess()
-            this.$refs.form.reset()
-          }).catch(e => {
-            this.showError()
-            console.log(e)
-          })
-        }
+        this.$emit('submit', this.subject)
       },
     }
   }

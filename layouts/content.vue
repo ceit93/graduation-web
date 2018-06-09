@@ -58,7 +58,7 @@
           {
             name: 'کوتاه‌پاسخ‌ها',
             icon: 'format_quote',
-            to: '/content/interview'
+            to: '/content/interviews'
           },
           // {
           //   name: 'دل‌نوشته جدید',

@@ -3,7 +3,7 @@
     <v-card-actions class="justify-content-center">
       <v-flex xs12 md6>
         <v-btn large block dark color="info" append to="new" nuxt>
-          <v-icon>plus</v-icon>&nbsp;
+          <v-icon>note_add</v-icon>&nbsp;
           کوتاه‌سوال جدید پیشنهاد کنید
         </v-btn>
       </v-flex>

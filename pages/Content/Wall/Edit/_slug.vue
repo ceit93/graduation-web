@@ -12,9 +12,9 @@
           <v-card-actions>
             <v-container>
               <v-layout align-center justify-center row wrap class="text-xs-center">
-                <input :v-model="file" name="image" type="file" ref="file" accept="image/*"
+                <input :v-model="file" @change="imageUpdate" name="image" type="file" ref="file" accept="image/*"
                        style="display: none;">
-                <v-flex xs12 @change="fileChanged" :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
+                <v-flex xs12 :md4="!this.$helper.isValid(post.image)" :md3="this.$helper.isValid(post.image)">
                   <v-btn @click="clear" large color="warning" type="button">
                     <v-icon small>refresh</v-icon>
                     شروع مجدد
@@ -139,21 +139,21 @@
         this.post.image = undefined
         this.$refs.file.value = ''
       },
-      fileChanged(e) {
+      imageUpdate(e) {
+        console.log('file changes!')
         this.fileChange = true
       },
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
-          console.log(e.target[3].files)
-          console.log(this.file)
           let image = e.target[3].files[0]
           let content = {
             title: this.post.title,
             body: this.post.body,
-            image: this.fileChange ? image : this.post.image,
+            image: this.fileChange ? image : (this.$helper.isValid(this.post.image) ? this.post.image : ''),
             approved: false,
           };
+          console.log(content)
           // initiate and fill formData
           let formData = new FormData();
           Object.keys(content).forEach((e) => {
@@ -163,13 +163,16 @@
           let redirect = this.owner.username
           console.log(content)
           console.log(path)
+
+          // passing content to the method since formData causes 400 Bad Request
           this.submitWithAxios(content, path, redirect)
         }
       },
       submitWithAxios(data, path, redirect) {
         this.$axios.post(path, {data: data}).then(e => {
           this.showSubmissionSuccess()
-          this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
+          // TODO: uncomment the following after successful editing
+          // this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
         }).catch(r => {
           this.showError()
           console.log(r)

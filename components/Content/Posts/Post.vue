@@ -152,8 +152,8 @@
 
       <v-card-text>
         <div style="text-align:justify;" class="pa-2">
-          <span class="iranblack">{{this.$persianJS.userName(postData.user)}}</span>:
-          <div v-html="postData.body"></div>
+          <span class="iranblack">{{this.$persianJS.userName(postData.user)}}:</span>
+          <div v-html="postData.body" style="white-space: pre-line;"></div>
         </div>
       </v-card-text>
       <div style="clear: both"></div>

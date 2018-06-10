@@ -1,5 +1,13 @@
 <template>
   <v-card class="justify-content-center justify-center">
+    <v-card-actions class="justify-content-center">
+      <v-flex xs12 md6>
+        <v-btn large block dark color="info"  append to="new" nuxt>
+          <v-icon>bookmark</v-icon>&nbsp;
+          ترین جدید پیشنهاد کنید
+        </v-btn>
+      </v-flex>
+    </v-card-actions>
     <v-card-title class="justify-content-center">
       <h3>ترین‌های خود را انتخاب کنید</h3>
     </v-card-title>
@@ -79,7 +87,7 @@
         prettyPeople() {
           let res = []
           for (let person of this.people){
-            person.name = this.$persianJS.arabicChar(person.name)
+            person.name = this.$persianJS.userName(person)
             person.avatar = this.$helper.avatar(person)
             res.push(person)
           }
@@ -105,13 +113,6 @@
           votes: votes,
           people: people
         }
-      },
-      mounted() {
-        this.$vuetify.goTo('#tabs', {
-          duration: 300,
-          offset: -100,
-          easing: 'easeInOutCubic'
-        })
       },
       notifications: {
         showSuccess: {

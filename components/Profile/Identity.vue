@@ -13,7 +13,7 @@
               <img
                 v-show="!loading"
                 :src="this.$helper.avatar(this.$auth.user)"
-                :alt="this.$persianJS.arabicChar(this.$auth.user.name)">
+                :alt="this.$persianJS.userName(this.$auth.user)">
               <v-progress-circular
                 v-show="loading"
                 indeterminate
@@ -36,11 +36,11 @@
           </v-flex>
           <v-flex xs12 md9 class="ceit-identity-text">
             <div class="mx-3">
-              <h1 class="iranblack">{{ this.$persianJS.arabicChar(this.$auth.user.name) }}</h1>
+              <h1 class="iranblack">{{ this.$persianJS.userName(this.$auth.user) }}</h1>
               <h3 class="iranblack">خوش اومدی!</h3> <br>
               <p>اینجا سایت فارغ‌التحصیلی ما ۹۳‌ای‌هاس و با همین وب‌اپلیکیشن باید مطالب نشریه رو کامل کنیم و بخشی از کارای جشن
                 رو انجام بدیم.</p>
-              <p>لطفا تا تموم قبل از موعد تکمیل محتوا (۳۱ خرداد)، مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل
+              <p>لطفا تا قبل از موعد تکمیل محتوا (۳۱ خرداد)، مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل
                 کنید.</p>
               <p>اینجا رو هم تند تند چک کنید لطفا چون مرتب آپدیت می‌کنیمش!</p>
             </div>

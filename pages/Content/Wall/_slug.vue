@@ -1,6 +1,14 @@
 <template>
   <div>
     <v-card class="elevation-2">
+      <v-card-actions class="justify-content-center">
+        <v-flex xs12 md6>
+          <v-btn large block dark color="info" to="new" nuxt>
+            <v-icon>add_comment</v-icon>&nbsp;
+            دل نوشته جدید بنویسید
+          </v-btn>
+        </v-flex>
+      </v-card-actions>
       <v-card-text>
         <search-select
           v-model="search"
@@ -43,7 +51,7 @@
         let res = []
         for (let person of this.people){
           let newPerson = Object.assign({}, person)
-          newPerson.name = this.$persianJS.arabicChar(person.name) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
+          newPerson.name = this.$persianJS.userName(person) + ' - ' + this.$persianJS.englishNumber(person.std_numbers)
           newPerson.avatar = this.$helper.avatar(person)
           res.push(newPerson)
         }
@@ -77,13 +85,6 @@
       }
     },
     components: {Wall, SearchSelect},
-    async mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
-    },
     methods: {
       approvePost(index){
         this.user.posts[index].approved = true

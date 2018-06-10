@@ -1,7 +1,15 @@
 <template>
   <v-card class="justify-content-center justify-center">
+    <v-card-actions class="justify-content-center">
+      <v-flex xs12 md6>
+        <v-btn large block dark color="info" append to="new" nuxt>
+          <v-icon>note_add</v-icon>&nbsp;
+          کوتاه‌سوال جدید پیشنهاد کنید
+        </v-btn>
+      </v-flex>
+    </v-card-actions>
     <v-card-title class="justify-content-center">
-      <h3>ترین‌های خود را انتخاب کنید</h3>
+      <h3>کوتاه‌پاسخ‌های شما</h3>
     </v-card-title>
     <v-card-actions class="justify-content-center">
       <v-btn
@@ -63,9 +71,9 @@
 
 <script>
   import Tarins from "~/components/Content/Tarins/Tarins";
-  import Interviews from "../../components/Content/Interviews";
+  import Interviews from "../../../components/Content/Interviews";
   export default {
-    name: "interview",
+    name: "Index",
     components: {Interviews},
     layout: 'content',
     data(){
@@ -73,13 +81,6 @@
         dialog: false,
         valid: true
       }
-    },
-    mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
     },
     notifications: {
       showSuccess: {

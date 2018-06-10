@@ -8,10 +8,10 @@
             <span class="caption grey--text text--darken-1">*می‌توانید دل‌نوشته جدید ثبت‌ کنید. همچنین می‌توانید پس از ثبت، از منوی سمت چپ هر دل‌نوشته، آن را پاک کنید.</span>
           </v-card-title>
           <v-card-text>
-            <post-editor :post="composed" image="" :people="prettyPeople"></post-editor>
+            <post-editor :post="composed" :recipientLocked="false" :people="prettyPeople"></post-editor>
           </v-card-text>
           <v-card-actions>
-            <v-container>
+            <v-container fluid>
               <v-layout align-center justify-center row wrap class="text-xs-center">
                 <input :v-model="composed.file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
                 <v-flex xs12 md4>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import PostEditor from '~/components/content/Posts/PostEditor'
+  import PostEditor from '~/components/Content/Posts/PostEditor'
   export default {
     name: "index",
     layout: 'content',
@@ -50,7 +50,7 @@
     data() {
       return {
         composed: {
-          user: '',
+          recipient: '',
           title: '',
           body: '',
         },
@@ -61,7 +61,7 @@
       prettyPeople() {
         let res = []
         for (let person of this.people){
-          person.name = this.$persianJS.arabicChar(person.name)
+          person.name = this.$persianJS.userName(person)
           person.avatar = this.$helper.avatar(person)
           res.push(person)
         }
@@ -76,13 +76,6 @@
         }).catch(e => {
           context.error({ statusCode: 500, message: 'خطای سرور...' })
         })
-    },
-    mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
     },
     notifications: {
       showError: {
@@ -107,12 +100,11 @@
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
-          console.log(e)
           let image = e.target[3].files[0]
           // recipient Object ID
-          let recipient = this.people.filter(x => x._id === this.composed.user);
+          let recipient = this.people.filter(x => x._id === this.composed.recipient);
           if (recipient.length !== 1)
-            recipient = this.composed.user;
+            recipient = this.composed.recipient;
           else
             recipient = recipient[0];
 
@@ -122,21 +114,22 @@
             image: image === undefined ? '' : image,
             user: this.$auth.user,
             approved: false,
-            date: new Date(),
           };
           // initiate and fill formData
           let formData = new FormData();
           Object.keys(content).forEach((e) => {
             formData.append(e, content[e]);
           });
-          let path = 'posts'
+          let path = '/posts'
           if (recipient._id !== this.$auth.user._id)// Post to someone else's wall
             path += '/wall/' + recipient._id
           let redirect = recipient.username
+          console.log(formData)
           this.submitWithAxios(formData, path, redirect)
         }
       },
       submitWithAxios(data, path, redirect) {
+        debugger
         this.$axios.post(path, data, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -146,6 +139,7 @@
           this.$nuxt.$router.replace({'path': redirect})
         }).catch(r => {
           this.showError()
+          console.log(r)
         })
       }
     },

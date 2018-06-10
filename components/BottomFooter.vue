@@ -17,8 +17,8 @@
                 >
                     <v-icon size="24px">{{ icon.ico }}</v-icon>
                 </v-btn>
-                <v-flex xs12 text-xs-center :to="'https://github.com/ceit93'" class="yellow--text text--accent-2 caption">
-                  {{footer}}
+                <v-flex xs12 text-xs-center :to="'https://github.com/ceit93'">
+                  <a href="https://github.com/ceit93" target="_blank" rel="noopener" class="yellow--text text--accent-2 caption" style="text-decoration: none">{{footer}}</a>
                 </v-flex>
             </v-card-text>
         </v-card>
@@ -31,9 +31,10 @@
     data: () => ({
       icons: [
         {ico: 'mdi-github-circle', link: 'https://github.com/ceit93'},
-        {ico: 'mdi-telegram', link: 'https://t.me/ceit93'}
+        {ico: 'mdi-telegram', link: 'https://t.me/ceit93'},
+        {ico: 'alternate_email', link: 'mailto:grad@ceit93.ir'},
       ],
-      footer: 'دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر'
+      footer: 'دانشجویان ورودی سال ۱۳۹۳ دانشکده مهندسی کامپیوتر و فناوری اطلاعات دانشگاه صنعتی امیرکبیر - grad@ceit93.ir',
     }),
   }
 </script>

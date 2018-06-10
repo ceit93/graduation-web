@@ -4,9 +4,9 @@
       <v-card-title primary-title>
         <v-dialog v-model="dialog2" max-width="40vw">
           <v-btn icon slot="activator">
-            <v-avatar :size="40" class="elevation-2">
+            <v-avatar :size="50" class="elevation-2">
               <img :src="this.$helper.avatar(postData.user)"
-                   :alt="this.$persianJS.arabicChar(postData.user.name)">
+                   :alt="this.$persianJS.userName(postData.user)">
             </v-avatar>
           </v-btn>
           <v-card>
@@ -23,7 +23,7 @@
                 </v-card-title>
                 <v-spacer></v-spacer>
                 <v-card-title class="text-xs-center hidden-xs-only justify-content-center">
-                  <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</h1>
+                  <h1 class="text-xs-center blue--text iranblack">{{this.$persianJS.userName(postData.user)}}</h1>
                 </v-card-title>
               </v-layout>
             </v-card-media>
@@ -102,12 +102,13 @@
           <span>عدم تایید دل‌نوشته</span>
         </v-tooltip>
 
-        <v-tooltip top class="hidden-xs-only" v-if="canDelete">
-          <v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">
-            <v-icon>edit</v-icon>
-          </v-btn>
-          <span>ویرایش دل‌نوشته</span>
-        </v-tooltip>
+        <!--TODO remove the following after completing the editing-->
+        <!--<v-tooltip top class="hidden-xs-only" v-if="canDelete">-->
+          <!--<v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">-->
+            <!--<v-icon>edit</v-icon>-->
+          <!--</v-btn>-->
+          <!--<span>ویرایش دل‌نوشته</span>-->
+        <!--</v-tooltip>-->
 
         <v-tooltip top class="hidden-xs-only" v-if="canDelete">
           <v-btn icon small fab class="hidden-xs-only" v-if="canDelete" slot="activator" color="error" @click="deletePost" alt="حذف دل‌نوشته">
@@ -131,12 +132,13 @@
               @click="dissaprovePost">
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile
-              v-if="canDelete">
-              <v-list-tile-title class="blue--text">
-                <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
-              </v-list-tile-title>
-            </v-list-tile>
+            <!--TODO remove the following after completing the editing-->
+            <!--<v-list-tile-->
+              <!--v-if="canDelete">-->
+              <!--<v-list-tile-title class="blue&#45;&#45;text">-->
+                <!--<nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>-->
+              <!--</v-list-tile-title>-->
+            <!--</v-list-tile>-->
             <v-list-tile
               v-if="canDelete"
               @click="deletePost">
@@ -152,8 +154,8 @@
 
       <v-card-text>
         <div style="text-align:justify;" class="pa-2">
-          <span class="iranblack">{{this.$persianJS.arabicChar(postData.user.name)}}</span>:
-          {{postData.body}}
+          <span class="iranblack">{{this.$persianJS.userName(postData.user)}}:</span>
+          <div v-html="postData.body" style="white-space: pre-line;"></div>
         </div>
       </v-card-text>
       <div style="clear: both"></div>

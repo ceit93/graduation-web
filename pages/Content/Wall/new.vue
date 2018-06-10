@@ -11,24 +11,24 @@
             <post-editor :post="composed" :recipientLocked="false" :people="prettyPeople"></post-editor>
           </v-card-text>
           <v-card-actions>
-            <v-container fluid>
-              <v-layout align-center justify-center row wrap class="text-xs-center">
+            <v-container>
+              <v-layout align-center justify-center row wrap class="text-xs-center mx-0">
                 <input :v-model="composed.file" @change="imageUploaded" name="image" type="file" ref="file"
                        accept="image/*" style="display: none;">
-                <v-flex xs12 md4>
-                  <v-btn @click="clear" large color="warning" type="button">
+                <v-flex xs12 md4 class="px-1 my-1">
+                  <v-btn @click="clear" large color="warning" type="button" block class="mx-0">
                     <v-icon small>refresh</v-icon>
                     شروع مجدد
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 md4 class="mt-2">
-                  <v-btn @click="clickFile" large type="button">
+                <v-flex xs12 md4 class="px-1 my-1">
+                  <v-btn @click="clickFile" large type="button" block class="mx-0">
                     <v-icon small>cloud_upload</v-icon>
                     آپلود عکس
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 md4 class="mt-2">
-                  <v-btn color="success" large type="submit">
+                <v-flex xs12 md4 class="px-1 my-1">
+                  <v-btn color="success" large type="submit" block class="mx-0">
                     <v-icon small>check</v-icon>
                     ثبت دل‌نوشته
                   </v-btn>

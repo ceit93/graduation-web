@@ -9,7 +9,7 @@
             </v-flex>
           </div>
           <v-btn
-            v-if="this.$auth.loggedIn"
+            v-if="this.$auth.loggedIn || this.$helper.isValid(this.code)"
             flat
             to="/profile"
             nuxt

@@ -4,7 +4,7 @@
     <v-container fluid full-height>
       <v-content>
         <div class="bg-main">
-          <img src="@/static/ceit-poster.jpg" alt="" class="g-w-100 g-content-bg-image">
+          <img src="/ceit-poster.jpg" alt="" class="g-w-100 g-content-bg-image">
           <!--style="margin-top: -10px;"-->
           <v-tabs
             dark
@@ -45,11 +45,11 @@
     data() {
       return {
         tabs: [
-          {
-            name: 'افزودن ترین دلخواه',
-            icon: 'bookmark',
-            to: '/content/tarins/new'
-          },
+          // {
+          //   name: 'افزودن ترین دلخواه',
+          //   icon: 'bookmark',
+          //   to: '/content/tarins/new'
+          // },
           {
             name: 'ترین‌ها',
             icon: 'star',
@@ -58,13 +58,13 @@
           {
             name: 'کوتاه‌پاسخ‌ها',
             icon: 'format_quote',
-            to: '/content/interview'
+            to: '/content/interviews'
           },
-          {
-            name: 'دل‌نوشته جدید',
-            icon: 'add_comment',
-            to: '/content/wall/new'
-          },
+          // {
+          //   name: 'دل‌نوشته جدید',
+          //   icon: 'add_comment',
+          //   to: '/content/wall/new'
+          // },
           {
             name: 'دیوار دل‌نوشته‌ها',
             icon: 'mdi-account-card-details',
@@ -98,6 +98,13 @@
         await this.$auth.logout()
         this.$nuxt.$router.replace({'path': '/login'})
       },
+    },
+    mounted() {
+      this.$vuetify.goTo('#tabs', {
+        duration: 300,
+        offset: -100,
+        easing: 'easeInOutCubic'
+      })
     },
   }
 </script>

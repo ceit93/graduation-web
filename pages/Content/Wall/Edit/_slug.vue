@@ -12,7 +12,7 @@
           <v-card-actions>
             <v-container class="justify-content-between">
               <v-layout align-center row wrap class="text-xs-center mx-0 ">
-                <input :v-model="file" @change="uploadImage" name="image" type="file" ref="file" accept="image/*"
+                <input :v-model="file" @change="imageUpdate" name="image" type="file" ref="file" accept="image/*"
                        style="display: none;">
                 <v-flex xs12
                         :class="[btnColumn,'my-1','px-1']"
@@ -85,6 +85,7 @@
         valid: true,
         file: '',
         loading: true,
+        fileChange: false
       }
     },
     computed: {
@@ -129,14 +130,6 @@
         owner: owner
       }
     },
-    mounted() {
-      this.$vuetify.goTo('#tabs', {
-        duration: 300,
-        offset: -100,
-        easing: 'easeInOutCubic'
-      })
-    },
-
     notifications: {
       showError: {
         title: 'خطا',
@@ -187,7 +180,7 @@
           let content = {
             title: this.post.title,
             body: this.post.body,
-            image: this.post.image,
+            image: this.fileChange ? image : (this.$helper.isValid(this.post.image) ? this.post.image : ''),
             approved: false,
           };
           // initiate and fill formData
@@ -209,13 +202,6 @@
           console.log(r)
         })
       },
-      getPostOwner() {
-        this.$axios.get('/posts/owner/' + this.post._id).then(e => {
-          this.owner = e.data._id
-        }).catch(e => {
-          context.error({statusCode: 500, message: 'خطای سرور...'})
-        })
-      }
     },
   }
 </script>

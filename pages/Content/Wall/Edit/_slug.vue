@@ -60,6 +60,7 @@
     components: {PostEditor},
     data() {
       return {
+        image:undefined,
         valid: true,
         file: '',
         loading: true
@@ -135,32 +136,27 @@
         this.$refs.file.click()
       },
       removeImage() {
-        this.post.image = undefined
+        this.post.image = undefined;
+        this.image = '';
       },
+
+      /**
+       * Store uploaded image into this.image
+       * and load image as data url into post-editor img tag
+       * @param e
+       */
       uploadImage(e) {
-        this.loading = true;
-        // first get the image file from input
-        // Note : post.image should be url not Object !!!
-        let uploadImage = e.target.files[0];
-        let formData = new FormData();
-        formData.append('post', this.post._id);
-        formData.append('image', uploadImage);
-        this.$axios.post(`/posts/${this.post._id}/image`, formData, {
-          header: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then((res) => {
-          this.loading = false;
-          // here we save url returned from back into our post.
-          this.post.image = res.data.image
-        }).catch(e => {
-          console.log(e)
-        });
+        this.image = e.target.files[0];
+        let reader = new FileReader();
+        reader.onload = () => {
+          this.post.image = reader.result
+        };
+        reader.readAsDataURL(this.image);
       },
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
-          let image = e.target[3].files[0]
+          let image = this.image;
           if (!this.$helper.isValid(this.post.image)) {
             this.post.image = image
           }
@@ -177,17 +173,15 @@
           });
           let path = '/posts/' + this.post._id
           let redirect = this.owner.username
-          console.log(content)
-          console.log(path)
           this.submitWithAxios(content, path, redirect)
         }
       },
       submitWithAxios(data, path, redirect) {
         this.$axios.post(path, {data: data}).then(e => {
-          this.showSubmissionSuccess()
-          // this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
+          this.showSubmissionSuccess();
+          this.$nuxt.$router.replace({'path': '/content/wall/' +redirect})
         }).catch(r => {
-          this.showError()
+          this.showError();
           console.log(r)
         })
       },

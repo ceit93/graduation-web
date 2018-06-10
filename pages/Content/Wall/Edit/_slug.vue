@@ -162,7 +162,7 @@
        * and load image as data url into post-editor img tag
        * @param e
        */
-      uploadImage(e) {
+      imageUpdate(e) {
         this.image = e.target.files[0];
         let reader = new FileReader();
         reader.onload = () => {

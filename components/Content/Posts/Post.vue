@@ -102,13 +102,12 @@
           <span>عدم تایید دل‌نوشته</span>
         </v-tooltip>
 
-        <!--TODO remove the following after completing the editing-->
-        <!--<v-tooltip top class="hidden-xs-only" v-if="canDelete">-->
-          <!--<v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">-->
-            <!--<v-icon>edit</v-icon>-->
-          <!--</v-btn>-->
-          <!--<span>ویرایش دل‌نوشته</span>-->
-        <!--</v-tooltip>-->
+        <v-tooltip top class="hidden-xs-only" v-if="canDelete">
+          <v-btn icon small fab :to="'/content/wall/edit/' + postData._id" nuxt class="hidden-xs-only" v-if="canDelete" slot="activator" color="info" alt="ویرایش دل‌نوشته">
+            <v-icon>edit</v-icon>
+          </v-btn>
+          <span>ویرایش دل‌نوشته</span>
+        </v-tooltip>
 
         <v-tooltip top class="hidden-xs-only" v-if="canDelete">
           <v-btn icon small fab class="hidden-xs-only" v-if="canDelete" slot="activator" color="error" @click="deletePost" alt="حذف دل‌نوشته">

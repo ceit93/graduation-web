@@ -132,7 +132,7 @@
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
             
-            <v-list-tile
+            <v-list-tile>
               v-if="canDelete"
               <v-list-tile-title class="blue&#45;&#45;text">
                 <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>

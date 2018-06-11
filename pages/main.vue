@@ -1,18 +1,13 @@
 <template>
-    <v-container fluid style="background-color: rgba(85, 85, 85, 0.38)">
-        <v-layout align-center justify-center row class="mx-0">
-
-            <v-card tile flat
-                    v-for="(item, index) in studentsArray" :key="index" :href="'/content/wall/' + item.username">
-                    <v-avatar tile size="100px"><img :src="item.avatar">
-                        <div class="cover"></div>
-                    </v-avatar>
-                                    <!--<span>{{item.name}}</span>-->
-            </v-card>
-                    <!--</v-btn>-->
-                <!--</div>-->
-        </v-layout>
-    </v-container>
+  <v-container grid-list-xl>
+    <v-layout row wrap>
+      <v-flex v-for="(item, index) in studentsArray" :key="index">
+        <v-avatar size="100px">
+          <img :src="$helper.avatar(item)">
+        </v-avatar>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -51,13 +46,4 @@
   }
 </script>
 <style>
-    .cover{
-        position: absolute;
-        background-color: rgba(62, 62, 62, 0.38);
-        width: 100%;
-        height: 100%;
-    }
-    .cover:hover{
-        background-color: rgba(132, 132, 132, 0);
-    }
 </style>

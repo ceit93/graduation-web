@@ -11,23 +11,24 @@
             <post-editor :post="composed" :recipientLocked="false" :people="prettyPeople"></post-editor>
           </v-card-text>
           <v-card-actions>
-            <v-container fluid>
-              <v-layout align-center justify-center row wrap class="text-xs-center">
-                <input :v-model="composed.file" name="image" type="file" ref="file" accept="image/*" style="display: none;">
-                <v-flex xs12 md4>
-                  <v-btn @click="clear" large color="warning" type="button">
+            <v-container>
+              <v-layout align-center justify-center row wrap class="text-xs-center mx-0">
+                <input :v-model="composed.file" @change="imageUploaded" name="image" type="file" ref="file"
+                       accept="image/*" style="display: none;">
+                <v-flex xs12 md4 class="px-1 my-1">
+                  <v-btn @click="clear" large color="warning" type="button" block class="mx-0">
                     <v-icon small>refresh</v-icon>
                     شروع مجدد
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 md4 class="mt-2">
-                  <v-btn @click="clickFile" large type="button">
+                <v-flex xs12 md4 class="px-1 my-1">
+                  <v-btn @click="clickFile" large type="button" block class="mx-0">
                     <v-icon small>cloud_upload</v-icon>
                     آپلود عکس
                   </v-btn>
                 </v-flex>
-                <v-flex xs12 md4 class="mt-2">
-                  <v-btn color="success" large type="submit">
+                <v-flex xs12 md4 class="px-1 my-1">
+                  <v-btn color="success" large type="submit" block class="mx-0">
                     <v-icon small>check</v-icon>
                     ثبت دل‌نوشته
                   </v-btn>
@@ -43,16 +44,19 @@
 
 <script>
   import PostEditor from '~/components/Content/Posts/PostEditor'
+
   export default {
     name: "index",
     layout: 'content',
     components: {PostEditor},
     data() {
       return {
+        image: undefined,
         composed: {
           recipient: '',
           title: '',
           body: '',
+          image: ''
         },
         valid: true
       }
@@ -60,7 +64,7 @@
     computed: {
       prettyPeople() {
         let res = []
-        for (let person of this.people){
+        for (let person of this.people) {
           person.name = this.$persianJS.userName(person)
           person.avatar = this.$helper.avatar(person)
           res.push(person)
@@ -69,12 +73,12 @@
         return res
       }
     },
-    asyncData(context){
+    asyncData(context) {
       return context.$axios.get('users/students')
         .then(e => {
           return {people: e.data}
         }).catch(e => {
-          context.error({ statusCode: 500, message: 'خطای سرور...' })
+          context.error({statusCode: 500, message: 'خطای سرور...'})
         })
     },
     notifications: {
@@ -90,17 +94,25 @@
       }
     },
     methods: {
-      clear(){
+      clear() {
         this.$refs.post.reset()
         this.$refs.file.value = ''
       },
       clickFile() {
         this.$refs.file.click()
       },
+      imageUploaded(e) {
+        this.image = e.target.files[0];
+        let reader = new FileReader();
+        reader.onload = () => {
+          this.composed.image = reader.result
+        };
+        reader.readAsDataURL(this.image);
+      },
       submitPost(e) {
         e.preventDefault();
         if (this.$refs.post.validate()) {
-          let image = e.target[3].files[0]
+          let image = this.image;
           // recipient Object ID
           let recipient = this.people.filter(x => x._id === this.composed.recipient);
           if (recipient.length !== 1)

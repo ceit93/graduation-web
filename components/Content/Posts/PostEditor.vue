@@ -21,7 +21,7 @@
           :cache_items="true"
           :dense="true"
           :flat="true"
-        ></search-select>
+        />
       </v-flex>
       <v-flex xs12>
         <v-text-field
@@ -43,7 +43,9 @@
           placeholder="یادش بخیر اون زمونا..."/>
       </v-flex>
       <v-flex xs12 md3 v-if="this.$helper.isValid(post.image)">
-        <img :src="post.image" width="100%">
+        <img :src="post.image"
+             class="pt-3"
+             width="100%">
       </v-flex>
     </v-layout>
   </v-container>

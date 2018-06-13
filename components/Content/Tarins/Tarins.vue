@@ -73,7 +73,7 @@
       },
       computed: {
         pagesCount() {
-          return Math.ceil(this.people.length / this.perPage)
+          return Math.ceil(this.votes.length / this.perPage)
         }
       },
       methods: {

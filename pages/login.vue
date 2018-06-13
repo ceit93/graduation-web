@@ -66,6 +66,7 @@
       onLoginError(e) {
         this.showLoginError()
         this.$nuxt.$router.replace({'path' : '/login'})
+        console.log(e)
       }
     },
     async mounted () {
@@ -98,4 +99,3 @@
     background-color: #29b473;
   }
 </style>
-

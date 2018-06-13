@@ -59,7 +59,7 @@
         miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
-          { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
+          // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
           { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},
         ],
         title: 'فارغ‌التحصیلی ۹۳',

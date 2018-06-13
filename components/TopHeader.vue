@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer
+      disable-resize-watcher
       class="hidden-md-and-up light-blue darken-4"
       :mini-variant.sync="miniVariant"
       :clipped="clipped"

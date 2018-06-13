@@ -116,7 +116,7 @@
           <span>حذف دل‌نوشته</span>
         </v-tooltip>
 
-        <v-menu bottom left class="hidden-sm-and-up">
+        <v-menu bottom left class="hidden-sm-and-up" v-if="canDelete || canApprove || canDisapprove">
           <v-btn slot="activator" icon>
             <v-icon>more_horiz</v-icon>
           </v-btn>
@@ -131,14 +131,16 @@
               @click="dissaprovePost">
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
-            
+
             <v-list-tile
-              v-if="canDelete"
+              v-if="canDelete">
               <v-list-tile-title class="blue&#45;&#45;text">
-                <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
+                <v-list-tile-title class="blue--text">
+                  <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
+                </v-list-tile-title>
               </v-list-tile-title>
             </v-list-tile>
-            
+
             <v-list-tile
               v-if="canDelete"
               @click="deletePost">
@@ -155,7 +157,7 @@
       <v-card-text>
         <div style="text-align:justify;" class="pa-2">
           <span class="iranblack">{{this.$persianJS.userName(postData.user)}}:</span>
-          <div v-html="postData.body" style="white-space: pre-line;"></div>
+          <div style="white-space: pre-line;">{{postData.body}}</div>
         </div>
       </v-card-text>
       <div style="clear: both"></div>

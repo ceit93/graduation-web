@@ -31,7 +31,7 @@
     "vue-notifications": "^0.9.0",
     "vue-quill-editor": "^3.0.6",
     "vue-tabs-component": "^1.4.0",
-    "vuetify": "^1.0.18"
+    "vuetify": "^1.0.18",
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

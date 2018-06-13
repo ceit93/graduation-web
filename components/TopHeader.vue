@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer
+      disable-resize-watcher
       class="hidden-md-and-up light-blue darken-4"
       :mini-variant.sync="miniVariant"
       :clipped="clipped"
@@ -59,7 +60,7 @@
         miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
-          // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'}, TODO uncomment this line
+          // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
           { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},
         ],
         title: 'فارغ‌التحصیلی ۹۳',

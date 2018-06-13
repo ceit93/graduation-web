@@ -116,7 +116,7 @@
           <span>حذف دل‌نوشته</span>
         </v-tooltip>
 
-        <v-menu bottom left class="hidden-sm-and-up">
+        <v-menu bottom left class="hidden-sm-and-up" v-if="canDelete || canApprove || canDisapprove">
           <v-btn slot="activator" icon>
             <v-icon>more_horiz</v-icon>
           </v-btn>
@@ -132,10 +132,12 @@
               <v-list-tile-title class="orange--text">عدم تایید</v-list-tile-title>
             </v-list-tile>
 
-            <v-list-tile>
-              v-if="canDelete"
+            <v-list-tile
+              v-if="canDelete">
               <v-list-tile-title class="blue&#45;&#45;text">
-                <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
+                <v-list-tile-title class="blue--text">
+                  <nuxt-link :to="'/content/wall/edit/' + postData._id">ویرایش دل نوشته</nuxt-link>
+                </v-list-tile-title>
               </v-list-tile-title>
             </v-list-tile>
 

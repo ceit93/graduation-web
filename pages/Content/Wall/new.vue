@@ -136,7 +136,6 @@
           if (recipient._id !== this.$auth.user._id)// Post to someone else's wall
             path += '/wall/' + recipient._id
           let redirect = recipient.username
-          console.log(formData)
           this.submitWithAxios(formData, path, redirect)
         }
       },

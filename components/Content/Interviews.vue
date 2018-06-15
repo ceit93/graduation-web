@@ -74,9 +74,6 @@
           return this.interviews.slice(start, start + this.perPage)
         }
       },
-      mounted(){
-        console.log('hello!')
-      },
     }
 </script>
 

@@ -168,7 +168,7 @@
 
 <script>
   export default {
-    props: ['postData', 'belongsToLoggedInUser'],
+    props: ['postData', 'belongsToLoggedInUser', 'showControls'],
     name: "post",
     data(){
       return {
@@ -181,13 +181,13 @@
         return this.$auth.user.username
       },
       canDelete() {
-        return this.postData.user.username === this.$auth.user.username
+        return this.showControls && (this.postData.user.username === this.$auth.user.username)
       },
       canApprove() {
-        return !this.postData.approved && this.belongsToLoggedInUser
+        return this.showControls && (!this.postData.approved && this.belongsToLoggedInUser)
       },
       canDisapprove() {
-        return this.postData.approved && this.belongsToLoggedInUser
+        return this.showControls && (this.postData.approved && this.belongsToLoggedInUser)
       }
     },
     notifications: {

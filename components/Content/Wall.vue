@@ -46,6 +46,7 @@
            :key="index">
         <post
           :postData="post"
+          :showControls="true"
           :belongsToLoggedInUser="access"
           @approved="approved(index)"
           @deleted="removed(index)"

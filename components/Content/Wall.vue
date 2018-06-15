@@ -61,7 +61,7 @@
     export default {
       components: {Post},
       props: ['user', 'canHaveWall'],
-      name: "wall",
+      name: "Wall",
       data() {
         return {
           dialog: false

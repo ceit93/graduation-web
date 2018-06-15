@@ -82,9 +82,9 @@
           </v-dialog>
         </span>
         <v-spacer></v-spacer>
-        <span class="grey--text text--lighten-1">
-            {{postData.date | moment('HH:MM jYYYY/jMM/jD') | makeParsi}}
-        </span>
+        <!--<span class="grey&#45;&#45;text text&#45;&#45;lighten-1">-->
+            <!--{{this.$persianJS.englishNumber(postData.updated_at)}}-->
+        <!--</span>-->
 
 
         <v-tooltip top class="hidden-xs-only" v-if="canApprove">
@@ -174,12 +174,6 @@
       return {
         dialog: false,
         dialog2: false
-      }
-    },
-    filters: {
-      makeParsi: function (value) {
-        if (!value) return '';
-        return persianJs(value.toString()).englishNumber().toString();
       }
     },
     computed: {

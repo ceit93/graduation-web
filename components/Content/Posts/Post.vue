@@ -169,7 +169,7 @@
 <script>
   export default {
     props: ['postData', 'belongsToLoggedInUser', 'showControls'],
-    name: "post",
+    name: "Post",
     data(){
       return {
         dialog: false,

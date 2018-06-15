@@ -37,7 +37,6 @@
     export default {
       name: "ProfileSlug",
       components: {Post},
-      middleware: 'admin',
       asyncData(context) {
         return context.$axios.get(`/users/${context.params.slug}`)
           .then((res) => {

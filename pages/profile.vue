@@ -7,7 +7,7 @@
 
 <script>
   import Countdown from '~/components/Profile/Countdown.vue'
-  import Identity from "../../components/Profile/Identity";
+  import Identity from "../components/Profile/Identity";
   export default {
     name: "index",
     data() {

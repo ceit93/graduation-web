@@ -20,8 +20,10 @@
         <v-flex xs11 md8>
           <div v-for="post in user.posts" :key="post._id">
             <post
+              v-if="post.approved"
               :postData="post"
-              :belongsToLoggedInUser="false">
+              :belongsToLoggedInUser="false"
+              :showControls="false">
             </post>
           </div>
         </v-flex>

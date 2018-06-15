@@ -34,7 +34,7 @@
           <v-dialog v-model="dialog">
             <v-chip color="info" text-color="white" slot="activator" @click.native.stop="dialog = true" small>
               <v-icon small>check</v-icon>
-              تایید شده (؟)
+              (؟)
             </v-chip>
             <v-card>
               <v-card-text>

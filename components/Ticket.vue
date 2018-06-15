@@ -37,7 +37,7 @@
         type: Object
       },
     },
-    name: "ticket",
+    name: "Ticket",
     data() {
       return {
         footerText: 'جشن در روز 1397/4/28 در ساعت 17:00 در محل آمفی تئاتر مولوی برگزار خواهد شد.'

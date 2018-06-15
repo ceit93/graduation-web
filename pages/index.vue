@@ -18,7 +18,7 @@
                 :src="$helper.avatar(item)">
             </v-avatar>
             <h3 class="iranblack light-blue--text text--darken-3">{{$persianJS.arabicChar(item.name)}}</h3>
-            <p class="text-xs-center grey--text pt-1 pb-3">{{$persianJS.englishNumber(item.std_numbers)}}</p>
+            <p class="iranblack caption text-xs-center grey--text pt-1 pb-3">{{$persianJS.englishNumber(item.std_numbers)}}</p>
           </nuxt-link>
         </div>
       </v-flex>

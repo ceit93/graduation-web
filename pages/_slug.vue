@@ -10,7 +10,8 @@
                 :src="this.$helper.avatar(user)">
             </v-avatar>
             <h1 class="iranblack light-blue--text text--darken-3 mt-2">{{this.$persianJS.userName(user)}}</h1>
-            <div class="iranblack text-xs-center pt-2 pb-3">{{this.$persianJS.englishNumber(user.std_numbers)}}</div>
+            <div class="iranblack text-xs-center pt-2">{{this.$persianJS.englishNumber(user.std_numbers)}}</div>
+            <div class="iranblack text-xs-center pb-3"><a :href="`mailto:${user.email}`" target="_blank">{{user.email}}</a> </div>
             <div v-for="interview in user.interviews" v-if="$helper.isValid(interview.answer)" :key="interview._id" class="text-xs-right mr-3">
               <span class="caption iranblack text-xs-center blue-grey--text">{{interview.question.text}}؟</span>&nbsp;
               <span class="caption blue-grey--text text--darken-4">{{interview.answer}}</span>
@@ -37,13 +38,24 @@
     export default {
       name: "ProfileSlug",
       components: {Post},
-      asyncData(context) {
-        return context.$axios.get(`/users/${context.params.slug}`)
+      async asyncData(context) {
+        let user = await context.$axios.get(`/users/${context.params.slug}`)
           .then((res) => {
-            return {user: res.data.user}
+            return res.data.user
           }).catch(e => {
             context.error({ statusCode: 404, message: 'کاربر مورد نظر یافت می‌نشود...' })
           })
+        let questions = await context.$axios.get('/questions')
+          .then((res) => {
+            return res.data.questions
+          }).catch(e => {
+            context.error({statusCode: 500, message: 'خطای سرور...'})
+          })
+        let temp = questions.map(x => {
+          return {question: x, answer: ''}
+        })
+        user.interviews = temp.map(x => Object.assign(x, user.interviews.find(interview => interview.question._id === x.question._id)))
+        return {user: user}
       },
     }
 </script>

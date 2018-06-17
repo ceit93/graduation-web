@@ -1,5 +1,5 @@
 <template>
-<v-content class="login-content">
+  <v-content class="login-content">
     <v-container>
       <v-card flat class="transparent">
         <v-card-text class="text-xs-center">
@@ -34,7 +34,7 @@
 <script>
   export default {
     layout: 'landing',
-    name: 'login',
+    name: 'Index',
     computed: {
       code () {
         return this.$route.query.code

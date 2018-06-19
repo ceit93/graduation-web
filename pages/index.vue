@@ -8,6 +8,7 @@
           <h3 class="iranblack">دانشگاه صنعتی امیرکبیر (پلی‌تکنیک تهران)</h3>
         </v-flex>
       </v-layout>
+      <countdown date="June 23, 2018" :button="button"></countdown>
       <v-layout row wrap align-center justify-center>
         <v-flex xs6 sm4 md3 lg2 v-for="(item, index) in studentsArray" :key="index">
           <div class="text-xs-center no-underline">
@@ -29,11 +30,20 @@
 </template>
 
 <script>
+  import Countdown from "../components/Profile/Countdown";
   export default {
     name: "index",
+    components: {Countdown},
     data(){
       return {
         students: [],
+        button: {
+          hidden: true,
+          title: 'تکمیل محتوا',
+          outline: false,
+          disabled: true,
+          to: '/content'
+        },
       }
     },
     computed: {

@@ -24,7 +24,7 @@
             <v-dialog v-model="dialog" max-width="300px">
               <v-chip color="red" outline dark slot="activator" @click.native.stop="dialog = true">این شمارش‌گر چیه؟</v-chip>
               <v-card>
-                <v-card-title><h3 class="red--text darken-4">فقط تا ساعت ۲۳:۵۹ روز جمعه ۱ خرداد مهلت تکمیل محتوا برای نشریه را دارید.</h3></v-card-title>
+                <v-card-title><h3 class="red--text darken-4">فقط تا ساعت ۲۳:۵۹ روز جمعه ۱ تیر مهلت تکمیل محتوا برای نشریه را دارید.</h3></v-card-title>
                 <v-card-text>
                   <p>پس از مهلت فوق، محتوا برای نشریه به روز نخواهد شد ولی کماکان می‌توانید از طریق این وب‌اپلیکیشن برای دوستان خود دل‌نوشته بنویسید.</p>
                   <p>بدیهی‌است دل‌نوشته‌های نوشته شده پس از تاریخ فوق، فقط در این‌جا و در نسخه آنلاین یادگاری‌ها نمایش داده خواهند شد.</p>

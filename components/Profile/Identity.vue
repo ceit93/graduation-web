@@ -3,7 +3,7 @@
     <v-layout align-center justify-center row class="mx-0">
       <v-flex xs12 align-center justify-center>
         <!--Credits: http://fareez.info/blog/countdown-timer-using-vuejs/-->
-        <v-layout row wrap class="ltr mt-5 light-blue--text text--darken-3 mx-0">
+        <v-layout row wrap class="mt-5 light-blue--text text--darken-3 mx-0">
           <v-flex xs12 md3 class="text-xs-center">
             <avatar></avatar>
           </v-flex>

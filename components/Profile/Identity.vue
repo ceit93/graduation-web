@@ -3,7 +3,7 @@
     <v-layout align-center justify-center row class="mx-0">
       <v-flex xs12 align-center justify-center>
         <!--Credits: http://fareez.info/blog/countdown-timer-using-vuejs/-->
-        <v-layout row wrap class="ltr mt-5 light-blue--text text--darken-3 mx-0">
+        <v-layout row wrap class="mt-5 light-blue--text text--darken-3 mx-0">
           <v-flex xs12 md3 class="text-xs-center">
             <avatar></avatar>
           </v-flex>
@@ -13,7 +13,7 @@
               <h3 class="iranblack">خوش اومدی!</h3> <br>
               <p>اینجا سایت فارغ‌التحصیلی ما ۹۳‌ای‌هاس و با همین وب‌اپلیکیشن باید مطالب نشریه رو کامل کنیم و بخشی از کارای جشن
                 رو انجام بدیم.</p>
-              <p>لطفا تا قبل از موعد تکمیل محتوا (۳۱ خرداد)، مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل
+              <p>لطفا تا قبل از موعد تکمیل محتوا مطالب مربوط به نشریه و پروفایل و ترین‌ها و ... رو کامل
                 کنید.</p>
               <p>اینجا رو هم تند تند چک کنید لطفا چون مرتب آپدیت می‌کنیمش!</p>
             </div>

@@ -60,6 +60,7 @@
         miniVariant: false,
         items: [
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
+          { icon: 'mdi-alert-octagon', title: 'اطلاع‌رسانی', to: '/news'},
           { icon: 'mdi-account', title: 'پروفایل', to: '/profile'},
           // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
           { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},

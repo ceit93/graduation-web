@@ -1,7 +1,7 @@
 <template>
   <div class="grey lighten-5">
     <identity></identity>
-    <countdown date="June 21, 2018" :button="button"></countdown>
+    <countdown date="June 23, 2018" :button="button"></countdown>
   </div>
 </template>
 
@@ -19,30 +19,9 @@
           disabled: false,
           to: '/content'
         },
-        notifs: []
       }
     },
-    notifications: {
-      showNotif: {
-        title: 'یک پیام جدید...',
-        message: 'محتوای پیام...',
-        type: 'info'
-      }
-    },
-    asyncData(context) {
-      return context.$axios.get('/notifications')
-        .then((res) => {
-          return { notifs: res.data.notifications }
-        }).catch(e => {
-          context.error({statusCode: 500, message: 'خطای سرور...'})
-        })
-    },
-    mounted() {
-      this.notifs.forEach(notif => {
-        this.showNotif(notif)
-      })
-    },
-    components: {Identity, Countdown },
+    components: {Identity, Countdown},
   }
 </script>
 

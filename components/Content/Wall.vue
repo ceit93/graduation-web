@@ -28,7 +28,10 @@
           </v-card-media>
         </v-card>
       </v-dialog>
-      <h3 class="title iranblack">دیوارِ {{this.$persianJS.userName(user)}}</h3>
+      <h3 class="title iranblack">دیوارِ {{this.$persianJS.userName(user)}}</h3> &nbsp;
+      <span class="caption grey--text text--lighten-1">
+            {{this.$persianJS.englishNumber(postsLength)}} کاراکتر
+      </span>
     </v-card-title>
     <v-card-text>
       <h2 v-if="this.canHaveWall && (user.posts === null || user.posts.length === 0)" class="grey--text text-xs-center">ای بابا :(</h2>
@@ -71,6 +74,14 @@
         access() {
           return this.user.username === this.$auth.user.username
         },
+        postsLength() {
+          let sum = 0
+          this.user.posts.forEach(p => {
+            if (p.approved)
+              sum += p.body.length
+          })
+          return sum
+        }
       },
       notifications: {
         showError: {

@@ -82,7 +82,7 @@
           </v-dialog>
         </span>
         <v-spacer></v-spacer>
-        <span class="grey--text text--lighten-1">
+        <span class="caption grey--text text--lighten-1">
             {{this.$persianJS.englishNumber(postData.body.length)}} کاراکتر
         </span>
 

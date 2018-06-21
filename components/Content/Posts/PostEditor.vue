@@ -39,6 +39,7 @@
           required
           textarea
           :rows="8"
+          :counter="2000"
           label="متن دل‌نوشته"
           placeholder="یادش بخیر اون زمونا..."/>
       </v-flex>

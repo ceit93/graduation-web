@@ -34,6 +34,7 @@
   export default {
     name: "index",
     components: {Countdown},
+    auth: false,
     data(){
       return {
         students: [],
@@ -42,7 +43,7 @@
           title: 'تکمیل محتوا',
           outline: false,
           disabled: true,
-          to: '/content'
+          to: '/content',
         },
       }
     },

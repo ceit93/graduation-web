@@ -37,6 +37,7 @@
     import Post from "../components/Content/Posts/Post";
     export default {
       name: "ProfileSlug",
+      auth: false,
       components: {Post},
       async asyncData(context) {
         let user = await context.$axios.get(`/users/${context.params.slug}`)

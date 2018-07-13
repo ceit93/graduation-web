@@ -10,16 +10,19 @@
             v-if="selfPayed"
             class="green text-xs-center justify-content-center register-title"
           >
+
             <div class="caption">
               <div>
-                شما قبلا هزینه ثبت نام خود را پرداخت کرده اید.
+                شما تا به حال {{this.$persianJS.englishNumber(30)}} هزار تومان از هزینه جشن خود را پرداخت کرده اید.
               </div>
               <div> حالا می توانید هزینه همراهان خود را در اینجا پرداخت کنید.</div>
 
             </div>
 
           </v-card-title>
+
           <v-card-text>
+
             <v-form ref="form" v-model="valid">
               <v-layout row class="align-items-center justify-content-center">
                 <v-flex xs10
@@ -41,7 +44,17 @@
 
 
                 </v-flex>
+
                 <span class="title blue g-w-100 white--text pa-3 text-xs-center elevation-3">
+                  <v-tooltip bottom>
+                    <v-icon
+                      slot="activator"
+                      color="white"
+                      light
+                    >info</v-icon>
+                      <div>هزینه به ازای هر دانشجو : {{this.$persianJS.englishNumber(45)}} هزار تومان</div>
+                      <div>هزینه به ازای هر همراه : {{this.$persianJS.englishNumber(30)}} هزار تومان</div>
+                  </v-tooltip>
                   <span>
                     هزینه ثبت نام:
                   </span>
@@ -158,7 +171,7 @@
        * @returns {number}
        */
       cost: function (val) {
-        return (this.selfPayed ? 0 : 30) + (this.fields[2].value * 30);
+        return (this.selfPayed ? 15 : 45) + (this.fields[2].value * 30);
       }
     },
   }

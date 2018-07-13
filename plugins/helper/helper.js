@@ -10,7 +10,7 @@ export default {
           }
           return '/' + object.gender + '-avatar.png'
         }
-        return '/avatar.png'
+        return '/undefined-avatar.png'
       },
       sortBy: function(array, sortBy) {
         return array.sort((a,b) => {

@@ -178,7 +178,10 @@
     },
     computed: {
       username() {
-        return this.$auth.user.username
+        if (this.$auth.loggedIn)
+          return this.$auth.user.username
+        else
+          return 'کاربر ناشناس'
       },
       canDelete() {
         return this.showControls && (this.postData.user.username === this.$auth.user.username)

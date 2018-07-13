@@ -21,6 +21,7 @@
           exact
           class="ceit-tile"
         >
+
           <v-list-tile-action>
             <v-icon v-html="item.icon"></v-icon>
           </v-list-tile-action>

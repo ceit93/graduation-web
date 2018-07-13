@@ -43,7 +43,7 @@
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat v-for="item in items" :to="item.to" exact :key="item.title">{{item.title}}</v-btn>
+        <v-btn flat v-for="item in items" :class="item.color" style="border-radius: 0px" :to="item.to" exact :key="item.title">{{item.title}}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -62,7 +62,7 @@
           { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
           { icon: 'mdi-alert-octagon', title: 'اطلاع‌رسانی', to: '/news'},
           { icon: 'mdi-account', title: 'پروفایل', to: '/profile'},
-          // { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register'},
+          { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register',color:'green darken-1'},
           { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},
         ],
         title: 'فارغ‌التحصیلی ۹۳',
@@ -81,5 +81,8 @@
   .user-button {
     margin-left: 20px;
     margin-right: 20px;
+  }
+  .register{
+    background-color: green!important;
   }
 </style>

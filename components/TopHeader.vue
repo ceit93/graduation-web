@@ -36,9 +36,15 @@
       <v-btn :to="'/'" nuxt icon class="user-button">
         <v-avatar
           :tile="true"
-          :size="50"
-        >
+          :size="50">
           <img src="/logo.png" alt="بهترین وب‌اپلیکیشن فارغ‌التحصیلی">
+        </v-avatar>
+      </v-btn>
+      <v-btn href="http://mehmano.com/" flat fab >
+        <v-avatar
+          :tile="true"
+          :size="40">
+          <img src="/meh.png" alt="بهترین وب‌اپلیکیشن فارغ‌التحصیلی">
         </v-avatar>
       </v-btn>
       <v-toolbar-title v-text="title" class="title"></v-toolbar-title>

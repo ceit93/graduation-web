@@ -2,11 +2,17 @@
   <v-content class="login-content">
     <v-container>
       <v-card flat class="transparent">
-        <v-card-text class="text-xs-center">
+        <v-card-text class="text-xs-center pb-0">
           <div class="d-flex justify-content-center">
             <v-flex xs12 sm12 md5 style="flex: none !important;">
               <img src="/web-cover-min.png" width="100%"/>
             </v-flex>
+          </div>
+          <div class="title py-2">با همکاری:</div>
+          <div class="d-flex justify-content-center">
+            <a href="http://mehmano.com/  ">
+              <img src="/meh.png" class="sponsor-logo-big">
+            </a>
           </div>
           <v-btn
             v-if="this.$auth.loggedIn || this.$helper.isValid(this.code)"
@@ -27,6 +33,8 @@
               dark
               color="grey darken-4">ورود با شناسه یکتای امیرکبیر</v-btn>
           </div>
+
+
           <div class="d-flex justify-content-center">
             <v-btn
               v-if="!this.$auth.loggedIn && !this.$helper.isValid(this.code)"
@@ -182,5 +190,10 @@
 
   .login-content {
     background-color: #29b473;
+  }
+  .sponsor-logo-big{
+    width: 120px;
+    height: 100px;
+    flex: none!important;
   }
 </style>

@@ -95,15 +95,15 @@
             v-model="dialog"
             width="500"
           >
-            <v-btn
-              slot="activator"
-              color="primary"
-              dark
-              block
-            >
-              <v-icon>mdi-plus</v-icon>
-              اضافه کردن مهمان
-            </v-btn>
+            <!--<v-btn-->
+              <!--slot="activator"-->
+              <!--color="primary"-->
+              <!--dark-->
+              <!--block-->
+            <!--&gt;-->
+              <!--<v-icon>mdi-plus</v-icon>-->
+              <!--اضافه کردن مهمان-->
+            <!--</v-btn>-->
 
             <v-card>
 

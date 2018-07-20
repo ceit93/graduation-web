@@ -46,7 +46,6 @@
       auth: false,
       components: {
         Post},
-      middleware: 'admin',
       async asyncData(context) {
         return context.$axios.get(`/users/${context.params.slug}`)
           .then((res) => {

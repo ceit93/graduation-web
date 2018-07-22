@@ -11,7 +11,7 @@
     <v-card-text
       class="mt-4 text-xs-center">
       <div>
-        <p class="text-xs-center">هم ورودی عزیز، ثبت نام شما با مشخصات زیر انجام شد.</p>
+        <p class="text-xs-center">{{title}}</p>
       </div>
       <v-divider/>
       <div class="ticket-text mt-3">
@@ -36,6 +36,10 @@
       data: {
         type: Object
       },
+      title:{
+        type:String,
+        default:'هم ورودی عزیز، ثبت نام شما با مشخصات زیر انجام شد.'
+      }
     },
     name: "Ticket",
     data() {

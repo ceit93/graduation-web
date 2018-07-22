@@ -86,10 +86,69 @@
 
       <v-flex
         v-else
-        class="mt-5 mx-auto"
+        class="mt-5 mx-auto justify-content-center"
         md4 xs12>
         <ticket
           :data="ticket"/>
+        <div class="d-flex justify-content-center">
+          <v-dialog
+            v-model="dialog"
+            width="500"
+          >
+            <!--<v-btn-->
+              <!--slot="activator"-->
+              <!--color="primary"-->
+              <!--dark-->
+              <!--block-->
+            <!--&gt;-->
+              <!--<v-icon>mdi-plus</v-icon>-->
+              <!--اضافه کردن مهمان-->
+            <!--</v-btn>-->
+
+            <v-card>
+
+
+              <v-card-text>
+                <div class="d-flex align-items-center my-3">
+                  <span>تعداد همراهان</span>
+                  <span><input type="number" v-model="familyInDialog" :min="ticket.family"
+                               class="ceit-add-family-input"></span>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center my-3">
+                  <span>
+                    هزینه ثبت نام:
+                  </span>
+                  <span>
+                      <span style="font-size: 30px">
+                        {{this.$persianJS.englishNumber((familyInDialog-ticket.family) * 30)}}
+                      </span>
+
+                    <span style="font-size: 9px;">
+                      هزار تومان
+                    </span>
+                  </span>
+
+
+                </div>
+
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn
+                  color="primary"
+                  :disabled="familyInDialog <= ticket.family"
+                  @click="addFamily()"
+                >
+                  پرداخت
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-flex>
     </v-layout>
   </v-container>
@@ -105,6 +164,8 @@
     name: "Index",
     data() {
       return {
+        familyInDialog: 0,
+        dialog: false,
         selfPayed: '',
         valid: true,
         status: false,
@@ -139,6 +200,10 @@
         ]
       }
     },
+    created() {
+      if (this.status)
+        this.familyInDialog = this.ticket.family;
+    },
     methods: {
       async submit() {
         if (this.$refs.form.validate()) {
@@ -156,6 +221,19 @@
 
           }
 
+        }
+      },
+      async addFamily(){
+        if(this.familyInDialog <= this.ticket.family){
+
+        }else {
+          try {
+            let result = await this.$axios.post('/payment/add', {newFamily:this.familyInDialog});
+            window.location = result.data.gateway.url
+
+          } catch (e) {
+
+          }
         }
       }
     },
@@ -180,5 +258,13 @@
 <style scoped>
   .register-title {
     color: white;
+  }
+
+  .ceit-add-family-input {
+    background-color: lightgray;
+    padding: 5px;
+    width: 100%;
+    border-radius: 3px;
+
   }
 </style>

@@ -41,29 +41,25 @@
 
 <script>
     import Post from "../components/Content/Posts/Post";
+    import users from "~/static/data/users.json";
+    import questions from "~/static/data/questions.json";
+    import interviews from "~/static/data/interviews.json";
     export default {
       name: "ProfileSlug",
       auth: false,
       components: {
         Post},
       async asyncData(context) {
-        return context.$axios.get(`/users/${context.params.slug}`)
-          .then((res) => {
-            return {user:
-            res.data.user}
-          }).catch(e => {
-            context.error({ statusCode: 404, message: 'کاربر مورد نظر یافت می‌نشود...' })
-          })
-        let questions = await context.$axios.get('/questions')
-          .then((res) => {
-            return res.data.questions
-          }).catch(e => {
-            context.error({statusCode: 500, message: 'خطای سرور...'})
-          })
-        let temp = questions.map(x => {
-          return {question: x, answer: ''}
-        })
-        user.interviews = temp.map(x => Object.assign(x, user.interviews.find(interview => interview.question._id === x.question._id)))
+        let temp = questions.map(x => {return {question: x, answer: ''}})
+        let username = context.params.slug
+        let user = users.find(u => u.username === username)
+        for (let i in user.interviews){
+          let id = user.interviews[i]
+          let interv = interviews.find(u => u._id === id)
+          interv.question = questions.find(q => q._id === interv.question)
+          user.interviews[i] = interv
+        }
+        console.log(user.interviews)
         return {user: user}
       },
       data(){

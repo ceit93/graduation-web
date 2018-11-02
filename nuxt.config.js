@@ -62,10 +62,10 @@ module.exports = {
       {property: 'og:locale', content: 'fa_IR'},
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-      {rel: 'icon', type: 'image/png', href: '/favicon-32x32.png', sizes:'32x32'},
-      {rel: 'icon', type: 'image/png', href: '/favicon-16x16.png', sizes:'16x16'},
-      {rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5'},
+      {rel: 'icon', type: 'image/x-icon', href: 'favicon.ico'},
+      {rel: 'icon', type: 'image/png', href: 'favicon-32x32.png', sizes:'32x32'},
+      {rel: 'icon', type: 'image/png', href: 'favicon-16x16.png', sizes:'16x16'},
+      {rel: 'mask-icon', href: 'safari-pinned-tab.svg', color: '#5bbad5'},
       {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'},
       {rel: 'apple-touch-startup-image', href: 'apple-splash-640x1136.png', media:'(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'},
       {rel: 'apple-touch-startup-image', href: 'apple-splash-750x1294.png', media:'(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'},
@@ -130,10 +130,6 @@ module.exports = {
   },
 
   generate: {
-    routes: [
-      '/',
-      '/',
-      '/'
-    ]
+    routes: ['/', '/amirh'],
   }
 }

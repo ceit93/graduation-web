@@ -19,3 +19,5 @@ yarn.lock
 
 # PWA Module
 sw.*
+
+static/data/*

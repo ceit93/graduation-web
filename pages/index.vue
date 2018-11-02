@@ -31,6 +31,7 @@
 
 <script>
   import Countdown from "../components/Profile/Countdown";
+  import users from "~/static/data/users.json";
   export default {
     name: "index",
     components: {Countdown},
@@ -48,6 +49,20 @@
       }
     },
     computed: {
+      people: function() {
+        return users.filter(function (item) {
+          if (!item.std_numbers)
+            return false
+          let regex = /^9331[0-9]{3}$/
+          let f1 = false
+          for (let num of item.std_numbers)
+            if (num.match(regex))
+              f1 = true
+          if (item.authorized)
+            f1 = true
+          return f1
+        })
+      },
       studentsArray : function() {
         let res = []
         for (let person of this.people){
@@ -60,17 +75,18 @@
       },
     },
 
-    async asyncData (context) {
-      let {people} = await context.$axios.get('/users/students')
-        .then((res) => {
-          return { people: res.data }
-        }).catch(e => {
-          context.error({statusCode: 500, message: 'خطای سرور...'})
-        })
-      return {
-        people: people
-      }
-    },
+    // async asyncData (context) {
+    //   let {people} = await context.$axios.get('/users.json')
+    //     .then((res) => {
+    //       console.log(res.data)
+    //       return { people: res.data }
+    //     }).catch(e => {
+    //       context.error({statusCode: 500, message: 'خطای سرور...'})
+    //     })
+    //   return {
+    //     people: people
+    //   }
+    // },
   }
 </script>
 

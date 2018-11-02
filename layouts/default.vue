@@ -4,7 +4,7 @@
       <v-container fluid full-height>
         <v-content style="height: 100%">
           <nuxt/>
-          <speed-dial :actions="actions" @up="goUp" @back="goBack" @logout="logout"></speed-dial>
+          <!--<speed-dial :actions="actions" @up="goUp" @back="goBack" @logout="logout"></speed-dial>-->
         </v-content>
       </v-container>
       <bottom-footer></bottom-footer>

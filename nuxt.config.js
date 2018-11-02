@@ -29,21 +29,21 @@ module.exports = {
     }
   },
   router: {
-    middleware: ['auth']
+    // middleware: ['auth']
   },
 
   axios: {
     port: '3000',
-    prefix: '/api/',
+    prefix: '/data/',
     https: true,
     proxyHeaders: false,
     proxy: true, // Can be also an object with default options
     debug: false
   },
 
-  proxy: {
-    '/api': process.env.PROXY_API_URL || 'http://localhost:3000/',
-  },
+  // proxy: {
+  //   '/api': process.env.PROXY_API_URL || 'http://localhost:3000/',
+  // },
   plugins: [
     '~plugins/vuetify.js',
     '~plugins/tabs.js',
@@ -127,5 +127,13 @@ module.exports = {
     short_name: "CEIT 93",
     theme_color: "#01579B",
     background_color: "#ffffff",
+  },
+
+  generate: {
+    routes: [
+      '/',
+      '/',
+      '/'
+    ]
   }
 }

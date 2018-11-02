@@ -66,11 +66,11 @@
         fixed: false,
         miniVariant: false,
         items: [
-          { icon: 'mdi-message-text', title: 'محتوا', to: '/content'},
-          { icon: 'mdi-alert-octagon', title: 'اطلاع‌رسانی', to: '/news'},
-          { icon: 'mdi-account', title: 'پروفایل', to: '/profile'},
+          { icon: 'mdi-message-text', title: 'آمار', to: '/visualization'},
+          // { icon: 'mdi-alert-octagon', title: 'اطلاع‌رسانی', to: '/news'},
+          // { icon: 'mdi-account', title: 'پروفایل', to: '/profile'},
 //          { icon: 'mdi-account-plus', title: 'ثبت‌نام جشن', to: '/register',color:'green darken-1'},
-          { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},
+//           { icon: 'mdi-exit-to-app', title: 'خروج', to: '/logout'},
         ],
         title: 'فارغ‌التحصیلی ۹۳',
       }

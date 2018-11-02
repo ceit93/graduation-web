@@ -50,7 +50,6 @@
       components: {
         Post},
       async asyncData(context) {
-        let temp = questions.map(x => {return {question: x, answer: ''}})
         let username = context.params.slug
         let user = users.find(u => u.username === username)
         for (let i in user.interviews){
@@ -59,8 +58,19 @@
           interv.question = questions.find(q => q._id === interv.question)
           user.interviews[i] = interv
         }
-        console.log(user.interviews)
-        return {user: user}
+        return context.$axios.get('/posts.json')
+          .then((res) => {
+            let posts = res.data
+            for (let i in user.posts){
+              let id = user.posts[i]
+              let post = posts.find(p => p._id === id)
+              post.user = users.find(q => q._id === post.user)
+              user.posts[i] = post
+            }
+            return {user: user}
+          }).catch(e => {
+            context.error({statusCode: 500, message: 'خطای سرور...'})
+          })
       },
       data(){
         return{

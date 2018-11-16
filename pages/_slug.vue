@@ -41,9 +41,6 @@
 
 <script>
     import Post from "../components/Content/Posts/Post";
-    import users from "~/static/data/users.json";
-    import questions from "~/static/data/questions.json";
-    import interviews from "~/static/data/interviews.json";
     export default {
       name: "ProfileSlug",
       auth: false,
@@ -51,23 +48,9 @@
         Post},
       async asyncData(context) {
         let username = context.params.slug
-        let user = users.find(u => u.username === username)
-        for (let i in user.interviews){
-          let id = user.interviews[i]
-          let interv = interviews.find(u => u._id === id)
-          interv.question = questions.find(q => q._id === interv.question)
-          user.interviews[i] = interv
-        }
-        return context.$axios.get('/posts.json')
+        return context.$axios.get('/people/'+username+'.json')
           .then((res) => {
-            let posts = res.data
-            for (let i in user.posts){
-              let id = user.posts[i]
-              let post = posts.find(p => p._id === id)
-              post.user = users.find(q => q._id === post.user)
-              user.posts[i] = post
-            }
-            return {user: user}
+            return {user: res.data}
           }).catch(e => {
             context.error({statusCode: 500, message: 'خطای سرور...'})
           })

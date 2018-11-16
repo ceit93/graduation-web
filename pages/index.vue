@@ -31,7 +31,6 @@
 
 <script>
   import Countdown from "../components/Profile/Countdown";
-  import users from "~/static/data/users.json";
   export default {
     name: "index",
     components: {Countdown},
@@ -62,20 +61,12 @@
     },
 
     async asyncData (context) {
-      return {
-        people: users.filter(function (item) {
-          if (!item.std_numbers)
-            return false
-          let regex = /^9331[0-9]{3}$/
-          let f1 = false
-          for (let num of item.std_numbers)
-            if (num.match(regex))
-              f1 = true
-          if (item.authorized)
-            f1 = true
-          return f1
-         })
-      }
+      return context.$axios.get('/people/index.json')
+        .then((res) => {
+          return {people: res.data}
+        }).catch(e => {
+          context.error({statusCode: 500, message: 'خطای سرور...'})
+        })
     },
   }
 </script>

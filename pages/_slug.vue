@@ -13,7 +13,7 @@
             <div class="iranblack text-xs-center pt-2">{{this.$persianJS.englishNumber(user.std_numbers)}}</div>
             <div class="iranblack text-xs-center pb-3"><a :href="`mailto:${user.email}`" target="_blank">{{user.email}}</a> </div>
               <div class="pb-5">
-                  <div class="light-blue--text" v-for="(tarin, index) in user.topTarins" :key="index"
+                  <div class="light-blue--text" v-for="(tarin, index) in user.topTarin.topTarins" :key="index"
                        v-bind:style="{fontSize: 25-2*index + 'px' }">
                       #{{tarin.name}}
                   </div>
@@ -52,12 +52,10 @@
           .then((res) => {
             return {user: res.data}
           }).catch(e => {
-            context.error({statusCode: 500, message: 'خطای سرور...'})
+            context.error({statusCode: 500, message: e})
           })
       },
       data(){
-        return{
-        }
       },
     }
 </script>

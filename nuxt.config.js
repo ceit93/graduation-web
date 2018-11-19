@@ -131,5 +131,6 @@ module.exports = {
 
   generate: {
     routes: ['/', '/amirh'],
+    minify: false,
   }
 }

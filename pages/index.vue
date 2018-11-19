@@ -65,7 +65,8 @@
         .then((res) => {
           return {people: res.data}
         }).catch(e => {
-          context.error({statusCode: 500, message: 'خطای سرور...'})
+          console.log(e)
+          context.error({statusCode: 500, message: e})
         })
     },
   }
